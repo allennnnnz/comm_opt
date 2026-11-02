@@ -1,0 +1,55 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M0_baseline/20261102_134841/broadcast_g8.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: broadcast_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 4294967296 step: 2(factor) warmup iters: 5 iters: 20 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 965924 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 965925 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 965926 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 965927 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 965929 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 965932 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 965935 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 965938 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+           8             2     float    none       0    16.25    0.00    0.00       0    14.34    63.49    63.49    59.60    15.35    0.00    0.00       0    14.34    28.67    28.67    19.52  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+          16             4     float    none       0    15.18    0.00    0.00       0    14.34    24.58    24.58    14.35    15.09    0.00    0.00       0    14.34    25.60    25.60    15.32  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+          32             8     float    none       0    15.13    0.00    0.00       0    14.34    24.58    24.58    14.94    15.18    0.00    0.00       0    14.34    26.62    26.62    17.48  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+          64            16     float    none       0    14.99    0.00    0.00       0    14.34    23.55    23.55    14.31    14.92    0.00    0.00       0    14.34    25.60    25.60    16.21  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+         128            32     float    none       0    14.65    0.01    0.01       0    14.34    24.58    24.58    15.20    14.37    0.01    0.01       0    13.31    24.58    24.58    15.69  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+         256            64     float    none       0    14.38    0.02    0.02       0    13.31    23.55    23.55    18.68    14.19    0.02    0.02       0    13.31    22.53    22.53    13.96  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+         512           128     float    none       0    14.23    0.04    0.04       0    13.31    22.53    22.53    14.01    14.15    0.04    0.04       0    13.31    21.50    21.50    12.52  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        1024           256     float    none       0    14.73    0.07    0.07       0    14.34    26.62    26.62    17.58    14.87    0.07    0.07       0    14.34    24.58    24.58    15.22  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        2048           512     float    none       0    15.38    0.13    0.13       0    14.34    23.55    23.55    13.25    15.21    0.13    0.13       0    14.34    26.62    26.62    17.13  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        4096          1024     float    none       0    16.71    0.25    0.25       0    16.38    24.58    24.58    11.61    16.64    0.25    0.25       0    15.36    25.60    25.60    11.97  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        8192          2048     float    none       0    17.79    0.46    0.46       0    16.38    26.62    26.62    12.32    17.87    0.46    0.46       0    16.38    27.65    27.65    13.74  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       16384          4096     float    none       0    19.03    0.86    0.86       0    18.43    28.67    28.67    12.39    18.67    0.88    0.88       0    18.43    27.65    27.65    11.04  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       32768          8192     float    none       0    21.89    1.50    1.50       0    21.50    32.77    32.77    11.01    21.19    1.55    1.55       0    20.48    32.77    32.77    11.39  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       65536         16384     float    none       0    24.00    2.73    2.73       0    22.53    35.84    35.84    11.19    22.77    2.88    2.88       0    22.53    32.77    32.77     8.91  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      131072         32768     float    none       0    26.16    5.01    5.01       0    23.55    36.86    36.86    10.01    24.85    5.27    5.27       0    24.58    34.82    34.82     8.10  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      262144         65536     float    none       0    26.43    9.92    9.92       0    24.58    34.82    34.82     8.27    25.05   10.46   10.46       0    24.58    36.86    36.86     9.80  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      524288        131072     float    none       0    26.70   19.64   19.64       0    24.58    38.91    38.91    10.83    25.69   20.41   20.41       0    24.58    35.84    35.84     8.71  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     1048576        262144     float    none       0    48.04   21.83   21.83       0    41.98   180.22   180.22    52.12    46.78   22.42   22.42       0    41.98   175.10   175.10    48.38  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     2097152        524288     float    none       0    50.13   41.84   41.84       0    45.06   209.92   209.92    52.70    48.88   42.90   42.90       0    45.06   191.49   191.49    51.22  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     4194304       1048576     float    none       0    60.16   69.72   69.72       0    53.25   264.19   264.19    61.31    59.69   70.27   70.27       0    52.22   270.34   270.34    64.41  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     8388608       2097152     float    none       0    78.24  107.22  107.22       0    72.70   366.59   366.59    68.86    76.74  109.31  109.31       0    71.68   362.50   362.50    69.04  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    16777216       4194304     float    none       0   123.08  136.31  136.31       0   117.76   466.94   466.94    54.39   122.36  137.11  137.11       0   115.71   472.06   472.06    56.30  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    33554432       8388608     float    none       0   207.60  161.63  161.63       0   199.68   556.03   556.03    34.07   206.31  162.64  162.64       0   201.73   553.98   553.98    34.12  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    67108864      16777216     float    none       0   370.49  181.14  181.14       0   364.54   716.80   716.80    19.49   367.57  182.57  182.57       0   362.50   692.22   692.22    18.43  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   134217728      33554432     float    none       0   677.52  198.10  198.10       0   668.67  1025.02  1025.02    10.86   677.85  198.01  198.01       0   667.65  1017.86  1017.86    10.63  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   268435456      67108864     float    none       0  1286.67  208.63  208.63       0  1272.83  1669.12  1669.12     6.22  1284.68  208.95  208.95       0  1261.57  1622.02  1622.02     5.51  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   536870912     134217728     float    none       0  2454.56  218.72  218.72       0  2425.86  2889.73  2889.73     3.71  2544.88  210.96  210.96       0  2421.76  5135.36  5135.36    22.32  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+  1073741824     268435456     float    none       0  4756.91  225.72  225.72       0  4723.71  5271.55  5271.55     2.34  4763.20  225.42  225.42       0  4747.26  5284.86  5284.86     2.28  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+  2147483648     536870912     float    none       0  9329.15  230.19  230.19       0  9275.39  9879.55  9879.55     1.27  9332.55  230.11  230.11       0  9306.11  9916.42  9916.42     1.38  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+  4294967296    1073741824     float    none       0  18716.1  229.48  229.48       0  18662.4  19092.5  19092.5     0.45  18716.4  229.48  229.48       0  18674.7  19132.4  19132.4     0.49  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 69.0621 
+#
+# Collective test concluded: broadcast_perf
+#
+

@@ -1,0 +1,55 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M0_baseline/20261102_134841/alltoall_g8.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: alltoall_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 4294967296 step: 2(factor) warmup iters: 5 iters: 20 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 965641 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 965642 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 965643 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 965644 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 965645 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 965647 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 965650 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 965654 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+           0             0     float    none      -1     6.72    0.00    0.00       0     6.14    15.36    15.36    29.43     5.56    0.00    0.00    N/A     6.14     9.22     9.22    10.34  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+           0             0     float    none      -1     5.54    0.00    0.00       0     6.14    27.65    27.65    56.58     5.38    0.00    0.00    N/A     6.14     8.19     8.19     8.61  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+           0             0     float    none      -1     5.54    0.00    0.00       0     6.14    22.53    22.53    45.31     5.51    0.00    0.00    N/A     6.14    17.41    17.41    31.27  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+           0             0     float    none      -1     5.55    0.00    0.00       0     6.14    29.70    29.70    61.17     6.31    0.00    0.00    N/A     7.17    30.72    30.72    61.98  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+         128             4     float    none      -1    22.14    0.01    0.01       0    19.46    48.13    48.13    25.12    22.50    0.01    0.00    N/A    20.48    31.74    31.74    11.61  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+         256             8     float    none      -1    21.22    0.01    0.01       0    20.48    26.62    26.62     6.80    21.45    0.01    0.01    N/A    20.48    27.65    27.65     7.54  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+         512            16     float    none      -1    21.18    0.02    0.02       0    19.46    26.62    26.62     9.74    21.08    0.02    0.02    N/A    19.46    27.65    27.65     8.27  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+        1024            32     float    none      -1    24.08    0.04    0.04       0    19.46    30.72    30.72    10.75    20.05    0.05    0.04    N/A    19.46    28.67    28.67     9.96  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+        2048            64     float    none      -1    19.99    0.10    0.09       0    19.46    26.62    26.62     8.24    19.92    0.10    0.09    N/A    18.43    26.62    26.62    11.14  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+        4096           128     float    none      -1    19.58    0.21    0.18       0    18.43    27.65    27.65     9.43    19.63    0.21    0.18    N/A    19.46    25.60    25.60     6.64  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+        8192           256     float    none      -1    19.89    0.41    0.36       0    19.46    25.60    25.60     6.59    19.85    0.41    0.36    N/A    19.46    26.62    26.62     7.35  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+       16384           512     float    none      -1    20.06    0.82    0.71       0    19.46    24.58    24.58     5.48    19.98    0.82    0.72    N/A    19.46    25.60    25.60     6.43  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+       32768          1024     float    none      -1    21.05    1.56    1.36       0    20.48    25.60    25.60     4.99    20.96    1.56    1.37    N/A    20.48    25.60    25.60     4.86  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+       65536          2048     float    none      -1    22.80    2.87    2.52       0    21.50    31.74    31.74     8.78    22.21    2.95    2.58    N/A    21.50    26.62    26.62     4.72  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+      131072          4096     float    none      -1    25.54    5.13    4.49       0    23.55    30.72    30.72     5.76    24.94    5.25    4.60    N/A    23.55    28.67    28.67     4.20  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+      262144          8192     float    none      -1    34.14    7.68    6.72       0    31.74    40.96    40.96     7.19    33.75    7.77    6.80    N/A    32.77    39.94    39.94     6.12  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+      524288         16384     float    none      -1    38.79   13.52   11.83       0    36.86    53.25    53.25     9.32    38.45   13.63   11.93    N/A    36.86    59.39    59.39    12.10  P2P   N/A             N/A       N/A                 N/A       1          N/A     N/A         
+     1048576         32768     float    none      -1    41.47   25.29   22.12       0    37.89    54.27    54.27    10.57    40.30   26.02   22.77    N/A    36.86    52.22    52.22    10.58  P2P   N/A             N/A       N/A                 N/A       2          N/A     N/A         
+     2097152         65536     float    none      -1    48.74   43.03   37.65       0    46.08    67.58    67.58     9.76    49.29   42.55   37.23    N/A    43.01    64.51    64.51    12.62  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+     4194304        131072     float    none      -1    62.52   67.09   58.71       0    57.34    90.11    90.11    11.71    60.66   69.15   60.50    N/A    57.34    86.02    86.02    11.00  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+     8388608        262144     float    none      -1    82.48  101.70   88.99       0    71.68   104.45   104.45     9.57    79.33  105.74   92.52    N/A    72.70    89.09    89.09     7.51  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+    16777216        524288     float    none      -1   126.91  132.20  115.68       0   120.83   152.58   152.58     6.93   125.37  133.82  117.10    N/A   118.78   141.31   141.31     5.40  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+    33554432       1048576     float    none      -1   200.05  167.73  146.76       0   196.61   221.18   221.18     3.01   195.13  171.96  150.47    N/A   194.56   203.78   203.78     1.19  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+    67108864       2097152     float    none      -1   354.25  189.44  165.76       0   353.28   373.76   373.76     1.35   350.45  191.49  167.56    N/A   347.14   364.54   364.54     0.99  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+   134217728       4194304     float    none      -1   646.55  207.59  181.64       0   643.07   685.06   685.06     1.60   641.72  209.15  183.01    N/A   631.81   668.67   668.67     1.34  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+   268435456       8388608     float    none      -1  1203.19  223.10  195.22       0  1201.15  1252.35  1252.35     1.13  1203.47  223.05  195.17    N/A  1190.91  1262.59  1262.59     1.44  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+   536870912      16777216     float    none      -1  2320.72  231.34  202.42       0  2309.12  2407.42  2407.42     1.03  2303.29  233.09  203.95    N/A  2278.40  2406.40  2406.40     1.25  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+  1073741824      33554432     float    none      -1  4313.20  248.94  217.83       0  4269.06  4480.00  4480.00     1.16  4330.70  247.94  216.95    N/A  4300.80  4482.05  4482.05     0.89  P2P   N/A             N/A       N/A                 N/A       8          N/A     N/A         
+  2147483648      67108864     float    none      -1  8660.46  247.96  216.97       0  8431.62  8933.38  8933.38     1.43  8557.36  250.95  219.58    N/A  8526.85  8762.37  8762.37     0.73  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+  4294967296     134217728     float    none      -1  18262.1  235.18  205.79       0  18073.6  18526.2  18526.2     0.72  18249.0  235.35  205.93    N/A  18069.5  18697.2  18697.2     0.97  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 63.0884 
+#
+# Collective test concluded: alltoall_perf
+#
+
