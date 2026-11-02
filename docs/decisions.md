@@ -36,3 +36,9 @@
 - **決定**：使用者核准（「好 開始做」）M4_repeat（重複驗證 F1–F5）與 M2_p2p_channels（F1 能否靠設定解決）。兩張實驗卡的預期與判準在量測前 commit。
 - **新資訊**：讀 NCCL 2.32.3 原始碼（tag `v2.32.3-1`）找到 F1 的機制：每個 P2P 操作的 channel 下限依 communicator 的 rank 數減半（`scheduleP2pTasksToPlan`），且只有每個 channel 負責超過 16 MiB 時才加倍（`addP2pToPlan`）。`exp/M2_p2p_channels/predict_channels.py` 依此重現 M0 的所有 channel 觀測值。
 - **影響**：F1 是確定性的設計行為，不是雜訊；它是否值得研究，取決於 M2 的結果（能不能靠設定解決、代價是什麼）。
+
+## D007（2026-11-02）M4 與 M2_p2p_channels 完成；G1 報告送出 `[需裁決]`
+
+- **M4**：F1、F2a、F2b、F4、F5 依量測前判準成立；F3 不成立（只在 2 MiB 明顯）；兩組 GPU 無差異。見 `exp/M4_repeat/README.md`。
+- **M2**：原始碼 channel 模型 143/143 點正確；F1「部分是預設值問題」——16 MiB 最佳設定只到 2 卡的 69%，64 MiB 調小 chunk 可達 104%，但所有能改善 8 卡的 chunk 設定都讓 2 卡 send/recv 或 alltoall 變慢。見 `exp/M2_p2p_channels/README.md`。
+- **G1**：報告在 `docs/gates/G1_report.md`，建議以 F1 為主線。`[需裁決]`：使用者選擇要追哪個現象。

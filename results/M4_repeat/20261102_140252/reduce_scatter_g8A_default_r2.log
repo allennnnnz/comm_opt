@@ -1,0 +1,38 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M4_repeat/20261102_140252/reduce_scatter_g8A_default_r2.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: reduce_scatter_perf
+# nThread 1 nGpus 1 minBytes 1048576 maxBytes 4294967296 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 974559 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 974560 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 974561 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 974562 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 974564 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 974567 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 974570 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 974574 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+     1048576         32768     float     sum      -1    39.14   26.79   23.44       0    33.79    70.66    70.66    13.33    38.79   27.03   23.65       0    34.82    48.13    48.13     8.85  GEN   RING            LL        N/A                 N/A       22         16      N/A         
+     2097152         65536     float     sum      -1    47.74   43.92   38.43       0    46.08    60.42    60.42     4.79    47.00   44.62   39.04       0    44.03    61.44    61.44     5.19  GEN   RING            LL        N/A                 N/A       24         16      N/A         
+     4194304        131072     float     sum      -1    81.52   51.45   45.02       0    79.87    93.18    93.18     3.17    81.22   51.64   45.18       0    78.85    89.09    89.09     1.86  GEN   RING            LL128     N/A                 N/A       22         20      N/A         
+     8388608        262144     float     sum      -1   114.98   72.96   63.84       0   111.62   121.86   121.86     1.36   113.63   73.82   64.60       0   112.64   124.93   124.93     1.61  GEN   RING            LL128     N/A                 N/A       24         20      N/A         
+    16777216        524288     float     sum      -1   154.87  108.33   94.79       0   150.53   176.13   176.13     3.43   154.22  108.79   95.19       0   150.53   189.44   189.44     4.24  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+    33554432       1048576     float     sum      -1   232.35  144.42  126.36       0   229.38   256.00   256.00     2.17   211.88  158.37  138.57       0   210.94   228.35   228.35     1.78  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+    67108864       2097152     float     sum      -1   331.81  202.25  176.97       0   330.75   381.95   381.95     2.39   330.99  202.75  177.41       0   329.73   369.66   369.66     2.53  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+   134217728       4194304     float     sum      -1   629.82  213.11  186.47       0   629.76   659.46   659.46     1.00   628.09  213.69  186.98       0   625.66   655.36   655.36     1.11  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+   268435456       8388608     float     sum      -1  1142.77  234.90  205.54       0  1142.78  1171.46  1171.46     0.51  1143.29  234.79  205.44       0  1147.90  1171.46  1171.46     0.36  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+   536870912      16777216     float     sum      -1  2203.91  243.60  213.15       0  2197.50  2244.61  2244.61     0.40  2206.97  243.26  212.85       0  2205.70  2253.82  2253.82     0.43  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+  1073741824      33554432     float     sum      -1  4247.93  252.77  221.17       0  4247.55  4276.22  4276.22     0.16  4255.07  252.34  220.80       0  4253.70  4439.04  4439.04     0.66  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+  2147483648      67108864     float     sum      -1  8384.07  256.14  224.12       0  8391.68  8430.59  8430.59     0.09  8386.44  256.07  224.06       0  8384.51  8442.88  8442.88     0.15  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+  4294967296     134217728     float     sum      -1  16535.2  259.75  227.28       0  16536.6  16603.1  16603.1     0.11  16535.5  259.74  227.27       0  16532.5  16623.6  16623.6     0.14  GEN   RING            SIMPLE    N/A                 N/A       24         17      N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 142.601 
+#
+# Collective test concluded: reduce_scatter_perf
+#
+

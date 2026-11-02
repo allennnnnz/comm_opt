@@ -1,0 +1,36 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M2_p2p_channels/20261102_142517/sendrecv_g8A_chunk64k_r0.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: sendrecv_perf
+# nThread 1 nGpus 1 minBytes 1048576 maxBytes 1073741824 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 988714 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 988715 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 988716 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 988717 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 988718 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 988720 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 988724 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 988727 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+     1048576        262144     float     sum      -1    61.06   17.17   17.17       0    62.46   116.74   116.74    13.24    59.92   17.50   17.50    N/A    61.44    78.85    78.85     6.23  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+     2097152        524288     float     sum      -1    97.36   21.54   21.54       0    99.33   121.86   121.86     4.70    96.22   21.80   21.80    N/A    97.28   123.90   123.90     5.36  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+     4194304       1048576     float     sum      -1   173.05   24.24   24.24       0   174.08   201.73   201.73     3.89   165.58   25.33   25.33    N/A   164.86   196.61   196.61     3.68  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+     8388608       2097152     float     sum      -1   317.97   26.38   26.38       0   315.39   429.06   429.06     6.89   304.36   27.56   27.56    N/A   303.10   397.31   397.31     5.69  P2P   N/A             N/A       N/A                 N/A       4          N/A     N/A         
+    16777216       4194304     float     sum      -1   319.82   52.46   52.46       0   317.44   377.86   377.86     4.10   287.27   58.40   58.40    N/A   300.03   466.94   466.94    11.33  P2P   N/A             N/A       N/A                 N/A       8          N/A     N/A         
+    33554432       8388608     float     sum      -1   309.57  108.39  108.39       0   308.22   358.40   358.40     3.15   300.81  111.55  111.55    N/A   309.25   379.90   379.90     5.47  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+    67108864      16777216     float     sum      -1   397.63  168.77  168.77       0   403.46   464.90   464.90     2.82   385.22  174.21  174.21    N/A   392.19   462.85   462.85     3.67  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+   134217728      33554432     float     sum      -1   764.12  175.65  175.65       0   786.43   829.44   829.44     1.39   738.89  181.65  181.65    N/A   738.30   802.82   802.82     1.61  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+   268435456      67108864     float     sum      -1  1504.40  178.43  178.43       0  1498.11  1581.06  1581.06     0.92  1489.65  180.20  180.20    N/A  1465.34  1567.74  1567.74     1.45  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+   536870912     134217728     float     sum      -1  2982.02  180.04  180.04       0  2931.71  3096.58  3096.58     0.97  2950.16  181.98  181.98    N/A  2874.37  3072.00  3072.00     1.21  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+  1073741824     268435456     float     sum      -1  5867.83  182.99  182.99       0  5876.74  6045.70  6045.70     0.68  5843.62  183.75  183.75    N/A  5790.72  6065.15  6065.15     1.03  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 104.544 
+#
+# Collective test concluded: sendrecv_perf
+#
+

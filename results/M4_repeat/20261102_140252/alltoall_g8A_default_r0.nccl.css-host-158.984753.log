@@ -1,0 +1,266 @@
+css-host-158:984753:984753 [6] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+css-host-158:984753:984753 [6] NCCL INFO cudaDriverVersion 13040
+css-host-158:984753:984753 [6] NCCL INFO NCCL version 2.32.3+cuda13.4
+css-host-158:984753:984753 [6] NCCL INFO NCCL git version unknown unknown
+css-host-158:984753:984753 [6] NCCL INFO Comm config nvlinkCentricSched set to 1
+css-host-158:984753:984753 [6] NCCL INFO Comm config graphUsageMode set to 0
+css-host-158:984753:984753 [6] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+css-host-158:984753:984753 [6] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [4]mlx5_4:1/RoCE [5]mlx5_5:1/RoCE [6]mlx5_6:1/RoCE [7]mlx5_7:1/RoCE [RO]; OOB eth5:10.2.131.158<0>
+css-host-158:984753:984753 [6] NCCL INFO Initialized NET plugin IB
+css-host-158:984753:984753 [6] NCCL INFO Assigned NET plugin IB to comm
+css-host-158:984753:984753 [6] NCCL INFO RMA/Plugin: Could not find: libnccl-rma.so
+css-host-158:984753:984753 [6] NCCL INFO RMA/Plugin: Initialized plugin 
+css-host-158:984753:984753 [6] NCCL INFO RMA/Plugin: Assigned plugin RMA_IB_PROXY to comm
+css-host-158:984753:984753 [6] NCCL INFO GIN/Plugin: Could not find: libnccl-gin.so
+css-host-158:984753:984753 [6] NCCL INFO Using network IB
+css-host-158:984753:984753 [6] NCCL INFO Loaded NVML from libnvidia-ml.so.1
+css-host-158:984753:984753 [6] NCCL INFO DMA-BUF is available on GPU device 6
+css-host-158:984753:984753 [6] NCCL INFO [Rank 6] ncclCommInitRankConfig comm 0x62f01abd5710 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c6000 commId 0x20c85039723e2b7 - Init START
+css-host-158:984753:984753 [6] NCCL INFO Socket handshake magic 0x564ab9f2fc4b9d6c (built-in default)
+css-host-158:984753:984753 [6] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+css-host-158:984753:984753 [6] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 6 is 32-63,96-127. (GPU affinity = 32-63,96-127 ; CPU affinity = 0-127).
+css-host-158:984753:984753 [6] NCCL INFO NVLS multicast support is not available on dev 6, transport disabled, symmetric multimem disabled
+css-host-158:984753:984753 [6] NCCL INFO Rank 6: 12 Net devices
+css-host-158:984753:984753 [6] NCCL INFO Rank 6: 0 CollNet devices
+css-host-158:984753:984753 [6] NCCL INFO comm 0x62f01abd5710 rank 6 nRanks 8 nNodes 1 localRanks 8 localRank 6 MNNVL 0
+css-host-158:984753:984753 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5 [2] 7/-1/-1->6->5 [3] 7/-1/-1->6->5 [4] 7/-1/-1->6->5 [5] 7/-1/-1->6->5 [6] 7/-1/-1->6->5 [7] 7/-1/-1->6->5 [8] 7/-1/-1->6->5 [9] 7/-1/-1->6->5 [10] 7/-1/-1->6->5 [11] 7/-1/-1->6->5 [12] 7/-1/-1->6->5 [13] 7/-1/-1->6->5 [14] 7/-1/-1->6->5 [15] 7/-1/-1->6->5 [16] 7/-1/-1->6->5 [17] 7/-1/-1->6->5 [18] 7/-1/-1->6->5 [19] 7/-1/-1->6->5 [20] 7/-1/-1->6->5 [21] 7/-1/-1->6->5 [22] 7/-1/-1->6->5 [23] 7/-1/-1->6->5
+css-host-158:984753:984753 [6] NCCL INFO P2P Chunksize set to 524288
+css-host-158:984753:984753 [6] NCCL INFO NCCL_PROFILER_PLUGIN set by environment to STATIC_PLUGIN
+css-host-158:984753:984753 [6] NCCL INFO PROFILER/Plugin: Loaded perftest (v7)
+css-host-158:984753:984753 [6] NCCL INFO Successfully loaded external profiler plugin 
+css-host-158:984753:984753 [6] NCCL INFO Profiler event mask: 0x100e (4110) - Enabled: Coll P2p ProxyOp CeColl 
+css-host-158:984753:984753 [6] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+css-host-158:984753:984910 [0] NCCL INFO [Proxy Service] Device 6 CPU core 56
+css-host-158:984753:984911 [0] NCCL INFO [Proxy Service UDS] Device 6 CPU core 121
+css-host-158:984753:984910 [6] NCCL INFO proxy listening socket at 10.2.131.158<36827>
+css-host-158:984753:984753 [6] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+css-host-158:984753:984753 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:984753:984753 [6] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 32 p2p channels per peer
+css-host-158:984753:984923 [6] NCCL INFO [Profiler Thread] started (cudaDev=6, maxInflight=16384)
+css-host-158:984753:984753 [6] NCCL INFO ncclCommInitRankConfig comm 0x62f01abd5710 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c6000 commId 0x20c85039723e2b7 - Init COMPLETE
+css-host-158:984753:984753 [6] NCCL INFO Init timings - ncclCommInitRankConfig: rank 6 nranks 8 total 0.74 (kernels 0.21, alloc 0.24, bootstrap 0.07, allgathers 0.01, topo 0.09, graphs 0.00, connections 0.09, rest 0.02)
+css-host-158:984753:984753 [6] NCCL INFO Symmetric VA size=80GB
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 7[7] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 0[0] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 1[1] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 2[2] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 3[3] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 4[4] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 00/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 01/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 02/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 03/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 04/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 05/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 06/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 07/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 08/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 09/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 10/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 11/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 12/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 13/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 14/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 15/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 16/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 17/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 18/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 19/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 20/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 21/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 22/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 23/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 24/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 25/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 26/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 27/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 28/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 29/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 30/1 : 6[6] -> 5[5] via P2P/CUMEM/read
+css-host-158:984753:984753 [6] NCCL INFO Channel 31/1 : 6[6] -> 5[5] via P2P/CUMEM/read

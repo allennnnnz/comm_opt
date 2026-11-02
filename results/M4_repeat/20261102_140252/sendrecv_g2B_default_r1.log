@@ -1,0 +1,26 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M4_repeat/20261102_140252/sendrecv_g2B_default_r1.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: sendrecv_perf
+# nThread 1 nGpus 1 minBytes 4194304 maxBytes 268435456 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 969008 on css-host-158 device  0 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 969009 on css-host-158 device  1 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+     4194304       1048576     float     sum      -1    72.62   57.76   57.76       0    73.73   100.35   100.35     7.60    70.77   59.27   59.27    N/A    63.49   111.62   111.62    14.34  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+     8388608       2097152     float     sum      -1   102.83   81.58   81.58       0    94.21   147.46   147.46    14.65    99.51   84.30   84.30    N/A    97.28   143.36   143.36    14.92  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+    16777216       4194304     float     sum      -1   139.81  120.00  120.00       0   137.22   161.79   161.79     2.70   140.45  119.45  119.45    N/A   134.14   156.67   156.67     2.97  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+    33554432       8388608     float     sum      -1   242.95  138.11  138.11       0   241.66   291.84   291.84     4.00   239.37  140.18  140.18    N/A   242.69   285.70   285.70     3.58  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+    67108864      16777216     float     sum      -1   420.82  159.47  159.47       0   421.89   458.75   458.75     2.00   408.25  164.38  164.38    N/A   414.72   459.78   459.78     2.64  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+   134217728      33554432     float     sum      -1   759.79  176.65  176.65       0   763.90   829.44   829.44     1.53   766.78  175.04  175.04    N/A   772.10   836.61   836.61     1.78  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+   268435456      67108864     float     sum      -1  1473.79  182.14  182.14       0  1465.34  1553.41  1553.41     1.85  1466.71  183.02  183.02    N/A  1466.37  1559.55  1559.55     1.25  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 131.525 
+#
+# Collective test concluded: sendrecv_perf
+#
+

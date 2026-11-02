@@ -1,0 +1,75 @@
+css-host-158:992726:992726 [4] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+css-host-158:992726:992726 [4] NCCL INFO cudaDriverVersion 13040
+css-host-158:992726:992726 [4] NCCL INFO NCCL version 2.32.3+cuda13.4
+css-host-158:992726:992726 [4] NCCL INFO NCCL git version unknown unknown
+css-host-158:992726:992726 [4] NCCL INFO Comm config nvlinkCentricSched set to 1
+css-host-158:992726:992726 [4] NCCL INFO Comm config graphUsageMode set to 0
+css-host-158:992726:992726 [4] NCCL INFO Comm config maxP2pPeers set to 2
+css-host-158:992726:992726 [4] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+css-host-158:992726:992726 [4] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [4]mlx5_4:1/RoCE [5]mlx5_5:1/RoCE [6]mlx5_6:1/RoCE [7]mlx5_7:1/RoCE [RO]; OOB eth5:10.2.131.158<0>
+css-host-158:992726:992726 [4] NCCL INFO Initialized NET plugin IB
+css-host-158:992726:992726 [4] NCCL INFO Assigned NET plugin IB to comm
+css-host-158:992726:992726 [4] NCCL INFO RMA/Plugin: Could not find: libnccl-rma.so
+css-host-158:992726:992726 [4] NCCL INFO RMA/Plugin: Initialized plugin 
+css-host-158:992726:992726 [4] NCCL INFO RMA/Plugin: Assigned plugin RMA_IB_PROXY to comm
+css-host-158:992726:992726 [4] NCCL INFO GIN/Plugin: Could not find: libnccl-gin.so
+css-host-158:992726:992726 [4] NCCL INFO Using network IB
+css-host-158:992726:992726 [4] NCCL INFO Loaded NVML from libnvidia-ml.so.1
+css-host-158:992726:992726 [4] NCCL INFO DMA-BUF is available on GPU device 4
+css-host-158:992726:992726 [4] NCCL INFO [Rank 4] ncclCommInitRankConfig comm 0x5d4cf5c15d30 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 8a000 commId 0xb5553e435915139e - Init START
+css-host-158:992726:992726 [4] NCCL INFO Socket handshake magic 0x564ab9f2fc4b9d6c (built-in default)
+css-host-158:992726:992726 [4] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+css-host-158:992726:992726 [4] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 4 is 32-63,96-127. (GPU affinity = 32-63,96-127 ; CPU affinity = 0-127).
+css-host-158:992726:992726 [4] NCCL INFO NVLS multicast support is not available on dev 4, transport disabled, symmetric multimem disabled
+css-host-158:992726:992726 [4] NCCL INFO Rank 4: 12 Net devices
+css-host-158:992726:992726 [4] NCCL INFO Rank 4: 0 CollNet devices
+css-host-158:992726:992726 [4] NCCL INFO comm 0x5d4cf5c15d30 rank 4 nRanks 8 nNodes 1 localRanks 8 localRank 4 MNNVL 0
+css-host-158:992726:992726 [4] NCCL INFO Trees [0] 5/-1/-1->4->3 [1] 5/-1/-1->4->3 [2] 5/-1/-1->4->3 [3] 5/-1/-1->4->3 [4] 5/-1/-1->4->3 [5] 5/-1/-1->4->3 [6] 5/-1/-1->4->3 [7] 5/-1/-1->4->3 [8] 5/-1/-1->4->3 [9] 5/-1/-1->4->3 [10] 5/-1/-1->4->3 [11] 5/-1/-1->4->3 [12] 5/-1/-1->4->3 [13] 5/-1/-1->4->3 [14] 5/-1/-1->4->3 [15] 5/-1/-1->4->3 [16] 5/-1/-1->4->3 [17] 5/-1/-1->4->3 [18] 5/-1/-1->4->3 [19] 5/-1/-1->4->3 [20] 5/-1/-1->4->3 [21] 5/-1/-1->4->3 [22] 5/-1/-1->4->3 [23] 5/-1/-1->4->3
+css-host-158:992726:992726 [4] NCCL INFO NCCL_P2P_NVL_CHUNKSIZE set by environment to 131072.
+css-host-158:992726:992726 [4] NCCL INFO P2P Chunksize set to 131072
+css-host-158:992726:992726 [4] NCCL INFO NCCL_PROFILER_PLUGIN set by environment to STATIC_PLUGIN
+css-host-158:992726:992726 [4] NCCL INFO PROFILER/Plugin: Loaded perftest (v7)
+css-host-158:992726:992726 [4] NCCL INFO Successfully loaded external profiler plugin 
+css-host-158:992726:992726 [4] NCCL INFO Profiler event mask: 0x100e (4110) - Enabled: Coll P2p ProxyOp CeColl 
+css-host-158:992726:992726 [4] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+css-host-158:992726:992889 [0] NCCL INFO [Proxy Service] Device 4 CPU core 114
+css-host-158:992726:992889 [4] NCCL INFO proxy listening socket at 10.2.131.158<42123>
+css-host-158:992726:992890 [0] NCCL INFO [Proxy Service UDS] Device 4 CPU core 116
+css-host-158:992726:992726 [4] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+css-host-158:992726:992726 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:992726:992726 [4] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 32 p2p channels per peer
+css-host-158:992726:992903 [4] NCCL INFO [Profiler Thread] started (cudaDev=4, maxInflight=16384)
+css-host-158:992726:992726 [4] NCCL INFO ncclCommInitRankConfig comm 0x5d4cf5c15d30 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 8a000 commId 0xb5553e435915139e - Init COMPLETE
+css-host-158:992726:992726 [4] NCCL INFO Init timings - ncclCommInitRankConfig: rank 4 nranks 8 total 0.71 (kernels 0.24, alloc 0.26, bootstrap 0.01, allgathers 0.01, topo 0.09, graphs 0.00, connections 0.07, rest 0.03)
+css-host-158:992726:992726 [4] NCCL INFO Channel 00/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 01/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 02/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 03/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 04/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 05/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 06/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 07/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 08/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 09/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 10/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 11/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 12/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 13/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 14/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 15/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 16/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 17/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 18/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 19/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 20/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 21/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 22/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 23/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 24/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 25/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 26/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 27/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 28/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 29/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 30/1 : 4[4] -> 5[5] via P2P/CUMEM/read
+css-host-158:992726:992726 [4] NCCL INFO Channel 31/1 : 4[4] -> 5[5] via P2P/CUMEM/read

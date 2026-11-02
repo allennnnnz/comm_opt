@@ -1,0 +1,26 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M4_repeat/20261102_140252/alltoall_g2B_default_r0.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: alltoall_perf
+# nThread 1 nGpus 1 minBytes 67108864 maxBytes 4294967296 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 968166 on css-host-158 device  0 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 968167 on css-host-158 device  1 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+    67108864       8388608     float    none      -1   279.59  240.02  120.01       0   265.22   315.39   315.39     3.89   253.02  265.23  132.61    N/A   254.98   279.55   279.55     2.76  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+   134217728      16777216     float    none      -1   496.17  270.50  135.25       0   480.26   533.50   533.50     2.37   461.78  290.65  145.33    N/A   462.85   499.71   499.71     2.03  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+   268435456      33554432     float    none      -1   924.09  290.49  145.24       0   901.12   987.14   987.14     2.03   789.31  340.09  170.04    N/A   779.26   893.95   893.95     3.46  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+   536870912      67108864     float    none      -1  1686.62  318.31  159.16       0  1568.77  1753.09  1753.09     1.65  1491.85  359.87  179.93    N/A  1497.09  1575.94  1575.94     1.41  P2P   N/A             N/A       N/A                 N/A       16         N/A     N/A         
+  1073741824     134217728     float    none      -1  2879.00  372.96  186.48       0  2839.55  2951.17  2951.17     1.08  2478.88  433.16  216.58    N/A  2383.87  2634.75  2634.75     1.46  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+  2147483648     268435456     float    none      -1  5616.48  382.35  191.18       0  5564.42  5698.56  5698.56     0.64  4872.02  440.78  220.39    N/A  4745.22  5102.59  5102.59     1.41  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+  4294967296     536870912     float    none      -1  11120.7  386.21  193.11       0  11044.9  11234.3  11234.3     0.43  9711.37  442.26  221.13    N/A  9641.98  10105.9  10105.9     1.32  P2P   N/A             N/A       N/A                 N/A       32         N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 172.603 
+#
+# Collective test concluded: alltoall_perf
+#
+

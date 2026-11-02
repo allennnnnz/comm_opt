@@ -1,0 +1,37 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M4_repeat/20261102_140252/broadcast_g8A_default_r2.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: broadcast_perf
+# nThread 1 nGpus 1 minBytes 1048576 maxBytes 2147483648 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 0 unalign: 0
+# Per-Iteration Report: CUDA event timing; i_* uses max over process rows 
+#
+# Using devices
+#  Rank  0 Group  0 Pid 979064 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 979065 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 979066 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 979067 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 979068 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 979071 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 979074 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 979077 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                                 out-of-place (+ per-iteration)                                in-place (+ per-iteration)                                                                                 tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%     time   algbw   busbw  #wrong    i_min    i_max    i_p99    i_cv%  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)     (us)  (GB/s)  (GB/s)             (us)     (us)     (us)      (%)                                                                                               
+     1048576        262144     float    none       0    44.63   23.50   23.50       0    43.01   144.38   144.38    32.71    45.08   23.26   23.26       0    43.01   136.19   136.19    29.09  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     2097152        524288     float    none       0    50.26   41.72   41.72       0    46.08   152.58   152.58    32.80    49.76   42.14   42.14       0    47.10   158.72   158.72    32.35  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     4194304       1048576     float    none       0    61.16   68.58   68.58       0    56.32   219.14   219.14    36.64    59.38   70.64   70.64       0    56.32   215.04   215.04    37.80  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     8388608       2097152     float    none       0    77.37  108.43  108.43       0    72.70   327.68   327.68    46.02    77.82  107.80  107.80       0    75.78   359.42   359.42    50.74  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    16777216       4194304     float    none       0   125.57  133.61  133.61       0   121.86   497.66   497.66    42.54   124.03  135.26  135.26       0   119.81   487.42   487.42    42.13  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    33554432       8388608     float    none       0   206.48  162.51  162.51       0   202.75   552.96   552.96    24.40   202.02  166.09  166.09       0   198.66   562.18   562.18    26.43  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+    67108864      16777216     float    none       0   363.35  184.70  184.70       0   360.45   701.44   701.44    13.97   362.24  185.26  185.26       0   358.40   695.30   695.30    13.79  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   134217728      33554432     float    none       0   669.88  200.36  200.36       0   664.58  1003.52  1003.52     7.49   669.46  200.49  200.49       0   667.65   984.06   984.06     7.07  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   268435456      67108864     float    none       0  1266.55  211.94  211.94       0  1263.62  1623.04  1623.04     4.21  1264.21  212.33  212.33       0  1262.59  1622.02  1622.02     4.21  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+   536870912     134217728     float    none       0  2423.59  221.52  221.52       0  2417.66  2863.10  2863.10     2.70  2424.25  221.46  221.46       0  2418.69  2806.78  2806.78     2.49  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+  1073741824     268435456     float    none       0  4709.53  227.99  227.99       0  4684.80  5199.87  5199.87     1.65  4717.89  227.59  227.59       0  4682.75  5221.38  5221.38     1.76  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+  2147483648     536870912     float    none       0  9267.59  231.72  231.72       0  9251.84  9914.37  9914.37     1.08  9275.07  231.53  231.53       0  9249.79  9837.57  9837.57     0.95  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 151.684 
+#
+# Collective test concluded: broadcast_perf
+#
+
