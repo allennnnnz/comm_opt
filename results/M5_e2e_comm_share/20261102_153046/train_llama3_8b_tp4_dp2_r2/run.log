@@ -1,0 +1,613 @@
+W1102 15:30:48.044000 1021139 torch/distributed/run.py:982] 
+W1102 15:30:48.044000 1021139 torch/distributed/run.py:982] *****************************************
+W1102 15:30:48.044000 1021139 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 15:30:48.044000 1021139 torch/distributed/run.py:982] *****************************************
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+Applied TorchTitan process-local compatibility backports [199884, 200238, 200199] to torch 2.15.0
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+WARNING:absl:Failed to load jax profiler: No module named 'jax'
+[titan] 2026-11-02 15:30:55,945 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:55,956 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_2.20261102-153055-LIM2CG.jsonl
+[titan] 2026-11-02 15:30:56,176 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:56,290 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,295 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,301 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_6.20261102-153056-WA61OZ.jsonl
+[titan] 2026-11-02 15:30:56,306 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_4.20261102-153056-F7HZO7.jsonl
+[titan] 2026-11-02 15:30:56,432 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,443 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_5.20261102-153056-J5AVV1.jsonl
+[titan] 2026-11-02 15:30:56,450 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,461 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_0.20261102-153056-BQKFD6.jsonl
+[titan] 2026-11-02 15:30:56,472 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,483 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_7.20261102-153056-TQFADK.jsonl
+[titan] 2026-11-02 15:30:56,485 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,492 - __main__ - INFO - torchtitan version: 0.4.0 (0.0.0 means __version__ is not defined correctly).
+[titan] 2026-11-02 15:30:56,497 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_1.20261102-153056-99XHDX.jsonl
+[titan] 2026-11-02 15:30:56,503 - torchtitan.observability.structured_logger.jsonl_handler - INFO - Structured logging -> JSONL: /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/structured_logs/training.global_rank_3.20261102-153056-1SWD27.jsonl
+[titan] 2026-11-02 15:30:56,652 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:56,671 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,214 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,214 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,239 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,246 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,264 - torchtitan.distributed.utils - WARNING - TORCH_NCCL_ASYNC_ERROR_HANDLING=1 will be overridden to 3.
+[titan] 2026-11-02 15:30:57,877 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,878 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,879 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,880 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,882 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,883 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,884 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:57,884 - torchtitan.tools.garbage_collector - INFO - [GC] Initial GC collection took 0.00 seconds
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,526 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:58,527 - torchtitan.distributed.parallelism_context - INFO - Building device mesh with parallelism: pp=1, dp_replicate=1, dp_shard=2, cp=1, tp=4, ep=1
+[titan] 2026-11-02 15:30:59,159 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,160 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,163 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,164 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,201 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,204 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,207 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,212 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,216 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,216 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,218 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,220 - torchtitan.distributed.parallelism_context - INFO - Successfully created meshes with active axes: ['loss', 'tp', 'dp', 'dp_shard']
+[titan] 2026-11-02 15:30:59,222 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,222 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,225 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,225 - torchtitan.observability.metrics - INFO - CUDA capacity: NVIDIA A100-SXM4-80GB with 79.28GiB memory
+[titan] 2026-11-02 15:30:59,446 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,448 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,448 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,448 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,450 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,450 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,453 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,453 - torchtitan.components.tokenizer - INFO - Loading tokenizer from tokenizer.json
+[titan] 2026-11-02 15:30:59,709 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,711 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,748 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,750 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,775 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,776 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,777 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,778 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,779 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,800 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,802 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,820 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,823 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,825 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,826 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,828 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:30:59,846 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,857 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,868 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,892 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,898 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:30:59,956 - torchtitan.models.base.state_dict_adapter - WARNING - model.safetensors.index.json not found at hf_assets_path: /home/rogerlee/comm_opt/assets/tokenizer_tinyllama/model.safetensors.index.json.                     Defaulting to saving a single safetensors file if checkpoint is saved in HF format
+[titan] 2026-11-02 15:30:59,958 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:30:59,958 - torchtitan.models.common.flops - INFO - Total parameter count: 8,030,261,248, active parameters: 7,504,924,672
+[titan] 2026-11-02 15:31:00,001 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,024 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,028 - torchtitan.distributed.activation_remat - INFO - Applied DefaultActivationRematConfig to 32 transformer blocks. Save patterns: ['*'], recompute patterns: ['*routed_experts.w13.*']
+[titan] 2026-11-02 15:31:00,047 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,057 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,072 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,083 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[titan] 2026-11-02 15:31:00,207 - torchtitan.distributed.fsdp - INFO - Applied FSDP to the model
+[rank3]:W1102 15:31:01.634000 1021236 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank7]:W1102 15:31:01.635000 1021240 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank1]:W1102 15:31:01.648000 1021234 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank5]:W1102 15:31:01.654000 1021238 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank4]:W1102 15:31:01.656000 1021237 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank0]:W1102 15:31:01.657000 1021233 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank2]:W1102 15:31:01.657000 1021235 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[rank6]:W1102 15:31:01.660000 1021239 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_StridedShard(dim=0, sf=4), Shard(dim=0)) to (Replicate(), Replicate()), 2 sequential all_gather operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. it is not possible to merge non-ascending order all_gather operations.
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,978 - torchtitan.training_engine - INFO - Model Llama3Model.Config size: 8,030,261,248 total parameters
+[titan] 2026-11-02 15:31:01,980 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,980 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,980 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,980 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,981 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,981 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,981 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,981 - torchtitan.components.optim.optimizer - INFO - Optimizer AdamW (model_part=0): 195 params [.*] {'lr': 0.0003, 'betas': (0.9, 0.95), 'eps': 1e-08, 'weight_decay': 0.1, 'foreach': None, 'fused': True}
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,982 - torchtitan.components.optim.lr_scheduler - WARNING - Warmup steps (200) exceed total steps (20). Adjusting warmup steps to 20.
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,983 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,983 - torchtitan.trainer - INFO - Peak FLOPS used for computing MFU: 3.120e+14
+[titan] 2026-11-02 15:31:01,984 - torchtitan.trainer - INFO - CUDA memory usage for model: 5.21GiB(6.58%)
+[titan] 2026-11-02 15:31:01,984 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,984 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,984 - torchtitan.trainer - INFO - Trainer is initialized with 8192 tokens per DP rank, 16384 tokens per train step, gradient accumulation steps 1, maximum context length 2048, total steps 20 (warmup 200)
+[titan] 2026-11-02 15:31:01,984 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,984 - torchtitan.trainer - INFO - Training starts at step 1
+[titan] 2026-11-02 15:31:01,984 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+[titan] 2026-11-02 15:31:01,984 - torchtitan.observability.profiler - INFO - Profiling active. Traces will be saved at /home/rogerlee/comm_opt/results/M5_e2e_comm_share/20261102_153046/train_llama3_8b_tp4_dp2_r2/profiling/traces
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/_inductor/lowering.py:2827: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:681: FutureWarning: `torch.distributed._functional_collectives.reduce_scatter_tensor` is deprecated. Please use `torch.distributed._functional_collectives.reduce_scatter_single` instead.
+  funcol.reduce_scatter_tensor(x, "sum", scatter_dim, pg),
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/spmd_types/_collectives.py:336: FutureWarning: `torch.distributed._functional_collectives.all_gather_tensor` is deprecated. Please use `torch.distributed._functional_collectives.all_gather_single` instead.
+  funcol.all_gather_tensor(x, gather_dim, pg), dtype_options.async_op
+[rank6]:W1102 15:31:10.198000 1021239 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank7]:W1102 15:31:10.203000 1021240 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank4]:W1102 15:31:10.203000 1021237 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank1]:W1102 15:31:10.204000 1021234 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank2]:W1102 15:31:10.205000 1021235 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank0]:W1102 15:31:10.206000 1021233 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank5]:W1102 15:31:10.206000 1021238 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[rank3]:W1102 15:31:10.216000 1021236 .venv-titan/lib/python3.12/site-packages/torch/distributed/tensor/_redistribute.py:394] While redistributing from (_NormPartial(2.0), _NormPartial(2.0)) to (Replicate(), Replicate()), 2 sequential all_reduce operations will be performed. This is suboptimal: multiple collective operations have higher latency (separate kernel launches and synchronization points) and may give inconsistent results between ranks due to different reduction orders. To optimize, flatten mesh dimensions ["dp_shard", "tp"] so DTensor can use a single operation instead.
+[titan] 2026-11-02 15:31:12,215 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.66  [35mmfu: 3.10%[39m
+[titan] 2026-11-02 15:31:12,216 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.66  [35mmfu: 3.10%[39m
+[titan] 2026-11-02 15:31:12,216 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,216 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,220 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.65  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,220 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.65  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,221 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,221 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,226 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.65  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,226 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.65  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,226 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,226 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,236 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.64  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,236 - torchtitan.observability.metrics - INFO - [31mstep:  1  [32mloss: 12.27384  [38;2;180;60;0mgrad_norm:  5.0742  [38;2;54;234;195mmemory: 19.97GiB(25.19%)  [34mtps: 200  [36mtflops: 9.64  [35mmfu: 3.09%[39m
+[titan] 2026-11-02 15:31:12,236 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+[titan] 2026-11-02 15:31:12,237 - torchtitan.distributed.utils - INFO - Synchronizing and adjusting timeout for all ProcessGroups to 0:01:40
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+/home/rogerlee/comm_opt/.venv-titan/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py:362: UserWarning: FSDP2-wrapped module (FSDPLlama3TransformerBlock) returned a view tensor. An in-place op on this view (e.g., `x += y`) will silently drop the pre-backward hook and skip the all-gather, which can cause backward to fail or produce wrong gradients. Use out-of-place ops (`out = out + y`, not `out += y`) or `.clone()` the output before any in-place op.
+  output = self._register_pre_backward_hook(output)
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.62  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.62  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,625  [36mtflops: 126.63  [35mmfu: 40.59%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.61  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.61  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.61  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.61  [35mmfu: 40.58%[39m
+[titan] 2026-11-02 15:31:13,018 - torchtitan.observability.metrics - INFO - [31mstep:  2  [32mloss: 11.92067  [38;2;180;60;0mgrad_norm:  6.8508  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,624  [36mtflops: 126.59  [35mmfu: 40.57%[39m
+[titan] 2026-11-02 15:31:13,837 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,031 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,082 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,087 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,093 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,101 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,103 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,122 - torchtitan.distributed.cuda_graph - INFO - Recorded CUDA graph forward_backward
+[titan] 2026-11-02 15:31:14,728 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.80  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.80  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.79  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.79  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.79  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.79  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.79  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:14,729 - torchtitan.observability.metrics - INFO - [31mstep:  3  [32mloss: 10.92883  [38;2;180;60;0mgrad_norm:  9.1235  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 1,198  [36mtflops: 57.78  [35mmfu: 18.52%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.87  [35mmfu: 43.87%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.91  [35mmfu: 43.88%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.90  [35mmfu: 43.88%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,838  [36mtflops: 136.94  [35mmfu: 43.89%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,838  [36mtflops: 136.94  [35mmfu: 43.89%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.87  [35mmfu: 43.87%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.88  [35mmfu: 43.87%[39m
+[titan] 2026-11-02 15:31:15,451 - torchtitan.observability.metrics - INFO - [31mstep:  4  [32mloss: 14.02227  [38;2;180;60;0mgrad_norm: 50.4803  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,837  [36mtflops: 136.90  [35mmfu: 43.88%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.15  [35mmfu: 48.13%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.16  [35mmfu: 48.13%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.14  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.15  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.14  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,111  [36mtflops: 150.13  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,112  [36mtflops: 150.13  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,110 - torchtitan.observability.metrics - INFO - [31mstep:  5  [32mloss: 12.86353  [38;2;180;60;0mgrad_norm: 36.6955  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,111  [36mtflops: 150.13  [35mmfu: 48.12%[39m
+[titan] 2026-11-02 15:31:16,819 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,889  [36mtflops: 139.39  [35mmfu: 44.68%[39m
+[titan] 2026-11-02 15:31:16,819 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,889  [36mtflops: 139.38  [35mmfu: 44.67%[39m
+[titan] 2026-11-02 15:31:16,819 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,889  [36mtflops: 139.37  [35mmfu: 44.67%[39m
+[titan] 2026-11-02 15:31:16,819 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,889  [36mtflops: 139.38  [35mmfu: 44.67%[39m
+[titan] 2026-11-02 15:31:16,820 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,888  [36mtflops: 139.35  [35mmfu: 44.66%[39m
+[titan] 2026-11-02 15:31:16,820 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,887  [36mtflops: 139.31  [35mmfu: 44.65%[39m
+[titan] 2026-11-02 15:31:16,820 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,888  [36mtflops: 139.34  [35mmfu: 44.66%[39m
+[titan] 2026-11-02 15:31:16,820 - torchtitan.observability.metrics - INFO - [31mstep:  6  [32mloss: 11.67473  [38;2;180;60;0mgrad_norm:  5.7823  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,887  [36mtflops: 139.31  [35mmfu: 44.65%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,066  [36mtflops: 147.94  [35mmfu: 47.42%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,067  [36mtflops: 147.98  [35mmfu: 47.43%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,068  [36mtflops: 148.04  [35mmfu: 47.45%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,067  [36mtflops: 147.96  [35mmfu: 47.42%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,065  [36mtflops: 147.88  [35mmfu: 47.40%[39m
+[titan] 2026-11-02 15:31:17,488 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,064  [36mtflops: 147.86  [35mmfu: 47.39%[39m
+[titan] 2026-11-02 15:31:17,489 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,063  [36mtflops: 147.81  [35mmfu: 47.38%[39m
+[titan] 2026-11-02 15:31:17,489 - torchtitan.observability.metrics - INFO - [31mstep:  7  [32mloss: 11.01334  [38;2;180;60;0mgrad_norm: 11.1633  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 3,062  [36mtflops: 147.76  [35mmfu: 47.36%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,835  [36mtflops: 136.81  [35mmfu: 43.85%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,835  [36mtflops: 136.81  [35mmfu: 43.85%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,835  [36mtflops: 136.80  [35mmfu: 43.84%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,835  [36mtflops: 136.81  [35mmfu: 43.85%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,838  [36mtflops: 136.93  [35mmfu: 43.89%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,835  [36mtflops: 136.78  [35mmfu: 43.84%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,836  [36mtflops: 136.82  [35mmfu: 43.85%[39m
+[titan] 2026-11-02 15:31:18,211 - torchtitan.observability.metrics - INFO - [31mstep:  8  [32mloss: 11.20243  [38;2;180;60;0mgrad_norm:  4.9166  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,836  [36mtflops: 136.86  [35mmfu: 43.87%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,949  [36mtflops: 142.30  [35mmfu: 45.61%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,949  [36mtflops: 142.30  [35mmfu: 45.61%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,949  [36mtflops: 142.31  [35mmfu: 45.61%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,950  [36mtflops: 142.33  [35mmfu: 45.62%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,949  [36mtflops: 142.28  [35mmfu: 45.60%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,950  [36mtflops: 142.32  [35mmfu: 45.62%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,948  [36mtflops: 142.26  [35mmfu: 45.60%[39m
+[titan] 2026-11-02 15:31:18,906 - torchtitan.observability.metrics - INFO - [31mstep:  9  [32mloss: 10.26912  [38;2;180;60;0mgrad_norm:  5.4849  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,948  [36mtflops: 142.22  [35mmfu: 45.58%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.31  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.32  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,826  [36mtflops: 136.35  [35mmfu: 43.70%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.32  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.30  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.32  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,826  [36mtflops: 136.37  [35mmfu: 43.71%[39m
+[titan] 2026-11-02 15:31:19,632 - torchtitan.observability.metrics - INFO - [31mstep: 10  [32mloss:  9.54839  [38;2;180;60;0mgrad_norm: 12.7156  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,825  [36mtflops: 136.31  [35mmfu: 43.69%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.77  [35mmfu: 45.76%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.77  [35mmfu: 45.76%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.79  [35mmfu: 45.77%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.79  [35mmfu: 45.77%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.76  [35mmfu: 45.76%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.78  [35mmfu: 45.76%[39m
+[titan] 2026-11-02 15:31:20,324 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,959  [36mtflops: 142.77  [35mmfu: 45.76%[39m
+[titan] 2026-11-02 15:31:20,325 - torchtitan.observability.metrics - INFO - [31mstep: 11  [32mloss:  9.56956  [38;2;180;60;0mgrad_norm: 12.0123  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,958  [36mtflops: 142.74  [35mmfu: 45.75%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.43  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.44  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.43  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.44  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.43  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.44  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,869  [36mtflops: 138.44  [35mmfu: 44.37%[39m
+[titan] 2026-11-02 15:31:21,039 - torchtitan.observability.metrics - INFO - [31mstep: 12  [32mloss:  9.10802  [38;2;180;60;0mgrad_norm:  4.7511  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,868  [36mtflops: 138.39  [35mmfu: 44.36%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,774  [36mtflops: 133.86  [35mmfu: 42.90%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,817  [36mtflops: 135.93  [35mmfu: 43.57%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,788  [36mtflops: 134.52  [35mmfu: 43.11%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,732  [36mtflops: 131.80  [35mmfu: 42.24%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,719  [36mtflops: 131.21  [35mmfu: 42.05%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,792  [36mtflops: 134.71  [35mmfu: 43.18%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,739  [36mtflops: 132.16  [35mmfu: 42.36%[39m
+[titan] 2026-11-02 15:31:22,022 - torchtitan.observability.metrics - INFO - [31mstep: 13  [32mloss:  9.10898  [38;2;180;60;0mgrad_norm: 24.1785  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,796  [36mtflops: 134.91  [35mmfu: 43.24%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,792  [36mtflops: 134.74  [35mmfu: 43.19%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,793  [36mtflops: 134.76  [35mmfu: 43.19%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,793  [36mtflops: 134.77  [35mmfu: 43.20%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,792  [36mtflops: 134.74  [35mmfu: 43.19%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,792  [36mtflops: 134.71  [35mmfu: 43.18%[39m
+[titan] 2026-11-02 15:31:22,756 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,792  [36mtflops: 134.70  [35mmfu: 43.17%[39m
+[titan] 2026-11-02 15:31:22,757 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,791  [36mtflops: 134.67  [35mmfu: 43.16%[39m
+[titan] 2026-11-02 15:31:22,757 - torchtitan.observability.metrics - INFO - [31mstep: 14  [32mloss:  8.97615  [38;2;180;60;0mgrad_norm: 11.4900  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,790  [36mtflops: 134.62  [35mmfu: 43.15%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,942  [36mtflops: 141.94  [35mmfu: 45.49%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,941  [36mtflops: 141.92  [35mmfu: 45.49%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,941  [36mtflops: 141.92  [35mmfu: 45.49%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,943  [36mtflops: 141.99  [35mmfu: 45.51%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.04  [35mmfu: 45.53%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,941  [36mtflops: 141.91  [35mmfu: 45.48%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,941  [36mtflops: 141.90  [35mmfu: 45.48%[39m
+[titan] 2026-11-02 15:31:23,453 - torchtitan.observability.metrics - INFO - [31mstep: 15  [32mloss:  8.39500  [38;2;180;60;0mgrad_norm:  4.5741  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,942  [36mtflops: 141.94  [35mmfu: 45.49%[39m
+USDT:2026-11-02 15:31:23 1021238:1021238 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-11-02 15:31:23 1021239:1021239 SyncActivityProfilerHandler.cpp:39] profiler_startUSDT:2026-11-02 15:31:23 1021235:1021235 SyncActivityProfilerHandler.cpp:39] profiler_startUSDT:2026-11-02 15:31:23 1021236:1021236 SyncActivityProfilerHandler.cpp:39] profiler_start
+
+
+USDT:2026-11-02 15:31:23 1021233:1021233 SyncActivityProfilerHandler.cpp:39] profiler_startUSDT:2026-11-02 15:31:23 1021240:1021240 SyncActivityProfilerHandler.cpp:39] profiler_start
+
+USDT:2026-11-02 15:31:23 1021234:1021234 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-11-02 15:31:23 1021237:1021237 SyncActivityProfilerHandler.cpp:39] profiler_start
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,990  [36mtflops: 144.29  [35mmfu: 46.25%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,991  [36mtflops: 144.29  [35mmfu: 46.25%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,990  [36mtflops: 144.29  [35mmfu: 46.25%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,990  [36mtflops: 144.28  [35mmfu: 46.24%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,990  [36mtflops: 144.25  [35mmfu: 46.23%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,990  [36mtflops: 144.25  [35mmfu: 46.23%[39m
+[titan] 2026-11-02 15:31:24,139 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,989  [36mtflops: 144.24  [35mmfu: 46.23%[39m
+[titan] 2026-11-02 15:31:24,140 - torchtitan.observability.metrics - INFO - [31mstep: 16  [32mloss:  8.25822  [38;2;180;60;0mgrad_norm: 15.9129  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,988  [36mtflops: 144.19  [35mmfu: 46.22%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,933  [36mtflops: 141.53  [35mmfu: 45.36%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,935  [36mtflops: 141.61  [35mmfu: 45.39%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,932  [36mtflops: 141.48  [35mmfu: 45.35%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,933  [36mtflops: 141.51  [35mmfu: 45.36%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,932  [36mtflops: 141.47  [35mmfu: 45.34%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,933  [36mtflops: 141.52  [35mmfu: 45.36%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,932  [36mtflops: 141.47  [35mmfu: 45.34%[39m
+[titan] 2026-11-02 15:31:24,838 - torchtitan.observability.metrics - INFO - [31mstep: 17  [32mloss:  8.32335  [38;2;180;60;0mgrad_norm: 13.5822  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,931  [36mtflops: 141.43  [35mmfu: 45.33%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,764  [36mtflops: 133.38  [35mmfu: 42.75%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,765  [36mtflops: 133.39  [35mmfu: 42.75%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,765  [36mtflops: 133.42  [35mmfu: 42.76%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,764  [36mtflops: 133.35  [35mmfu: 42.74%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,764  [36mtflops: 133.35  [35mmfu: 42.74%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,764  [36mtflops: 133.37  [35mmfu: 42.75%[39m
+[titan] 2026-11-02 15:31:25,580 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,762  [36mtflops: 133.27  [35mmfu: 42.72%[39m
+[titan] 2026-11-02 15:31:25,581 - torchtitan.observability.metrics - INFO - [31mstep: 18  [32mloss:  8.07137  [38;2;180;60;0mgrad_norm:  5.8026  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,761  [36mtflops: 133.23  [35mmfu: 42.70%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.07  [35mmfu: 45.54%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.07  [35mmfu: 45.53%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.05  [35mmfu: 45.53%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.07  [35mmfu: 45.54%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,945  [36mtflops: 142.09  [35mmfu: 45.54%[39m
+[titan] 2026-11-02 15:31:26,276 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.05  [35mmfu: 45.53%[39m
+[titan] 2026-11-02 15:31:26,277 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,944  [36mtflops: 142.06  [35mmfu: 45.53%[39m
+[titan] 2026-11-02 15:31:26,277 - torchtitan.observability.metrics - INFO - [31mstep: 19  [32mloss:  7.71481  [38;2;180;60;0mgrad_norm:  3.8832  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,945  [36mtflops: 142.10  [35mmfu: 45.55%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,951  [36mtflops: 142.37  [35mmfu: 45.63%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,950  [36mtflops: 142.36  [35mmfu: 45.63%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,950  [36mtflops: 142.35  [35mmfu: 45.62%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,954  [36mtflops: 142.53  [35mmfu: 45.68%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,950  [36mtflops: 142.33  [35mmfu: 45.62%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,949  [36mtflops: 142.28  [35mmfu: 45.60%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,952  [36mtflops: 142.42  [35mmfu: 45.65%[39m
+[titan] 2026-11-02 15:31:26,971 - torchtitan.observability.metrics - INFO - [31mstep: 20  [32mloss:  7.97142  [38;2;180;60;0mgrad_norm: 14.3570  [38;2;54;234;195mmemory: 27.79GiB(35.05%)  [34mtps: 2,948  [36mtflops: 142.24  [35mmfu: 45.59%[39m
+USDT:2026-11-02 15:31:26 1021240:1021240 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-11-02 15:31:26 1021235:1021235 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-11-02 15:31:26 1021237:1021237 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-11-02 15:31:26 1021239:1021239 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-11-02 15:31:26 1021233:1021233 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-11-02 15:31:26 1021238:1021238 SyncActivityProfilerHandler.cpp:46] profiler_stopUSDT:2026-11-02 15:31:26 1021236:1021236 SyncActivityProfilerHandler.cpp:46] profiler_stop
+
+USDT:2026-11-02 15:31:26 1021234:1021234 SyncActivityProfilerHandler.cpp:46] profiler_stop
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,101 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,102 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,109 - torchtitan.observability.profiler - INFO - Dumping profiler traces at step 20
+[titan] 2026-11-02 15:31:27,857 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,857 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,857 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,858 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,858 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,858 - torchtitan.trainer - INFO - Sleeping 2 seconds for other ranks to complete
+[titan] 2026-11-02 15:31:27,858 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,858 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,860 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,861 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,861 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,861 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,862 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.76 seconds
+[titan] 2026-11-02 15:31:27,862 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:27,880 - torchtitan.observability.profiler - INFO - Finished dumping profiler traces in 0.77 seconds
+[titan] 2026-11-02 15:31:27,881 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:29,858 - torchtitan.trainer - INFO - Training completed
+[titan] 2026-11-02 15:31:31,598 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,611 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,613 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,618 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,626 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,791 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:31,801 - __main__ - INFO - Process group destroyed
+[titan] 2026-11-02 15:31:32,083 - __main__ - INFO - Process group destroyed

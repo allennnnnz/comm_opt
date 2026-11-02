@@ -61,14 +61,21 @@ def clip(iv: np.ndarray, s: float, e: float) -> np.ndarray:
     return iv
 
 
-def load_rank(path: Path, step_re: str, mode: str = "cadence"):
+def load_rank(path: Path, step_re: str, mode: str = "cadence", merge_by_name: bool = False):
     opener = gzip.open if path.suffix == ".gz" else open
     ev = json.load(opener(path))["traceEvents"]
     work = [e for e in ev if e.get("cat") in GPU_WORK_CATS and e.get("dur", 0) > 0]
     is_comm = np.array([bool(COMM_RE.search(e["name"])) and e["cat"] == "kernel" for e in work])
     iv = np.array([(e["ts"], e["ts"] + e["dur"]) for e in work], dtype=float).reshape(-1, 2)
-    ann = sorted((e["ts"], e["ts"] + e["dur"]) for e in ev
-                 if e.get("cat") == "gpu_user_annotation" and re.search(step_re, e["name"]))
+    ann = [(e["ts"], e["ts"] + e["dur"], e["name"]) for e in ev
+           if e.get("cat") == "gpu_user_annotation" and re.search(step_re, e["name"])]
+    if merge_by_name:  # one step split into several GPU annotation segments (torch ProfilerStep#N)
+        span = {}
+        for s, t, n in ann:
+            a, b = span.get(n, (s, t))
+            span[n] = (min(a, s), max(b, t))
+        ann = list(span.values())
+    ann = sorted((s, t) for s, t, *_ in ann)
     if mode == "cadence":
         steps = [(s, n) for (s, _), (n, _) in zip(ann, ann[1:])]
     else:
@@ -77,7 +84,7 @@ def load_rank(path: Path, step_re: str, mode: str = "cadence"):
     return iv, is_comm, steps, comm_kernels
 
 
-def decompose(trace_files: list, step_re: str, mode: str = "cadence") -> tuple:
+def decompose(trace_files: list, step_re: str, mode: str = "cadence", merge_by_name: bool = False) -> tuple:
     """Return (per-rank-step breakdown, per-collective table, comm kernel name counts).
 
     Transfer vs waiting: the j-th comm kernel in the window is the same collective on every rank, so its
@@ -86,7 +93,7 @@ def decompose(trace_files: list, step_re: str, mode: str = "cadence") -> tuple:
     (exact when comm does not overlap compute, as in TP inference). Requires equal comm-kernel counts.
     """
     files = sorted(trace_files, key=lambda p: int(re.search(r"rank(\d+)", p.name).group(1)))
-    ranks = [load_rank(f, step_re, mode) for f in files]
+    ranks = [load_rank(f, step_re, mode, merge_by_name) for f in files]
     windows = [[(ts, dur) for ts, dur, _ in ck if any(s <= ts < e for s, e in st)] for _, _, st, ck in ranks]
     counts = {len(w) for w in windows}
     transfer = (np.min([[d for _, d in w] for w in windows], axis=0) if len(counts) == 1 and counts != {0}

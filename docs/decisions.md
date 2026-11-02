@@ -53,3 +53,9 @@
 - **使用者的選擇**：推論「模型切到 8 張卡」（vLLM，TP=8）；訓練「模型切到多張卡」（torchtitan，TP=8、TP=4×FSDP=2、TP=2×FSDP=4）；中型與小型模型都量。
 - **量法依據**：Mirzaei & Mitra 2610.05305（延遲拆成計算、通訊、空檔；分讀入與生成階段）、Chopper 2512.08242（多層級 GPU timeline 對齊、記錄時脈）、Lee et al. 2507.03114（重疊造成的計算變慢）。
 - **環境**：`.venv-vllm`（vLLM 0.33.0）與 `.venv-titan`（torchtitan 0.4.0），兩者都用 PyTorch 2.14.0。模型權重用 Hugging Face 共用快取裡已下載的 Qwen2.5-32B-Instruct 與 TinyLlama-1.1B；訓練用隨機初始化。
+
+## D010（2026-11-02）M5 完成：通訊占端到端 8–30%
+
+- **結果**：推論（vLLM TP=8）Qwen2.5-32B 生成 8–27%、讀入 24–30%；訓練（torchtitan）Llama-3 8B 11–22%（加上重疊造成的計算變慢為 16–22%）。小模型受 CPU 主導。見 `exp/M5_e2e_comm_share/README.md`。
+- **量測方法的修正**（量測前已寫入實驗卡）：端到端時間用不開 profiler 的量測；通訊 kernel 時間拆成真正傳輸與等待；讀入階段改以每步 token 數為變因；訓練環境改用 PyTorch 2.15.0（torchtitan 0.4.0 需要）。
+- **新的候選現象**：O1–O6（實驗卡「結論」），連同 F1–F5 交給下一次 G1。
