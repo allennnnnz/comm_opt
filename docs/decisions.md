@@ -30,3 +30,9 @@
 - **分析環境**：`.venv`（uv，Python 3.12），版本鎖在 `requirements-analysis.txt`（D3）。
 - **事後新增的偵測**：`gpu_count_gap`（同一大小不同 GPU 數的 busbw 落差 > 30%）是看到 sendrecv 平台之後才加進 `analyze.py` 的。因此 F1–F7 屬於事後觀察，不能直接當結論；M4 要在量測前寫好判準再驗證。
 - **使用者開始量測的依據**：使用者表示已暫停其他項目；量測前確認 8 張卡記憶體 0 MiB、無任何程式（R13）。
+
+## D006（2026-11-02）核准 M4_repeat 與 M2_p2p_channels；F1 的機制在原始碼中找到
+
+- **決定**：使用者核准（「好 開始做」）M4_repeat（重複驗證 F1–F5）與 M2_p2p_channels（F1 能否靠設定解決）。兩張實驗卡的預期與判準在量測前 commit。
+- **新資訊**：讀 NCCL 2.32.3 原始碼（tag `v2.32.3-1`）找到 F1 的機制：每個 P2P 操作的 channel 下限依 communicator 的 rank 數減半（`scheduleP2pTasksToPlan`），且只有每個 channel 負責超過 16 MiB 時才加倍（`addP2pToPlan`）。`exp/M2_p2p_channels/predict_channels.py` 依此重現 M0 的所有 channel 觀測值。
+- **影響**：F1 是確定性的設計行為，不是雜訊；它是否值得研究，取決於 M2 的結果（能不能靠設定解決、代價是什麼）。
