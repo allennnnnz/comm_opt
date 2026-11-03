@@ -84,3 +84,10 @@
 - **新現象**：P1 搬資料階段只有可達頻寬的 10–50%（不只是同步問題）；P2 沒有單一最佳做法；P3 NCCL symmetric kernels 在 16 KB 以上選擇不佳；P4 NCCL 2.32.3 比 2.30.7 快 20–40%。見 `exp/M6_allreduce_bakeoff/README.md`。
 - **偏差**：SymmetricMemory 沒有 fp16 kernel，以 bf16 補跑（相同 bytes）；不影響判準。
 - `[需裁決]`：是否以此方向進入選題（G2）；是否放行 low-latency-nccl。
+
+## D014（2026-11-03）核准 M7（找出慢在哪）；放行 low-latency-nccl
+
+- **使用者決定**：「先找慢在哪，我放行可以研究低延遲版本 nccl」。
+- **low-latency-nccl**：ss16118/low-latency-nccl 分支 `siyshen/low-latency`（NCCL 2.29.2 為基礎），只在本機編譯與執行。另以它的 headers 重編一份 nccl-tests（`third_party/nccl-tests-llnccl`）；用系統 2.32.3 headers 編的 nccl-tests 搭配它會得到錯誤結果。
+- **試跑發現**：它新增的 Lamport／LLBuffer 做法在 A100 上結果錯誤（預設也挑到這類），只有保留的 AGxLL_R、RSxLD_AGxST 正確。
+- **M7 設計**：NCCL SYM 的做法 × CTA 數掃描、low-latency-nccl、vLLM 1/2-stage、MSCCL++ symmetric memory，共 22 種 × 3 次。
