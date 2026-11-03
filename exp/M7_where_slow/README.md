@@ -50,7 +50,7 @@ M6 顯示 64 KB–1 MB 最快的現成做法離可達水準還差 1.5–2.1 倍�
 
 - 8 張 A100、fp16、1 KB–8 MB（×2），CUDA graph（`-G 20`），登記記憶體（`-R 2`），`-a 3`
 - **A. NCCL 2.32.3 SYM 掃描**：`NCCL_SYM_KERNEL` ∈ {AGxLL_R, RSxLD_AGxST} × `NCCL_SYM_CTAS` ∈ {1, 2, 4, 8, 16, 32, 64}，加上自選（不設定）→ 15 種
-- **B. low-latency-nccl（2.29.2 分支）**：自選、強制 AGxLL_R、強制 RSxLD_AGxST → 3 種（用針對它的 headers 重編的 `third_party/nccl-tests-llnccl`）；新增的 Lamport／LLBuffer 做法已確認在 A100 上錯誤，不量時間
+- **B. low-latency-nccl（2.29.2 分支，commit 5357eff）**：自選、強制 AGxLL_R、強制 RSxLD_AGxST → 3 種（用針對它的 headers 重編的 `third_party/nccl-tests-llnccl`）；新增的 Lamport／LLBuffer 做法已確認在 A100 上錯誤，不量時間
 - **C. vLLM**：`VLLM_CUSTOM_ALLREDUCE_ALGO` ∈ {1stage, 2stage} → 2 種（`bench_torch.py`）
 - **D. MSCCL++**：`MSCCLPP_NCCL_SYMMETRIC_MEMORY` ∈ {0, 1} → 2 種
 - 共 22 種 × 3 次 = 66 次 launch，seed 20261106 打亂順序；每個 launch 前確認沒有其他 GPU 工作
