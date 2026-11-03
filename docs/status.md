@@ -5,8 +5,8 @@
 ## 目前狀態（2026-11-03）
 
 - **階段**：1 找現象 → 選題前
-- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）
-- **等待使用者**：依 D017 重新決定題目定位
+- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）
+- **等待使用者**：依 D017、D018 決定題目定位；是否先量 TRT-LLM／LMDeploy 的合併 kernel
 
 ## 已核准的實驗
 
@@ -22,5 +22,6 @@
 
 ## 下一步
 
-1. 使用者裁決 D013
-2. 若進入選題：先拆解「搬資料只有 10–50% 效率」的原因（機制依據），再用 brainstorming skill 寫研究問題與 claims（G2）
+1. 使用者裁決 D018：是否在 A100 上量 TRT-LLM 與 LMDeploy 的合併 kernel（64 KB–1 MB，對照 M6/M7 的不合併做法），作為之後原型的比較基準
+2. 待議（使用者先前提出）：M9 GPU 核心與連線使用率量測（ncu／nsys）
+3. 若進入選題：用 brainstorming skill 寫研究問題與 claims（G2）；候選核心＝兩輪免 barrier 的合併 two-shot（A100，32-bit 原子加法）＋依機器實測挑做法

@@ -110,3 +110,11 @@
 - **結果**：sm_80 沒有 16 byte 向量原子加法；但 7 張 GPU 以 warp 寬度 32-bit 原子加法寫同一 128 byte 行，3 × 2^20 行 0 次違反（約 25% 的行在寫入途中被觀察到），匯入總頻寬 235–241 GB/s。見 `exp/M8_ll128_atomic_a100/README.md`。
 - **與預期相反**：我預期會出現違反。
 - **影響**：《Every µs Matters》的 two-shot LL128 atomic 很可能可以移植到 A100（改用 32-bit 原子加法）；只做移植的論文貢獻偏弱。`[需裁決]`：重新決定題目的定位。
+
+## D018（2026-11-03）文獻與程式碼查核：A100 上的「加總同步＋正規化合併」已有人做 `[需裁決]`
+
+- **使用者要求**：「查 TensorRT-LLM 和其他框架：確認『加總＋正規化合併』在 A100 上有沒有人做過。不需要 GPU」。只讀程式碼與文件，沒有用 GPU。見 `lit/notes/fused_ar_rmsnorm_a100.md`。
+- **結果**：TensorRT-LLM（one-shot Lamport 免 barrier；two-shot 2 次 barrier、norm 對全部列重複做）與 LMDeploy TurboMind（token 列 RS → 只對自己那段 residual + norm → AG，2 次 barrier）都有 A100 可走的合併 kernel。vLLM、SGLang、FlashInfer 在 A100 上不開。
+- **影響**：「分工加總＋各自正規化＋互相交換」本身不是新貢獻。沒找到的是：**兩輪都免 barrier 的合併 two-shot**（LMDeploy 在 ≤ 512 KB 把合併關掉；TRT-LLM 的 two-shot 合併要 2 次 barrier；《Every µs Matters》不合併 norm、只在 GB200），以及**在 A100 上依實測挑做法**（TRT-LLM 把 sm80 當 sm90 查 H100 調出的表）。
+- **更正**：D012 的「TensorRT-LLM 在 SM80 不啟用」不精確——FlashInfer 版不啟用，TRT-LLM 自己的合併 kernel 有 A100 程式路徑（未實測）。
+- `[需裁決]`：是否先在 A100 上量 TRT-LLM 與 LMDeploy 的合併 kernel（新實驗），再決定是否做「兩輪免 barrier 的合併 two-shot」。
