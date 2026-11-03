@@ -5,8 +5,8 @@
 ## 目前狀態（2026-11-03）
 
 - **階段**：1 找現象 → 選題前
-- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）
-- **等待使用者**：是否以「一次同步 + two-shot 資料量的加總同步」進入選題（D015）
+- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）
+- **等待使用者**：依 D017 重新決定題目定位
 
 ## 已核准的實驗
 
@@ -18,6 +18,7 @@
 | M5_e2e_comm_share | 2026-11-02（D009） | 完成 |
 | M6_allreduce_bakeoff | 2026-11-03（D012） | 完成 |
 | M7_where_slow | 2026-11-03（D014） | 完成 |
+| M8_ll128_atomic_a100 | 2026-11-03（D016） | 完成 |
 
 ## 下一步
 
