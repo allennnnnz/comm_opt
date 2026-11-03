@@ -2,12 +2,14 @@
 //
 // Premise of the two-shot LL128 atomic all-reduce (Shen et al., arXiv 2607.16100, Sec IV-4): when a reader
 // sees a line's flag (element 0) equal to the rank count N, every other element of that line has also been
-// summed. Test: 8 GPUs each run warp-wide atomicAdd on every line in GPU0's memory (lane 0 adds 1 to the
-// flag, lanes 1..31 add rank+1). An observer kernel on GPU0 reads each line with one warp-wide load and
-// counts lines where flag == 8 but some element != 36 (= 1+...+8). One process, peer access enabled.
+// summed. Test: GPUs 1..7 each run warp-wide atomicAdd over NVLink on every line in GPU0's memory (lane 0
+// adds 1 to the flag, lanes 1..31 add rank+1). An observer kernel on GPU0 reads each line with one warp-wide
+// load and counts lines where flag == 7 but some element != 35 (= 2+...+8). GPU0 does not write: a writer
+// kernel on GPU0 did not run concurrently with the spinning observer in a first attempt, so every write here
+// arrives over NVLink, which is the case the premise is about. One process, peer access enabled.
 //
 // Build: nvcc -O3 -arch=sm_80 -o test_ll128_atomic test_ll128_atomic.cu
-// Usage: ./test_ll128_atomic [log2_lines=20] [runs=3]
+// Usage: ./test_ll128_atomic [log2_lines=20] [runs=3] [observe=1]
 #include <cuda_runtime.h>
 #include <cstdio>
 #include <cstdlib>
@@ -17,7 +19,7 @@
   fprintf(stderr, "%s:%d %s\n", __FILE__, __LINE__, cudaGetErrorString(e)); exit(1); } } while (0)
 
 constexpr int NGPU = 8, WORDS = 32;  // 32 x 4 B = one 128-byte line
-constexpr unsigned EXPECT_FLAG = NGPU, EXPECT_DATA = NGPU * (NGPU + 1) / 2;
+constexpr unsigned EXPECT_FLAG = NGPU - 1, EXPECT_DATA = NGPU * (NGPU + 1) / 2 - 1;  // writers are ranks 1..7
 
 __global__ void writer(unsigned* lines, size_t nlines, unsigned rank) {
   const unsigned lane = threadIdx.x % 32;
@@ -28,7 +30,7 @@ __global__ void writer(unsigned* lines, size_t nlines, unsigned rank) {
 }
 
 __global__ void observer(const volatile unsigned* lines, size_t nlines, unsigned long long* violations,
-                         unsigned long long* timeouts) {
+                         unsigned long long* timeouts, unsigned long long* raced) {
   const unsigned lane = threadIdx.x % 32;
   const size_t warp = (blockIdx.x * (size_t)blockDim.x + threadIdx.x) / 32;
   const size_t nwarps = (gridDim.x * (size_t)blockDim.x) / 32;
@@ -39,9 +41,10 @@ __global__ void observer(const volatile unsigned* lines, size_t nlines, unsigned
       if (flag == EXPECT_FLAG) {
         bool bad = (lane != 0) && (v != EXPECT_DATA);
         if (__any_sync(0xffffffffu, bad) && lane == 0) atomicAdd(violations, 1ull);
+        if (spin > 0 && lane == 0) atomicAdd(raced, 1ull);  // saw the line in progress before it completed
         break;
       }
-      if (spin > (1l << 24)) { if (lane == 0) atomicAdd(timeouts, 1ull); break; }
+      if (spin > (1l << 20)) { if (lane == 0) atomicAdd(timeouts, 1ull); break; }
     }
   }
 }
@@ -49,6 +52,8 @@ __global__ void observer(const volatile unsigned* lines, size_t nlines, unsigned
 int main(int argc, char** argv) {
   const int log2_lines = argc > 1 ? atoi(argv[1]) : 20;
   const int runs = argc > 2 ? atoi(argv[2]) : 3;
+  const bool observe = argc > 3 ? atoi(argv[3]) != 0 : true;
+  setvbuf(stdout, nullptr, _IONBF, 0);
   const size_t nlines = 1ull << log2_lines, bytes = nlines * WORDS * sizeof(unsigned);
   int n = 0;
   CK(cudaGetDeviceCount(&n));
@@ -62,10 +67,11 @@ int main(int argc, char** argv) {
   }
   CK(cudaSetDevice(0));
   unsigned* lines;
-  unsigned long long *viol, *tmo;
+  unsigned long long *viol, *tmo, *rac;
   CK(cudaMalloc(&lines, bytes));
   CK(cudaMalloc(&viol, 8));
   CK(cudaMalloc(&tmo, 8));
+  CK(cudaMalloc(&rac, 8));
   std::vector<cudaStream_t> st(NGPU);
   std::vector<cudaEvent_t> t0(NGPU), t1(NGPU);
   cudaStream_t obs;
@@ -83,17 +89,20 @@ int main(int argc, char** argv) {
     CK(cudaMemset(lines, 0, bytes));
     CK(cudaMemset(viol, 0, 8));
     CK(cudaMemset(tmo, 0, 8));
+    CK(cudaMemset(rac, 0, 8));
     CK(cudaDeviceSynchronize());
     // observer first (half the SMs on GPU0), then writers on all GPUs; GPU0's writer shares its SMs
-    observer<<<108, threads, 0, obs>>>(lines, nlines, viol, tmo);
-    for (int d = 0; d < NGPU; ++d) {
+    if (observe) observer<<<108, threads, 0, obs>>>(lines, nlines, viol, tmo, rac);
+    CK(cudaGetLastError());
+    for (int d = 1; d < NGPU; ++d) {
       CK(cudaSetDevice(d));
       CK(cudaEventRecord(t0[d], st[d]));
-      writer<<<d == 0 ? 108 : blocks, threads, 0, st[d]>>>(lines, nlines, d);
+      writer<<<blocks, threads, 0, st[d]>>>(lines, nlines, d);
+      CK(cudaGetLastError());
       CK(cudaEventRecord(t1[d], st[d]));
     }
     double max_ms = 0;
-    for (int d = 0; d < NGPU; ++d) {
+    for (int d = 1; d < NGPU; ++d) {
       CK(cudaSetDevice(d));
       CK(cudaStreamSynchronize(st[d]));
       float ms;
@@ -102,21 +111,25 @@ int main(int argc, char** argv) {
     }
     CK(cudaSetDevice(0));
     CK(cudaStreamSynchronize(obs));
-    unsigned long long hv = 0, ht = 0;
+    unsigned long long hv = 0, ht = 0, hr = 0;
     CK(cudaMemcpy(&hv, viol, 8, cudaMemcpyDeviceToHost));
     CK(cudaMemcpy(&ht, tmo, 8, cudaMemcpyDeviceToHost));
+    CK(cudaMemcpy(&hr, rac, 8, cudaMemcpyDeviceToHost));
     // final state check: every line should end at flag 8 and data 36
     std::vector<unsigned> h(nlines * WORDS);
     CK(cudaMemcpy(h.data(), lines, bytes, cudaMemcpyDeviceToHost));
     size_t final_bad = 0;
     for (size_t l = 0; l < nlines; ++l)
       for (int w = 0; w < WORDS; ++w)
-        if (h[l * WORDS + w] != (w == 0 ? EXPECT_FLAG : EXPECT_DATA)) { ++final_bad; break; }
-    // per GPU: nlines x 128 B of atomic adds; aggregate into GPU0 = 8x that
+        if (h[l * WORDS + w] != (w == 0 ? EXPECT_FLAG : EXPECT_DATA)) {
+          if (++final_bad <= 3) printf("  bad line %zu: flag=%u w1=%u w31=%u\n", l, h[l * WORDS], h[l * WORDS + 1], h[l * WORDS + 31]);
+          break;
+        }
+    // per writer GPU: nlines x 128 B of atomic adds over NVLink; aggregate into GPU0 = 7x that
     double per_gpu_GBs = bytes / (max_ms * 1e-3) / 1e9;
-    printf("run %d: violations=%llu timeouts=%llu final_bad_lines=%zu writer_max_ms=%.2f "
+    printf("run %d: violations=%llu raced_lines=%llu timeouts=%llu final_bad_lines=%zu writer_max_ms=%.2f "
            "atomic_GBps_per_gpu=%.1f aggregate_into_gpu0_GBps=%.1f\n",
-           r, hv, ht, final_bad, max_ms, per_gpu_GBs, per_gpu_GBs * NGPU);
+           r, hv, hr, ht, final_bad, max_ms, per_gpu_GBs, per_gpu_GBs * (NGPU - 1));
   }
   return 0;
 }
