@@ -1,0 +1,38 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M7_where_slow/20261103_091734/all_reduce_g8A_A_agll_c64_r1.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=23203
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 1024 maxBytes 8388608 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 20 unalign: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 1158836 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 1158837 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 1158838 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 1158839 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 1158840 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 1158842 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 1158845 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 1158848 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                              out-of-place                       in-place                                                         tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong     time   algbw   busbw  #wrong  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)  (GB/s)  (GB/s)                                                                                                       
+        1024           512      half     sum      -1     6.09    0.17    0.29       0     5.40    0.19    0.33       0  SYM   N/A             N/A       AGxLL_R             N/A       1          16      N/A         
+        2048          1024      half     sum      -1     5.48    0.37    0.65       0     5.61    0.37    0.64       0  SYM   N/A             N/A       AGxLL_R             N/A       2          16      N/A         
+        4096          2048      half     sum      -1     5.76    0.71    1.24       0     5.80    0.71    1.24       0  SYM   N/A             N/A       AGxLL_R             N/A       4          16      N/A         
+        8192          4096      half     sum      -1     6.17    1.33    2.33       0     6.05    1.36    2.37       0  SYM   N/A             N/A       AGxLL_R             N/A       8          16      N/A         
+       16384          8192      half     sum      -1     7.53    2.18    3.81       0     7.42    2.21    3.86       0  SYM   N/A             N/A       AGxLL_R             N/A       16         16      N/A         
+       32768         16384      half     sum      -1     9.12    3.59    6.29       0     9.18    3.57    6.25       0  SYM   N/A             N/A       AGxLL_R             N/A       32         16      N/A         
+       65536         32768      half     sum      -1    13.19    4.97    8.70       0    12.17    5.39    9.43       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+      131072         65536      half     sum      -1    18.72    7.00   12.25       0    18.50    7.08   12.40       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+      262144        131072      half     sum      -1    33.28    7.88   13.78       0    32.80    7.99   13.99       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+      524288        262144      half     sum      -1    48.79   10.75   18.80       0    48.70   10.77   18.84       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+     1048576        524288      half     sum      -1    93.83   11.18   19.56       0    93.68   11.19   19.59       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+     2097152       1048576      half     sum      -1   186.05   11.27   19.73       0   185.52   11.30   19.78       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+     4194304       2097152      half     sum      -1   389.87   10.76   18.83       0   392.86   10.68   18.68       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+     8388608       4194304      half     sum      -1   884.37    9.49   16.60       0   911.03    9.21   16.11       0  SYM   N/A             N/A       AGxLL_R             N/A       64         16      N/A         
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 10.2274 
+#
+# Collective test concluded: all_reduce_perf
+#
+

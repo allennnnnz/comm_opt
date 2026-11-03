@@ -91,3 +91,9 @@
 - **low-latency-nccl**：ss16118/low-latency-nccl 分支 `siyshen/low-latency`（NCCL 2.29.2 為基礎），只在本機編譯與執行。另以它的 headers 重編一份 nccl-tests（`third_party/nccl-tests-llnccl`）；用系統 2.32.3 headers 編的 nccl-tests 搭配它會得到錯誤結果。
 - **試跑發現**：它新增的 Lamport／LLBuffer 做法在 A100 上結果錯誤（預設也挑到這類），只有保留的 AGxLL_R、RSxLD_AGxST 正確。
 - **M7 設計**：NCCL SYM 的做法 × CTA 數掃描、low-latency-nccl、vLLM 1/2-stage、MSCCL++ symmetric memory，共 22 種 × 3 次。
+
+## D015（2026-11-03）M7 完成：需要新的做法 `[需裁決]`
+
+- **結果**：NCCL SYM 在 A100 上選錯 CTA 數（16K–256K 自選比最佳慢 1.35–2.33 倍，判準成立）；但所有做法的最佳組合在 64K–1M 仍比可達水準慢 1.44–1.91 倍（4/5 ≥ 1.5）→ 依判準「需要新的做法」。
+- **機制**：one-shot 一次同步但每卡讀 7×S；two-shot 資料量 1.75×S 但兩輪同步（固定約 13 µs vs 5.4 µs）。沒有現成做法同時做到一次同步與 two-shot 的資料量。
+- `[需裁決]`：是否以此進入選題；先確認《Every µs Matters》的 LL128 原子加 two-shot 在 A100 上是否可行（新穎性風險）。

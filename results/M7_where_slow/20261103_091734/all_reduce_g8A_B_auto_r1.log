@@ -1,0 +1,51 @@
+# Writing JSON output to /home/rogerlee/comm_opt/results/M7_where_slow/20261103_091734/all_reduce_g8A_B_auto_r1.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=22902 nccl-library=22902
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 1024 maxBytes 8388608 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 20 unalign: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 1153405 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 1153406 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 1153407 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 1153408 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 1153410 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 1153413 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 1153416 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 1153419 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                              out-of-place                       in-place                                                         tuning                                            
+#       size         count      type   redop    root     time   algbw   busbw  #wrong     time   algbw   busbw  #wrong  impl  algo            proto     kernelVariant       sync      #channels  #warps  netChunkSize
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)  (GB/s)  (GB/s)                                                                                                       
+        1024           512      half     sum      -1     1.18    0.87    1.52    4096     1.17    0.87    1.53    4093  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        2048          1024      half     sum      -1     1.18    1.74    3.04    8192     1.17    1.75    3.06    8188  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        4096          2048      half     sum      -1     1.18    3.47    6.07   16368     1.18    3.48    6.08   16374  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+        8192          4096      half     sum      -1     1.20    6.82   11.94   32744     1.20    6.82   11.94   32743  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       16384          8192      half     sum      -1     1.21   13.59   23.78   65472     1.21   13.51   23.64   65487  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       32768         16384      half     sum      -1     1.21   27.17   47.55  130968     1.21   27.04   47.33  130972  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+       65536         32768      half     sum      -1     1.22   53.71   93.99  261944     1.22   53.71   93.99  261959  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      131072         65536      half     sum      -1     1.24  105.82  185.19  523712     1.24  105.71  184.98  523920  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      262144        131072      half     sum      -1     1.30  202.00  353.50  1.04746e+06     1.30  202.22  353.89  1.04783e+06  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+      524288        262144      half     sum      -1     1.26  415.40  726.95  2.09507e+06     1.26  415.56  727.23  2.09553e+06  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     1048576        524288      half     sum      -1     1.26  833.28  1458.2  4.19054e+06     1.26  833.26  1458.2  4.19127e+06  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     2097152       1048576      half     sum      -1    30.03   69.84  122.22       0    27.30   76.81  134.41       0  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     4194304       2097152      half     sum      -1    49.79   84.24  147.42       0    49.90   84.06  147.10       0  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+     8388608       4194304      half     sum      -1    88.70   94.57  165.50       0    88.31   94.99  166.23       0  N/A   N/A             N/A       N/A                 N/A       N/A        N/A     N/A         
+# Out of bounds values : 176 FAILED
+# Avg bus bandwidth    : 239.519 
+#
+# Collective test concluded: all_reduce_perf
+#
+
+ .. css-host-158 pid 1153416: Test failure common.cu:1545
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+ .. css-host-158 pid 1153419: Test failure common.cu:1545
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[29714,1],6]
+  Exit code:    7
+--------------------------------------------------------------------------

@@ -1,0 +1,46 @@
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+Option -U (tuning) is not supported before NCCL 2.28. Ignoring
+# Writing JSON output to /home/rogerlee/comm_opt/results/M7_where_slow/20261103_091734/all_reduce_g8A_D_mscclpp_sym0_r1.json
+# nccl-tests version 2.21.1 (afd59ab) nccl-headers=23203 nccl-library=900
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 1024 maxBytes 8388608 step: 2(factor) warmup iters: 10 iters: 40 agg iters: 1 validation: 1 graph: 20 unalign: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 1164152 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 1164153 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 1164154 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 1164155 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 1164156 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 1164157 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 1164158 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 1164161 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                              out-of-place                       in-place
+#       size         count      type   redop    root     time   algbw   busbw  #wrong     time   algbw   busbw  #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)  (GB/s)  (GB/s)        
+        1024           512      half     sum      -1     5.67    0.18    0.32       0     5.63    0.18    0.32       0
+        2048          1024      half     sum      -1     5.96    0.34    0.60       0     5.98    0.34    0.60       0
+        4096          2048      half     sum      -1     6.42    0.64    1.12       0     6.43    0.64    1.12       0
+        8192          4096      half     sum      -1     6.94    1.18    2.07       0     7.08    1.16    2.03       0
+       16384          8192      half     sum      -1     7.77    2.11    3.69       0     7.69    2.13    3.73       0
+       32768         16384      half     sum      -1    10.05    3.26    5.71       0    10.01    3.27    5.73       0
+       65536         32768      half     sum      -1    10.52    6.23   10.91       0     9.75    6.72   11.76       0
+      131072         65536      half     sum      -1    10.57   12.40   21.71       0    10.52   12.46   21.81       0
+      262144        131072      half     sum      -1    15.29   17.14   30.00       0    14.10   18.60   32.55       0
+      524288        262144      half     sum      -1    18.09   28.98   50.72       0    18.09   28.98   50.71       0
+     1048576        524288      half     sum      -1    28.22   37.15   65.01       0    28.22   37.16   65.03       0
+     2097152       1048576      half     sum      -1    38.11   55.04   96.31       0    38.19   54.91   96.10       0
+     4194304       2097152      half     sum      -1    55.80   75.16  131.53       0    55.67   75.35  131.86       0
+     8388608       4194304      half     sum      -1    93.28   89.93  157.37       0    93.08   90.12  157.71       0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 41.3606 
+#
+# Collective test concluded: all_reduce_perf
+#
+

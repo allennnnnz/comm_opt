@@ -1,0 +1,42 @@
+W1103 09:21:44.035000 1157346 torch/distributed/run.py:982] 
+W1103 09:21:44.035000 1157346 torch/distributed/run.py:982] *****************************************
+W1103 09:21:44.035000 1157346 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1103 09:21:44.035000 1157346 torch/distributed/run.py:982] *****************************************
+[rank0]:W1103 09:21:51.825000 1157439 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1103 09:21:51.826000 1157439 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1103 09:21:51.826000 1157439 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1103 09:21:51.826000 1157445 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1103 09:21:51.827000 1157445 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1103 09:21:51.827000 1157445 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1103 09:21:51.827000 1157443 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1103 09:21:51.828000 1157443 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1103 09:21:51.828000 1157443 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1103 09:21:51.835000 1157440 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1103 09:21:51.836000 1157440 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1103 09:21:51.837000 1157440 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1103 09:21:51.843000 1157446 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1103 09:21:51.844000 1157446 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1103 09:21:51.845000 1157446 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1103 09:21:51.897000 1157441 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1103 09:21:51.898000 1157441 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1103 09:21:51.898000 1157441 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1103 09:21:51.924000 1157444 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1103 09:21:51.925000 1157444 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1103 09:21:51.926000 1157444 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1103 09:21:51.981000 1157442 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1103 09:21:51.982000 1157442 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1103 09:21:51.983000 1157442 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+vllm_car            1024 B  max    17.90 us  rel_err 3.72e-04 
+vllm_car            2048 B  max    17.90 us  rel_err 3.47e-04 
+vllm_car            4096 B  max    17.82 us  rel_err 3.70e-04 
+vllm_car            8192 B  max    17.26 us  rel_err 3.83e-04 
+vllm_car           16384 B  max    17.51 us  rel_err 3.78e-04 
+vllm_car           32768 B  max    18.03 us  rel_err 3.61e-04 
+vllm_car           65536 B  max    19.27 us  rel_err 3.11e-04 
+vllm_car          131072 B  max    19.26 us  rel_err 2.77e-04 
+vllm_car          262144 B  max    19.81 us  rel_err 2.77e-04 
+vllm_car          524288 B  max    21.33 us  rel_err 2.77e-04 
+vllm_car         1048576 B  max    24.50 us  rel_err 2.77e-04 
+vllm_car         2097152 B  max    31.20 us  rel_err 2.77e-04 
+vllm_car         4194304 B  max    49.43 us  rel_err 2.77e-04 
+vllm_car         8388608 B  max    85.95 us  rel_err 2.77e-04 
