@@ -70,3 +70,10 @@
   - 一對一傳輸的通道問題已被 AMD RCCL PR #8349 描述並修正（論文價值低）。
   - **量測方法的缺口**：M0／M4 的 nccl-tests 用預設 `-R 0`（沒登記記憶體），NCCL ≥ 2.27 的 symmetric kernels 不會啟用；也沒用 CUDA graph（`-G`）。「NCCL 小資料慢」在重量前不能當結論。
 - **建議**（待裁決）：以「生成階段中等大小 all-reduce」為主線，但先做一次現成實作的對照量測（M6），依量測前寫好的判準決定是否值得實作。
+
+## D012（2026-11-03）核准 M6：現成 all-reduce 做法對照
+
+- **使用者核准**：「好 先去測試這個」（測試生成階段加總同步的現成做法與時間拆解）。
+- **納入**：NCCL 2.32.3（一般、CUDA graph、登記記憶體的 symmetric kernels）、MSCCL++（commit d5ce6c72，NCCL 相容介面）、PyTorch 自帶 NCCL 2.30.7、vLLM custom AR、PyTorch SymmetricMemory one-shot／two-shot。
+- **未納入**：low-latency-nccl（ss16118，個人帳號專案）的下載與編譯被安全檢查擋下，**需使用者決定是否放行**；SiFAR 無程式碼；TensorRT-LLM／FlashInfer 在 SM80 不啟用。
+- **量測前的修正**：資料型別由 bf16 改為 fp16（MSCCL++ 介面下 nccl-tests 不支援 bf16）。
