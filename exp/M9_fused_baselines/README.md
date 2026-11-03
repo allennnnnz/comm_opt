@@ -20,6 +20,7 @@
 - FlashInfer 0.7.2.post1（`.venv-vllm` 已安裝）帶有**同源的** `trtllm_allreduce_fusion` 原始碼，也有 A100 路徑；FlashInfer 只是不為 sm80 編譯（`supported_major_versions=[9, 10, 12]`）。本實驗在測試腳本裡**用同一批原始碼另外編一份 sm_80 版本**，不改 FlashInfer 套件
 - LMDeploy TurboMind 的合併 kernel（token 列 RS → 自己那段 norm → AG，2 次 barrier）在 ≤ 512 KB 會改走「一般 all-reduce＋另跑 norm」；它自帶 `src/turbomind/comm/test_comm.cu` 量測程式（hidden 寫死 2048）
 - vLLM 0.33.0 在 A100 上不開合併：生成階段實際是「vLLM custom AR → `fused_add_rms_norm`」兩個 kernel
+- **sm_80 試編成功**（2026-11-03，只編譯、未執行）：FlashInfer 的 `trtllm_allreduce.cu`、`trtllm_allreduce_fusion.cu`、`trtllm_moe_allreduce_fusion.cu` 以 `-gencode=arch=compute_80,code=sm_80` ＋ FlashInfer 的 `common_nvcc_flags` 編譯，CUDA 13.4，耗時 257 秒；產物只含 sm_80 程式碼，one-shot Lamport／two-shot sync 的 kernel 實例都在裡面（快取於 `~/.cache/flashinfer/0.7.2.post1/80/cached_ops/trtllm_comm_sm80/`）
 
 ## 要量的做法
 
