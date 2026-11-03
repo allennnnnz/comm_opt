@@ -1,0 +1,64 @@
+W1103 08:39:20.194000 1118164 torch/distributed/run.py:982] 
+W1103 08:39:20.194000 1118164 torch/distributed/run.py:982] *****************************************
+W1103 08:39:20.194000 1118164 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1103 08:39:20.194000 1118164 torch/distributed/run.py:982] *****************************************
+[rank0]:W1103 08:39:28.077000 1118268 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1103 08:39:28.077000 1118268 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1103 08:39:28.078000 1118268 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1103 08:39:28.080000 1118275 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1103 08:39:28.080000 1118275 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1103 08:39:28.081000 1118275 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1103 08:39:28.136000 1118271 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1103 08:39:28.136000 1118271 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1103 08:39:28.137000 1118271 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1103 08:39:28.143000 1118269 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1103 08:39:28.144000 1118269 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1103 08:39:28.145000 1118269 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1103 08:39:28.146000 1118274 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1103 08:39:28.148000 1118274 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1103 08:39:28.148000 1118274 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1103 08:39:28.155000 1118270 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1103 08:39:28.156000 1118270 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1103 08:39:28.156000 1118270 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1103 08:39:28.164000 1118273 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1103 08:39:28.165000 1118273 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1103 08:39:28.166000 1118273 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1103 08:39:28.238000 1118272 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1103 08:39:28.239000 1118272 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1103 08:39:28.239000 1118272 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:[W1103 08:39:29.153579931 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank6]:[W1103 08:39:29.153594514 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank0]:[W1103 08:39:29.153608898 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank7]:[W1103 08:39:29.153640199 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank3]:[W1103 08:39:29.153662707 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank4]:[W1103 08:39:29.153680701 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank5]:[W1103 08:39:29.153705106 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+[rank1]:[W1103 08:39:29.153717856 CUDASymmetricMemoryOps.cu:89] Warning: one_shot_all_reduce: detected multiple CUDA streams issuing symm_mem collectives for group "0". symm_mem collectives use a shared signal pad indexed by blockIdx.x with no per-stream isolation; concurrent launches from different streams on the same group will deadlock. Serialize all symm_mem collectives for a group onto a single dedicated CUDA stream. (function operator())
+symm_one_shot       1024 B  max    14.15 us  rel_err 5.61e-03 
+symm_one_shot       2048 B  max    14.88 us  rel_err 5.13e-03 
+symm_one_shot       4096 B  max    15.42 us  rel_err 5.26e-03 
+symm_one_shot       8192 B  max    16.76 us  rel_err 6.63e-03 
+symm_one_shot      16384 B  max    17.70 us  rel_err 7.57e-03 
+symm_one_shot      32768 B  max    17.94 us  rel_err 7.00e-03 
+symm_one_shot      65536 B  max    19.32 us  rel_err 6.03e-03 
+symm_one_shot     131072 B  max    21.83 us  rel_err 6.53e-03 
+symm_one_shot     262144 B  max    29.12 us  rel_err 6.53e-03 
+symm_one_shot     524288 B  max    37.31 us  rel_err 9.08e-03 
+symm_one_shot    1048576 B  max    56.55 us  rel_err 9.08e-03 
+symm_one_shot    2097152 B  max    93.40 us  rel_err 9.08e-03 
+symm_one_shot    4194304 B  max   165.88 us  rel_err 9.46e-03 
+symm_one_shot    8388608 B  max   323.71 us  rel_err 9.73e-03 
+symm_two_shot       1024 B  max    11.26 us  rel_err 5.61e-03 
+symm_two_shot       2048 B  max    11.95 us  rel_err 5.13e-03 
+symm_two_shot       4096 B  max    12.26 us  rel_err 5.26e-03 
+symm_two_shot       8192 B  max    11.84 us  rel_err 6.63e-03 
+symm_two_shot      16384 B  max    11.83 us  rel_err 7.57e-03 
+symm_two_shot      32768 B  max    12.55 us  rel_err 7.00e-03 
+symm_two_shot      65536 B  max    13.53 us  rel_err 6.03e-03 
+symm_two_shot     131072 B  max    17.02 us  rel_err 6.53e-03 
+symm_two_shot     262144 B  max    18.11 us  rel_err 6.53e-03 
+symm_two_shot     524288 B  max    18.50 us  rel_err 9.08e-03 
+symm_two_shot    1048576 B  max    21.80 us  rel_err 9.08e-03 
+symm_two_shot    2097152 B  max    29.37 us  rel_err 9.08e-03 
+symm_two_shot    4194304 B  max    48.65 us  rel_err 9.46e-03 
+symm_two_shot    8388608 B  max    82.72 us  rel_err 9.73e-03 

@@ -77,3 +77,10 @@
 - **納入**：NCCL 2.32.3（一般、CUDA graph、登記記憶體的 symmetric kernels）、MSCCL++（commit d5ce6c72，NCCL 相容介面）、PyTorch 自帶 NCCL 2.30.7、vLLM custom AR、PyTorch SymmetricMemory one-shot／two-shot。
 - **未納入**：low-latency-nccl（ss16118，個人帳號專案）的下載與編譯被安全檢查擋下，**需使用者決定是否放行**；SiFAR 無程式碼；TensorRT-LLM／FlashInfer 在 SM80 不啟用。
 - **量測前的修正**：資料型別由 bf16 改為 fp16（MSCCL++ 介面下 nccl-tests 不支援 bf16）。
+
+## D013（2026-11-03）M6 完成：判準結果「值得實作」 `[需裁決]`
+
+- **結果**：64 KB–1 MB 最快的現成做法（vLLM、MSCCL++）比可達水準慢 1.53–2.07 倍，5/5 個大小 ≥ 1.5 → 依量測前判準「值得實作」。我的預期是「部分」，結果比預期更有空間。
+- **新現象**：P1 搬資料階段只有可達頻寬的 10–50%（不只是同步問題）；P2 沒有單一最佳做法；P3 NCCL symmetric kernels 在 16 KB 以上選擇不佳；P4 NCCL 2.32.3 比 2.30.7 快 20–40%。見 `exp/M6_allreduce_bakeoff/README.md`。
+- **偏差**：SymmetricMemory 沒有 fp16 kernel，以 bf16 補跑（相同 bytes）；不影響判準。
+- `[需裁決]`：是否以此方向進入選題（G2）；是否放行 low-latency-nccl。

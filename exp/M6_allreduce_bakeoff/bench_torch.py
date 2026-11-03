@@ -25,6 +25,8 @@ p.add_argument("--min-bytes", type=int, default=1 << 10)
 p.add_argument("--max-bytes", type=int, default=8 << 20)
 p.add_argument("--graph-ops", type=int, default=20, help="all-reduces captured per graph")
 p.add_argument("--replays", type=int, default=20, help="timed graph replays")
+p.add_argument("--dtype", choices=["float16", "bfloat16"], default="float16")
+p.add_argument("--impls", default="torch_nccl,vllm_car,symm_one_shot,symm_two_shot")
 a = p.parse_args()
 
 rank, world = int(os.environ["RANK"]), int(os.environ["WORLD_SIZE"])
@@ -33,7 +35,9 @@ dev = torch.device("cuda", rank)
 dist.init_process_group("nccl", device_id=dev)
 cpu_group = dist.new_group(backend="gloo")
 group_name = dist.group.WORLD.group_name
-DT = torch.float16  # fp16, not bf16: nccl-tests disables bf16 under the MSCCL++ shim (it reports version 0.9.0)
+# fp16 by default: nccl-tests disables bf16 under the MSCCL++ shim (it reports version 0.9.0);
+# SymmetricMemory one/two-shot have no fp16 kernels, so they run with --dtype bfloat16 (same bytes)
+DT = getattr(torch, a.dtype)
 sizes = []
 s = a.min_bytes
 while s <= a.max_bytes:
@@ -118,7 +122,7 @@ def bench(impl, nbytes) -> float:
     return us
 
 
-impls = ["torch_nccl", "vllm_car", "symm_one_shot", "symm_two_shot"]
+impls = a.impls.split(",")
 random.Random(a.seed).shuffle(impls)
 rows = []
 for impl in impls:

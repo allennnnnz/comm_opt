@@ -4,9 +4,9 @@
 
 ## 目前狀態（2026-11-03）
 
-- **階段**：1 找現象 → 準備選題
-- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share；依實測數據的文獻對照（`lit/notes/survey_20261103.md`，D011）
-- **等待使用者**：是否以「生成階段中等大小 all-reduce」為主線，並核准先做 M6（現成實作對照量測）
+- **階段**：1 找現象 → 選題前
+- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：判準結果「值得實作」）
+- **等待使用者**：是否以「A100 上生成階段中等大小加總同步」進入選題；是否放行 low-latency-nccl
 
 ## 已核准的實驗
 
@@ -16,12 +16,9 @@
 | M4_repeat | 2026-11-02（D006） | 完成 |
 | M2_p2p_channels | 2026-11-02（D006） | 完成 |
 | M5_e2e_comm_share | 2026-11-02（D009） | 完成 |
-
-## 提案中（需核准）
-
-- **M6 現成 all-reduce 實作對照**：8 卡、10 KB–5 MB，比較 NCCL 預設、NCCL 登記記憶體後的低延遲模式（`-R 2`）、CUDA graph 模式（`-G`）、vLLM custom AR、MSCCL++、PyTorch SymmetricMemory、low-latency-nccl；拆出同步、傳輸、發射各花多少
+| M6_allreduce_bakeoff | 2026-11-03（D012） | 完成 |
 
 ## 下一步
 
-1. 使用者裁決方向與 M6
-2. 若核准：先寫 M6 實驗卡（含「值不值得實作」的判準），再建置與量測
+1. 使用者裁決 D013
+2. 若進入選題：先拆解「搬資料只有 10–50% 效率」的原因（機制依據），再用 brainstorming skill 寫研究問題與 claims（G2）

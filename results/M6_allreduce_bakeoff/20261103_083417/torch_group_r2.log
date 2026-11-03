@@ -1,0 +1,84 @@
+W1103 08:34:53.906000 1113621 torch/distributed/run.py:982] 
+W1103 08:34:53.906000 1113621 torch/distributed/run.py:982] *****************************************
+W1103 08:34:53.906000 1113621 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1103 08:34:53.906000 1113621 torch/distributed/run.py:982] *****************************************
+[rank6]:W1103 08:35:01.791000 1113727 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1103 08:35:01.791000 1113727 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1103 08:35:01.792000 1113727 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1103 08:35:01.803000 1113721 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1103 08:35:01.803000 1113721 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1103 08:35:01.804000 1113721 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1103 08:35:01.810000 1113723 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1103 08:35:01.810000 1113723 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1103 08:35:01.811000 1113723 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1103 08:35:01.815000 1113722 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1103 08:35:01.816000 1113722 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1103 08:35:01.816000 1113722 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1103 08:35:01.834000 1113726 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1103 08:35:01.835000 1113726 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1103 08:35:01.836000 1113726 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1103 08:35:01.838000 1113724 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1103 08:35:01.839000 1113724 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1103 08:35:01.840000 1113724 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1103 08:35:01.872000 1113728 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1103 08:35:01.873000 1113728 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1103 08:35:01.873000 1113728 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1103 08:35:01.874000 1113725 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1103 08:35:01.876000 1113725 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1103 08:35:01.877000 1113725 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+vllm_car            1024 B  max     7.74 us  rel_err 3.72e-04 
+vllm_car            2048 B  max     8.04 us  rel_err 3.47e-04 
+vllm_car            4096 B  max     7.81 us  rel_err 3.70e-04 
+vllm_car            8192 B  max     7.84 us  rel_err 3.83e-04 
+vllm_car           16384 B  max     7.94 us  rel_err 3.78e-04 
+vllm_car           32768 B  max     8.85 us  rel_err 3.61e-04 
+vllm_car           65536 B  max    10.66 us  rel_err 3.11e-04 
+vllm_car          131072 B  max    14.12 us  rel_err 2.77e-04 
+vllm_car          262144 B  max    19.83 us  rel_err 2.77e-04 
+vllm_car          524288 B  max    21.53 us  rel_err 2.77e-04 
+vllm_car         1048576 B  max    24.47 us  rel_err 2.77e-04 
+vllm_car         2097152 B  max    31.14 us  rel_err 2.77e-04 
+vllm_car         4194304 B  max    49.87 us  rel_err 2.77e-04 
+vllm_car         8388608 B  max    86.43 us  rel_err 2.77e-04 
+symm_one_shot       1024 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot       2048 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot       4096 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot       8192 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot      16384 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot      32768 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot      65536 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot     131072 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot     262144 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot     524288 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot    1048576 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot    2097152 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot    4194304 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_one_shot    8388608 B  max      nan us  rel_err nan NotImplementedError: "one_shot_all_reduce" not implemented f
+symm_two_shot       1024 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot       2048 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot       4096 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot       8192 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot      16384 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot      32768 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot      65536 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot     131072 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot     262144 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot     524288 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot    1048576 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot    2097152 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot    4194304 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+symm_two_shot    8388608 B  max      nan us  rel_err nan NotImplementedError: "two_shot_all_reduce" not implemented f
+torch_nccl          1024 B  max    28.73 us  rel_err 7.31e-04 
+torch_nccl          2048 B  max    28.36 us  rel_err 6.82e-04 
+torch_nccl          4096 B  max    29.05 us  rel_err 7.52e-04 
+torch_nccl          8192 B  max    29.48 us  rel_err 7.97e-04 
+torch_nccl         16384 B  max    30.79 us  rel_err 9.50e-04 
+torch_nccl         32768 B  max    36.70 us  rel_err 9.15e-04 
+torch_nccl         65536 B  max    37.75 us  rel_err 1.05e-03 
+torch_nccl        131072 B  max    37.59 us  rel_err 9.34e-04 
+torch_nccl        262144 B  max    38.18 us  rel_err 9.96e-04 
+torch_nccl        524288 B  max    39.73 us  rel_err 9.96e-04 
+torch_nccl       1048576 B  max    50.47 us  rel_err 9.98e-04 
+torch_nccl       2097152 B  max    63.99 us  rel_err 9.01e-04 
+torch_nccl       4194304 B  max    92.72 us  rel_err 1.18e-03 
+torch_nccl       8388608 B  max   143.44 us  rel_err 1.11e-03 

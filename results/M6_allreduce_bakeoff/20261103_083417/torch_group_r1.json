@@ -1,0 +1,972 @@
+{
+ "args": {
+  "out": "/home/rogerlee/comm_opt/results/M6_allreduce_bakeoff/20261103_083417/torch_group_r1.json",
+  "seed": 1,
+  "min_bytes": 1024,
+  "max_bytes": 8388608,
+  "graph_ops": 20,
+  "replays": 20
+ },
+ "torch": "2.14.0+cu130",
+ "nccl": "2.30.7",
+ "order": [
+  "symm_two_shot",
+  "torch_nccl",
+  "symm_one_shot",
+  "vllm_car"
+ ],
+ "rows": [
+  {
+   "impl": "symm_two_shot",
+   "bytes": 1024,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 2048,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 4096,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 8192,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 16384,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 32768,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 65536,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 131072,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 262144,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 524288,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 1048576,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 2097152,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 4194304,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_two_shot",
+   "bytes": 8388608,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"two_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 1024,
+   "per_rank_us": [
+    31.02720022201538,
+    30.809600353240967,
+    30.906879901885986,
+    30.82751989364624,
+    30.991361141204834,
+    30.82240104675293,
+    30.896639823913574,
+    30.845439434051514
+   ],
+   "max_rel_err": 0.000730901665519923,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 2048,
+   "per_rank_us": [
+    30.47679901123047,
+    30.43839931488037,
+    30.37951946258545,
+    30.38464069366455,
+    30.469119548797607,
+    30.453760623931885,
+    30.32576084136963,
+    30.43071985244751
+   ],
+   "max_rel_err": 0.0006819088011980057,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 4096,
+   "per_rank_us": [
+    30.993919372558594,
+    30.986239910125732,
+    30.988800525665283,
+    30.960640907287598,
+    31.07583999633789,
+    30.97088098526001,
+    30.963199138641357,
+    31.03231906890869
+   ],
+   "max_rel_err": 0.0007521001389250159,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 8192,
+   "per_rank_us": [
+    31.293439865112305,
+    31.137280464172363,
+    31.18079900741577,
+    31.129601001739502,
+    31.301119327545166,
+    31.137280464172363,
+    31.11936092376709,
+    31.18079900741577
+   ],
+   "max_rel_err": 0.0007970978040248156,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 16384,
+   "per_rank_us": [
+    32.30976104736328,
+    32.4019193649292,
+    32.332799434661865,
+    32.35584020614624,
+    32.335360050201416,
+    32.42239952087402,
+    32.29952096939087,
+    32.38912105560303
+   ],
+   "max_rel_err": 0.000949813227634877,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 32768,
+   "per_rank_us": [
+    38.297600746154785,
+    38.17984104156494,
+    38.2207989692688,
+    38.19263935089111,
+    38.38207960128784,
+    38.17215919494629,
+    38.21311950683594,
+    38.21824073791504
+   ],
+   "max_rel_err": 0.0009145695948973298,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 65536,
+   "per_rank_us": [
+    39.41119909286499,
+    39.534080028533936,
+    39.5084810256958,
+    39.51872110366821,
+    39.44704055786133,
+    39.531519412994385,
+    39.50079917907715,
+    39.61344003677368
+   ],
+   "max_rel_err": 0.0010497557232156396,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 131072,
+   "per_rank_us": [
+    39.46239948272705,
+    39.49824094772339,
+    39.49311971664429,
+    39.4649600982666,
+    39.480319023132324,
+    39.49568033218384,
+    39.480319023132324,
+    39.531519412994385
+   ],
+   "max_rel_err": 0.0009343709680251777,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 262144,
+   "per_rank_us": [
+    39.51359987258911,
+    39.52383995056152,
+    39.51103925704956,
+    39.51872110366821,
+    39.575040340423584,
+    39.52127933502197,
+    39.5084810256958,
+    39.60319995880127
+   ],
+   "max_rel_err": 0.0009960850002244115,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 524288,
+   "per_rank_us": [
+    41.09824180603027,
+    41.09824180603027,
+    41.07264041900635,
+    41.054720878601074,
+    41.19296073913574,
+    41.09312057495117,
+    41.062397956848145,
+    41.09824180603027
+   ],
+   "max_rel_err": 0.0009960850002244115,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 1048576,
+   "per_rank_us": [
+    52.98175811767578,
+    53.07648181915283,
+    53.05600166320801,
+    53.06111812591553,
+    53.02015781402588,
+    53.0841588973999,
+    53.06367874145508,
+    53.148159980773926
+   ],
+   "max_rel_err": 0.0009982503252103925,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 2097152,
+   "per_rank_us": [
+    71.79264068603516,
+    71.68511867523193,
+    71.87967777252197,
+    71.72095775604248,
+    71.8617582321167,
+    71.72863960266113,
+    71.9001579284668,
+    71.86431884765625
+   ],
+   "max_rel_err": 0.0009008072665892541,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 4194304,
+   "per_rank_us": [
+    111.75423622131348,
+    111.7465591430664,
+    111.76192283630371,
+    111.75680160522461,
+    111.84896469116211,
+    111.75935745239258,
+    111.78496360778809,
+    111.91295623779297
+   ],
+   "max_rel_err": 0.001177978701889515,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "torch_nccl",
+   "bytes": 8388608,
+   "per_rank_us": [
+    149.81375694274902,
+    149.69599723815918,
+    149.7599983215332,
+    149.6396827697754,
+    149.77791786193848,
+    149.70111846923828,
+    149.7804832458496,
+    149.74464416503906
+   ],
+   "max_rel_err": 0.0011084170546382666,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 1024,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 2048,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 4096,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 8192,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 16384,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 32768,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 65536,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 131072,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 262144,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 524288,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 1048576,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 2097152,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 4194304,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "symm_one_shot",
+   "bytes": 8388608,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "NotImplementedError: \"one_shot_all_reduce\" not implemented for 'Half'"
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 1024,
+   "per_rank_us": [
+    5.8265602588653564,
+    5.877760052680969,
+    5.818880200386047,
+    5.811200141906738,
+    5.811200141906738,
+    5.89568018913269,
+    5.811200141906738,
+    5.798400044441223
+   ],
+   "max_rel_err": 0.00037247873842716217,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 2048,
+   "per_rank_us": [
+    5.928959846496582,
+    5.91871976852417,
+    5.908480286598206,
+    5.877760052680969,
+    5.9750401973724365,
+    5.9059202671051025,
+    5.936639904975891,
+    5.87007999420166
+   ],
+   "max_rel_err": 0.00034738751128315926,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 4096,
+   "per_rank_us": [
+    6.197760105133057,
+    6.146559715270996,
+    6.205440163612366,
+    6.169599890708923,
+    6.225919723510742,
+    6.164479851722717,
+    6.195200085639954,
+    6.144000291824341
+   ],
+   "max_rel_err": 0.0003696763305924833,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 8192,
+   "per_rank_us": [
+    6.558719873428345,
+    6.556159853935242,
+    6.428160071372986,
+    6.553599834442139,
+    6.548479795455933,
+    6.568959951400757,
+    6.481919884681702,
+    6.517760157585144
+   ],
+   "max_rel_err": 0.00038285800837911665,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 16384,
+   "per_rank_us": [
+    6.676480174064636,
+    6.801919937133789,
+    6.732800006866455,
+    6.79423987865448,
+    6.71999990940094,
+    6.812160015106201,
+    6.7686402797698975,
+    6.740480065345764
+   ],
+   "max_rel_err": 0.00037763657746836543,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 32768,
+   "per_rank_us": [
+    7.306240200996399,
+    7.283200025558472,
+    7.244799733161926,
+    7.3369598388671875,
+    7.275519967079163,
+    7.311360239982605,
+    7.180799841880798,
+    7.316480278968811
+   ],
+   "max_rel_err": 0.00036131145316176116,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 65536,
+   "per_rank_us": [
+    8.611840009689331,
+    8.806399703025818,
+    8.688639998435974,
+    8.739839792251587,
+    8.663039803504944,
+    8.80128026008606,
+    8.663039803504944,
+    8.747519850730896
+   ],
+   "max_rel_err": 0.0003113991697318852,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 131072,
+   "per_rank_us": [
+    11.550719738006592,
+    11.622400283813477,
+    11.453440189361572,
+    11.658240556716919,
+    11.571199893951416,
+    11.627520322799683,
+    11.499520540237427,
+    11.635199785232544
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 262144,
+   "per_rank_us": [
+    17.134079933166504,
+    17.11616039276123,
+    17.154560089111328,
+    16.962560415267944,
+    17.144320011138916,
+    17.11616039276123,
+    17.111040353775024,
+    17.000960111618042
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 524288,
+   "per_rank_us": [
+    18.465280532836914,
+    18.434560298919678,
+    18.41663956642151,
+    18.26815962791443,
+    18.47040057182312,
+    18.431999683380127,
+    18.449920415878296,
+    18.275840282440186
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 1048576,
+   "per_rank_us": [
+    21.875200271606445,
+    21.975040435791016,
+    21.890559196472168,
+    21.811199188232422,
+    21.89568042755127,
+    21.972479820251465,
+    21.875200271606445,
+    21.816320419311523
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 2097152,
+   "per_rank_us": [
+    27.950079441070557,
+    27.955200672149658,
+    27.996160984039307,
+    27.91424036026001,
+    27.96544075012207,
+    27.924480438232422,
+    28.039679527282715,
+    27.904000282287598
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 4194304,
+   "per_rank_us": [
+    44.88959789276123,
+    44.79743957519531,
+    44.84096050262451,
+    44.92800235748291,
+    44.92288112640381,
+    44.84608173370361,
+    44.84096050262451,
+    44.88704204559326
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "vllm_car",
+   "bytes": 8388608,
+   "per_rank_us": [
+    79.16543960571289,
+    79.08607959747314,
+    79.09887790679932,
+    79.03232097625732,
+    79.16800022125244,
+    79.0553617477417,
+    79.03232097625732,
+    79.0451192855835
+   ],
+   "max_rel_err": 0.00027710426365956664,
+   "correct": true,
+   "error": ""
+  }
+ ]
+}
