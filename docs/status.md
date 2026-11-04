@@ -19,7 +19,7 @@
 | M6_allreduce_bakeoff | 2026-11-03（D012） | 完成 |
 | M7_where_slow | 2026-11-03（D014） | 完成 |
 | M8_ll128_atomic_a100 | 2026-11-03（D016） | 完成 |
-| M9_fused_baselines | 2026-11-03（使用者同意先寫卡） | 提案，等使用者看過 |
+| M9_fused_baselines | 2026-11-04（D019） | 進行中 |
 
 ## 下一步
 

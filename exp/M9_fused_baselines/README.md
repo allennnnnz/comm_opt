@@ -1,7 +1,7 @@
 # M9_fused_baselines
 
-- **狀態**：提案（等使用者看過再量）
-- **核准**：2026-11-03 使用者同意先寫實驗卡（「好」，回應「先在 A100 上量 TensorRT-LLM 和 LMDeploy 的合併版」）；**量測要等使用者看過本卡**
+- **狀態**：進行中
+- **核准**：2026-11-04（D019，使用者：「好 開始量 並且放行」）
 - **類型**：結論性（每個設定 3 次獨立執行、隨機順序，同 M6／M7）
 
 ## 白話結論
@@ -78,6 +78,15 @@ third_party/lmdeploy/build{,_force}/bin/test_comm --hidden 5120 --tokens 1,8,16,
 exp/M9_fused_baselines/run.py      # 排程、隨機順序、R13 檢查、環境紀錄
 exp/M9_fused_baselines/analyze.py  # 判準、圖
 ```
+
+## 量測前的修正（看到任何正式數據之前）
+
+- **試跑**（2026-11-04，hidden 5120、token 1／8／128、K=R=5，只確認能跑，數字不採用）：`F_trt_one`、`F_trt_two` 在 A100 上可執行且結果正確（相對誤差 ≤ 7.2e-4）；FlashInfer 的 cluster 大小問題沒有發生
+- `F_trt_two`：FlashInfer 要求 token 數**大於** 8（assertion），所以 token = 8 也跳過，不是原先寫的「≥ 8」
+- LMDeploy `test_comm` 的原始計時是「每次呼叫各自用一對 CUDA event、呼叫前先同步」，**只印 rank 0**，不是卡片原先寫的「連續 N 次取平均」。修正：保留原始計時（記為 isolated），另外加一段「連續 K=20 次呼叫包在一對 event 裡」的計時（記為 b2b，和 M6 的 graph 連續計時較接近），兩者都印出每個 rank。分析以 b2b、8 個 rank 取最大值為主
+- LMDeploy 測試原本帶 bias、eps=1e-5；改成無 bias、eps=1e-6，與 torch 這邊一致
+- 所有對 LMDeploy 的修改存在 `exp/M9_fused_baselines/lmdeploy_m9.patch`（測試程式＋`fused_allreduce.cu` 的 `#if 1` 改為 `#ifndef M9_FORCE_FUSED`；不加該旗標時行為與原版相同）
+- **讀程式時的新發現**（量測前）：LMDeploy 一般 all-reduce 在小訊息（打包後 ≤ 1 MB）用的是 `Allreduce_LL16_V2`——分兩次傳、**資料與旗標放在同一個 8 byte 封包裡、不需要 barrier**。也就是說，A100 上「免 barrier 的 two-shot」LMDeploy 已經有了（LL 格式，資料量加倍），只是沒有和 norm 合併
 
 ## 已知風險
 

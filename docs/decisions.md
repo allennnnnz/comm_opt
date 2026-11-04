@@ -118,3 +118,9 @@
 - **影響**：「分工加總＋各自正規化＋互相交換」本身不是新貢獻。沒找到的是：**兩輪都免 barrier 的合併 two-shot**（LMDeploy 在 ≤ 512 KB 把合併關掉；TRT-LLM 的 two-shot 合併要 2 次 barrier；《Every µs Matters》不合併 norm、只在 GB200），以及**在 A100 上依實測挑做法**（TRT-LLM 把 sm80 當 sm90 查 H100 調出的表）。
 - **更正**：D012 的「TensorRT-LLM 在 SM80 不啟用」不精確——FlashInfer 版不啟用，TRT-LLM 自己的合併 kernel 有 A100 程式路徑（未實測）。
 - `[需裁決]`：是否先在 A100 上量 TRT-LLM 與 LMDeploy 的合併 kernel（新實驗），再決定是否做「兩輪免 barrier 的合併 two-shot」。
+
+## D019（2026-11-04）核准 M9：在 A100 上量現有的合併做法；放行編譯 LMDeploy
+
+- **使用者決定**：「好 開始量 並且放行」（看過實驗卡簡介之後）。
+- **範圍**：照 `exp/M9_fused_baselines/README.md`：vLLM／NCCL 不合併、TRT-LLM 合併 one-shot／two-shot（FlashInfer 0.7.2.post1 同源原始碼另編 sm_80）、LMDeploy 合併（原分派與強制合併）。
+- **LMDeploy**：commit 3228395，本機編譯（會下載 fmt、cutlass、yaml-cpp、xgrammar、Catch2），只用於量測。
