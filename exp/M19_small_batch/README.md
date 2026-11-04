@@ -42,6 +42,12 @@ M18 步驟 b（1410 MHz、同一次量測）：原型在 1–16 tokens 幾乎固
 
 **範圍**：fp16、hidden 5120、TP=8、token 1／2／4／8／16／32／64／128；5 次獨立 launch；每次之前確認沒有其他 GPU 工作
 
+## 量測前的修正（小試跑後、正式數據前）
+
+- 小試跑（不採用）顯示：1、8 tokens 的計時負擔約 1%，32 tokens 約 14%（stamped 版在 push 後多一次 `__syncthreads`）。依 P4 規則，超過 10% 的大小不採用拆解；本實驗重點在 1–8 tokens
+- 「最長的 block」在小資料時常是等待接收的 block，看不到擁有列的 block 在做什麼；加記每張 GPU 的 block 0（擁有該 GPU 第一列的 block）的各段時間
+- vLLM 的 kernel 內拆解使用 `car_timed_warm.cu`：stamped 與 plain 兩個版本各 5 次，用來檢查計時負擔（同 M11）
+
 ## 預期（量測前寫，量測後不改）
 
 - **P1（H1）**：原型在 1–4 tokens 時，關鍵路徑中「start barrier ＋ push 之後等待接收」佔 kernel 內時間 ≥ 50%
