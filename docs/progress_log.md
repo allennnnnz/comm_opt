@@ -23,4 +23,4 @@ commit 編號為 2026-11-04 歷史改寫後的編號（改寫前後對照見 `do
 | `p16-M15-bf16` | `ade7db9`–`e06439f`（第 43–46 個） | M15：原型支援 bf16＋盲點清單 | bf16 快 1.33–1.60 倍；整理 12 項盲點 | `exp/M15_bf16/README.md` |
 | `p17-M16-epoch-fix` | `0146bc6`–`d9e289d`（第 47–50 個） | M16：修交錯使用時的漏洞；改為 push 到 GitHub | 漏洞重現並修好；跨次量測看起來變慢（後證實多為機器狀態） | `exp/M16_epoch_fix/README.md` |
 | `p18-M17-epoch-ab` | `70bc4ff`–`badc968`（第 51–52 個） | M17：同一次量測比較新舊版 | 修法代價 0.3–3.5%；正式修正版對 vLLM 1.28／1.55／1.32 倍 | `exp/M17_epoch_ab/README.md` |
-| （進行中，尚未標籤） | `aec5efd`– | M18：五項改善逐步加入 | 進行中 | `exp/M18_incremental/README.md` |
+| `p19-M18ab-review` | M18 計畫起至盤點（本表更新時的最新 commit） | M18 步驟 a、b；全面盤點與策略提案 | 偶爾變慢來自時脈（採用暖機量測）；依大小選 block 數無效；1410 MHz 下原型對 vLLM 16／32／64／128 tokens 1.23／1.70／1.39／1.38 倍、1–4 tokens 較慢；暫停並提出策略 | `docs/strategy_review_20261104.md` |
