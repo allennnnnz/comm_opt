@@ -35,6 +35,7 @@ p.add_argument("--graph-ops", type=int, default=20)
 p.add_argument("--replays", type=int, default=20)
 p.add_argument("--warmup-ms", type=int, default=0)
 p.add_argument("--warm-replays", type=int, default=3)
+p.add_argument("--discard-first", type=int, default=0, help="1: measure one throwaway config first (M18 step b on)")
 p.add_argument("--versions", required=True, help="comma-separated name=path.cu")
 p.add_argument("--impls", required=True)
 p.add_argument("--table", default="", help="JSON file {tokens: blocks} for P_<ver>_tab")
@@ -210,6 +211,10 @@ if a.warmup_ms > 0:  # all GPUs busy until clocks have ramped
     sync_all()
 
 random.Random(a.seed).shuffle(impls)
+if a.discard_first:  # the first config of every launch is an outlier (M18 step a): measure one and drop it
+    check(impls[0], tokens[0])
+    bench(impls[0], tokens[0])
+    sync_all()
 rows_out = []
 for idx, impl in enumerate(impls):
     for nt in tokens:
