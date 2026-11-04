@@ -1,4 +1,4 @@
-"""M14: the fused prototype (pull reduce-scatter + residual + RMSNorm + push all-gather) vs vLLM and TRT-LLM fused,
+"""M15 (adds --dtype; otherwise M14's bench): the fused prototype (pull reduce-scatter + residual + RMSNorm + push all-gather) vs vLLM and TRT-LLM fused,
 timed exactly as M9 (CUDA graph of K ops, R replays, per-op = elapsed / (R*K), max over ranks).
 
 Implementations
@@ -10,7 +10,7 @@ Correctness (once per impl and size): normalized output (all rows) and residual 
 U_/F_, this rank's rows for P_ours) against an fp32 reference; max |out - ref| / max |ref| <= 2^-5 counts as correct.
 
 Usage (8 ranks, .venv-vllm, extension prebuilt by run.py):
-  torchrun --nproc-per-node 8 exp/M14_fused_prototype/bench_proto.py --hidden 5120 --tokens 8,16 --out F.json
+  torchrun --nproc-per-node 8 exp/M15_bf16/bench_proto.py --hidden 5120 --tokens 8,16 --out F.json
 """
 import argparse
 import json
@@ -32,6 +32,7 @@ p.add_argument("--graph-ops", type=int, default=20)
 p.add_argument("--replays", type=int, default=20)
 p.add_argument("--impls", default="U_vllm,F_trt_one,F_trt_two,P_ours_c16,P_ours_c32,P_ours_c64,P_ours_c108")
 p.add_argument("--eps", type=float, default=1e-6)
+p.add_argument("--dtype", choices=["float16", "bfloat16"], default="float16")
 p.add_argument("--ext-dir", required=True, help="build directory of the prebuilt extension")
 a = p.parse_args()
 
@@ -40,7 +41,7 @@ torch.cuda.set_device(rank)
 dev = torch.device("cuda", rank)
 dist.init_process_group("nccl", device_id=dev)
 cpu_group = dist.new_group(backend="gloo")
-DT = torch.float16
+DT = getattr(torch, a.dtype)
 H = a.hidden
 tokens = [int(t) for t in a.tokens.split(",")]
 max_tokens = max(tokens)
@@ -50,7 +51,7 @@ import vllm._custom_ops  # noqa: E402,F401
 from torch.utils.cpp_extension import load  # noqa: E402
 from vllm.distributed.device_communicators.custom_all_reduce import CustomAllreduce  # noqa: E402
 
-ext = load(name="m14_fused_ar_norm", sources=[str(Path(__file__).with_name("fused_ar_norm.cu"))],
+ext = load(name="m15_fused_ar_norm", sources=[str(Path(__file__).with_name("fused_ar_norm.cu"))],
            extra_cuda_cflags=["-O3", "-gencode=arch=compute_80,code=sm_80"], build_directory=a.ext_dir,
            verbose=False)
 
@@ -213,7 +214,7 @@ for impl in impls:
         dist.all_gather_object(gathered, (us, rel_err, err), group=cpu_group)
         if rank == 0:
             worst = max(g[1] for g in gathered)
-            rows_out.append(dict(impl=impl, hidden=H, tokens=nt, bytes=nt * H * 2,
+            rows_out.append(dict(impl=impl, dtype=a.dtype, hidden=H, tokens=nt, bytes=nt * H * 2,
                                  per_rank_us=[g[0] for g in gathered], max_rel_err=worst,
                                  correct=bool(worst <= 2 ** -5), error=next((g[2] for g in gathered if g[2]), "")))
             print(f"{impl:12s} h{H} t{nt:>4d} max {max(g[0] for g in gathered):8.2f} us  rel_err {worst:.2e} "

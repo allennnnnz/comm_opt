@@ -1,6 +1,6 @@
-// M14 prototype: one kernel = start barrier -> pull reduce-scatter by token rows -> residual add + RMSNorm on the
+// M15 (bf16 support; otherwise identical to M14) prototype: one kernel = start barrier -> pull reduce-scatter by token rows -> residual add + RMSNorm on the
 // rows this GPU owns -> push all-gather of the normalized rows with LL128 lines (8-byte epoch flag per 128-byte line),
-// no mid barrier. TP=8, fp16. Built as a PyTorch extension (torch.utils.cpp_extension.load).
+// no mid barrier. TP=8, fp16 or bf16 (one kernel instance per type). Built as a PyTorch extension (torch.utils.cpp_extension.load).
 //
 // Buffers (all but ctr/residual/gamma/out are PyTorch symmetric memory, addressed through per-rank pointer lists):
 //   x[k]      rank k's input, T x H fp16 (peers pull from it)
@@ -14,6 +14,7 @@
 // producer overwrites it, and landing halves alternate by epoch parity (epoch e+2 is written only after the receiver
 // finished e, since every rank receives from every rank each epoch).
 #include <ATen/cuda/CUDAContext.h>
+#include <cuda_bf16.h>
 #include <cuda_fp16.h>
 #include <torch/extension.h>
 
@@ -23,14 +24,30 @@ namespace {
 
 constexpr int NG = 8, THREADS = 512, MAXU = 4, MAXB = 128;  // MAXU: 16-byte units per thread, H <= 16384
 
-struct Args {
-  const half* x[NG];
+// the only type-dependent code: 16-bit pairs <-> fp32
+template <typename T>
+struct Pair;
+template <>
+struct Pair<half> {
+  using t = __half2;
+  static __device__ __forceinline__ float2 f2(t v) { return __half22float2(v); }
+  static __device__ __forceinline__ t pk(float a, float b) { return __floats2half2_rn(a, b); }
+};
+template <>
+struct Pair<__nv_bfloat16> {
+  using t = __nv_bfloat162;
+  static __device__ __forceinline__ float2 f2(t v) { return __bfloat1622float2(v); }
+  static __device__ __forceinline__ t pk(float a, float b) { return __floats2bfloat162_rn(a, b); }
+};
+
+struct Args {  // element pointers are 16-bit; the kernel moves them as raw 16-byte units
+  const uint16_t* x[NG];
   unsigned long long* land[NG];
   uint32_t* flags[NG];
   unsigned long long* ctr;
-  half* residual;
-  const half* gamma;
-  half* out;
+  uint16_t* residual;
+  const uint16_t* gamma;
+  uint16_t* out;
   int rank, T, H, rows_per, gpr;
   float eps;
 };
@@ -43,20 +60,22 @@ __device__ __forceinline__ void st_v2(unsigned long long* p, unsigned long long 
 __device__ __forceinline__ void ld_v2(const unsigned long long* p, unsigned long long& a, unsigned long long& b) {
   asm volatile("ld.volatile.global.v2.u64 {%0,%1}, [%2];" : "=l"(a), "=l"(b) : "l"(p) : "memory");
 }
+template <typename T>
 __device__ __forceinline__ void add8(float* f, const uint4& v) {
-  const __half2* h = reinterpret_cast<const __half2*>(&v);
+  const typename Pair<T>::t* h = reinterpret_cast<const typename Pair<T>::t*>(&v);
 #pragma unroll
   for (int i = 0; i < 4; ++i) {
-    const float2 t = __half22float2(h[i]);
+    const float2 t = Pair<T>::f2(h[i]);
     f[2 * i] += t.x;
     f[2 * i + 1] += t.y;
   }
 }
+template <typename T>
 __device__ __forceinline__ uint4 pack8(const float* f) {
   uint4 v;
-  __half2* h = reinterpret_cast<__half2*>(&v);
+  typename Pair<T>::t* h = reinterpret_cast<typename Pair<T>::t*>(&v);
 #pragma unroll
-  for (int i = 0; i < 4; ++i) h[i] = __floats2half2_rn(f[2 * i], f[2 * i + 1]);
+  for (int i = 0; i < 4; ++i) h[i] = Pair<T>::pk(f[2 * i], f[2 * i + 1]);
   return v;
 }
 __device__ __forceinline__ float warp_sum(float v) {
@@ -65,6 +84,7 @@ __device__ __forceinline__ float warp_sum(float v) {
   return v;
 }
 
+template <typename T>
 __global__ void __launch_bounds__(THREADS, 1) fused_ar_norm_kernel(Args a) {
   const unsigned long long epoch = a.ctr[blockIdx.x] + 1;
   if (threadIdx.x < NG) {  // start barrier: peers' inputs are ready before anyone pulls
@@ -96,13 +116,13 @@ __global__ void __launch_bounds__(THREADS, 1) fused_ar_norm_kernel(Args a) {
         for (int k = 0; k < NG; ++k) v[k] = reinterpret_cast<const uint4*>(a.x[k] + (size_t)row * H)[u];
         float f[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 #pragma unroll
-        for (int k = 0; k < NG; ++k) add8(f, v[k]);
+        for (int k = 0; k < NG; ++k) add8<T>(f, v[k]);
         uint4* rp = reinterpret_cast<uint4*>(a.residual + (size_t)row * H) + u;
-        add8(f, *rp);
-        const uint4 rv = pack8(f);  // residual is stored in fp16; the norm uses the stored values (as vLLM)
+        add8<T>(f, *rp);
+        const uint4 rv = pack8<T>(f);  // residual is stored in fp16; the norm uses the stored values (as vLLM)
         *rp = rv;
         float z[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-        add8(z, rv);
+        add8<T>(z, rv);
 #pragma unroll
         for (int i = 0; i < 8; ++i) {
           acc[q][i] = z[i];
@@ -125,11 +145,11 @@ __global__ void __launch_bounds__(THREADS, 1) fused_ar_norm_kernel(Args a) {
       const int u = threadIdx.x + q * THREADS;
       if (u < U) {
         float g[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-        add8(g, reinterpret_cast<const uint4*>(a.gamma)[u]);
+        add8<T>(g, reinterpret_cast<const uint4*>(a.gamma)[u]);
         float o[8];
 #pragma unroll
         for (int i = 0; i < 8; ++i) o[i] = acc[q][i] * rstd * g[i];
-        reinterpret_cast<uint4*>(a.out + (size_t)row * H)[u] = pack8(o);
+        reinterpret_cast<uint4*>(a.out + (size_t)row * H)[u] = pack8<T>(o);
       }
     }
     __syncthreads();  // the whole row is in the local output before it is pushed
@@ -176,24 +196,30 @@ void fused_ar_norm(const std::vector<int64_t>& x_ptrs, const std::vector<int64_t
   TORCH_CHECK(x_ptrs.size() == NG && land_ptrs.size() == NG && flag_ptrs.size() == NG, "needs 8 ranks");
   TORCH_CHECK(H % 8 == 0 && H / 8 <= MAXU * THREADS, "unsupported hidden size");
   TORCH_CHECK(ctas >= 1 && ctas <= MAXB, "ctas out of range");
-  TORCH_CHECK(residual.scalar_type() == torch::kHalf && out.scalar_type() == torch::kHalf, "fp16 only");
+  const auto dt = residual.scalar_type();
+  TORCH_CHECK((dt == torch::kHalf || dt == torch::kBFloat16) && out.scalar_type() == dt && gamma.scalar_type() == dt,
+              "fp16 or bf16, same type for residual, gamma, out");
   Args a{};
   for (int k = 0; k < NG; ++k) {
-    a.x[k] = reinterpret_cast<const half*>(x_ptrs[k]);
+    a.x[k] = reinterpret_cast<const uint16_t*>(x_ptrs[k]);
     a.land[k] = reinterpret_cast<unsigned long long*>(land_ptrs[k]);
     a.flags[k] = reinterpret_cast<uint32_t*>(flag_ptrs[k]);
   }
   a.ctr = reinterpret_cast<unsigned long long*>(ctr.data_ptr<int64_t>());
-  a.residual = reinterpret_cast<half*>(residual.data_ptr<at::Half>());
-  a.gamma = reinterpret_cast<const half*>(gamma.data_ptr<at::Half>());
-  a.out = reinterpret_cast<half*>(out.data_ptr<at::Half>());
+  a.residual = reinterpret_cast<uint16_t*>(residual.data_ptr());
+  a.gamma = reinterpret_cast<const uint16_t*>(gamma.data_ptr());
+  a.out = reinterpret_cast<uint16_t*>(out.data_ptr());
   a.rank = (int)rank;
   a.T = (int)T;
   a.H = (int)H;
   a.rows_per = (int)rows_per;
   a.gpr = (int)gpr;
   a.eps = (float)eps;
-  fused_ar_norm_kernel<<<(int)ctas, THREADS, 0, at::cuda::getCurrentCUDAStream()>>>(a);
+  auto stream = at::cuda::getCurrentCUDAStream();
+  if (dt == torch::kHalf)
+    fused_ar_norm_kernel<half><<<(int)ctas, THREADS, 0, stream>>>(a);
+  else
+    fused_ar_norm_kernel<__nv_bfloat16><<<(int)ctas, THREADS, 0, stream>>>(a);
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
 
