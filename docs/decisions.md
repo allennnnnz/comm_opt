@@ -201,3 +201,9 @@
 - **結果**：bf16 全部正確（最大誤差 4.93e-3，vLLM 6.70e-3）；hidden 5120 的 160K／320K／640K 比 vLLM（bf16）快 1.33／1.60／1.39 倍、區間不重疊 → 依判準「bf16 可用」。bf16 與 fp16 倍數相差 ≤ 0.1 的有 9/10。fp16 重現 M14（1.35／1.60／1.34 倍）。見 `exp/M15_bf16/README.md`。
 - **與預期不同**：P2 有 1 格（hidden 8192、256K）相差 0.165。
 - 原型後續以 `exp/M15_bf16/fused_ar_norm.cu` 為準（fp16／bf16 兩用）。
+
+## D033（2026-11-04）核准 M16：修原型的 epoch 設計
+
+- **使用者要求**：「修漏洞」。
+- **修法**：每張 GPU 一個全域 epoch，最後完成的 block 遞增；以交錯測試（不同 block 數、token 數 1–128、eager 與 CUDA graph）驗證，並用舊版重現漏洞；速度回歸檢查對照 M15。見 `exp/M16_epoch_fix/README.md`。
+- **使用者另問「進度是否都進 repo」**：本機全部已 commit；從未 push（守則）；GitHub 單檔上限 100 MB，而 git 歷史含 M10 的 291 MB `.sqlite`，日後若要 push 需先處理。
