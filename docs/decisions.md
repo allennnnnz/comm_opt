@@ -238,3 +238,9 @@
 - **做法**：見 `exp/M18_incremental/README.md`。起點 v0 = m16nf 固定 64 blocks（之前「最佳 block 數」屬事後挑選）；每步先過交錯正確性測試，再於同一次 run 內 5 次 launch A/B；依預先寫好的保留規則（≥ 3% 且區間不重疊才算有效；變差的大小不用新做法）逐步推進。挑選類參數先校準、再用另一次 run 驗證。
 - **授權範圍的理解**：使用者要求逐步自動推進，因此每步依保留規則決定、照實記錄，不逐步停下；正確性失敗或無法解釋的現象才停下來問。
 - **順序**：a 查清偶爾變慢（先修量測方法，否則小幅改善無法分辨）→ b block 數 → c one-shot → d start barrier → e 大訊息 → 最佳組合確認。
+
+## D039（2026-11-04）交接用的環境建置文件與腳本
+
+- **使用者要求**：「運作環境也要放進去，我希望交接時別人可以順利跑起來」；並要求依進度分 commit 推上 GitHub（已完成：18 個階段 tag `p01`–`p18` 依序 push，進度表 `docs/progress_log.md`）。
+- **做法**：不上傳虛擬環境本身（數 GB、綁定機器），改為可重建：`SETUP.md`（交接說明）、`env/setup_python.sh`（依 `requirements-*.txt` 以 uv 重建三個環境）、`env/build_third_party.sh`（依原始指令與 commit 下載編譯外部工具，含 LMDeploy patch）、`env/get_models_assets.sh`（模型釘死 revision）、`env/check_env.py`（逐項檢查、可選 GPU 正確性測試）、`env/system_snapshot.txt`（系統軟體版本）。
+- **驗證**：本機 `check_env.py` 全部 OK；三份 requirements 全部可解析安裝；nccl-tests 在乾淨目錄從零編譯成功；其他外部工具在乾淨目錄下載、切換版本、套用 patch 成功（未在乾淨目錄完整重編）。

@@ -1,11 +1,13 @@
 # comm_opt
 
-Research on GPU-to-GPU communication optimization, from measurement to paper. The topic is not chosen yet; it will come out of characterizing this machine with nccl-tests.
+Research on GPU-to-GPU communication optimization, from measurement to paper. Current focus: decode-time tensor-parallel all-reduce + residual + RMSNorm on 8x A100 (no NVLS); a fused prototype is 1.28-1.55x faster than vLLM at 160-640 KB (see docs/status.md).
 
 - Research rules (with sources): [docs/research_rules.md](docs/research_rules.md)
 - Current status and next steps: [docs/status.md](docs/status.md)
 - Decision log: [docs/decisions.md](docs/decisions.md)
 - Folder layout and working conventions: [CLAUDE.md](CLAUDE.md)
+- **Handover / environment setup (start here on a new machine): [SETUP.md](SETUP.md)** — scripts in `env/` rebuild the Python environments, external tools, models, and check the machine
+- Progress by phase (git tags p01–p18): [docs/progress_log.md](docs/progress_log.md)
 
 ## Reproducing the measurements
 
