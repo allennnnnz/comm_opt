@@ -1,0 +1,53 @@
+W1104 10:47:27.808000 1270232 torch/distributed/run.py:982] 
+W1104 10:47:27.808000 1270232 torch/distributed/run.py:982] *****************************************
+W1104 10:47:27.808000 1270232 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 10:47:27.808000 1270232 torch/distributed/run.py:982] *****************************************
+[rank2]:W1104 10:47:35.688000 1270327 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 10:47:35.688000 1270327 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 10:47:35.689000 1270327 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1104 10:47:35.724000 1270332 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 10:47:35.724000 1270332 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 10:47:35.725000 1270332 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 10:47:35.725000 1270330 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 10:47:35.726000 1270330 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 10:47:35.726000 1270330 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 10:47:35.747000 1270329 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 10:47:35.748000 1270329 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 10:47:35.748000 1270329 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 10:47:35.751000 1270328 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 10:47:35.752000 1270328 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 10:47:35.752000 1270328 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1104 10:47:35.756000 1270331 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 10:47:35.757000 1270331 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 10:47:35.757000 1270331 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1104 10:47:35.781000 1270326 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 10:47:35.782000 1270326 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 10:47:35.782000 1270326 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 10:47:35.787000 1270325 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 10:47:35.787000 1270325 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 10:47:35.788000 1270325 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+P_ours_c32   h5120 t   8 max    14.50 us  rel_err 3.93e-03 
+P_ours_c32   h5120 t  16 max    15.12 us  rel_err 4.05e-03 
+P_ours_c32   h5120 t  32 max    16.57 us  rel_err 4.66e-03 
+P_ours_c32   h5120 t  64 max    20.29 us  rel_err 4.38e-03 
+P_ours_c32   h5120 t 128 max    29.19 us  rel_err 4.71e-03 
+P_ours_c64   h5120 t   8 max    15.16 us  rel_err 3.93e-03 
+P_ours_c64   h5120 t  16 max    15.20 us  rel_err 4.05e-03 
+P_ours_c64   h5120 t  32 max    16.59 us  rel_err 4.66e-03 
+P_ours_c64   h5120 t  64 max    20.20 us  rel_err 4.38e-03 
+P_ours_c64   h5120 t 128 max    27.39 us  rel_err 4.71e-03 
+P_ours_c108  h5120 t   8 max    15.24 us  rel_err 3.93e-03 
+P_ours_c108  h5120 t  16 max    15.57 us  rel_err 4.05e-03 
+P_ours_c108  h5120 t  32 max    16.45 us  rel_err 4.66e-03 
+P_ours_c108  h5120 t  64 max    19.26 us  rel_err 4.38e-03 
+P_ours_c108  h5120 t 128 max    26.31 us  rel_err 4.71e-03 
+U_vllm       h5120 t   8 max    14.21 us  rel_err 5.27e-03 
+U_vllm       h5120 t  16 max    18.13 us  rel_err 5.81e-03 
+U_vllm       h5120 t  32 max    23.18 us  rel_err 5.57e-03 
+U_vllm       h5120 t  64 max    25.05 us  rel_err 6.53e-03 
+U_vllm       h5120 t 128 max    31.71 us  rel_err 6.53e-03 
+P_ours_c16   h5120 t   8 max    13.69 us  rel_err 3.93e-03 
+P_ours_c16   h5120 t  16 max    14.32 us  rel_err 4.05e-03 
+P_ours_c16   h5120 t  32 max    15.64 us  rel_err 4.66e-03 
+P_ours_c16   h5120 t  64 max    20.43 us  rel_err 4.38e-03 
+P_ours_c16   h5120 t 128 max    32.04 us  rel_err 4.71e-03 

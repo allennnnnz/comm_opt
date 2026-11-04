@@ -213,3 +213,9 @@
 - **使用者要求**：「把必要的實驗跟程式碼都 push 上 GitHub，我需要每個版本的改動都有紀錄」。之前的守則是「不 push」，依使用者要求改為「commit 後 push」（CLAUDE.md 已更新）。
 - **使用者的三個決定**（AskUserQuestion）：repo 維持公開；從歷史中移除超過 GitHub 上限的衍生檔；以 deploy key（本機 `~/.ssh/id_ed25519.pub`，write access）讓本機 push。
 - **做法**：先備份完整歷史（`/home/rogerlee/comm_opt_git_backup_20261104.bundle`），再以 `git filter-branch` 移除 `results/M10_why_fused_slow/20261104_083556/*.sqlite`（291 MB、16 MB，衍生檔，仍在本機）。48 個 commit 全部保留，M10 之前的編號不變，之後的編號改變，對照表見 `docs/git_history_rewrite_20261104.md`。remote 改為 `ssh://git@ssh.github.com:443/allennnnnz/comm_opt.git`（本機連不到 port 22）。
+
+## D035（2026-11-04）M16 完成：漏洞修好但量到變慢 `[需裁決]`
+
+- **結果**：舊版在交錯測試中卡住（逾時）；新版 eager／graph 各 60 次交錯呼叫全部正確（含 token 1、3、13）。速度比 M15 慢 9–25%，160K 對 vLLM 1.27／1.24 倍（< 1.3）→ 依判準「修好但變慢」。但未修改的 vLLM 本次也比 M15 慢 3–13%（機器狀態不同）。見 `exp/M16_epoch_fix/README.md`。
+- **與預期不同**：P3 不符。
+- `[需裁決]`：建議去掉可能不必要的 `__threadfence()`，在同一次 run 內比較 M15／M16／無 fence 版／vLLM。
