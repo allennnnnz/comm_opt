@@ -207,3 +207,9 @@
 - **使用者要求**：「修漏洞」。
 - **修法**：每張 GPU 一個全域 epoch，最後完成的 block 遞增；以交錯測試（不同 block 數、token 數 1–128、eager 與 CUDA graph）驗證，並用舊版重現漏洞；速度回歸檢查對照 M15。見 `exp/M16_epoch_fix/README.md`。
 - **使用者另問「進度是否都進 repo」**：本機全部已 commit；從未 push（守則）；GitHub 單檔上限 100 MB，而 git 歷史含 M10 的 291 MB `.sqlite`，日後若要 push 需先處理。
+
+## D034（2026-11-04）改為 push 到 GitHub；改寫 git 歷史移除 291 MB 衍生檔
+
+- **使用者要求**：「把必要的實驗跟程式碼都 push 上 GitHub，我需要每個版本的改動都有紀錄」。之前的守則是「不 push」，依使用者要求改為「commit 後 push」（CLAUDE.md 已更新）。
+- **使用者的三個決定**（AskUserQuestion）：repo 維持公開；從歷史中移除超過 GitHub 上限的衍生檔；以 deploy key（本機 `~/.ssh/id_ed25519.pub`，write access）讓本機 push。
+- **做法**：先備份完整歷史（`/home/rogerlee/comm_opt_git_backup_20261104.bundle`），再以 `git filter-branch` 移除 `results/M10_why_fused_slow/20261104_083556/*.sqlite`（291 MB、16 MB，衍生檔，仍在本機）。48 個 commit 全部保留，M10 之前的編號不變，之後的編號改變，對照表見 `docs/git_history_rewrite_20261104.md`。remote 改為 `ssh://git@ssh.github.com:443/allennnnnz/comm_opt.git`（本機連不到 port 22）。
