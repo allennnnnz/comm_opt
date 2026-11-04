@@ -183,3 +183,10 @@
 - **使用者決定**：「好 開始做新方法原形」，並要求列出 A 之後的改善（列在 `exp/M14_fused_prototype/README.md` 的改善路線）。
 - **設計**：單一 kernel：start barrier → pull reduce-scatter（依 token 列）→ residual＋RMSNorm（只做自己的列，residual 分片保存）→ push all-gather（LL128＋flag，不用 mid barrier）。D028 的大訊息問題依我的建議先全部用 push，由本實驗與 vLLM 的實際比較做最後確認。
 - **判準**（使用者同意的成功標準）：hidden 5120 的 160K／320K／640K 都比 `U_vllm` 快 ≥ 1.3 倍 → go；五個大小都 < 1.15 倍 → no-go；其他 → 討論。
+
+## D030（2026-11-04）M14 完成：原型 go `[需裁決]`
+
+- **結果**（hidden 5120，同一次 run 內和 vLLM 比）：160K／320K／640K 快 1.30／1.56／1.37 倍（區間不重疊、全部正確）→ 依判準 go；80K 1.09、1.25M 1.22 倍。hidden 8192 也能跑（1.11–1.37 倍），TRT-LLM 在此無法啟動。實測時間和 D029 粗估差 ≤ 7%。見 `exp/M14_fused_prototype/README.md`。
+- **注意**：160K 剛好在門檻（1.301）；原型有一次 launch 整體慢 1.5–5.4 µs，原因未查；本次 vLLM 比 M9 快約 10%。
+- **同日盲點檢討**（已向使用者說明）：實際批次可能讀入與生成混合、只測 fp16／TP8／token ≥ 8、比較對象不是最強、epoch 設計在不同 block 數交替時會出錯、記號可靠性只有觀察、新穎性需要更清楚的機制說明。
+- `[需裁決]`：先處理哪些盲點，再進 G2／G3。
