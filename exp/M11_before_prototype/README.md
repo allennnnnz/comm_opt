@@ -1,7 +1,7 @@
 # M11_before_prototype
 
-- **狀態**：提案（等使用者看過再量）
-- **核准**：2026-11-04 使用者同意寫卡（「好」，回應「要不要我現在就寫量測 ① ② 的實驗卡」）；**量測要等使用者看過本卡**
+- **狀態**：進行中
+- **核准**：2026-11-04（D023，使用者：「開始量」）
 - **類型**：結論性（每個設定 3 次獨立執行、隨機順序）
 
 ## 白話結論
@@ -95,6 +95,13 @@ nvcc -O3 -arch=sm_80 -DNO_STAMPS -o build/car_plain exp/M11_before_prototype/car
 python3 exp/M11_before_prototype/run.py      # R13 檢查、隨機順序、3 次、環境紀錄、nsys 指標
 .venv/bin/python exp/M11_before_prototype/analyze.py
 ```
+
+## 量測前的修正與發現（看到任何正式數據之前）
+
+- **A100 沒有 bf16 成對原子加法指令**：`atomicAdd(__nv_bfloat162*)` 在 sm_80 由 CUDA 標頭（`cuda_bf16.hpp`）以每個 lane 各自的 `atomicCAS` 迴圈模擬（`atom.add.noftz.bf16x2` 要 sm_90）。編譯產物確認：`atom_bf16` 是 `ATOMG.E.CAS` 迴圈。這代表 lane 0 的計數器可能比資料先完成，**A1 對 `atom_bf16` 很可能不成立**；預期不改，照原樣判定
+- **`atom_f16` 改用只送不等的 `red`**：`atomicAdd(__half2*)` 編成 `ATOM.E.ADD.F16x2`（要等回覆）；新做法的設計是只送不等，所以測試程式用 inline PTX `red.global.add.noftz.f16x2`（sm_60 起支援）。`atom_f32` 本來就編成 `RED.E.ADD.F32`
+- **B 的記錄方式**：試跑（數字不採用）發現 vLLM 2-stage 在小訊息時只有少數 block 真的在做第一階段（每卡只負責 1/8，但 block 數依全部資料量決定），「各 block 平均」會把關鍵的那個 block 平均掉。改成**同時記錄最慢那個 block 的各階段時間**（關鍵路徑），分析以它為主
+- **B 的試跑**：加計時版比不加的慢 3–10%（10 個設定中最大 9.6%），接近卡片的 10% 門檻；正式量測照判準檢查
 
 ## 已知風險
 

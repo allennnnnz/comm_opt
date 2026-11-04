@@ -21,7 +21,7 @@
 | M8_ll128_atomic_a100 | 2026-11-03（D016） | 完成 |
 | M9_fused_baselines | 2026-11-04（D019） | 完成 |
 | M10_why_fused_slow | 2026-11-04（D021） | 完成 |
-| M11_before_prototype | 2026-11-04（使用者同意寫卡） | 提案，等使用者看過 |
+| M11_before_prototype | 2026-11-04（D023） | 進行中 |
 
 ## 下一步
 
