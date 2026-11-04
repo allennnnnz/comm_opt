@@ -6,7 +6,7 @@
 
 - **階段**：1 找現象 → 選題前
 - **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）、M9_fused_baselines（D020：A100 上現有合併沒有比較快，離可達水準仍有 2 倍以上）、M10_why_fused_slow（D022：block 太少不是主因）、M11_before_prototype（D024：原子加法正確但試作版比 vLLM 慢；路沒塞滿）、M12_push_vs_pull（D026：收齊用主動送夠快，分工加總維持拿）、M13_push_retest（D028：依大小切換；M12 大資料量問題來自測試方式）
-- **等待使用者**：依 D028 決定大訊息收齊是否也用主動送；之後寫以 vLLM 為底的原型實驗卡
+- **進行中**：M14 新做法原型（單一 kernel：pull RS＋RMSNorm＋push AG）
 
 ## 已核准的實驗
 
@@ -24,6 +24,7 @@
 | M11_before_prototype | 2026-11-04（D023） | 完成 |
 | M12_push_vs_pull | 2026-11-04（D025） | 完成 |
 | M13_push_retest | 2026-11-04（D027） | 完成 |
+| M14_fused_prototype | 2026-11-04（D029） | 進行中 |
 
 ## 下一步
 

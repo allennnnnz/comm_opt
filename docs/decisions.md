@@ -177,3 +177,9 @@
 - **結果**：`rs_push_par` 比 `rs_push` 快 12–30% 但仍比 `rs_pull` 慢 1.26–1.77 倍（P1 0/5，H1 只部分成立）；錯開讀取順序無效（P2）；連續執行下 `ag_pull` 從 16.85／24.79 降到 5.32／8.68 µs（M12 的問題是單次執行＋清除緩衝區）；連續模式 `ag_push` 80K–320K 4.0–4.5 µs，比 vLLM「中間等待＋第二階段」12.2–12.4 µs 快（P5）；640K、1.25M 為 `ag_pull_rot` 的 1.14、1.22 倍（P4 1/2）→ 依判準「依大小切換」。見 `exp/M13_push_retest/README.md`。
 - **與預期不同**：P1、P2、P4 不符。
 - **判準未涵蓋的事實**：計入「拿」之前必要的全體等待後，`ag_push` 在 640K、1.25M 仍比 vLLM 快 6.9、3.4 µs。`[需裁決]`：大訊息是否也用主動送。
+
+## D029（2026-11-04）核准新做法原型（M14）；大訊息 all-gather 先全部用 push
+
+- **使用者決定**：「好 開始做新方法原形」，並要求列出 A 之後的改善（列在 `exp/M14_fused_prototype/README.md` 的改善路線）。
+- **設計**：單一 kernel：start barrier → pull reduce-scatter（依 token 列）→ residual＋RMSNorm（只做自己的列，residual 分片保存）→ push all-gather（LL128＋flag，不用 mid barrier）。D028 的大訊息問題依我的建議先全部用 push，由本實驗與 vLLM 的實際比較做最後確認。
+- **判準**（使用者同意的成功標準）：hidden 5120 的 160K／320K／640K 都比 `U_vllm` 快 ≥ 1.3 倍 → go；五個大小都 < 1.15 倍 → no-go；其他 → 討論。
