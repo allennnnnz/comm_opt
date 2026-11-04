@@ -1,0 +1,45 @@
+{
+ "args": {
+  "out": "/home/rogerlee/comm_opt/results/M10_why_fused_slow/20261104_083556/reglimit_h6400_r2.json",
+  "seed": 2,
+  "hidden": 6400,
+  "tokens": "8",
+  "graph_ops": 20,
+  "replays": 20,
+  "impls": "F_trt_one",
+  "eps": 1e-06
+ },
+ "torch": "2.14.0+cu130",
+ "nccl": "2.30.7",
+ "vllm": "0.33.0",
+ "flashinfer": "0.7.2.post1",
+ "fi_sm80_flags": [
+  "-gencode=arch=compute_80,code=sm_80",
+  "-DFLASHINFER_ENABLE_FP8_E8M0",
+  "-DFLASHINFER_ENABLE_FP4_E2M1"
+ ],
+ "order": [
+  "F_trt_one"
+ ],
+ "rows": [
+  {
+   "impl": "F_trt_one",
+   "hidden": 6400,
+   "tokens": 8,
+   "bytes": 102400,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  }
+ ]
+}

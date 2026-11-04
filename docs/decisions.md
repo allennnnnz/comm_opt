@@ -137,3 +137,9 @@
 - **使用者要求**：「調查清楚 a100 是少了什麼功能，造成預期比較快的方法在 a100 沒有比較快」。
 - **量測前已確認**：TRT-LLM 合併 kernel 每執行緒 76 個暫存器 → hidden 8192（1024 執行緒）超過 A100 每 SM 65,536 → M9 的啟動失敗；A100 沒有 cluster，一列 token 只能給一個 block。
 - **設計**：固定資料量、改變 hidden（5120／2560／1280），看「一列一個 block」的 TRT-LLM 合併是否隨 block 變多而變快；vLLM 與 LMDeploy（block 數不變）當對照。另驗暫存器上限（hidden 6400 vs 6656）與 nsys 記錄實際啟動參數。見 `exp/M10_why_fused_slow/README.md`。
+
+## D022（2026-11-04）M10 完成：「沒有 cluster → block 太少」不是合併變慢的主因 `[需裁決]`
+
+- **結果**：同樣資料量給 4 倍 block，TRT-LLM two-shot 合併快 1.27–1.62 倍（仍比 vLLM 慢），one-shot 合併 1.00–1.20 倍；對照組不變 → 依判準 H1 不成立（P1 1/6）。沒有 cluster 確實造成大 hidden 無法啟動（6400 也失敗，與我預期的 6656 不同）。見 `exp/M10_why_fused_slow/README.md`。
+- **與預期相反**：P1、P3 不符。
+- **影響**：新做法的省時間空間要靠「拿掉 barrier＋少搬資料」，不能只靠多派 block。`[需裁決]`：先量線路使用率與時間組成。

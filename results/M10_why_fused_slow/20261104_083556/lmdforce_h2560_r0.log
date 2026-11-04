@@ -1,0 +1,85 @@
+Device count: 8
+preparing data ... done.
+M9	allreduce	7	2560	32	28.837	19.507
+M9	allreduce	0	2560	32	28.151	19.251
+M9	allreduce	1	2560	32	28.218	19.046
+M9	allreduce	5	2560	32	30.852	19.149
+M9	allreduce	4	2560	32	27.998	19.251
+M9	allreduce	2	2560	32	30.015	19.661
+M9	allreduce	3	2560	32	26.927	19.251
+M9	allreduce	6	2560	32	27.442	19.251
+M9	allreduce	0	2560	64	31.821	24.013
+M9	allreduce	2	2560	64	33.117	23.603
+M9	allreduce	4	2560	64	31.119	23.808
+M9	allreduce	5	2560	64	32.905	24.064
+M9	allreduce	7	2560	64	32.229	23.552
+M9	allreduce	6	2560	64	31.051	23.501
+M9	allreduce	3	2560	64	30.692	23.450
+M9	allreduce	1	2560	64	32.099	24.115
+M9	allreduce	2	2560	128	41.086	31.898
+M9	allreduce	6	2560	128	36.995	31.898
+M9	allreduce	0	2560	128	38.455	31.795
+M9	allreduce	3	2560	128	36.939	31.744
+M9	allreduce	1	2560	128	38.095	31.949
+M9	allreduce	5	2560	128	40.374	31.846
+M9	allreduce	7	2560	128	38.930	32.051
+M9	allreduce	4	2560	128	36.860	31.846
+M9	allreduce	2	2560	256	51.330	39.885
+M9	allreduce	1	2560	256	47.267	40.397
+M9	allreduce	7	2560	256	47.009	39.987
+M9	allreduce	4	2560	256	43.681	40.090
+M9	allreduce	6	2560	256	45.744	40.243
+M9	allreduce	0	2560	256	45.151	40.192
+[allreduce] dim 2560 tp 8 warmup 10 iters 1000
+            num          count           size           time          algbw          busbw
+       (tokens)     (elements)           (MB)           (us)         (GB/s)         (GB/s)
+             32          81920           0.16         28.151          5.820         10.185
+             64         163840           0.31         31.821         10.298         18.021
+            128         327680           0.62         38.455         17.042         29.824
+            256         655360           1.25         45.151         29.030         50.802
+M9	allreduce	3	2560	256	44.326	39.731
+M9	allreduce	5	2560	256	46.286	39.987
+preparing data ... done.
+[rank 0] count = 32, data_diff = 0.002624
+M9	fused	5	2560	32	32.183	22.579
+M9	fused	0	2560	32	32.568	22.579
+M9	fused	7	2560	32	34.409	22.630
+M9	fused	3	2560	32	31.453	22.477
+M9	fused	1	2560	32	34.310	22.784
+M9	fused	4	2560	32	31.119	22.528
+M9	fused	2	2560	32	35.345	22.784
+M9	fused	6	2560	32	32.463	22.528
+[rank 0] count = 64, data_diff = 0.002638
+M9	fused	5	2560	64	31.672	23.398
+M9	fused	6	2560	64	31.752	23.450
+M9	fused	2	2560	64	36.068	23.808
+M9	fused	4	2560	64	31.330	23.501
+M9	fused	1	2560	64	33.216	23.654
+M9	fused	3	2560	64	31.720	23.245
+M9	fused	0	2560	64	32.488	23.398
+M9	fused	7	2560	64	33.967	23.706
+[rank 0] count = 128, data_diff = 0.002648
+M9	fused	7	2560	128	36.309	26.368
+M9	fused	4	2560	128	33.458	26.163
+M9	fused	0	2560	128	35.301	26.624
+M9	fused	6	2560	128	34.209	26.266
+M9	fused	3	2560	128	34.059	26.214
+M9	fused	1	2560	128	35.509	26.522
+M9	fused	2	2560	128	39.100	26.573
+M9	fused	5	2560	128	34.128	26.112
+[rank 0] count = 256, data_diff = 0.002651
+M9	fused	7	2560	256	43.564	36.096
+M9	fused	6	2560	256	41.662	35.994
+M9	fused	4	2560	256	40.965	35.891
+M9	fused	2	2560	256	46.116	36.147
+M9	fused	0	2560	256	43.117	36.045
+M9	fused	3	2560	256	41.345	35.942
+M9	fused	1	2560	256	42.891	36.096
+M9	fused	5	2560	256	41.431	35.994
+[allreduce | rmsnorm] dim 2560 tp 8 warmup 10 iters 1000
+            num          count           size           time          algbw          busbw
+       (tokens)     (elements)           (MB)           (us)         (GB/s)         (GB/s)
+             32          81920           0.16         32.568          5.031          8.804
+             64         163840           0.31         32.488         10.086         17.651
+            128         327680           0.62         35.301         18.565         32.488
+            256         655360           1.25         43.117         30.399         53.199

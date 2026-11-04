@@ -1,0 +1,91 @@
+Device count: 8
+preparing data ... done.
+M9	allreduce	4	5120	16	39.348	20.490
+M9	allreduce	3	5120	16	39.330	20.560
+M9	allreduce	6	5120	16	41.578	20.701
+M9	allreduce	1	5120	16	40.406	20.893
+M9	allreduce	7	5120	16	38.844	20.549
+M9	allreduce	5	5120	16	37.462	20.821
+M9	allreduce	0	5120	16	41.162	20.530
+M9	allreduce	2	5120	16	42.477	21.018
+M9	allreduce	6	5120	32	42.819	25.118
+M9	allreduce	0	5120	32	41.075	24.976
+M9	allreduce	4	5120	32	40.949	25.110
+M9	allreduce	1	5120	32	39.581	25.219
+M9	allreduce	2	5120	32	44.052	25.296
+M9	allreduce	3	5120	32	38.964	25.096
+M9	allreduce	7	5120	32	39.578	25.019
+M9	allreduce	5	5120	32	39.958	25.034
+M9	allreduce	6	5120	64	48.001	29.363
+M9	allreduce	0	5120	64	44.649	29.394
+M9	allreduce	7	5120	64	45.407	29.194
+M9	allreduce	4	5120	64	44.963	29.362
+M9	allreduce	5	5120	64	44.237	29.261
+M9	allreduce	2	5120	64	47.487	29.278
+M9	allreduce	1	5120	64	43.638	29.266
+M9	allreduce	3	5120	64	43.572	29.216
+M9	allreduce	3	5120	128	55.404	42.363
+M9	allreduce	4	5120	128	57.169	42.366
+M9	allreduce	1	5120	128	55.882	42.312
+M9	allreduce	5	5120	128	54.106	42.322
+M9	allreduce	7	5120	128	55.517	42.554
+M9	allreduce	0	5120	128	56.171	42.603
+[allreduce] dim 5120 tp 8 warmup 10 iters 50
+            num          count           size           time          algbw          busbw
+       (tokens)     (elements)           (MB)           (us)         (GB/s)         (GB/s)
+M9	allreduce	6	5120	128	56.646	42.654
+M9	allreduce	2	5120	128	56.829	42.579
+             16          81920           0.16         41.162          3.980          6.966
+             32         163840           0.31         41.075          7.978         13.961
+             64         327680           0.62         44.649         14.678         25.687
+            128         655360           1.25         56.171         23.335         40.835
+preparing data ... done.
+[rank 0] count = 16, data_diff = 0.002670
+M9	fused	4	5120	16	47.745	27.938
+M9	fused	5	5120	16	48.079	28.066
+M9	fused	1	5120	16	48.094	28.107
+M9	fused	7	5120	16	47.389	27.898
+M9	fused	3	5120	16	45.318	27.883
+M9	fused	6	5120	16	43.843	27.731
+M9	fused	0	5120	16	47.356	28.027
+M9	fused	2	5120	16	45.553	27.914
+[rank 0] count = 32, data_diff = 0.002673
+M9	fused	1	5120	32	47.639	27.802
+M9	fused	3	5120	32	44.650	28.179
+M9	fused	6	5120	32	43.171	27.718
+M9	fused	0	5120	32	45.144	28.109
+M9	fused	5	5120	32	47.106	27.766
+M9	fused	7	5120	32	47.844	27.803
+M9	fused	2	5120	32	43.757	27.683
+M9	fused	4	5120	32	43.817	28.006
+[rank 0] count = 64, data_diff = 0.002688
+M9	fused	2	5120	64	47.651	29.978
+M9	fused	6	5120	64	44.144	30.181
+M9	fused	7	5120	64	48.995	29.934
+M9	fused	3	5120	64	48.090	29.811
+M9	fused	5	5120	64	50.831	29.973
+M9	fused	1	5120	64	49.072	29.936
+M9	fused	0	5120	64	48.496	30.293
+M9	fused	4	5120	64	49.713	29.338
+[rank 0] count = 128, data_diff = 0.002698
+M9	fused	6	5120	128	50.527	38.347
+M9	fused	5	5120	128	54.851	39.555
+M9	fused	7	5120	128	53.721	39.296
+M9	fused	0	5120	128	53.946	39.576
+M9	fused	3	5120	128	53.087	39.261
+M9	fused	1	5120	128	54.052	39.451
+M9	fused	2	5120	128	51.558	39.325
+M9	fused	4	5120	128	53.121	39.451
+[allreduce | rmsnorm] dim 5120 tp 8 warmup 10 iters 50
+            num          count           size           time          algbw          busbw
+       (tokens)     (elements)           (MB)           (us)         (GB/s)         (GB/s)
+             16          81920           0.16         47.356          3.460          6.055
+             32         163840           0.31         45.144          7.259         12.703
+             64         327680           0.62         48.496         13.514         23.649
+            128         655360           1.25         53.946         24.297         42.519
+Collecting data...
+Generating '/tmp/nsys-rogerlee/nsys-report-a94d.qdstrm'
+Press Ctrl-C to stop symbol files downloading
+[1/1] [0%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [0%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [1%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [2%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [5%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [8%                          ] nsys_lmd_h5120_r0.nsys-rep[1/1] [11%                         ] nsys_lmd_h5120_r0.nsys-rep[1/1] [14%                         ] nsys_lmd_h5120_r0.nsys-rep[1/1] [=17%                        ] nsys_lmd_h5120_r0.nsys-rep[1/1] [==19%                       ] nsys_lmd_h5120_r0.nsys-rep[1/1] [==20%                       ] nsys_lmd_h5120_r0.nsys-rep[1/1] [=================72%        ] nsys_lmd_h5120_r0.nsys-rep[1/1] [=================73%        ] nsys_lmd_h5120_r0.nsys-rep[1/1] [======================91%   ] nsys_lmd_h5120_r0.nsys-rep[1/1] [=======================96%  ] nsys_lmd_h5120_r0.nsys-rep[1/1] [========================98% ] nsys_lmd_h5120_r0.nsys-rep[1/1] [========================100%] nsys_lmd_h5120_r0.nsys-rep[1/1] [========================100%] nsys_lmd_h5120_r0.nsys-rep
+Generated:
+	/home/rogerlee/comm_opt/results/M10_why_fused_slow/20261104_083556/nsys_lmd_h5120_r0.nsys-rep

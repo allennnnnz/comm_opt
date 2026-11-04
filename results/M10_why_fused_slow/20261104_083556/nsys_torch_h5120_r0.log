@@ -1,0 +1,88 @@
+W1104 08:40:37.400000 1241312 torch/distributed/run.py:982] 
+W1104 08:40:37.400000 1241312 torch/distributed/run.py:982] *****************************************
+W1104 08:40:37.400000 1241312 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 08:40:37.400000 1241312 torch/distributed/run.py:982] *****************************************
+[rank6]:W1104 08:40:45.317000 1241410 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 08:40:45.318000 1241410 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 08:40:45.319000 1241410 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1104 08:40:45.377000 1241405 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 08:40:45.377000 1241405 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 08:40:45.378000 1241405 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 08:40:45.422000 1241407 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 08:40:45.423000 1241407 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 08:40:45.423000 1241407 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 08:40:45.447000 1241404 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 08:40:45.448000 1241404 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 08:40:45.448000 1241404 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1104 08:40:45.458000 1241406 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 08:40:45.459000 1241406 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 08:40:45.460000 1241406 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 08:40:45.482000 1241408 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 08:40:45.483000 1241408 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 08:40:45.483000 1241408 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 08:40:45.522000 1241409 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 08:40:45.523000 1241409 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 08:40:45.523000 1241409 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1104 08:40:45.537000 1241411 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 08:40:45.538000 1241411 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 08:40:45.538000 1241411 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+U_vllm     h5120 t  16    163840 B  max    18.74 us  rel_err 7.82e-04 
+U_vllm     h5120 t  32    327680 B  max    24.55 us  rel_err 7.05e-04 
+U_vllm     h5120 t  64    655360 B  max    26.71 us  rel_err 6.66e-04 
+U_vllm     h5120 t 128   1310720 B  max    32.00 us  rel_err 7.19e-04 
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+F_trt_two  h5120 t  16    163840 B  max    68.34 us  rel_err 7.82e-04 
+F_trt_two  h5120 t  32    327680 B  max    55.52 us  rel_err 7.05e-04 
+F_trt_two  h5120 t  64    655360 B  max    51.92 us  rel_err 6.66e-04 
+F_trt_two  h5120 t 128   1310720 B  max    56.93 us  rel_err 7.19e-04 
+F_trt_one  h5120 t  16    163840 B  max    19.76 us  rel_err 7.82e-04 
+F_trt_one  h5120 t  32    327680 B  max    26.95 us  rel_err 7.05e-04 
+F_trt_one  h5120 t  64    655360 B  max    41.28 us  rel_err 6.66e-04 
+F_trt_one  h5120 t 128   1310720 B  max    86.19 us  rel_err 7.19e-04 
+Collecting data...
+Generating '/tmp/nsys-rogerlee/nsys-report-7a1a.qdstrm'
+Press Ctrl-C to stop symbol files downloading
+[11/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4
+[22/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1
+[27/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libssl.so.3
+[28/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libz.so.1.3
+[43/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+[50/137] Downloaded symbol information for /usr/bin/dash
+[56/137] Downloaded symbol information for /usr/bin/ninja
+[89/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+[92/137] Downloaded symbol information for /usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5
+[132/137] Downloaded symbol information for /usr/bin/uname
+[1/1] [0%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [0%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [1%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [2%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [5%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [6%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [7%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [8%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [9%                          ] nsys_torch_h5120_r0.nsys-rep[1/1] [10%                         ] nsys_torch_h5120_r0.nsys-rep[1/1] [11%                         ] nsys_torch_h5120_r0.nsys-rep[1/1] [12%                         ] nsys_torch_h5120_r0.nsys-rep[1/1] [13%                         ] nsys_torch_h5120_r0.nsys-rep[1/1] [14%                         ] nsys_torch_h5120_r0.nsys-rep[1/1] [=15%                        ] nsys_torch_h5120_r0.nsys-rep[1/1] [=17%                        ] nsys_torch_h5120_r0.nsys-rep[1/1] [==19%                       ] nsys_torch_h5120_r0.nsys-rep[1/1] [==20%                       ] nsys_torch_h5120_r0.nsys-rep[1/1] [======34%                   ] nsys_torch_h5120_r0.nsys-rep[1/1] [======35%                   ] nsys_torch_h5120_r0.nsys-rep[1/1] [=======36%                  ] nsys_torch_h5120_r0.nsys-rep[1/1] [=======37%                  ] nsys_torch_h5120_r0.nsys-rep[1/1] [======================92%   ] nsys_torch_h5120_r0.nsys-rep[1/1] [=======================96%  ] nsys_torch_h5120_r0.nsys-rep[1/1] [========================98% ] nsys_torch_h5120_r0.nsys-rep[1/1] [========================100%] nsys_torch_h5120_r0.nsys-rep[1/1] [========================100%] nsys_torch_h5120_r0.nsys-rep
+Generated:
+	/home/rogerlee/comm_opt/results/M10_why_fused_slow/20261104_083556/nsys_torch_h5120_r0.nsys-rep
