@@ -28,7 +28,7 @@
 | Python | 3.12，以 [uv](https://docs.astral.sh/uv/) 管理 | **必要** |
 | OS | Ubuntu 24.04.5 | 其他 Linux 應可 |
 
-**時脈注意**：這台機器的 GPU 工作時固定在 1155 MHz（最高 1410），閒置時降到 210 MHz。換機器後，絕對數字會不同；比較一律在同一次 run 內交錯量測（見第 6 節）。
+**時脈注意**：這台機器的 GPU 閒置時降到 210 MHz；只跑通訊 kernel 時多半在 1155–1260 MHz；先用矩陣乘法讓 GPU 忙 2 秒後穩定在最高的 1410 MHz（M18 步驟 a）。M14–M17 的數字是在較低時脈下量的，M18 起一律先暖機。換機器後絕對數字會不同；比較一律在同一次 run 內交錯量測（見第 6 節）。
 
 ## 3. 建置步驟
 
@@ -116,7 +116,7 @@ python3 exp/M17_epoch_ab/run.py                 # 量測 → results/M17_epoch_a
 | low-latency-nccl 的新做法在 A100 上算錯 | 新 kernel 只為 `sm_90` 以上編譯，A100 上是空殼（M7、M8） |
 | A100 沒有 bf16 的 atomicAdd 指令 | CUDA 以 CAS 迴圈模擬，跨 GPU 會出錯（M11） |
 | 原型的 epoch 必須全域一致 | 每個 block 各自計數時，交錯使用不同 block 數會卡住（M16 修正、M17 確認代價） |
-| 量測時脈 | GPU 閒置會降頻（210 MHz）。M14–M17 中排在每次 run 最前面量的設定偶爾慢 2–5 µs；M18 步驟 a 正在驗證「先暖機 2 秒＋每個設定 50 次重播」能否消除（結果見 `exp/M18_incremental/README.md`） |
+| 量測時脈與第一個設定 | 不暖機時時脈不穩（1155–1395 MHz），越早量的越慢；M18 起先全體暖機 2 秒（時脈 1410 MHz）、每個設定 50 次重播。另外每次 launch 量的第一個設定一定特別慢，要先量一個不記錄的暖身設定（M18 步驟 a） |
 | GitHub 連線 | 這台機器的 port 22 不通，`origin` 走 `ssh://git@ssh.github.com:443/allennnnnz/comm_opt.git` |
 
 ## 8. 用 Claude Code 接手（選用）
