@@ -155,3 +155,8 @@
 - **與預期不同**：A1（bf16）、A4、B2 不符。
 - **資料管理修正**：`.nsys-rep`、`.sqlite` 不再進 git（`.gitignore`）；raw `.nsys-rep` 留在 `results/`，sha256 記在 `results/MANIFEST_large_files.txt`；M10 已 commit 的 `.nsys-rep`／`.sqlite` 改為不追蹤（檔案仍在硬碟，git 歷史中仍有舊版本）；M11 由 nsys 轉出的 13 GB `.sqlite` 放在 `figures/`。
 - `[需裁決]`：新做法的設計要怎麼調整。
+
+## D025（2026-11-04）核准 M12：主動送（LL128 式 16 byte）vs 自己去拿
+
+- **使用者決定**：「先做 a 看看，等等跟我講結果」（選項 A：先改良送資料的方式，再以 vLLM 為底逐步改）。
+- **設計**：同一個程式內比較 all-gather 與 reduce-scatter 的「送（LL128 格式＋回合記號）」與「拿（vLLM 式 16 byte 讀取）」；另與 M11 的 vLLM 數字對照。見 `exp/M12_push_vs_pull/README.md`。
