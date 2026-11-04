@@ -5,8 +5,8 @@
 ## 目前狀態（2026-11-03）
 
 - **階段**：1 找現象 → 選題前
-- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）、M9_fused_baselines（D020：A100 上現有合併沒有比較快，離可達水準仍有 2 倍以上）、M10_why_fused_slow（D022：block 太少不是主因）
-- **等待使用者**：看過 `exp/M11_before_prototype/README.md`（提案）才開始量
+- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）、M9_fused_baselines（D020：A100 上現有合併沒有比較快，離可達水準仍有 2 倍以上）、M10_why_fused_slow（D022：block 太少不是主因）、M11_before_prototype（D024：原子加法正確但試作版比 vLLM 慢；路沒塞滿）
+- **等待使用者**：依 D024 重新討論新做法的設計；整體整理見 `docs/findings_overview.md`
 
 ## 已核准的實驗
 
@@ -21,7 +21,7 @@
 | M8_ll128_atomic_a100 | 2026-11-03（D016） | 完成 |
 | M9_fused_baselines | 2026-11-04（D019） | 完成 |
 | M10_why_fused_slow | 2026-11-04（D021） | 完成 |
-| M11_before_prototype | 2026-11-04（D023） | 進行中 |
+| M11_before_prototype | 2026-11-04（D023） | 完成 |
 
 ## 下一步
 

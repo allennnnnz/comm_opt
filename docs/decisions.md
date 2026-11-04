@@ -148,3 +148,10 @@
 
 - **使用者決定**：「開始量」（看過 `exp/M11_before_prototype/README.md` 的摘要之後）。
 - **範圍**：A. 8 對 8 跨卡原子加法（fp16／bf16／fp32）與備案「各寫各的格子」的正確性、誤差、是否每次相同、速度；B. vLLM 0.33.0 加總 kernel 的時間組成（原樣複製、只加計時）；C. nsys 記錄 NVLink 使用率。
+
+## D024（2026-11-04）M11 完成：原子加法正確但試作版比 vLLM 慢；路沒塞滿 `[需裁決]`
+
+- **結果**：8 對 8 半精度原子加法 0 次違反、誤差 1.5e-3，但 5 個大小都比 vLLM「起點 barrier＋第一階段」慢（0/5）；備案 store_slot 也 0/5 → 依判準「兩者都不行，停下來討論設計」。bf16 在 A100 上以 CAS 模擬，出現 347,886 次違反。vLLM 每次加總：barrier 占 kernel 內 34–42%（2-stage），每次之間另有 3.2–4.4 µs 空檔；NVLink 使用率 10–31%。見 `exp/M11_before_prototype/README.md`。
+- **與預期不同**：A1（bf16）、A4、B2 不符。
+- **資料管理修正**：`.nsys-rep`、`.sqlite` 不再進 git（`.gitignore`）；raw `.nsys-rep` 留在 `results/`，sha256 記在 `results/MANIFEST_large_files.txt`；M10 已 commit 的 `.nsys-rep`／`.sqlite` 改為不追蹤（檔案仍在硬碟，git 歷史中仍有舊版本）；M11 由 nsys 轉出的 13 GB `.sqlite` 放在 `figures/`。
+- `[需裁決]`：新做法的設計要怎麼調整。

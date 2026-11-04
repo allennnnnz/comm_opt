@@ -1,0 +1,128 @@
+A. per variant, best block count (median of 3 launch medians, µs):
+variant  atom_bf16  atom_f16  atom_f32  store_slot
+80K          13.33      4.93      6.27        6.61
+160K         18.97      5.22      7.71        8.18
+320K         25.91      6.31     16.95        9.33
+640K         35.36     12.13     26.83       17.44
+1.25M        64.24     23.17     46.67       27.84
+   variant   bytes  ctas   med    lo    hi
+ atom_bf16   81920   108 13.33 13.19 14.07
+ atom_bf16  163840    64 18.97 18.74 30.80
+ atom_bf16  327680    64 25.91 25.44 32.54
+ atom_bf16  655360    64 35.36 35.25 35.64
+ atom_bf16 1310720    32 64.24 62.55 66.90
+  atom_f16   81920   108  4.93  4.80  5.23
+  atom_f16  163840    16  5.22  5.15  6.12
+  atom_f16  327680   108  6.31  6.27  6.76
+  atom_f16  655360    64 12.13 11.40 16.07
+  atom_f16 1310720    64 23.17 21.88 24.53
+  atom_f32   81920    64  6.27  5.73  6.35
+  atom_f32  163840    64  7.71  7.33  7.82
+  atom_f32  327680    32 16.95 16.66 17.29
+  atom_f32  655360    32 26.83 26.79 28.47
+  atom_f32 1310720    32 46.67 45.32 57.12
+store_slot   81920    16  6.61  6.53  7.40
+store_slot  163840   108  8.18  7.92 10.29
+store_slot  327680   108  9.33  8.99 11.28
+store_slot  655360    64 17.44 13.59 17.83
+store_slot 1310720   108 27.84 26.82 31.34
+
+A. quality (all block counts, 3 launches):
+   variant   bytes  violations  timeouts   max_err  diff_frac
+ atom_bf16   81920       18123         0 6.751e-01  7.836e-01
+ atom_bf16  163840       37525         0 6.446e-01  6.749e-01
+ atom_bf16  327680       62436         0 5.128e-01  5.942e-01
+ atom_bf16  655360       99477         0 5.666e-01  4.476e-01
+ atom_bf16 1310720      130325         0 5.097e-01  3.273e-01
+  atom_f16   81920           0         0 1.529e-03  6.163e-01
+  atom_f16  163840           0         0 1.294e-03  6.184e-01
+  atom_f16  327680           0         0 1.416e-03  6.257e-01
+  atom_f16  655360           0         0 1.454e-03  6.102e-01
+  atom_f16 1310720           0         0 1.323e-03  5.191e-01
+  atom_f32   81920           0         0 3.985e-08  0.000e+00
+  atom_f32  163840           0         0 3.613e-08  0.000e+00
+  atom_f32  327680           0         0 5.137e-08  0.000e+00
+  atom_f32  655360           0         0 5.137e-08  3.333e-07
+  atom_f32 1310720           0         0 4.977e-08  1.667e-07
+store_slot   81920           0         0 3.546e-04  0.000e+00
+store_slot  163840           0         0 3.061e-04  0.000e+00
+store_slot  327680           0         0 3.061e-04  0.000e+00
+store_slot  655360           0         0 3.061e-04  0.000e+00
+store_slot 1310720           0         0 2.965e-04  0.000e+00
+
+B. vLLM critical-path breakdown (µs, median over calls and launches):
+ algo   bytes  start  stage1  mid  stage2  kernel  per_op  gap  share  share_lo  share_hi   sps  sps_lo  sps_hi
+    1   81920   2.16    4.32 2.11    0.00    8.52   12.32 3.80   0.49      0.49      0.50  6.48    6.47    6.50
+    1  163840   2.23    7.46 2.36    0.00   12.06   15.72 3.64   0.38      0.38      0.38  9.70    9.66    9.70
+    1  327680   2.19   12.89 3.06    0.00   18.22   21.99 3.77   0.29      0.29      0.29 15.08   15.07   15.08
+    1  655360   2.24   23.88 3.54    0.00   29.82   32.97 3.17   0.20      0.19      0.20 26.13   26.10   26.20
+    1 1310720   2.25   43.68 4.50    0.00   50.41   53.65 3.26   0.13      0.13      0.13 45.93   45.79   45.96
+    2   81920   2.04    2.13 4.90    7.41   16.47   19.94 3.46   0.42      0.42      0.42  4.16    4.16    4.17
+    2  163840   2.05    2.37 4.75    7.43   16.59   20.02 3.44   0.41      0.41      0.41  4.42    4.41    4.42
+    2  327680   2.12    2.79 4.80    7.59   17.35   21.06 3.71   0.40      0.40      0.40  4.91    4.88    4.92
+    2  655360   2.14    3.75 5.58    7.73   19.29   23.05 3.75   0.40      0.40      0.40  5.90    5.87    5.94
+    2 1310720   2.23    6.63 5.78    8.64   23.34   27.71 4.36   0.34      0.34      0.35  8.88    8.79    8.90
+
+B. stamping overhead (timed / plain per-op):
+ algo   bytes  plain  timed  overhead
+    1   81920 11.118 12.319     1.108
+    1  163840 14.784 15.723     1.064
+    1  327680 20.669 21.993     1.064
+    1  655360 31.739 32.965     1.039
+    1 1310720 52.255 53.653     1.027
+    2   81920 19.474 19.940     1.024
+    2  163840 19.392 20.024     1.033
+    2  327680 20.355 21.056     1.034
+    2  655360 22.277 23.053     1.035
+    2 1310720 27.044 27.709     1.025
+max correctness error (vs fp32 host sum): 3.55e-04
+
+== Checks ==
+A1 violations per variant: {'atom_bf16': 347886, 'atom_f16': 0, 'atom_f32': 0, 'store_slot': 0} timeouts: {'atom_bf16': 0, 'atom_f16': 0, 'atom_f32': 0, 'store_slot': 0}
+A2 atom_f32: max err 5.137e-08 <= 9.766e-04? True
+A2 store_slot: max err 3.546e-04 <= 9.766e-04? True
+A2 atom_f16: max err 1.529e-03 <= 3.906e-03? True
+A2 atom_bf16: max err 6.751e-01 <= 3.125e-02? False
+A3 atom_f32: mean differing fraction 0.0000
+A3 store_slot: mean differing fraction 0.0000
+A3 atom_f16: mean differing fraction 0.5979
+A3 atom_bf16: mean differing fraction 0.5655
+A4    80K: atom_f16 4.93 [4.80,5.23] (ctas 108) vs vLLM2 start+stage1 4.16 [4.16,4.17] -> not faster
+A4   160K: atom_f16 5.22 [5.15,6.12] (ctas 16) vs vLLM2 start+stage1 4.42 [4.41,4.42] -> not faster
+A4   320K: atom_f16 6.31 [6.27,6.76] (ctas 108) vs vLLM2 start+stage1 4.91 [4.88,4.92] -> not faster
+A4   640K: atom_f16 12.13 [11.40,16.07] (ctas 64) vs vLLM2 start+stage1 5.90 [5.87,5.94] -> not faster
+A4  1.25M: atom_f16 23.17 [21.88,24.53] (ctas 64) vs vLLM2 start+stage1 8.88 [8.79,8.90] -> not faster
+A4: 0/5 (need >= 3)
+   store_slot: faster than vLLM2 start+stage1 at 0/5
+   atom_f32: faster than vLLM2 start+stage1 at 0/5
+A5 1.25M: atom_f16 23.17 vs store_slot 27.84 -> f16 speed = 1.20 of slot (need >= 0.5)
+B1    80K: 2-stage barrier share 0.42 [0.42,0.42]  1-stage 0.49 [0.49,0.50]
+B1   160K: 2-stage barrier share 0.41 [0.41,0.41]  1-stage 0.38 [0.38,0.38]
+B1   320K: 2-stage barrier share 0.40 [0.40,0.40]  1-stage 0.29 [0.29,0.29]
+B1   640K: 2-stage barrier share 0.40 [0.40,0.40]  1-stage 0.20 [0.19,0.20]
+B1  1.25M: 2-stage barrier share 0.34 [0.34,0.35]  1-stage 0.13 [0.13,0.13]
+B2 gap per op (µs): {(1, 81920): 3.8, (1, 163840): 3.64, (1, 327680): 3.77, (1, 655360): 3.17, (1, 1310720): 3.26, (2, 81920): 3.46, (2, 163840): 3.44, (2, 327680): 3.71, (2, 655360): 3.75, (2, 1310720): 4.36}
+Overhead <= 1.10: {(1, 81920): False, (1, 163840): True, (1, 327680): True, (1, 655360): True, (1, 1310720): True, (2, 81920): True, (2, 163840): True, (2, 327680): True, (2, 655360): True, (2, 1310720): True}
+
+C. NVLink / SM utilization per NVTX range (% , mean over GPUs; max_gpu = busiest GPU):
+              range  samples_per_gpu  tx_req_mean  tx_req_max_gpu  rx_req_mean  rx_req_max_gpu  tx_rsp_mean  tx_rsp_max_gpu  rx_rsp_mean  rx_rsp_max_gpu  sm_active_mean  sm_active_max_gpu
+     car_1stage_80K            47440          1.0             1.0          1.0             1.0         17.2            17.3         17.2            17.3             7.4                7.6
+    car_1stage_320K            49031          1.0             1.0          1.0             1.0         40.9            40.9         40.9            40.9            27.1               27.4
+    car_1stage_160K            49127          1.0             1.0          1.0             1.0         27.4            27.5         27.5            27.5            15.3               15.7
+     car_2stage_80K            49146          0.9             0.9          1.0             1.0          2.5             2.5          2.4             2.5             5.0                5.2
+   car_2stage_1280K            49101          0.9             0.9          0.9             0.9         30.7            30.9         30.7            30.9            24.3               24.5
+    car_2stage_640K            49097          0.9             0.9          1.0             1.0         18.2            18.2         18.2            18.2            20.1               20.3
+   car_1stage_1280K            49221          0.5             0.5          0.5             0.6         62.0            62.0         62.0            62.0            30.3               30.5
+    car_2stage_320K            49062          0.9             0.9          1.0             1.0          9.6             9.6          9.6             9.6            17.9               18.1
+    car_2stage_160K            48983          0.9             0.9          1.0             1.0          5.1             5.1          5.1             5.1             9.9               10.1
+    car_1stage_640K            49261          0.8             0.8          0.8             0.8         52.3            52.3         52.3            52.3            28.8               29.0
+    rs_atom_f16_80K            39899          0.3             0.3          0.5             0.5          0.0             0.0          0.0             0.0             8.8               16.3
+   rs_atom_f16_160K            39894          0.5             0.5          0.6             0.7          0.0             0.0          0.0             0.0             8.9               16.2
+   rs_atom_f16_320K            39898          0.8             0.9          1.0             1.0          0.0             0.0          0.0             0.0             9.3               16.6
+   rs_atom_f16_640K            39898          1.6             1.6          1.7             1.7          0.0             0.0          0.0             0.0            10.4               17.5
+  rs_atom_f16_1280K            40830          2.8             2.8          3.0             3.0          0.0             0.0          0.0             0.0            13.6               20.4
+  rs_store_slot_80K            43626          0.2             0.2          0.4             0.4          0.0             0.0          0.0             0.0             7.2               13.2
+ rs_store_slot_160K            43625          0.4             0.4          0.5             0.5          0.0             0.0          0.0             0.0             7.5               13.5
+ rs_store_slot_320K            43619          0.7             0.7          0.8             0.8          0.0             0.0          0.0             0.0             8.2               14.0
+ rs_store_slot_640K            41111          1.3             1.3          1.4             1.4          0.0             0.0          0.0             0.0             9.6               15.3
+rs_store_slot_1280K            39896          2.3             2.3          2.4             2.4          0.0             0.0          0.0             0.0            11.9               17.4
