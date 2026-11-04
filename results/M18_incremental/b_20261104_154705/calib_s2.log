@@ -1,0 +1,92 @@
+W1104 15:48:34.532000 1306501 torch/distributed/run.py:982] 
+W1104 15:48:34.532000 1306501 torch/distributed/run.py:982] *****************************************
+W1104 15:48:34.532000 1306501 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 15:48:34.532000 1306501 torch/distributed/run.py:982] *****************************************
+[rank7]:W1104 15:48:42.379000 1306601 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 15:48:42.379000 1306601 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 15:48:42.380000 1306601 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1104 15:48:42.383000 1306595 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 15:48:42.384000 1306595 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 15:48:42.384000 1306595 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1104 15:48:42.398000 1306600 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 15:48:42.399000 1306600 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 15:48:42.399000 1306600 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1104 15:48:42.410000 1306596 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 15:48:42.411000 1306596 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 15:48:42.411000 1306596 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 15:48:42.423000 1306599 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 15:48:42.424000 1306599 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 15:48:42.424000 1306599 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 15:48:42.426000 1306594 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 15:48:42.427000 1306594 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 15:48:42.428000 1306594 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 15:48:42.466000 1306597 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 15:48:42.466000 1306598 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 15:48:42.467000 1306597 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 15:48:42.467000 1306597 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 15:48:42.467000 1306598 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 15:48:42.468000 1306598 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+P_v0_c48     t   1 max    11.88 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c48     t   2 max    11.85 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c48     t   4 max    11.85 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c48     t   8 max    11.94 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c48     t  16 max    12.64 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c48     t  32 max    13.74 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c48     t  64 max    17.60 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c48     t 128 max    23.73 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c16     t   1 max    11.83 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c16     t   2 max    11.65 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c16     t   4 max    11.78 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c16     t   8 max    11.74 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c16     t  16 max    12.99 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c16     t  32 max    14.51 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c16     t  64 max    18.79 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c16     t 128 max    27.84 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c96     t   1 max    11.59 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c96     t   2 max    11.71 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c96     t   4 max    12.12 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c96     t   8 max    12.04 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c96     t  16 max    12.51 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c96     t  32 max    13.49 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c96     t  64 max    16.04 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c96     t 128 max    22.30 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c24     t   1 max    11.63 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c24     t   2 max    11.71 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c24     t   4 max    11.80 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c24     t   8 max    11.75 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c24     t  16 max    12.20 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c24     t  32 max    13.54 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c24     t  64 max    17.33 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c24     t 128 max    27.48 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c108    t   1 max    11.76 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c108    t   2 max    11.69 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c108    t   4 max    12.09 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c108    t   8 max    12.09 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c108    t  16 max    12.46 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c108    t  32 max    13.37 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c108    t  64 max    16.15 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c108    t 128 max    22.64 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c64     t   1 max    11.63 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c64     t   2 max    11.51 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c64     t   4 max    12.01 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c64     t   8 max    11.94 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c64     t  16 max    12.05 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c64     t  32 max    12.90 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c64     t  64 max    16.43 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c64     t 128 max    22.37 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c80     t   1 max    11.56 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c80     t   2 max    11.53 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c80     t   4 max    11.82 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c80     t   8 max    11.95 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c80     t  16 max    12.04 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c80     t  32 max    13.34 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c80     t  64 max    16.04 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c80     t 128 max    22.05 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c32     t   1 max    11.47 us  sm min  1410 mem min  1593 P0  err 5.3e-04 
+P_v0_c32     t   2 max    11.41 us  sm min  1410 mem min  1593 P0  err 4.5e-04 
+P_v0_c32     t   4 max    11.63 us  sm min  1410 mem min  1593 P0  err 4.8e-04 
+P_v0_c32     t   8 max    11.76 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c32     t  16 max    12.31 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
+P_v0_c32     t  32 max    13.48 us  sm min  1410 mem min  1593 P0  err 6.3e-04 
+P_v0_c32     t  64 max    16.78 us  sm min  1410 mem min  1593 P0  err 6.1e-04 
+P_v0_c32     t 128 max    25.96 us  sm min  1410 mem min  1593 P0  err 6.6e-04 
