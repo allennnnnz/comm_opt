@@ -273,3 +273,9 @@
 
 - **使用者決定**：「好，先去拆解找出為何我們的方法在某些情況沒有優勢」（回應：先找原因，不直接套用 one-shot）。這是暫停期間核准的唯一工作，也是 D043 策略第一段的一部分。
 - **設計**：原型加時間戳記（torch 測試程式，M18 的量測方式）；vLLM 拆成「只做 all-reduce」與「all-reduce＋norm」，all-reduce kernel 內階段用 M11 的 `car_timed.cu` 加暖機在 1410 MHz 重量。見 `exp/M19_small_batch/README.md`。
+
+## D045（2026-11-04）M19 完成：原型小資料較慢的原因 `[需裁決]`
+
+- **結果**（1410 MHz、5 次 launch）：1 token 時原型 11.60 µs、vLLM 9.87 µs（+1.73）。差距來自：擁有列的 block 做 pull 要 3.67 µs，vLLM 1-stage 讀同樣資料量只要 1.63（+2.04）；原型多一段 push＋接收（約 +1.7，vLLM 只有 end barrier 1.29）；原型融合 norm 省下約 1.9 µs（vLLM 另跑 norm＋空檔 3.16）。沒有列的 GPU 70% 時間在等。P1–P4 全部符合。見 `exp/M19_small_batch/README.md`。
+- **推論的機制**：一列 640 個 16 byte 單位、block 只有 512 執行緒 → 兩輪遠端讀取（同樣出現在 16／32 tokens）。
+- `[需裁決]`：是否先試「每列一次讀完」（1024 執行緒或一列兩個 block），再視需要試 one-shot。

@@ -1,0 +1,3420 @@
+{
+ "args": {
+  "out": "/home/rogerlee/comm_opt/results/M19_small_batch/20261104_184016/torch_s1.json",
+  "seed": 1,
+  "hidden": 5120,
+  "tokens": "1,2,4,8,16,32,64,128",
+  "dtype": "float16",
+  "graph_ops": 20,
+  "replays": 20,
+  "warmup_ms": 2000,
+  "warm_replays": 50,
+  "discard_first": 1,
+  "versions": "v0=/home/rogerlee/comm_opt/exp/M18_incremental/kernels/v0.cu,v0s=/home/rogerlee/comm_opt/exp/M19_small_batch/kernels/v0_stamped.cu",
+  "impls": "U_vllm,A_vllm,P_v0_c64,S_v0s_c64",
+  "table": "",
+  "ext_root": "/home/rogerlee/comm_opt/results/M19_small_batch/20261104_184016/ext",
+  "eps": 1e-06
+ },
+ "torch": "2.14.0+cu130",
+ "order": [
+  "S_v0s_c64",
+  "U_vllm",
+  "P_v0_c64",
+  "A_vllm"
+ ],
+ "rows": [
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 1,
+   "bytes": 10240,
+   "per_rank_us": [
+    12.08575963973999,
+    11.842559576034546,
+    12.300800085067749,
+    12.08575963973999,
+    12.344319820404053,
+    12.055039405822754,
+    12.30847954750061,
+    12.147200107574463
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 9.62695035460993,
+     "phases_us": {
+      "barrier": 1.7368794326241135,
+      "pull_sum_residual": 3.6687943262411347,
+      "norm_reduce": 0.4205673758865248,
+      "write_out": 0.8617021276595744,
+      "push": 2.0482269503546098,
+      "recv_wait": 0.6617021276595745,
+      "end": 0.2078014184397163
+     },
+     "block0_phases_us": {
+      "barrier": 1.7368794326241135,
+      "pull_sum_residual": 3.6687943262411347,
+      "norm_reduce": 0.4205673758865248,
+      "write_out": 0.8617021276595744,
+      "push": 2.0482269503546098,
+      "recv_wait": 0.6617021276595745,
+      "end": 0.2078014184397163
+     },
+     "block0_total_us": 9.62695035460993,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.373758865248227,
+     "phases_us": {
+      "barrier": 1.1120567375886525,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.067375886524823,
+      "end": 2.176595744680851
+     },
+     "block0_phases_us": {
+      "barrier": 1.2531914893617022,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.20851063829787234
+     },
+     "block0_total_us": 2.0127659574468084,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.542553191489361,
+     "phases_us": {
+      "barrier": 1.2829787234042553,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.395035460992908,
+      "end": 0.8163120567375887
+     },
+     "block0_phases_us": {
+      "barrier": 1.2460992907801418,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.20638297872340425
+     },
+     "block0_total_us": 2.0056737588652482,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.472340425531915,
+     "phases_us": {
+      "barrier": 1.0304964539007093,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.560992907801419,
+      "end": 1.872340425531915
+     },
+     "block0_phases_us": {
+      "barrier": 1.2340425531914894,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5560283687943263,
+      "end": 0.21063829787234042
+     },
+     "block0_total_us": 2.000709219858156,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.64468085106383,
+     "phases_us": {
+      "barrier": 1.274468085106383,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.579432624113475,
+      "end": 1.7177304964539006
+     },
+     "block0_phases_us": {
+      "barrier": 1.0368794326241135,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.550354609929078,
+      "end": 0.3198581560283688
+     },
+     "block0_total_us": 1.9085106382978723,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.681560283687944,
+     "phases_us": {
+      "barrier": 1.3936170212765957,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.026950354609929,
+      "end": 1.1943262411347517
+     },
+     "block0_phases_us": {
+      "barrier": 1.2439716312056737,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.551063829787234,
+      "end": 0.21063829787234042
+     },
+     "block0_total_us": 2.0042553191489363,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.429787234042553,
+     "phases_us": {
+      "barrier": 0.9326241134751773,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.4361702127659575,
+      "end": 2.0631205673758863
+     },
+     "block0_phases_us": {
+      "barrier": 1.1645390070921986,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5546099290780142,
+      "end": 0.2049645390070922
+     },
+     "block0_total_us": 1.924113475177305,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.419858156028369,
+     "phases_us": {
+      "barrier": 0.9156028368794327,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.12836879432624,
+      "end": 0.3198581560283688
+     },
+     "block0_phases_us": {
+      "barrier": 1.1531914893617021,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.480141843971631,
+      "end": 0.26879432624113475
+     },
+     "block0_total_us": 8.881560283687943,
+     "owner": false
+    }
+   ],
+   "max_rel_err": 0.0005296599119901657,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 2,
+   "bytes": 20480,
+   "per_rank_us": [
+    12.375040054321289,
+    11.745280027389526,
+    12.372479438781738,
+    11.98591947555542,
+    12.385280132293701,
+    11.801600456237793,
+    12.405760288238525,
+    11.998720169067383
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 9.646099290780143,
+     "phases_us": {
+      "barrier": 1.0198581560283688,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.220567375886525,
+      "end": 0.31063829787234043
+     },
+     "block0_phases_us": {
+      "barrier": 1.1205673758865249,
+      "pull_sum_residual": 3.772340425531915,
+      "norm_reduce": 0.3624113475177305,
+      "write_out": 0.8588652482269503,
+      "push": 2.094326241134752,
+      "recv_wait": 1.078723404255319,
+      "end": 0.23404255319148937
+     },
+     "block0_total_us": 9.553900709219858,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.554609929078014,
+     "phases_us": {
+      "barrier": 1.3191489361702127,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.054609929078014,
+      "end": 2.1120567375886523
+     },
+     "block0_phases_us": {
+      "barrier": 1.4836879432624113,
+      "pull_sum_residual": 3.7574468085106383,
+      "norm_reduce": 0.39290780141843973,
+      "write_out": 0.8418439716312057,
+      "push": 2.076595744680851,
+      "recv_wait": 0.6354609929078014,
+      "end": 0.2
+     },
+     "block0_total_us": 9.377304964539007,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.590070921985816,
+     "phases_us": {
+      "barrier": 1.2624113475177305,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.329787234042553,
+      "end": 0.9921985815602837
+     },
+     "block0_phases_us": {
+      "barrier": 1.2617021276595746,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.2078014184397163
+     },
+     "block0_total_us": 2.0219858156028367,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.680141843971631,
+     "phases_us": {
+      "barrier": 1.2382978723404254,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.235460992907801,
+      "end": 1.1695035460992909
+     },
+     "block0_phases_us": {
+      "barrier": 1.273758865248227,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.21134751773049645
+     },
+     "block0_total_us": 2.0411347517730496,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.70354609929078,
+     "phases_us": {
+      "barrier": 1.1695035460992909,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.640425531914894,
+      "end": 1.8035460992907801
+     },
+     "block0_phases_us": {
+      "barrier": 1.0354609929078014,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.550354609929078,
+      "end": 0.32056737588652484
+     },
+     "block0_total_us": 1.9056737588652481,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.664539007092198,
+     "phases_us": {
+      "barrier": 1.1531914893617021,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.034042553191489,
+      "end": 1.3879432624113475
+     },
+     "block0_phases_us": {
+      "barrier": 1.2106382978723405,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.551063829787234,
+      "end": 0.21063829787234042
+     },
+     "block0_total_us": 1.974468085106383,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.624113475177305,
+     "phases_us": {
+      "barrier": 0.9709219858156029,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.081560283687943,
+      "end": 1.6156028368794326
+     },
+     "block0_phases_us": {
+      "barrier": 1.1801418439716311,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.20567375886524822
+     },
+     "block0_total_us": 1.9397163120567376,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.574468085106384,
+     "phases_us": {
+      "barrier": 0.9085106382978724,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.132624113475178,
+      "end": 0.4177304964539007
+     },
+     "block0_phases_us": {
+      "barrier": 1.1666666666666667,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.519148936170213,
+      "end": 0.2723404255319149
+     },
+     "block0_total_us": 8.941843971631206,
+     "owner": false
+    }
+   ],
+   "max_rel_err": 0.000453133718110621,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 4,
+   "bytes": 40960,
+   "per_rank_us": [
+    12.369920015335083,
+    12.01151967048645,
+    12.30847954750061,
+    12.180479764938354,
+    12.395520210266113,
+    11.955200433731079,
+    12.339199781417847,
+    12.21119999885559
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 9.71631205673759,
+     "phases_us": {
+      "barrier": 1.00354609929078,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.263829787234043,
+      "end": 0.3262411347517731
+     },
+     "block0_phases_us": {
+      "barrier": 1.1673758865248227,
+      "pull_sum_residual": 3.780141843971631,
+      "norm_reduce": 0.36099290780141846,
+      "write_out": 0.8602836879432624,
+      "push": 2.0815602836879434,
+      "recv_wait": 1.0858156028368795,
+      "end": 0.23404255319148937
+     },
+     "block0_total_us": 9.576595744680851,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.753900709219858,
+     "phases_us": {
+      "barrier": 1.2092198581560283,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.2858156028368795,
+      "end": 0.30921985815602837
+     },
+     "block0_phases_us": {
+      "barrier": 1.247517730496454,
+      "pull_sum_residual": 3.880851063829787,
+      "norm_reduce": 0.3588652482269504,
+      "write_out": 0.8411347517730496,
+      "push": 2.075177304964539,
+      "recv_wait": 1.0843971631205673,
+      "end": 0.22127659574468084
+     },
+     "block0_total_us": 9.693617021276596,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.73049645390071,
+     "phases_us": {
+      "barrier": 1.1354609929078014,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.104964539007092,
+      "end": 0.324113475177305
+     },
+     "block0_phases_us": {
+      "barrier": 1.2333333333333334,
+      "pull_sum_residual": 3.7851063829787233,
+      "norm_reduce": 0.3624113475177305,
+      "write_out": 0.8418439716312057,
+      "push": 2.054609929078014,
+      "recv_wait": 1.0879432624113474,
+      "end": 0.23900709219858157
+     },
+     "block0_total_us": 9.609929078014185,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.751063829787235,
+     "phases_us": {
+      "barrier": 1.2581560283687943,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.341843971631206,
+      "end": 1.0907801418439715
+     },
+     "block0_phases_us": {
+      "barrier": 1.277304964539007,
+      "pull_sum_residual": 3.681560283687943,
+      "norm_reduce": 0.37943262411347517,
+      "write_out": 0.8602836879432624,
+      "push": 2.0354609929078014,
+      "recv_wait": 0.6758865248226951,
+      "end": 0.20709219858156028
+     },
+     "block0_total_us": 9.14468085106383,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.771631205673758,
+     "phases_us": {
+      "barrier": 1.173049645390071,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.724113475177305,
+      "end": 1.801418439716312
+     },
+     "block0_phases_us": {
+      "barrier": 1.0425531914893618,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.550354609929078,
+      "end": 0.32056737588652484
+     },
+     "block0_total_us": 1.9163120567375886,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.765248226950355,
+     "phases_us": {
+      "barrier": 1.153900709219858,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.051063829787234,
+      "end": 1.5624113475177306
+     },
+     "block0_phases_us": {
+      "barrier": 1.2354609929078013,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.551063829787234,
+      "end": 0.21134751773049645
+     },
+     "block0_total_us": 1.998581560283688,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.733333333333333,
+     "phases_us": {
+      "barrier": 1.0439716312056737,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.15177304964539,
+      "end": 1.5617021276595744
+     },
+     "block0_phases_us": {
+      "barrier": 1.1950354609929077,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 0.5524822695035461,
+      "end": 0.20921985815602837
+     },
+     "block0_total_us": 1.9567375886524823,
+     "owner": false
+    },
+    {
+     "kernel_us": 9.682978723404256,
+     "phases_us": {
+      "barrier": 0.9730496453900709,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.506382978723404,
+      "end": 1.3936170212765957
+     },
+     "block0_phases_us": {
+      "barrier": 1.175177304964539,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.505673758865248,
+      "end": 0.27092198581560284
+     },
+     "block0_total_us": 8.985106382978723,
+     "owner": false
+    }
+   ],
+   "max_rel_err": 0.00048099629930220544,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 8,
+   "bytes": 81920,
+   "per_rank_us": [
+    12.031999826431274,
+    11.91167950630188,
+    12.101119756698608,
+    11.973119974136353,
+    12.026879787445068,
+    11.91167950630188,
+    12.10368037223816,
+    11.991039514541626
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 9.797163120567376,
+     "phases_us": {
+      "barrier": 1.1063829787234043,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.217730496453902,
+      "end": 0.3354609929078014
+     },
+     "block0_phases_us": {
+      "barrier": 1.221985815602837,
+      "pull_sum_residual": 3.797163120567376,
+      "norm_reduce": 0.3638297872340426,
+      "write_out": 0.8638297872340426,
+      "push": 2.057446808510638,
+      "recv_wait": 1.1198581560283687,
+      "end": 0.23333333333333334
+     },
+     "block0_total_us": 9.660992907801418,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.822695035460994,
+     "phases_us": {
+      "barrier": 1.151063829787234,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.9134751773049645,
+      "end": 1.721276595744681
+     },
+     "block0_phases_us": {
+      "barrier": 1.2361702127659575,
+      "pull_sum_residual": 3.8858156028368795,
+      "norm_reduce": 0.3595744680851064,
+      "write_out": 0.8439716312056738,
+      "push": 2.0851063829787235,
+      "recv_wait": 1.0730496453900709,
+      "end": 0.22127659574468084
+     },
+     "block0_total_us": 9.694326241134751,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.83049645390071,
+     "phases_us": {
+      "barrier": 1.079432624113475,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.087943262411348,
+      "end": 1.7943262411347518
+     },
+     "block0_phases_us": {
+      "barrier": 1.2304964539007093,
+      "pull_sum_residual": 3.8354609929078016,
+      "norm_reduce": 0.3432624113475177,
+      "write_out": 0.8432624113475178,
+      "push": 2.051063829787234,
+      "recv_wait": 1.0943262411347519,
+      "end": 0.23120567375886525
+     },
+     "block0_total_us": 9.617021276595745,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.9,
+     "phases_us": {
+      "barrier": 1.2581560283687943,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.980851063829787,
+      "end": 1.675177304964539
+     },
+     "block0_phases_us": {
+      "barrier": 1.2609929078014184,
+      "pull_sum_residual": 3.7439716312056737,
+      "norm_reduce": 0.36666666666666664,
+      "write_out": 0.8617021276595744,
+      "push": 2.0382978723404257,
+      "recv_wait": 1.1312056737588652,
+      "end": 0.23546099290780143
+     },
+     "block0_total_us": 9.687234042553191,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.808510638297872,
+     "phases_us": {
+      "barrier": 1.1290780141843972,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.980141843971631,
+      "end": 1.7822695035460994
+     },
+     "block0_phases_us": {
+      "barrier": 0.8950354609929078,
+      "pull_sum_residual": 3.700709219858156,
+      "norm_reduce": 0.36099290780141846,
+      "write_out": 0.8482269503546099,
+      "push": 2.0375886524822695,
+      "recv_wait": 1.1517730496453902,
+      "end": 0.3347517730496454
+     },
+     "block0_total_us": 9.36950354609929,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.816312056737589,
+     "phases_us": {
+      "barrier": 1.1836879432624114,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.036170212765957,
+      "end": 1.4070921985815603
+     },
+     "block0_phases_us": {
+      "barrier": 1.2191489361702128,
+      "pull_sum_residual": 3.7886524822695034,
+      "norm_reduce": 0.3780141843971631,
+      "write_out": 0.8439716312056738,
+      "push": 2.0886524822695036,
+      "recv_wait": 1.0510638297872341,
+      "end": 0.22695035460992907
+     },
+     "block0_total_us": 9.639716312056738,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.798581560283688,
+     "phases_us": {
+      "barrier": 1.049645390070922,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.567375886524823,
+      "end": 0.48723404255319147
+     },
+     "block0_phases_us": {
+      "barrier": 1.1936170212765957,
+      "pull_sum_residual": 3.895035460992908,
+      "norm_reduce": 0.33191489361702126,
+      "write_out": 0.8425531914893617,
+      "push": 2.0446808510638297,
+      "recv_wait": 1.124822695035461,
+      "end": 0.23404255319148937
+     },
+     "block0_total_us": 9.673049645390071,
+     "owner": true
+    },
+    {
+     "kernel_us": 9.771631205673758,
+     "phases_us": {
+      "barrier": 1.1595744680851063,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.626241134751773,
+      "end": 0.3141843971631206
+     },
+     "block0_phases_us": {
+      "barrier": 1.1851063829787234,
+      "pull_sum_residual": 3.921276595744681,
+      "norm_reduce": 0.3588652482269504,
+      "write_out": 0.8411347517730496,
+      "push": 2.0446808510638297,
+      "recv_wait": 1.1219858156028368,
+      "end": 0.2326241134751773
+     },
+     "block0_total_us": 9.706382978723404,
+     "owner": true
+    }
+   ],
+   "max_rel_err": 0.0006601413479074836,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 16,
+   "bytes": 163840,
+   "per_rank_us": [
+    12.295680046081543,
+    12.33407974243164,
+    12.257280349731445,
+    12.216320037841797,
+    12.30847954750061,
+    12.300800085067749,
+    12.239359617233276,
+    12.20352053642273
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 10.138297872340425,
+     "phases_us": {
+      "barrier": 1.175886524822695,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.856028368794326,
+      "end": 0.47588652482269506
+     },
+     "block0_phases_us": {
+      "barrier": 1.2312056737588652,
+      "pull_sum_residual": 3.9446808510638296,
+      "norm_reduce": 0.3595744680851064,
+      "write_out": 0.8617021276595744,
+      "push": 2.0687943262411346,
+      "recv_wait": 1.0900709219858156,
+      "end": 0.22907801418439716
+     },
+     "block0_total_us": 9.815602836879433,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.126241134751773,
+     "phases_us": {
+      "barrier": 1.202127659574468,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.197163120567376,
+      "end": 1.420567375886525
+     },
+     "block0_phases_us": {
+      "barrier": 1.250354609929078,
+      "pull_sum_residual": 3.973758865248227,
+      "norm_reduce": 0.3624113475177305,
+      "write_out": 0.8432624113475178,
+      "push": 2.0368794326241133,
+      "recv_wait": 1.126950354609929,
+      "end": 0.22695035460992907
+     },
+     "block0_total_us": 9.84468085106383,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.153191489361703,
+     "phases_us": {
+      "barrier": 1.1560283687943262,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.156737588652482,
+      "end": 1.6638297872340426
+     },
+     "block0_phases_us": {
+      "barrier": 1.224113475177305,
+      "pull_sum_residual": 4.015602836879433,
+      "norm_reduce": 0.349645390070922,
+      "write_out": 0.8446808510638298,
+      "push": 2.0326241134751775,
+      "recv_wait": 1.0609929078014184,
+      "end": 0.23049645390070922
+     },
+     "block0_total_us": 9.757446808510638,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.177304964539006,
+     "phases_us": {
+      "barrier": 1.2163120567375887,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.5049645390070925,
+      "end": 1.4907801418439717
+     },
+     "block0_phases_us": {
+      "barrier": 1.2404255319148936,
+      "pull_sum_residual": 4.019858156028369,
+      "norm_reduce": 0.3553191489361702,
+      "write_out": 0.8624113475177305,
+      "push": 2.0340425531914894,
+      "recv_wait": 1.1205673758865249,
+      "end": 0.24397163120567375
+     },
+     "block0_total_us": 9.863829787234042,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.087943262411347,
+     "phases_us": {
+      "barrier": 0.9546099290780142,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 6.895744680851064,
+      "end": 1.4085106382978723
+     },
+     "block0_phases_us": {
+      "barrier": 0.8978723404255319,
+      "pull_sum_residual": 3.8390070921985817,
+      "norm_reduce": 0.36099290780141846,
+      "write_out": 0.849645390070922,
+      "push": 2.024113475177305,
+      "recv_wait": 1.1156028368794326,
+      "end": 0.32269503546099293
+     },
+     "block0_total_us": 9.534751773049646,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.246099290780142,
+     "phases_us": {
+      "barrier": 1.4333333333333333,
+      "pull_sum_residual": 3.856737588652482,
+      "norm_reduce": 0.4347517730496454,
+      "write_out": 0.851063829787234,
+      "push": 2.021276595744681,
+      "recv_wait": 1.249645390070922,
+      "end": 0.24113475177304963
+     },
+     "block0_phases_us": {
+      "barrier": 1.429078014184397,
+      "pull_sum_residual": 3.9368794326241137,
+      "norm_reduce": 0.4765957446808511,
+      "write_out": 0.8468085106382979,
+      "push": 2.1184397163120567,
+      "recv_wait": 1.074468085106383,
+      "end": 0.22411347517730495
+     },
+     "block0_total_us": 10.075177304964539,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.10354609929078,
+     "phases_us": {
+      "barrier": 1.1843971631205674,
+      "pull_sum_residual": 3.753900709219858,
+      "norm_reduce": 0.3624113475177305,
+      "write_out": 0.8418439716312057,
+      "push": 1.9921985815602836,
+      "recv_wait": 1.4546099290780141,
+      "end": 0.349645390070922
+     },
+     "block0_phases_us": {
+      "barrier": 1.2297872340425533,
+      "pull_sum_residual": 4.027659574468085,
+      "norm_reduce": 0.38085106382978723,
+      "write_out": 0.8432624113475178,
+      "push": 2.073049645390071,
+      "recv_wait": 1.075177304964539,
+      "end": 0.23120567375886525
+     },
+     "block0_total_us": 9.953191489361702,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.046099290780141,
+     "phases_us": {
+      "barrier": 1.1645390070921986,
+      "pull_sum_residual": 3.7843971631205675,
+      "norm_reduce": 0.2957446808510638,
+      "write_out": 0.8361702127659575,
+      "push": 1.926241134751773,
+      "recv_wait": 1.5099290780141843,
+      "end": 0.40425531914893614
+     },
+     "block0_phases_us": {
+      "barrier": 1.2070921985815604,
+      "pull_sum_residual": 4.090780141843972,
+      "norm_reduce": 0.34609929078014184,
+      "write_out": 0.8432624113475178,
+      "push": 2.080141843971631,
+      "recv_wait": 1.0808510638297872,
+      "end": 0.23191489361702128
+     },
+     "block0_total_us": 9.934042553191489,
+     "owner": true
+    }
+   ],
+   "max_rel_err": 0.0006601413479074836,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 32,
+   "bytes": 327680,
+   "per_rank_us": [
+    13.173760175704956,
+    13.207039833068848,
+    13.288960456848145,
+    13.224960565567017,
+    13.21727991104126,
+    13.26591968536377,
+    13.2915198802948,
+    13.29408049583435
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 10.939007092198581,
+     "phases_us": {
+      "barrier": 1.1226950354609928,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.043971631205673,
+      "end": 1.447517730496454
+     },
+     "block0_phases_us": {
+      "barrier": 1.2453900709219858,
+      "pull_sum_residual": 4.486524822695036,
+      "norm_reduce": 0.3624113475177305,
+      "write_out": 0.8730496453900709,
+      "push": 2.126241134751773,
+      "recv_wait": 1.1078014184397162,
+      "end": 0.23191489361702128
+     },
+     "block0_total_us": 10.47872340425532,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.01418439716312,
+     "phases_us": {
+      "barrier": 1.225531914893617,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.040425531914893,
+      "end": 1.5695035460992908
+     },
+     "block0_phases_us": {
+      "barrier": 1.275886524822695,
+      "pull_sum_residual": 4.402127659574468,
+      "norm_reduce": 0.36950354609929076,
+      "write_out": 0.8531914893617021,
+      "push": 2.1347517730496453,
+      "recv_wait": 1.070921985815603,
+      "end": 0.23049645390070922
+     },
+     "block0_total_us": 10.426241134751773,
+     "owner": true
+    },
+    {
+     "kernel_us": 10.934751773049646,
+     "phases_us": {
+      "barrier": 0.9921985815602837,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.03191489361702,
+      "end": 1.5283687943262412
+     },
+     "block0_phases_us": {
+      "barrier": 1.2326241134751772,
+      "pull_sum_residual": 4.490780141843971,
+      "norm_reduce": 0.32127659574468087,
+      "write_out": 0.851063829787234,
+      "push": 2.0886524822695036,
+      "recv_wait": 1.0574468085106383,
+      "end": 0.23049645390070922
+     },
+     "block0_total_us": 10.290780141843971,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.087943262411347,
+     "phases_us": {
+      "barrier": 1.1198581560283687,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 8.20709219858156,
+      "end": 1.6312056737588652
+     },
+     "block0_phases_us": {
+      "barrier": 1.2368794326241135,
+      "pull_sum_residual": 4.531914893617022,
+      "norm_reduce": 0.3567375886524823,
+      "write_out": 0.8723404255319149,
+      "push": 2.0340425531914894,
+      "recv_wait": 1.1404255319148937,
+      "end": 0.2326241134751773
+     },
+     "block0_total_us": 10.432624113475176,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.040425531914893,
+     "phases_us": {
+      "barrier": 0.9851063829787234,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.729078014184397,
+      "end": 1.478014184397163
+     },
+     "block0_phases_us": {
+      "barrier": 0.8836879432624114,
+      "pull_sum_residual": 4.23404255319149,
+      "norm_reduce": 0.36524822695035464,
+      "write_out": 0.8602836879432624,
+      "push": 2.1808510638297873,
+      "recv_wait": 1.4070921985815603,
+      "end": 0.3446808510638298
+     },
+     "block0_total_us": 10.40709219858156,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.148936170212766,
+     "phases_us": {
+      "barrier": 1.251063829787234,
+      "pull_sum_residual": 4.439716312056738,
+      "norm_reduce": 0.37163120567375885,
+      "write_out": 0.8631205673758865,
+      "push": 2.2581560283687945,
+      "recv_wait": 1.1638297872340426,
+      "end": 0.28297872340425534
+     },
+     "block0_phases_us": {
+      "barrier": 1.2375886524822695,
+      "pull_sum_residual": 4.548936170212766,
+      "norm_reduce": 0.36950354609929076,
+      "write_out": 0.8531914893617021,
+      "push": 2.471631205673759,
+      "recv_wait": 1.0539007092198582,
+      "end": 0.24397163120567375
+     },
+     "block0_total_us": 10.927659574468086,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.026241134751773,
+     "phases_us": {
+      "barrier": 1.1794326241134752,
+      "pull_sum_residual": 3.7404255319148936,
+      "norm_reduce": 0.30425531914893617,
+      "write_out": 0.8460992907801419,
+      "push": 1.9049645390070922,
+      "recv_wait": 1.6858156028368794,
+      "end": 1.1134751773049645
+     },
+     "block0_phases_us": {
+      "barrier": 1.4163120567375886,
+      "pull_sum_residual": 4.48581560283688,
+      "norm_reduce": 0.4390070921985816,
+      "write_out": 0.8581560283687943,
+      "push": 2.0659574468085107,
+      "recv_wait": 1.0843971631205673,
+      "end": 0.22907801418439716
+     },
+     "block0_total_us": 10.553191489361701,
+     "owner": true
+    },
+    {
+     "kernel_us": 11.009219858156028,
+     "phases_us": {
+      "barrier": 1.202127659574468,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 7.6680851063829785,
+      "end": 1.7156028368794327
+     },
+     "block0_phases_us": {
+      "barrier": 1.421276595744681,
+      "pull_sum_residual": 4.44822695035461,
+      "norm_reduce": 0.4205673758865248,
+      "write_out": 0.8553191489361702,
+      "push": 2.0531914893617023,
+      "recv_wait": 1.1439716312056738,
+      "end": 0.22907801418439716
+     },
+     "block0_total_us": 10.51418439716312,
+     "owner": true
+    }
+   ],
+   "max_rel_err": 0.0006292493198998272,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 64,
+   "bytes": 655360,
+   "per_rank_us": [
+    16.898560523986816,
+    16.81920051574707,
+    17.01375961303711,
+    16.770559549331665,
+    16.885759830474854,
+    16.796159744262695,
+    17.026560306549072,
+    16.808960437774658
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 14.425531914893616,
+     "phases_us": {
+      "barrier": 1.199290780141844,
+      "pull_sum_residual": 5.612056737588652,
+      "norm_reduce": 0.3276595744680851,
+      "write_out": 0.8787234042553191,
+      "push": 2.753900709219858,
+      "recv_wait": 2.123404255319149,
+      "end": 1.1851063829787234
+     },
+     "block0_phases_us": {
+      "barrier": 1.1829787234042553,
+      "pull_sum_residual": 5.853191489361702,
+      "norm_reduce": 0.375177304964539,
+      "write_out": 0.8929078014184397,
+      "push": 2.949645390070922,
+      "recv_wait": 1.9177304964539008,
+      "end": 0.2865248226950355
+     },
+     "block0_total_us": 13.672340425531916,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.38723404255319,
+     "phases_us": {
+      "barrier": 1.3482269503546098,
+      "pull_sum_residual": 5.692198581560284,
+      "norm_reduce": 0.3773049645390071,
+      "write_out": 0.8893617021276595,
+      "push": 3.5872340425531917,
+      "recv_wait": 2.0617021276595744,
+      "end": 0.24326241134751772
+     },
+     "block0_phases_us": {
+      "barrier": 1.325531914893617,
+      "pull_sum_residual": 5.697163120567376,
+      "norm_reduce": 0.4127659574468085,
+      "write_out": 0.8723404255319149,
+      "push": 2.90709219858156,
+      "recv_wait": 1.8517730496453901,
+      "end": 0.23049645390070922
+     },
+     "block0_total_us": 13.52127659574468,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.319148936170214,
+     "phases_us": {
+      "barrier": 1.5645390070921985,
+      "pull_sum_residual": 4.828368794326241,
+      "norm_reduce": 0.3432624113475177,
+      "write_out": 0.8730496453900709,
+      "push": 2.1127659574468085,
+      "recv_wait": 3.6340425531914895,
+      "end": 1.229078014184397
+     },
+     "block0_phases_us": {
+      "barrier": 1.7645390070921987,
+      "pull_sum_residual": 5.291489361702127,
+      "norm_reduce": 0.5539007092198581,
+      "write_out": 0.874468085106383,
+      "push": 2.4900709219858155,
+      "recv_wait": 2.178014184397163,
+      "end": 0.3326241134751773
+     },
+     "block0_total_us": 13.533333333333333,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.38936170212766,
+     "phases_us": {
+      "barrier": 1.5397163120567376,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 9.740425531914894,
+      "end": 0.25460992907801416
+     },
+     "block0_phases_us": {
+      "barrier": 1.5333333333333334,
+      "pull_sum_residual": 5.819148936170213,
+      "norm_reduce": 0.4148936170212766,
+      "write_out": 0.8943262411347518,
+      "push": 2.931914893617021,
+      "recv_wait": 1.973758865248227,
+      "end": 0.23191489361702128
+     },
+     "block0_total_us": 13.870921985815603,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.391489361702128,
+     "phases_us": {
+      "barrier": 1.4609929078014185,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 11.13049645390071,
+      "end": 0.38581560283687943
+     },
+     "block0_phases_us": {
+      "barrier": 1.2085106382978723,
+      "pull_sum_residual": 5.4070921985815605,
+      "norm_reduce": 0.3971631205673759,
+      "write_out": 0.8893617021276595,
+      "push": 2.6865248226950356,
+      "recv_wait": 2.3049645390070923,
+      "end": 0.5921985815602837
+     },
+     "block0_total_us": 13.704964539007092,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.393617021276595,
+     "phases_us": {
+      "barrier": 1.375886524822695,
+      "pull_sum_residual": 5.2304964539007095,
+      "norm_reduce": 0.33404255319148934,
+      "write_out": 0.8695035460992908,
+      "push": 2.4368794326241137,
+      "recv_wait": 2.8659574468085105,
+      "end": 0.399290780141844
+     },
+     "block0_phases_us": {
+      "barrier": 1.3893617021276596,
+      "pull_sum_residual": 5.497872340425532,
+      "norm_reduce": 0.4134751773049645,
+      "write_out": 0.8716312056737588,
+      "push": 3.556028368794326,
+      "recv_wait": 1.9709219858156029,
+      "end": 0.22836879432624113
+     },
+     "block0_total_us": 14.112056737588652,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.490780141843972,
+     "phases_us": {
+      "barrier": 1.4978723404255319,
+      "pull_sum_residual": 5.602127659574468,
+      "norm_reduce": 0.39078014184397164,
+      "write_out": 0.8829787234042553,
+      "push": 3.805673758865248,
+      "recv_wait": 1.8163120567375886,
+      "end": 0.24893617021276596
+     },
+     "block0_phases_us": {
+      "barrier": 1.4645390070921986,
+      "pull_sum_residual": 5.45531914893617,
+      "norm_reduce": 0.5085106382978724,
+      "write_out": 0.8787234042553191,
+      "push": 3.1609929078014183,
+      "recv_wait": 1.9617021276595745,
+      "end": 0.27163120567375887
+     },
+     "block0_total_us": 14.10354609929078,
+     "owner": true
+    },
+    {
+     "kernel_us": 14.33049645390071,
+     "phases_us": {
+      "barrier": 1.1418439716312057,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 11.086524822695035,
+      "end": 1.6560283687943262
+     },
+     "block0_phases_us": {
+      "barrier": 1.2,
+      "pull_sum_residual": 5.554609929078014,
+      "norm_reduce": 0.4056737588652482,
+      "write_out": 0.8794326241134752,
+      "push": 2.809219858156028,
+      "recv_wait": 2.2,
+      "end": 0.26099290780141843
+     },
+     "block0_total_us": 13.575177304964539,
+     "owner": true
+    }
+   ],
+   "max_rel_err": 0.0006062338361516595,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "S_v0s_c64",
+   "ctas": 64,
+   "order": 0,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 128,
+   "bytes": 1310720,
+   "per_rank_us": [
+    23.487999439239502,
+    23.47264051437378,
+    23.490560054779053,
+    23.47264051437378,
+    23.513600826263428,
+    23.48031997680664,
+    23.513600826263428,
+    23.467519283294678
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    {
+     "kernel_us": 20.997163120567375,
+     "phases_us": {
+      "barrier": 1.2191489361702128,
+      "pull_sum_residual": 8.51418439716312,
+      "norm_reduce": 0.37659574468085105,
+      "write_out": 0.9163120567375886,
+      "push": 6.2631205673758865,
+      "recv_wait": 2.6609929078014183,
+      "end": 0.350354609929078
+     },
+     "block0_phases_us": {
+      "barrier": 1.2127659574468086,
+      "pull_sum_residual": 8.388652482269503,
+      "norm_reduce": 0.41702127659574467,
+      "write_out": 0.9014184397163121,
+      "push": 4.407801418439717,
+      "recv_wait": 2.995035460992908,
+      "end": 0.7695035460992907
+     },
+     "block0_total_us": 19.382269503546098,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.834751773049646,
+     "phases_us": {
+      "barrier": 1.5858156028368795,
+      "pull_sum_residual": 8.03758865248227,
+      "norm_reduce": 0.36737588652482267,
+      "write_out": 0.8971631205673759,
+      "push": 5.930496453900709,
+      "recv_wait": 2.720567375886525,
+      "end": 0.38581560283687943
+     },
+     "block0_phases_us": {
+      "barrier": 1.70354609929078,
+      "pull_sum_residual": 8.063829787234043,
+      "norm_reduce": 0.424822695035461,
+      "write_out": 0.8872340425531915,
+      "push": 4.211347517730497,
+      "recv_wait": 3.14822695035461,
+      "end": 0.9879432624113476
+     },
+     "block0_total_us": 19.736879432624114,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.813475177304966,
+     "phases_us": {
+      "barrier": 2.0631205673758863,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 14.708510638297872,
+      "end": 2.9063829787234043
+     },
+     "block0_phases_us": {
+      "barrier": 2.0638297872340425,
+      "pull_sum_residual": 7.678014184397163,
+      "norm_reduce": 0.450354609929078,
+      "write_out": 0.8815602836879433,
+      "push": 3.3851063829787233,
+      "recv_wait": 3.2212765957446807,
+      "end": 1.897872340425532
+     },
+     "block0_total_us": 19.848936170212767,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.797163120567376,
+     "phases_us": {
+      "barrier": 1.5765957446808512,
+      "pull_sum_residual": 0.0,
+      "norm_reduce": 0.0,
+      "write_out": 0.0,
+      "push": 0.0,
+      "recv_wait": 16.999290780141845,
+      "end": 1.7411347517730495
+     },
+     "block0_phases_us": {
+      "barrier": 1.573758865248227,
+      "pull_sum_residual": 7.238297872340426,
+      "norm_reduce": 0.4574468085106383,
+      "write_out": 0.9049645390070922,
+      "push": 5.035460992907802,
+      "recv_wait": 2.9943262411347518,
+      "end": 1.1156028368794326
+     },
+     "block0_total_us": 19.733333333333334,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.639716312056738,
+     "phases_us": {
+      "barrier": 1.173049645390071,
+      "pull_sum_residual": 7.688652482269504,
+      "norm_reduce": 0.39574468085106385,
+      "write_out": 0.9148936170212766,
+      "push": 3.729078014184397,
+      "recv_wait": 5.421985815602837,
+      "end": 0.39290780141843973
+     },
+     "block0_phases_us": {
+      "barrier": 1.0297872340425531,
+      "pull_sum_residual": 7.448936170212766,
+      "norm_reduce": 0.44113475177304967,
+      "write_out": 0.8914893617021277,
+      "push": 4.95531914893617,
+      "recv_wait": 2.9943262411347518,
+      "end": 0.34822695035460993
+     },
+     "block0_total_us": 18.468794326241134,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.898581560283688,
+     "phases_us": {
+      "barrier": 1.7531914893617022,
+      "pull_sum_residual": 7.902836879432624,
+      "norm_reduce": 0.4177304964539007,
+      "write_out": 0.9063829787234042,
+      "push": 6.187234042553191,
+      "recv_wait": 2.695744680851064,
+      "end": 0.3191489361702128
+     },
+     "block0_phases_us": {
+      "barrier": 1.7304964539007093,
+      "pull_sum_residual": 7.653191489361702,
+      "norm_reduce": 0.475177304964539,
+      "write_out": 0.8929078014184397,
+      "push": 3.4063829787234043,
+      "recv_wait": 3.1702127659574466,
+      "end": 2.2631205673758865
+     },
+     "block0_total_us": 19.721985815602835,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.914893617021278,
+     "phases_us": {
+      "barrier": 1.7588652482269505,
+      "pull_sum_residual": 6.943262411347518,
+      "norm_reduce": 0.35602836879432626,
+      "write_out": 0.8808510638297873,
+      "push": 3.293617021276596,
+      "recv_wait": 3.7822695035460994,
+      "end": 1.5950354609929078
+     },
+     "block0_phases_us": {
+      "barrier": 1.9312056737588652,
+      "pull_sum_residual": 7.358865248226951,
+      "norm_reduce": 0.4921985815602837,
+      "write_out": 0.8822695035460993,
+      "push": 3.804255319148936,
+      "recv_wait": 3.498581560283688,
+      "end": 2.047517730496454
+     },
+     "block0_total_us": 20.120567375886523,
+     "owner": true
+    },
+    {
+     "kernel_us": 20.874468085106383,
+     "phases_us": {
+      "barrier": 1.3560283687943262,
+      "pull_sum_residual": 6.526241134751773,
+      "norm_reduce": 0.3553191489361702,
+      "write_out": 0.8992907801418439,
+      "push": 3.577304964539007,
+      "recv_wait": 6.799290780141844,
+      "end": 1.6198581560283687
+     },
+     "block0_phases_us": {
+      "barrier": 1.4645390070921986,
+      "pull_sum_residual": 7.273049645390071,
+      "norm_reduce": 0.4673758865248227,
+      "write_out": 0.8858156028368794,
+      "push": 2.765957446808511,
+      "recv_wait": 4.585106382978723,
+      "end": 0.5404255319148936
+     },
+     "block0_total_us": 18.42340425531915,
+     "owner": true
+    }
+   ],
+   "max_rel_err": 0.0006577186868526042,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 1,
+   "bytes": 10240,
+   "per_rank_us": [
+    9.582080245018005,
+    9.671679735183716,
+    9.694719910621643,
+    9.704959988594055,
+    9.646080136299133,
+    9.656320214271545,
+    9.71776008605957,
+    9.730560183525085
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006582181085832417,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 2,
+   "bytes": 20480,
+   "per_rank_us": [
+    10.623999834060669,
+    10.544639825820923,
+    10.6496000289917,
+    10.593279600143433,
+    10.6496000289917,
+    10.462720394134521,
+    10.644479990005493,
+    10.603519678115845
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006069124210625887,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 4,
+   "bytes": 40960,
+   "per_rank_us": [
+    11.432960033416748,
+    11.496959924697876,
+    11.502079963684082,
+    11.581439971923828,
+    11.44063949584961,
+    11.507200002670288,
+    11.484160423278809,
+    11.56607985496521
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006654741591773927,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 8,
+   "bytes": 81920,
+   "per_rank_us": [
+    13.360639810562134,
+    13.237760066986084,
+    13.358080387115479,
+    13.327360153198242,
+    12.912640571594238,
+    13.109760284423828,
+    13.370879888534546,
+    13.319679498672485
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006601413479074836,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 16,
+   "bytes": 163840,
+   "per_rank_us": [
+    15.032320022583008,
+    14.999040365219116,
+    14.89408016204834,
+    15.011839866638184,
+    15.001599788665771,
+    14.978560209274292,
+    14.947839975357056,
+    15.01695990562439
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0007819878519512713,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 32,
+   "bytes": 327680,
+   "per_rank_us": [
+    22.067201137542725,
+    22.0415997505188,
+    22.120959758758545,
+    22.026240825653076,
+    22.085120677947998,
+    22.04927921295166,
+    22.14400053024292,
+    22.0415997505188
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0007052519940771163,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 64,
+   "bytes": 655360,
+   "per_rank_us": [
+    22.39232063293457,
+    22.44096040725708,
+    22.49216079711914,
+    22.428159713745117,
+    22.364161014556885,
+    22.44863986968994,
+    22.499840259552002,
+    22.417919635772705
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006658551283180714,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "ctas": 0,
+   "order": 1,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 128,
+   "bytes": 1310720,
+   "per_rank_us": [
+    30.100479125976562,
+    30.167040824890137,
+    30.167040824890137,
+    30.154240131378174,
+    30.12864112854004,
+    30.174720287322998,
+    30.100479125976562,
+    30.149118900299072
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0007193165947683156,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 1,
+   "bytes": 10240,
+   "per_rank_us": [
+    11.379200220108032,
+    11.322879791259766,
+    11.432960033416748,
+    11.36896014213562,
+    11.384320259094238,
+    11.310080289840698,
+    11.445759534835815,
+    11.34335994720459
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0005296599119901657,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 2,
+   "bytes": 20480,
+   "per_rank_us": [
+    11.399680376052856,
+    11.42016053199768,
+    11.338239908218384,
+    11.41759991645813,
+    11.432960033416748,
+    11.432960033416748,
+    11.379200220108032,
+    11.42016053199768
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.000453133718110621,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 4,
+   "bytes": 40960,
+   "per_rank_us": [
+    11.776000261306763,
+    11.604479551315308,
+    11.752959489822388,
+    11.655679941177368,
+    11.78879976272583,
+    11.578880548477173,
+    11.747839450836182,
+    11.6428804397583
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00048099629930220544,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 8,
+   "bytes": 81920,
+   "per_rank_us": [
+    11.6428804397583,
+    11.653120517730713,
+    11.622400283813477,
+    11.624959707260132,
+    11.681280136108398,
+    11.630079746246338,
+    11.612160205841064,
+    11.604479551315308
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006601413479074836,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 16,
+   "bytes": 163840,
+   "per_rank_us": [
+    12.055039405822754,
+    12.003840208053589,
+    12.152320146560669,
+    12.031999826431274,
+    12.083200216293335,
+    11.98591947555542,
+    12.172800302505493,
+    12.014080286026001
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006601413479074836,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 32,
+   "bytes": 327680,
+   "per_rank_us": [
+    12.904959917068481,
+    12.782080173492432,
+    12.866560220718384,
+    12.869119644165039,
+    12.89471983909607,
+    12.77951955795288,
+    12.866560220718384,
+    12.869119644165039
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006292493198998272,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 64,
+   "bytes": 655360,
+   "per_rank_us": [
+    16.64255976676941,
+    16.60416007041931,
+    16.680959463119507,
+    16.609280109405518,
+    16.663039922714233,
+    16.60159945487976,
+    16.696319580078125,
+    16.606719493865967
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006062338361516595,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "P_v0_c64",
+   "ctas": 64,
+   "order": 2,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 128,
+   "bytes": 1310720,
+   "per_rank_us": [
+    22.266879081726074,
+    22.369279861450195,
+    22.256639003753662,
+    22.307839393615723,
+    22.28991985321045,
+    22.335999011993408,
+    22.231040000915527,
+    22.259199619293213
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.0006577186868526042,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 1,
+   "bytes": 10240,
+   "per_rank_us": [
+    6.453760266304016,
+    6.481919884681702,
+    6.563839912414551,
+    6.676480174064636,
+    6.44864022731781,
+    6.49728000164032,
+    6.57151997089386,
+    6.691840291023254
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00038285800837911665,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 2,
+   "bytes": 20480,
+   "per_rank_us": [
+    6.850559711456299,
+    6.81984007358551,
+    6.883839964866638,
+    6.763520240783691,
+    6.809599995613098,
+    6.812160015106201,
+    6.89408004283905,
+    6.735360026359558
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00034931476693600416,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 4,
+   "bytes": 40960,
+   "per_rank_us": [
+    7.441920042037964,
+    7.610880136489868,
+    7.575039863586426,
+    7.587839961051941,
+    7.423999905586243,
+    7.56991982460022,
+    7.610880136489868,
+    7.54688024520874
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00035754189593717456,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 8,
+   "bytes": 81920,
+   "per_rank_us": [
+    8.888319730758667,
+    8.808959722518921,
+    8.80128026008606,
+    8.732159733772278,
+    8.885759711265564,
+    8.806399703025818,
+    8.762879967689514,
+    8.714240193367004
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 16,
+   "bytes": 163840,
+   "per_rank_us": [
+    11.947519779205322,
+    11.883519887924194,
+    12.052479982376099,
+    12.049920558929443,
+    11.950080394744873,
+    11.845120191574097,
+    12.12928056716919,
+    11.998720169067383
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 32,
+   "bytes": 327680,
+   "per_rank_us": [
+    17.55136013031006,
+    17.45408058166504,
+    17.553919553756714,
+    17.566720247268677,
+    17.52832055091858,
+    17.43872046470642,
+    17.57696032524109,
+    17.582080364227295
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 64,
+   "bytes": 655360,
+   "per_rank_us": [
+    20.884480476379395,
+    20.876801013946533,
+    21.048319339752197,
+    21.00480079650879,
+    20.887041091918945,
+    20.876801013946533,
+    21.16352081298828,
+    20.940799713134766
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "A_vllm",
+   "ctas": 0,
+   "order": 3,
+   "dtype": "float16",
+   "hidden": 5120,
+   "tokens": 128,
+   "bytes": 1310720,
+   "per_rank_us": [
+    22.44863986968994,
+    22.67904043197632,
+    22.551040649414062,
+    22.622718811035156,
+    22.49216079711914,
+    22.661120891571045,
+    22.568960189819336,
+    22.59455919265747
+   ],
+   "sm_mhz": [
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410,
+    1410
+   ],
+   "mem_mhz": [
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593,
+    1593
+   ],
+   "pstate": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "stamps": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "max_rel_err": 0.00027717146440409124,
+   "correct": true,
+   "error": ""
+  }
+ ]
+}

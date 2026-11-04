@@ -69,6 +69,7 @@ def main():
 
     # prototype: per tokens, the rank with the longest kernel (median over launches of per-rank medians)
     g = st.groupby(["tokens", "rank"]).median(numeric_only=True).reset_index()
+    g["owner"] = g.owner > 0.5  # the median turned the boolean into 0.0 / 1.0
     crit_rank = g.loc[g.groupby("tokens").kernel.idxmax()].set_index("tokens")
     proto = pd.DataFrame({"per_op": per_op.P_v0_c64, "kernel": crit_rank.kernel})
     proto["gap"] = proto.per_op - proto.kernel
