@@ -1,0 +1,74 @@
+W1104 15:33:46.955000 1295686 torch/distributed/run.py:982] 
+W1104 15:33:46.955000 1295686 torch/distributed/run.py:982] *****************************************
+W1104 15:33:46.955000 1295686 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 15:33:46.955000 1295686 torch/distributed/run.py:982] *****************************************
+[rank7]:W1104 15:33:54.795000 1295787 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 15:33:54.795000 1295785 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 15:33:54.796000 1295787 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 15:33:54.796000 1295787 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 15:33:54.796000 1295785 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 15:33:54.796000 1295785 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 15:33:54.804000 1295783 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 15:33:54.805000 1295783 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 15:33:54.805000 1295783 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 15:33:54.820000 1295780 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 15:33:54.820000 1295780 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 15:33:54.821000 1295780 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1104 15:33:54.826000 1295786 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 15:33:54.826000 1295786 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 15:33:54.827000 1295786 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 15:33:54.829000 1295784 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 15:33:54.829000 1295784 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 15:33:54.830000 1295784 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1104 15:33:54.842000 1295781 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 15:33:54.842000 1295781 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 15:33:54.843000 1295781 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1104 15:33:54.954000 1295782 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 15:33:54.955000 1295782 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 15:33:54.956000 1295782 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1104 15:33:55.611000 1295686 torch/distributed/elastic/agent/server/api.py:753] Received 15 death signal, shutting down workers
+W1104 15:33:55.613000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295780 closing signal SIGTERM
+W1104 15:33:55.613000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295781 closing signal SIGTERM
+W1104 15:33:55.614000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295782 closing signal SIGTERM
+W1104 15:33:55.615000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295783 closing signal SIGTERM
+W1104 15:33:55.615000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295784 closing signal SIGTERM
+W1104 15:33:55.615000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295785 closing signal SIGTERM
+W1104 15:33:55.615000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295786 closing signal SIGTERM
+W1104 15:33:55.615000 1295686 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 1295787 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/home/rogerlee/comm_opt/.venv-vllm/bin/torchrun", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 380, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/run.py", line 1138, in main
+    run(args)
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/run.py", line 1129, in run
+    elastic_launch(
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 197, in __call__
+    return launch_agent(
+           ^^^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 377, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 745, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 923, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+                                     ^^^^^^^^^^^
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 85, in _terminate_process_handler
+    sigval = signal.Signals(signum)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/enum.py", line 726, in __call__
+    def __call__(cls, value, names=_not_given, *values, module=None, qualname=None, type=None, start=1, boundary=None):
+
+  File "/home/rogerlee/comm_opt/.venv-vllm/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 1295686 got signal: 15

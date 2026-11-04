@@ -244,3 +244,9 @@
 - **使用者要求**：「運作環境也要放進去，我希望交接時別人可以順利跑起來」；並要求依進度分 commit 推上 GitHub（已完成：18 個階段 tag `p01`–`p18` 依序 push，進度表 `docs/progress_log.md`）。
 - **做法**：不上傳虛擬環境本身（數 GB、綁定機器），改為可重建：`SETUP.md`（交接說明）、`env/setup_python.sh`（依 `requirements-*.txt` 以 uv 重建三個環境）、`env/build_third_party.sh`（依原始指令與 commit 下載編譯外部工具，含 LMDeploy patch）、`env/get_models_assets.sh`（模型釘死 revision）、`env/check_env.py`（逐項檢查、可選 GPU 正確性測試）、`env/system_snapshot.txt`（系統軟體版本）。
 - **驗證**：本機 `check_env.py` 全部 OK；三份 requirements 全部可解析安裝；nccl-tests 在乾淨目錄從零編譯成功；其他外部工具在乾淨目錄下載、切換版本、套用 patch 成功（未在乾淨目錄完整重編）。
+
+## D040（2026-11-04）使用者稽核；M18 步驟 a 第一次執行中止與修正
+
+- **使用者稽核**（commit `993afd5`，使用者以 Copilot 進行）：判定目前結果只足以支持「A100、TP=8、CUDA graph、單獨 fused kernel 可行」，不足以支持端到端加速、跨 TP／工作負載泛化、或「無 fence／LL128 旗標」的硬體保證。G2／G3 前的阻擋項：記憶體排序與跨卡發布的壓力測試、baseline 與 block 選擇的公平性（校準／驗證分離）、可達下限的重新界定、M18 步驟 a 完成、實際 vLLM 整合。並在 `analyze_a.py` 加上資料不完整時不下結論的保護。這些阻擋項納入後續計畫。
+- **步驟 a 第一次執行中止**：`new_s1` 在暖機時卡住（各 GPU 依自己的時間決定暖機輪數，輪數不同導致全體 all-reduce 對不上），NCCL watchdog 10 分鐘後中止；之後 run 隨工作階段結束中斷。資料保留於 `results/M18_incremental/a_20261104_152116/`。修正暖機迴圈（每輪全體決定是否繼續）後重跑步驟 a。
+- **待確認**：小試跑中暖機後 SM 時脈為 1410 MHz（`SETUP.md` 寫的「工作時固定 1155 MHz」可能有誤，待步驟 a 數據確認後更正）。

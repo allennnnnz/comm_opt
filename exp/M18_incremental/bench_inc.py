@@ -198,11 +198,15 @@ if a.warmup_ms > 0:  # all GPUs busy until clocks have ramped
     m = torch.randn(4096, 4096, dtype=DT, device=dev)
     big = torch.randn(8 << 20, dtype=DT, device=dev)
     t0 = time.time()
-    while (time.time() - t0) * 1000 < a.warmup_ms:
+    go = torch.ones(1, dtype=torch.int32, device=dev)
+    while True:  # every rank must run the same number of iterations (each one has a collective)
         for _ in range(10):
             m = (m @ m).clamp_(-1, 1)
         dist.all_reduce(big)
-        torch.cuda.synchronize()
+        go.fill_(1 if (time.time() - t0) * 1000 < a.warmup_ms else 0)
+        dist.all_reduce(go, op=dist.ReduceOp.MIN)  # stop as soon as any rank has reached the time
+        if int(go.item()) == 0:
+            break
     sync_all()
 
 random.Random(a.seed).shuffle(impls)
