@@ -54,10 +54,11 @@ def main():
     t = s[s.impl.str.startswith("F_trt")].set_index(["dtype", "impl", "hidden", "bytes"])
     res = []
     for _, r in best.iterrows():
-        v = u.loc[(r.dtype, r.hidden, r.bytes)]
-        trt = [t.loc[(r.dtype, i, r.hidden, r.bytes)].med for i in ("F_trt_one", "F_trt_two")
-               if (r.dtype, i, r.hidden, r.bytes) in t.index]
-        res.append(dict(dtype=r.dtype, hidden=r.hidden, bytes=r.bytes, ctas=r.ctas, ours=r.med, ours_lo=r.lo,
+        dt = r["dtype"]  # r.dtype would be the Series' own dtype attribute
+        v = u.loc[(dt, r.hidden, r.bytes)]
+        trt = [t.loc[(dt, i, r.hidden, r.bytes)].med for i in ("F_trt_one", "F_trt_two")
+               if (dt, i, r.hidden, r.bytes) in t.index]
+        res.append(dict(dtype=dt, hidden=r.hidden, bytes=r.bytes, ctas=r.ctas, ours=r.med, ours_lo=r.lo,
                         ours_hi=r.hi, vllm=v.med, vllm_lo=v.lo, speedup=v.med / r.med, disjoint=r.hi < v.lo,
                         trt_best=min(trt) if trt else float("nan"), err_ours=r.err, err_vllm=v.err))
     res = pd.DataFrame(res).sort_values(["hidden", "bytes", "dtype"])

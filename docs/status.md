@@ -5,8 +5,8 @@
 ## 目前狀態（2026-11-03）
 
 - **階段**：1 找現象 → 選題前（原型可行性已通過，準備 G2）
-- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）、M9_fused_baselines（D020：A100 上現有合併沒有比較快，離可達水準仍有 2 倍以上）、M10_why_fused_slow（D022：block 太少不是主因）、M11_before_prototype（D024：原子加法正確但試作版比 vLLM 慢；路沒塞滿）、M12_push_vs_pull（D026：收齊用主動送夠快，分工加總維持拿）、M13_push_retest（D028：依大小切換；M12 大資料量問題來自測試方式）、M14_fused_prototype（D030：原型 go，160–640 KB 快 1.30–1.56 倍）
-- **進行中**：M15 原型補 bf16
+- **已完成**：M0、M4、M2_p2p_channels、M5_e2e_comm_share、文獻對照（D011）、M6_allreduce_bakeoff（D013：值得實作）、M7_where_slow（D015：需要新的做法）、M8_ll128_atomic_a100（D017：LL128 atomic 前提在 A100 上很可能成立）、「加總＋正規化合併」查核（D018：A100 上已有 TensorRT-LLM 與 LMDeploy 的實作；空缺是兩輪免 barrier 的合併 two-shot）、M9_fused_baselines（D020：A100 上現有合併沒有比較快，離可達水準仍有 2 倍以上）、M10_why_fused_slow（D022：block 太少不是主因）、M11_before_prototype（D024：原子加法正確但試作版比 vLLM 慢；路沒塞滿）、M12_push_vs_pull（D026：收齊用主動送夠快，分工加總維持拿）、M13_push_retest（D028：依大小切換；M12 大資料量問題來自測試方式）、M14_fused_prototype（D030：原型 go，160–640 KB 快 1.30–1.56 倍）、M15_bf16（D032：bf16 可用，1.33–1.60 倍）
+- **等待使用者**：原型其他待辦（epoch 設計、token < 8、實際批次組成、最強對照組、偶爾變慢）的優先順序
 
 ## 已核准的實驗
 
@@ -25,7 +25,7 @@
 | M12_push_vs_pull | 2026-11-04（D025） | 完成 |
 | M13_push_retest | 2026-11-04（D027） | 完成 |
 | M14_fused_prototype | 2026-11-04（D029） | 完成 |
-| M15_bf16 | 2026-11-04（D031） | 進行中 |
+| M15_bf16 | 2026-11-04（D031） | 完成 |
 
 ## 下一步
 
