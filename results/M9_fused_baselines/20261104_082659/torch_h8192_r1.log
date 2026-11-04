@@ -1,0 +1,88 @@
+W1104 08:27:13.765000 1232488 torch/distributed/run.py:982] 
+W1104 08:27:13.765000 1232488 torch/distributed/run.py:982] *****************************************
+W1104 08:27:13.765000 1232488 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 08:27:13.765000 1232488 torch/distributed/run.py:982] *****************************************
+[rank1]:W1104 08:27:21.485000 1232581 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 08:27:21.486000 1232581 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 08:27:21.487000 1232581 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 08:27:21.507000 1232580 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 08:27:21.508000 1232580 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 08:27:21.508000 1232580 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1104 08:27:21.515000 1232582 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 08:27:21.515000 1232582 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 08:27:21.516000 1232582 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 08:27:21.517000 1232583 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 08:27:21.518000 1232583 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 08:27:21.519000 1232583 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 08:27:21.528000 1232585 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 08:27:21.528000 1232585 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 08:27:21.529000 1232585 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 08:27:21.587000 1232584 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 08:27:21.587000 1232584 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 08:27:21.588000 1232584 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank6]:W1104 08:27:21.611000 1232586 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 08:27:21.612000 1232586 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 08:27:21.612000 1232586 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1104 08:27:21.650000 1232587 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 08:27:21.651000 1232587 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 08:27:21.652000 1232587 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+F_trt_two  h8192 t   1     16384 B  max      nan us  rel_err nan SKIP: two-shot needs tokens > world size (FlashInfer asserti
+F_trt_two  h8192 t   8    131072 B  max      nan us  rel_err nan SKIP: two-shot needs tokens > world size (FlashInfer asserti
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+F_trt_two  h8192 t  16    262144 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+F_trt_two  h8192 t  32    524288 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+F_trt_two  h8192 t  64   1048576 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+F_trt_two  h8192 t 128   2097152 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+F_trt_two  h8192 t 256   4194304 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+U_vllm     h8192 t   1     16384 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+U_vllm     h8192 t   8    131072 B  max    17.09 us  rel_err 9.21e-04 
+U_vllm     h8192 t  16    262144 B  max    24.31 us  rel_err 8.39e-04 
+U_vllm     h8192 t  32    524288 B  max    25.83 us  rel_err 8.39e-04 
+U_vllm     h8192 t  64   1048576 B  max    30.64 us  rel_err 8.37e-04 
+U_vllm     h8192 t 128   2097152 B  max    38.66 us  rel_err 8.37e-04 
+U_vllm     h8192 t 256   4194304 B  max    59.29 us  rel_err 7.69e-04 
+F_trt_one  h8192 t   1     16384 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+F_trt_one  h8192 t   8    131072 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+F_trt_one  h8192 t  16    262144 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+F_trt_one  h8192 t  32    524288 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+F_trt_one  h8192 t  64   1048576 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+F_trt_one  h8192 t 128   2097152 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+F_trt_one  h8192 t 256   4194304 B  max      nan us  rel_err nan RuntimeError: Check failed: (status == cudaSuccess) is false
+U_nccl     h8192 t   1     16384 B  max      nan us  rel_err nan AcceleratorError: CUDA error: too many resources requested f
+U_nccl     h8192 t   8    131072 B  max    41.65 us  rel_err 1.16e-03 
+U_nccl     h8192 t  16    262144 B  max    41.52 us  rel_err 1.16e-03 
+U_nccl     h8192 t  32    524288 B  max    43.86 us  rel_err 1.16e-03 
+U_nccl     h8192 t  64   1048576 B  max    55.92 us  rel_err 1.30e-03 
+U_nccl     h8192 t 128   2097152 B  max    71.14 us  rel_err 1.03e-03 
+U_nccl     h8192 t 256   4194304 B  max   117.41 us  rel_err 1.24e-03 

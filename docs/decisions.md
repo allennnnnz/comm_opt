@@ -124,3 +124,10 @@
 - **使用者決定**：「好 開始量 並且放行」（看過實驗卡簡介之後）。
 - **範圍**：照 `exp/M9_fused_baselines/README.md`：vLLM／NCCL 不合併、TRT-LLM 合併 one-shot／two-shot（FlashInfer 0.7.2.post1 同源原始碼另編 sm_80）、LMDeploy 合併（原分派與強制合併）。
 - **LMDeploy**：commit 3228395，本機編譯（會下載 fmt、cutlass、yaml-cpp、xgrammar、Catch2），只用於量測。
+
+## D020（2026-11-04）M9 完成：A100 上現有合併沒有比較快；離可達水準仍有 2 倍以上 `[需裁決]`
+
+- **結果**（hidden 5120，80K–1.25M）：最快的合併做法是可達水準的 2.16–3.05 倍（5/5 ≥ 1.3）→ 依判準「有空間」。但最快的任何做法有 4/5 是不合併的 vLLM（`U_vllm`）；TRT-LLM two-shot 合併慢 1.8–2.0 倍；TRT-LLM 合併在 hidden 8192 無法啟動（A100 沒有 cluster，block 資源超限）。見 `exp/M9_fused_baselines/README.md`。
+- **與預期不同**：P1（one-shot 合併比 vLLM 快 1.2 倍）不符，P2 大訊息方向相反。
+- **使用者提出的策略**（2026-11-04）：「合併別人的方法，並針對他們各自的缺陷去做優化，達到更好的效能」。M9 量到的缺陷清單正好作為設計依據。
+- `[需裁決]`：是否開始原型（E1）的設計與實驗卡。

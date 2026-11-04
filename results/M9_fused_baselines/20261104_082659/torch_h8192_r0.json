@@ -1,0 +1,561 @@
+{
+ "args": {
+  "out": "/home/rogerlee/comm_opt/results/M9_fused_baselines/20261104_082659/torch_h8192_r0.json",
+  "seed": 0,
+  "hidden": 8192,
+  "tokens": "1,8,16,32,64,128,256",
+  "graph_ops": 20,
+  "replays": 20,
+  "impls": "U_vllm,U_nccl,F_trt_one,F_trt_two",
+  "eps": 1e-06
+ },
+ "torch": "2.14.0+cu130",
+ "nccl": "2.30.7",
+ "vllm": "0.33.0",
+ "flashinfer": "0.7.2.post1",
+ "fi_sm80_flags": [
+  "-gencode=arch=compute_80,code=sm_80",
+  "-DFLASHINFER_ENABLE_FP8_E8M0",
+  "-DFLASHINFER_ENABLE_FP4_E2M1"
+ ],
+ "order": [
+  "F_trt_one",
+  "U_vllm",
+  "U_nccl",
+  "F_trt_two"
+ ],
+ "rows": [
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 1,
+   "bytes": 16384,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 8,
+   "bytes": 131072,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 16,
+   "bytes": 262144,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 32,
+   "bytes": 524288,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 64,
+   "bytes": 1048576,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 128,
+   "bytes": 2097152,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "F_trt_one",
+   "hidden": 8192,
+   "tokens": 256,
+   "bytes": 4194304,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 1,
+   "bytes": 16384,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 8,
+   "bytes": 131072,
+   "per_rank_us": [
+    16.67840003967285,
+    16.560640335083008,
+    16.5939199924469,
+    16.55295968055725,
+    16.829440593719482,
+    16.609280109405518,
+    16.739840507507324,
+    16.61695957183838
+   ],
+   "max_rel_err": 0.0009206580580212176,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 16,
+   "bytes": 262144,
+   "per_rank_us": [
+    24.204800128936768,
+    24.30720090866089,
+    24.232959747314453,
+    24.104959964752197,
+    24.21247959136963,
+    24.286720752716064,
+    24.289278984069824,
+    24.056320190429688
+   ],
+   "max_rel_err": 0.0008386740228161216,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 32,
+   "bytes": 524288,
+   "per_rank_us": [
+    25.876479148864746,
+    26.04288101196289,
+    25.93791961669922,
+    25.902080535888672,
+    26.007039546966553,
+    26.08128070831299,
+    26.053121089935303,
+    25.93791961669922
+   ],
+   "max_rel_err": 0.0008386740228161216,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 64,
+   "bytes": 1048576,
+   "per_rank_us": [
+    29.570560455322266,
+    29.68575954437256,
+    29.721601009368896,
+    29.74208116531372,
+    29.629440307617188,
+    29.767680168151855,
+    29.79327917098999,
+    29.721601009368896
+   ],
+   "max_rel_err": 0.000836783554404974,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 128,
+   "bytes": 2097152,
+   "per_rank_us": [
+    38.32832098007202,
+    38.35903882980347,
+    38.25664043426514,
+    38.45632076263428,
+    38.451199531555176,
+    38.41279983520508,
+    38.399999141693115,
+    38.443520069122314
+   ],
+   "max_rel_err": 0.000836783554404974,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_vllm",
+   "hidden": 8192,
+   "tokens": 256,
+   "bytes": 4194304,
+   "per_rank_us": [
+    58.7391996383667,
+    58.90048027038574,
+    58.92608165740967,
+    58.89023780822754,
+    58.89023780822754,
+    58.95167827606201,
+    58.964481353759766,
+    58.93119812011719
+   ],
+   "max_rel_err": 0.0007691787905059755,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 1,
+   "bytes": 16384,
+   "per_rank_us": [
+    34.76480007171631,
+    34.746880531311035,
+    34.76223945617676,
+    34.76223945617676,
+    34.80576038360596,
+    34.73664045333862,
+    34.77504014968872,
+    34.7545599937439
+   ],
+   "max_rel_err": 0.0010402300395071507,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 8,
+   "bytes": 131072,
+   "per_rank_us": [
+    41.802239418029785,
+    41.899518966674805,
+    41.77663803100586,
+    41.72544002532959,
+    41.78175926208496,
+    41.845760345458984,
+    41.78175926208496,
+    41.72800064086914
+   ],
+   "max_rel_err": 0.001157660037279129,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 16,
+   "bytes": 262144,
+   "per_rank_us": [
+    41.661438941955566,
+    41.67679786682129,
+    41.58207893371582,
+    41.71520233154297,
+    41.74079895019531,
+    41.71520233154297,
+    41.605119705200195,
+    41.702399253845215
+   ],
+   "max_rel_err": 0.001157660037279129,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 32,
+   "bytes": 524288,
+   "per_rank_us": [
+    43.5865592956543,
+    43.66591930389404,
+    43.770880699157715,
+    43.69919776916504,
+    43.63264083862305,
+    43.70175838470459,
+    43.75296115875244,
+    43.76063823699951
+   ],
+   "max_rel_err": 0.001157660037279129,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 64,
+   "bytes": 1048576,
+   "per_rank_us": [
+    55.6390380859375,
+    55.52639961242676,
+    55.608320236206055,
+    55.64159870147705,
+    55.608320236206055,
+    55.53408145904541,
+    55.54175853729248,
+    55.6441593170166
+   ],
+   "max_rel_err": 0.0013026008382439613,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 128,
+   "bytes": 2097152,
+   "per_rank_us": [
+    66.8723201751709,
+    66.89536094665527,
+    66.96703910827637,
+    66.90815925598145,
+    66.9055986404419,
+    66.89536094665527,
+    66.92607879638672,
+    66.85952186584473
+   ],
+   "max_rel_err": 0.0010311786318197846,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "U_nccl",
+   "hidden": 8192,
+   "tokens": 256,
+   "bytes": 4194304,
+   "per_rank_us": [
+    106.429443359375,
+    106.55488014221191,
+    106.52416229248047,
+    106.54975891113281,
+    106.48063659667969,
+    106.58559799194336,
+    106.57024383544922,
+    106.58816337585449
+   ],
+   "max_rel_err": 0.001240733778104186,
+   "correct": true,
+   "error": ""
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 1,
+   "bytes": 16384,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "SKIP: two-shot needs tokens > world size (FlashInfer assertion)"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 8,
+   "bytes": 131072,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "SKIP: two-shot needs tokens > world size (FlashInfer assertion)"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 16,
+   "bytes": 262144,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 32,
+   "bytes": 524288,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 64,
+   "bytes": 1048576,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 128,
+   "bytes": 2097152,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "AcceleratorError: CUDA error: too many resources requested for launch\nSearch for `cudaErrorLaunchOutOfResources' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"
+  },
+  {
+   "impl": "F_trt_two",
+   "hidden": 8192,
+   "tokens": 256,
+   "bytes": 4194304,
+   "per_rank_us": [
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "max_rel_err": NaN,
+   "correct": false,
+   "error": "RuntimeError: Check failed: (status == cudaSuccess) is false: allreduce_fusion_op failed with error codetoo many resources requested for launch"
+  }
+ ]
+}

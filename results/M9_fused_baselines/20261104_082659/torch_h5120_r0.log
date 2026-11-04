@@ -1,0 +1,84 @@
+W1104 08:29:00.585000 1234483 torch/distributed/run.py:982] 
+W1104 08:29:00.585000 1234483 torch/distributed/run.py:982] *****************************************
+W1104 08:29:00.585000 1234483 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1104 08:29:00.585000 1234483 torch/distributed/run.py:982] *****************************************
+[rank6]:W1104 08:29:08.376000 1234585 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank0]:W1104 08:29:08.376000 1234579 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank6]:W1104 08:29:08.377000 1234585 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank6]:W1104 08:29:08.377000 1234585 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank0]:W1104 08:29:08.377000 1234579 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank0]:W1104 08:29:08.378000 1234579 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank2]:W1104 08:29:08.386000 1234581 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank2]:W1104 08:29:08.387000 1234581 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank2]:W1104 08:29:08.388000 1234581 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank7]:W1104 08:29:08.430000 1234586 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank7]:W1104 08:29:08.431000 1234586 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank7]:W1104 08:29:08.432000 1234586 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank1]:W1104 08:29:08.452000 1234580 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank1]:W1104 08:29:08.453000 1234580 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank1]:W1104 08:29:08.453000 1234580 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank3]:W1104 08:29:08.475000 1234582 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank3]:W1104 08:29:08.475000 1234582 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank3]:W1104 08:29:08.476000 1234582 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank4]:W1104 08:29:08.549000 1234583 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank4]:W1104 08:29:08.550000 1234583 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank4]:W1104 08:29:08.551000 1234583 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[rank5]:W1104 08:29:08.572000 1234584 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+[rank5]:W1104 08:29:08.573000 1234584 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+[rank5]:W1104 08:29:08.574000 1234584 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:69: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_create_ipc_workspace_for_all_reduce_fusion.
+  fi_handles, fi_ws = fi_ar.trtllm_create_ipc_workspace_for_all_reduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+/home/rogerlee/comm_opt/exp/M9_fused_baselines/bench_fused.py:75: DeprecationWarning: use the unified API allreduce.py instead. It will internally call trtllm_allreduce_fusion.
+  fi_ar.trtllm_allreduce_fusion(
+F_trt_one  h5120 t   1     10240 B  max    13.89 us  rel_err 6.58e-04 
+F_trt_one  h5120 t   8     81920 B  max    15.06 us  rel_err 6.60e-04 
+F_trt_one  h5120 t  16    163840 B  max    19.69 us  rel_err 7.82e-04 
+F_trt_one  h5120 t  32    327680 B  max    26.33 us  rel_err 7.05e-04 
+F_trt_one  h5120 t  64    655360 B  max    42.88 us  rel_err 6.66e-04 
+F_trt_one  h5120 t 128   1310720 B  max    91.16 us  rel_err 7.19e-04 
+U_vllm     h5120 t   1     10240 B  max    11.49 us  rel_err 6.58e-04 
+U_vllm     h5120 t   8     81920 B  max    14.29 us  rel_err 6.60e-04 
+U_vllm     h5120 t  16    163840 B  max    19.10 us  rel_err 7.82e-04 
+U_vllm     h5120 t  32    327680 B  max    23.43 us  rel_err 7.05e-04 
+U_vllm     h5120 t  64    655360 B  max    25.15 us  rel_err 6.66e-04 
+U_vllm     h5120 t 128   1310720 B  max    27.64 us  rel_err 7.19e-04 
+U_nccl     h5120 t   1     10240 B  max    33.70 us  rel_err 9.00e-04 
+U_nccl     h5120 t   8     81920 B  max    42.05 us  rel_err 1.56e-03 
+U_nccl     h5120 t  16    163840 B  max    34.83 us  rel_err 1.37e-03 
+U_nccl     h5120 t  32    327680 B  max    35.02 us  rel_err 1.23e-03 
+U_nccl     h5120 t  64    655360 B  max    37.06 us  rel_err 1.17e-03 
+U_nccl     h5120 t 128   1310720 B  max    50.38 us  rel_err 1.17e-03 
+F_trt_two  h5120 t   1     10240 B  max      nan us  rel_err nan SKIP: two-shot needs tokens > world size (FlashInfer asserti
+F_trt_two  h5120 t   8     81920 B  max      nan us  rel_err nan SKIP: two-shot needs tokens > world size (FlashInfer asserti
+F_trt_two  h5120 t  16    163840 B  max    56.71 us  rel_err 7.82e-04 
+F_trt_two  h5120 t  32    327680 B  max    46.50 us  rel_err 7.05e-04 
+F_trt_two  h5120 t  64    655360 B  max    44.17 us  rel_err 6.66e-04 
+F_trt_two  h5120 t 128   1310720 B  max    47.97 us  rel_err 7.19e-04 
