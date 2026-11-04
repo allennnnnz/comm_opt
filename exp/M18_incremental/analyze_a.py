@@ -42,6 +42,12 @@ def main():
     print(slow[["mode", "seed", "impl", "order", "tokens", "us", "rel", "sm_min", "mem_min", "pstate_max"]].head(25).to_string(index=False))
     print("\nmean rel by position in run (order of impl):")
     print(df.groupby(["mode", "order"]).rel.mean().unstack(0).round(3).to_string())
+    if not {"old", "new"}.issubset(set(df["mode"])) or not {
+        ("old", "P_v0_c64"),
+        ("new", "P_v0_c64"),
+    }.issubset(set(zip(df["mode"], df["impl"]))):
+        print("\nverdict: INCOMPLETE RUN (need old/new P_v0_c64 data)")
+        return
     o = sp.loc[("old", "P_v0_c64"), TARGET_T]
     n = sp.loc[("new", "P_v0_c64"), TARGET_T]
     holds = bool((n <= 1.05).all()) and bool((o > 1.05).any())
