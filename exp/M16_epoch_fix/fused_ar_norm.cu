@@ -1,4 +1,4 @@
-// M15 (bf16 support; otherwise identical to M14) prototype: one kernel = start barrier -> pull reduce-scatter by token rows -> residual add + RMSNorm on the
+// M16 (global epoch fix; otherwise identical to M15) prototype: one kernel = start barrier -> pull reduce-scatter by token rows -> residual add + RMSNorm on the
 // rows this GPU owns -> push all-gather of the normalized rows with LL128 lines (8-byte epoch flag per 128-byte line),
 // no mid barrier. TP=8, fp16 or bf16 (one kernel instance per type). Built as a PyTorch extension (torch.utils.cpp_extension.load).
 //
@@ -6,7 +6,10 @@
 //   x[k]      rank k's input, T x H fp16 (peers pull from it)
 //   land[k]   rank k's landing area: 2 (epoch parity) x 8 sources x rows_per x gpr groups x 64 u64
 //   flags[k]  rank k's start-barrier flags: MAXB x 8 u32 (vLLM-style, one slot per block index and peer)
-//   ctr       local per-block epoch counters (u64), so the kernel can be captured in a CUDA graph
+//   ctr       local: ctr[0] = global epoch (u64), ctr[1] = number of blocks finished in this call (u32). Every
+//             block reads the same epoch; the last block to finish resets the count and advances the epoch, so
+//             the epoch no longer depends on how many blocks a call uses (M14/M15 counted per block, which
+//             diverges when calls with different block counts are interleaved, e.g. one CUDA graph per batch size)
 //   residual  local T x H fp16; only this rank's rows are read and written (residual kept sharded, as LMDeploy)
 //   out       local T x H fp16, normalized output for all rows
 // Why no mid barrier is needed: a rank finishes only after receiving all 7 peers' all-gather data, and every peer
@@ -86,7 +89,7 @@ __device__ __forceinline__ float warp_sum(float v) {
 
 template <typename T>
 __global__ void __launch_bounds__(THREADS, 1) fused_ar_norm_kernel(Args a) {
-  const unsigned long long epoch = a.ctr[blockIdx.x] + 1;
+  const unsigned long long epoch = *reinterpret_cast<volatile unsigned long long*>(a.ctr) + 1;
   if (threadIdx.x < NG) {  // start barrier: peers' inputs are ready before anyone pulls
     stv32(&a.flags[threadIdx.x][blockIdx.x * NG + a.rank], (uint32_t)epoch);
     while (ldv32(&a.flags[a.rank][blockIdx.x * NG + threadIdx.x]) != (uint32_t)epoch) {
@@ -184,7 +187,15 @@ __global__ void __launch_bounds__(THREADS, 1) fused_ar_norm_kernel(Args a) {
     if (part != 7 && i0 + 1 < PR) dst[i0 + 1] = vb;
   }
   __syncthreads();
-  if (threadIdx.x == 0) a.ctr[blockIdx.x] = epoch;
+  if (threadIdx.x == 0) {  // the last block of this call advances the global epoch for the next call
+    __threadfence();
+    unsigned int* done = reinterpret_cast<unsigned int*>(a.ctr + 1);
+    if (atomicAdd(done, 1u) == gridDim.x - 1) {
+      *done = 0u;
+      a.ctr[0] = epoch;
+      __threadfence();
+    }
+  }
 }
 
 }  // namespace

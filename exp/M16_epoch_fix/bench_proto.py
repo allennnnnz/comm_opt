@@ -1,4 +1,4 @@
-"""M15 (adds --dtype; otherwise M14's bench): the fused prototype (pull reduce-scatter + residual + RMSNorm + push all-gather) vs vLLM and TRT-LLM fused,
+"""M16 (global-epoch kernel; otherwise M15's bench): the fused prototype (pull reduce-scatter + residual + RMSNorm + push all-gather) vs vLLM and TRT-LLM fused,
 timed exactly as M9 (CUDA graph of K ops, R replays, per-op = elapsed / (R*K), max over ranks).
 
 Implementations
@@ -10,7 +10,7 @@ Correctness (once per impl and size): normalized output (all rows) and residual 
 U_/F_, this rank's rows for P_ours) against an fp32 reference; max |out - ref| / max |ref| <= 2^-5 counts as correct.
 
 Usage (8 ranks, .venv-vllm, extension prebuilt by run.py):
-  torchrun --nproc-per-node 8 exp/M15_bf16/bench_proto.py --hidden 5120 --tokens 8,16 --out F.json
+  torchrun --nproc-per-node 8 exp/M16_epoch_fix/bench_proto.py --hidden 5120 --tokens 8,16 --out F.json
 """
 import argparse
 import json
@@ -51,7 +51,7 @@ import vllm._custom_ops  # noqa: E402,F401
 from torch.utils.cpp_extension import load  # noqa: E402
 from vllm.distributed.device_communicators.custom_all_reduce import CustomAllreduce  # noqa: E402
 
-ext = load(name="m15_fused_ar_norm", sources=[str(Path(__file__).with_name("fused_ar_norm.cu"))],
+ext = load(name="m16_fused_ar_norm", sources=[str(Path(__file__).with_name("fused_ar_norm.cu"))],
            extra_cuda_cflags=["-O3", "-gencode=arch=compute_80,code=sm_80"], build_directory=a.ext_dir,
            verbose=False)
 
