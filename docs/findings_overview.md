@@ -1,4 +1,4 @@
-# 目前為止的研究脈絡（2026-11-04，M0–M11）
+# 目前為止的研究脈絡（2026-11-04，M0–M15）
 
 > 給使用者規劃新做法與之後實驗流程用。每個數字都可以追到 `exp/<ID>/README.md` 與 `results/`。
 > 「事實」= 重複量測過；「推論」= 有數據支持但沒直接驗證；「未知」= 還沒量。
@@ -119,6 +119,32 @@
    - 混合：小訊息一次全送，大訊息分兩次傳
 3. **每一步怎麼驗證**：建議每加一個改進就量一次第五節的時間預算，這樣論文能說清楚每個改進各省了多少
 
+## 九、M11 之後：A 階段與原型（M12–M15）
+
+| 實驗 | 問題 | 結果 |
+|---|---|---|
+| M12 | all-gather／reduce-scatter 用「push＋到齊記號（LL128，16 byte）」能不能和 pull 一樣快 | all-gather：push ≈ pull，且不需要 mid barrier；reduce-scatter：pull 快 1.6–2.6 倍 |
+| M13 | 為何 reduce-scatter push 慢？M12 大訊息為何測不準？ | 依序等 8 格只解釋一部分（改平行快 12–30%，仍慢 1.3–1.8 倍）；大訊息問題來自單次執行＋清除緩衝區。連續執行下 push all-gather 80–320 KB 4.0–4.5 µs，vLLM「mid barrier＋收齊」12.2–12.4 µs |
+| M14 | 組合成單一 kernel 的原型 | 160／320／640 KB 比 vLLM 快 1.30／1.56／1.37 倍（go）；與事先粗估差 ≤ 7%；hidden 8192 可用 |
+| M15 | 補 bf16 | bf16 快 1.33／1.60／1.39 倍、全部正確；fp16 重現 M14 |
+
+## 十、盲點清單（2026-11-04 檢討）
+
+| 類別 | 盲點 | 狀態 |
+|---|---|---|
+| 方向 | 實際批次可能是「讀入＋生成」混合，資料量可能超出效益區間 | 未查 |
+| 方向 | 只測 TP=8；實際常用 TP=4 | 未查 |
+| 方向 | token < 8 或非 8 倍數不支援 | 未做 |
+| 方向 | 比較對象是 vLLM 預設，不是「每個大小調到最佳」的現成做法 | 未做 |
+| 方向 | fp16 only | **已解決（M15）** |
+| 論文 | 只量單獨的 all-reduce＋norm，未放進真實模型 | 未做 |
+| 論文 | 新穎性：各部件皆有前例；push reduce-scatter 為何慢只部分解釋 | 待補 |
+| 論文 | 只有一台 A100 機器；模型輸出準確度未用真實模型確認 | 未做 |
+| 工程 | epoch 每個 block 各自計數，不同 block 數交替時會對不上 | 未修（整合前必修） |
+| 工程 | LL128「128 byte 一起送達」是觀察，未在有計算負載下壓力測試 | 未做 |
+| 工程 | 原型偶爾整次 launch 慢 1.5–5 µs | 未查 |
+| 量測 | GPU 時脈約 1155 MHz（非最高 1410）；可達水準是實測推得 | 論文中需交代 |
+
 ## 證據路徑
 
 | 實驗 | 實驗卡 | 原始數據 |
@@ -134,3 +160,7 @@
 | M9 | `exp/M9_fused_baselines/README.md` | `results/M9_fused_baselines/20261104_082659/` |
 | M10 | `exp/M10_why_fused_slow/README.md` | `results/M10_why_fused_slow/20261104_083556/` |
 | M11 | `exp/M11_before_prototype/README.md` | `results/M11_before_prototype/20261104_090459/` |
+| M12 | `exp/M12_push_vs_pull/README.md` | `results/M12_push_vs_pull/20261104_093500/` |
+| M13 | `exp/M13_push_retest/README.md` | `results/M13_push_retest/20261104_095803/` |
+| M14 | `exp/M14_fused_prototype/README.md` | `results/M14_fused_prototype/20261104_101355/` |
+| M15 | `exp/M15_bf16/README.md` | `results/M15_bf16/20261104_102644/` |
