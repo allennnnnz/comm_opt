@@ -78,3 +78,16 @@
   - **C 單獨做也擁擠**：MoE 的動態 SM 分工（Weave、OverlapAdvisor、Analytical Resource Mgmt、Resource-aware Overlap）2026 下半年密集出現；SM-free 路線（Zero-SM、VCCL、T-CCL）也在做，且 copy engine 在驅動 550 上可能不可用
   - **但 C 可以併入 A**：交換器內加總（NVLS 機內、SHARP 機間）把「加法」從 GPU 運算單元搬到交換器，本來就該減少 SM 用量與對 GEMM 的干擾（NCCL 2.27 部落格宣稱 SHARP 讓 AG／RS 需要的 SM 從 ≥16 降到 ≤6，無數據）。R04_CD §5-1、5-2：H100 上「collective 實作 × SM 數 × GEMM 拖慢」沒有系統性量測，NVLS 對同時執行的 GEMM 的影響也沒人量 → **A 的主要量測軸可以是「延遲」與「SM 稅」兩個**
   - 這也繞開了 copy engine 在驅動 550 不可用的問題：交換器加總不需要 copy engine
+
+## R04_A（兩層交換器加總）讀後與抽查（2026-11-17）
+
+- **Opus 抽查**（NCCL v2.32.6 原始碼、登入節點唯讀）：
+  - `src/tuning/nvls.cc:149`：`NCCL_ALGO_NVLS` 在 `nNodes > 1` 且沒有 `collNetSupport` 時無效 → 跨機時「NVLS 演算法」＝機內 NVLS＋機間 IB SHARP；沒有 SHARP 時跨機只能走 NVLS_TREE（機內 NVLS＋機間一般樹）
+  - `src/graph/connect.cc:279` 註解「NVLS+SHARP not yet implemented」已過時，`:282` 在 `collnetEnable` 時設 `nvls.out`
+  - 外掛相容：HPC-X 外掛 `libnccl-net.so` 匯出 `ncclNetPlugin_v5–v8`、`ncclCollNetPlugin_v5–v8`；安裝的 NCCL 2.29.7 字串含 v6–v11 → v8 重疊（ABI 層面相容，實際載入待計算節點）
+- **報告事實（未逐條抽查）**：HPC-X v2.19 內含 SHARP 3.7.0、plugin 2.7；系統另有 `/opt/mellanox/sharp` 3.5.1（版本混用風險）；外掛的 `libsmx-3.7.so` 等沒有 `LD_LIBRARY_PATH` 時找不到；SHARP 需要 root 在 subnet manager 端跑 Aggregation Manager（或 UFM）、計算節點要有 IPoIB；NCCL 2.18 有「H100＋IB SHARP 多 GPU 同進程資料錯誤」的已知問題（2.18.3 修正；我們一 GPU 一進程，不受影響）
+- **文獻**：兩層同時啟用的實機量測——沒有找到；SHARP 用於 LLM 推論或小訊息延遲——沒有找到；Demystifying NCCL 明確排除 NVLS 與 CollNet；新增 CAIS（2605.05628）、DySHARP（2605.05607）都是 NVLS 的週期級模擬，指出 NVLS 的 AG／RS 與 GEMM 記憶體語意不匹配、只支援靜態規則集體
+- **判斷**：
+  - 文獻空白確定比 B／C／D 大；軟體層面看起來可行
+  - **單一最大風險＝Nano5 的 IB 交換器有沒有跑 SHARP Aggregation Manager**。使用者端只能用 `sharp_hello`／NCCL 日誌判斷 → M20 P10 一定要做；**同時建議使用者直接問 NCHC**（AM 是否啟用、每個 job 的 SHARP 配額、是否 rail-optimized 拓樸）
+  - 若 SHARP 不可用：A 退化成「機內 NVLS × SM 稅 × 跨機 NVLS_TREE」的特性量測，仍有空白（R04_CD §5-1、5-2），但主張變弱
