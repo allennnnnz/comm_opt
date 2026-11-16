@@ -49,6 +49,7 @@
 - **每個工作自動記錄**：`job_env.txt`（工作編號、節點、git commit、`nvidia-smi`、拓樸），由 `template.sbatch` 產生。
 - **`--exclusive` 會被叢集拿掉**：送出時出現 `sbatch: WARNING: Exclusive mode is not allowed. --exclusive is removed.`（`dev`／`normal`／`normal2`）[實測: 工作 475733–475735，2026-11-17]。申請 8 張 GPU 時，每 GPU 最多 12 顆 CPU（96／104 可排程）、預設記憶體 1600G；別人的 GPU 工作排不進來，小型純 CPU 工作理論上可能 [實測: `scontrol show job`／`show node hgpn03`]。對策：量測工作 `source exp/lib/cotenants.sh`，記錄同節點的其他工作（D054）。
 - **排隊很久**：2026-11-17 01:20 `sbatch --test-only` 試算，`dev` 單台數小時，`normal` 2 台與 `4nodes` 約兩天半，`normal2` 約九天 [實測]。`4nodes` 只接受 4 台。長時間排隊的工作提早送、用 `--dependency=afterok:<前置工作>` 綁住（D053）。
+- **整台工作在 `dev` 會一直被往後排**：`dev` 的節點常被許多 1–4 張卡的小工作分佔，要 8 張卡同時空出來很難；S01 的 8 卡工作預估開始時間從 11-17 01:42 一路延到 08:48（2026-11-17 05:51 `squeue --start`），排隊原因始終是 `Priority` [實測]。計畫時程要把「整台工作排一次要半天以上」算進去。
 - **節點分組**：H100 為 hgpn01–06、hgpn17–21（`dev` 多 hgpn01）；H200 為 hgpn39–41、43–46 [實測: `sinfo`]。兩組 H100 是否在不同交換器下待 M23 Q7。
 - **安裝位置**：`/home` 每人 100 GB，大檔一律放 `/work/allen0117/comm_opt_env/`（venv、模型、原始碼）[實測: 2026-11-16 曾滿額]。
 - **分析用 Python**：`/work/allen0117/comm_opt_env/venvs/analysis/bin/python`（numpy、pandas、matplotlib、scipy；與量測用的 vLLM venv 分開，避免改到量測環境）[建立: 2026-11-17]。
