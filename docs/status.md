@@ -8,9 +8,9 @@
 - **候選方向**：S04 完成（R04_A、R04_BE＋session2 版、R04_CD＋smtax_model 版）。整合判斷見 `docs/notes_synthesis_nano5.md` 最後一節：主線 A（兩層交換器加總），C 當量測軸，B 當應用；D 不做；E 備案。**待使用者決定是否採用 A 為主線**
 - **待使用者處理**：是否寄出給國網中心的詢問稿 `docs/nchc_inquiry_20261117.md`（SHARP、`nvidia_peermem`、IB 拓樸）
 - **S01**：驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊（預估 04:00 前後）。Opus 待辦：讀結果、補完並驗收 R01、把 vLLM 0.32.0 記為決策。其餘冒煙測試併入 M20／M23（D053）
-- **M20**：腳本完成（S05，Sonnet），已排隊：475733（H100 第 1 台，`dev`）、475734（2 台 SHARP，`normal`）、475735（H200 第 1 台，`normal2`），都以 `afterok:475444:475459` 綁 S01。R05 為階段性報告。**H100 第 2、3 台、H200 第 2 台尚未送**：Opus 看過 475733 輸出正常後送（`exp/M20_env_snapshot/node.sbatch`，`--exclude` 已量節點）
+- **M20**：腳本完成（S05，Sonnet），已排隊：475780（H100 第 1 台，`dev`）、475781（2 台 SHARP，`normal`）、475782（H200 第 1 台，`normal2`），以 `afterok:475459` 綁 S01 的 nccl-tests 冒煙測試（原 475733–475735 綁兩個 S01 工作，但 vLLM 測試 475444 預估要到 11-18；`scontrol update` 被叢集拒絕，01:50 取消重送）。R05 為階段性報告。**H100 第 2、3 台、H200 第 2 台尚未送**：Opus 看過 475780 輸出正常後送（`exp/M20_env_snapshot/node.sbatch`，`--exclude` 已量節點）
 - **M21**：腳本完成（`node_a.sbatch` 約 70 分、`node_b.sbatch` 約 50 分，`dev`，只乾跑過）；Opus 看過 M20 第 1 台（P4、P7）後決定暖機長度再送。R06 第 5 節有 16 條執行者自行決定之處，送出前 Opus 要審
-- **M23**：已排隊 475773（4 台 H100，`4nodes`，9 h）、475774（2 台 H200，`normal2`，3 h），以 `afterok` 綁 S01；預估 11-19／11-26。設定清單在執行時讀入的 `m23_lib.sh`（Opus 已加入跨機 NVLS＋SHARP）
+- **M23**：已排隊 475783（4 台 H100，`4nodes`，9 h）、475784（2 台 H200，`normal2`，3 h），以 `afterok:475459` 綁 S01（原 475773／475774 取消重送）；預估 11-19／11-26。設定清單在執行時讀入的 `m23_lib.sh`（Opus 已加入跨機 NVLS＋SHARP）
 - **同節點紀錄**：叢集拿掉 `--exclusive`，量測工作改以 `exp/lib/cotenants.sh` 記錄同節點工作（D054，待使用者確認）
 - **分析用 Python**：`/work/allen0117/comm_opt_env/venvs/analysis/bin/python`
 - **工作環境**：H100 分兩組 hgpn01–06、hgpn17–21；H200 為 hgpn39–41、43–46。論文搜尋 MCP 可用，但 arXiv 常回 429
