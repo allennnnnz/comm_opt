@@ -4,6 +4,8 @@
 
 ## 目前狀態（2026-11-16 深夜，nano5 分支）
 
+- **2026-11-17 00:1x 使用者要求暫停一小時（用量滿）**：S04 的 A 小助手已被 Opus 中止，恢復時用 SendMessage 叫它從原進度繼續（`R04_A_two_level_switch_reduction.md` 可能只寫了一部分）；R04_BE、R04_CD 已完成並抽查（`docs/notes_synthesis_nano5.md`）。S01 工作 475444、475459 仍在排隊，計算節點上照常跑
+
 - **換環境、重新開始**（D050、D051）：Nano5（8× H100／H200 每台，Slurm，D048）；文獻優先、不受 A100 題目限制。計畫 `docs/plan_nano5.md`
 - **文獻與原始碼調查完成**：R02_T1–T5（約 134 項核實）、R03（8 個系統原始碼）。Opus 整理與抽查：**`docs/notes_synthesis_nano5.md`**
 - **候選方向**（D052，使用者選擇全部繼續深入）：A 兩層交換器加總（NVLS＋IB SHARP，主推）、B 跨機 TP decode 小訊息延遲、C 通訊的 SM 資源稅、D 效能模型選 collective／E PD 分離 KV 傳輸

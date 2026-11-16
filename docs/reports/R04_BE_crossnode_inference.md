@@ -1,269 +1,204 @@
-# R04 / BE crossnode_inference：方向 B（跨機 TP decode 小訊息 all-reduce）與方向 E（PD 分離的 KV 傳輸）深入調查
+# R04 BE 組：跨機 TP decode 小訊息 all-reduce（B）與 PD 分離的 KV 傳輸（E）
 
-- **執行**：Sonnet 5.5，2026-11-16　**規格**：`docs/specs/S04_direction_deep_dive.md`（分工 BE）
-- **性質**：文獻＋原始碼＋官方文件調查；未送 GPU／Slurm 工作；登入節點只跑了幾秒內的唯讀指令（`ls`、`cat /proc/driver/nvidia/*`、`lsmod`）。只寫事實，不含選題判斷。
-- **版本標記**：vLLM「安裝版」= 0.32.0+cu129（`/work/allen0117/comm_opt_env/venvs/vllm/lib/python3.12/site-packages/vllm/`，下稱 `[0.32.0]`）；vLLM「原始碼」= v0.34.0（`/work/allen0117/comm_opt_env/src/vllm/`，下稱 `[v0.34.0]`）；SGLang v0.5.23（`src/sglang/`）；TRT-LLM v1.2.1（`src/trtllm/`）。
-- **證據標記**：`[src]` 原始碼已讀；`[doc-web]` 官方文件網頁，經 WebFetch 小模型擷取（非逐字原文，引用前請再對網頁核）；`[pdf]` 已下載 PDF 並用 pdftotext 讀全文；`[abs]` 開啟 arXiv abs 頁確認。
-- **工具限制紀錄**：arXiv MCP 的 `search_papers` 與 `citation_graph` 在本次執行中被 rate limit（HTTP 429／Semantic Scholar quota 用盡），重試數次仍失敗；因此**沒有用 `citation_graph` 往後追 NVRAR／DistServe／Splitwise**，改用 paper-search 的 `search_openalex` 與 WebSearch 找，再逐篇開 arXiv abs 頁核實。這是本報告文獻覆蓋度的已知缺口（見第 B-5、E-5 節）。
-
----
-
-# 第一部分：方向 B
-
-## B-1　方向定義（照抄 Opus）
-
-**B：跨機器 TP decode 的小訊息 all-reduce**（模型一台放不下、TP 跨兩台以上時）。一定要回答：(1) 實務上有沒有人跨機器做 TP 推論？框架官方文件或部落格的具體設定，以及「跨機器建議改用 PP／EP」的官方說法；(2) vLLM／SGLang／TRT-LLM 在 TP 跨機器時，all-reduce 實際走哪條路徑（附 `檔案:行號`）；(3) decode 時 all-reduce 的訊息大小範圍，有沒有論文報告實測分佈；(4) 低延遲跨機 all-reduce 的既有工作（NVRAR、Every-µs 的多節點部分、PCCL、其他 R02 沒有的）各自硬體；(5) GPU 直接發起 RDMA（IBGDA）與 GDRCopy 在沒有 root 時能不能用：NVSHMEM 官方文件對驅動參數與核心模組的要求。
-
-## B-2　最接近的既有工作
-
-「R02」欄指 `docs/reports/R02_T*.md` 已有的編號，只補新事實。
-
-| 編號 | 標題／作者／年／出處 | 做了什麼 | 和方向 B 重疊 | 原文明確沒做或自述限制（≤2 句＋位置） | 硬體與規模 | 程式碼 | 出處網址 |
-|---|---|---|---|---|---|---|---|
-| B1 | **NVRAR**：Understanding and Improving Communication Performance in Multi-node LLM Inference；Singhania, Singh, Hough 等；arXiv 2511.09557 v4（2026-05-20）；CAIS '26，DOI 10.1145/3786335.3813165。見 R02_T5 #10、R02_T4 P9 | 多機 TP 的強規模分析（vLLM、SGLang、自家 YALIS）＋NVSHMEM 階層式 recursive-doubling all-reduce | 與方向 B 幾乎同題：多機 TP decode 小訊息 all-reduce | 「We plan to investigate and reduce idle time in future versions of NVRAR.」（§5.2.2）；「We leave heuristic-based hyperparameter tuning to future work.」（§5 消融）。**新事實 [pdf]**：(a) intra-node reduce-scatter 與 all-gather 用 NVSHMEM host API，原文寫「which internally calls NCCL reduce-scatter」（§4.1）；(b) 全文 grep 不到 IBGDA、GDRCopy、PeerMappingOverride，未說明所用 NVSHMEM transport；(c) TP vs HP（hybrid = TP×PP）：「TP and HP do not scale ideally. HP is advantageous in compute-bound regimes, whereas TP is better for memory-bound and decode-heavy cases.」（Observation 1，§3） | Perlmutter（A100，每節點 4 GPU，Slingshot-11）、Vista（GH200，每節點 1 GPU，IB）；強規模掃 4–128 GPU（§3）；無 H100 | https://github.com/hpcgroup/nvrar（MIT）、https://github.com/axonn-ai/yalis | https://arxiv.org/abs/2511.09557 |
-| B2 | **Every Microsecond Matters**（Every-µs）；arXiv 2607.16100；NVIDIA＋ETH。見 R02_T1 P3 | barrier-free、symmetric memory、multicast、LL128 atomic 的單 NVLink 域小訊息 all-reduce | 只有「多節點」的部分與 B 相關 | **新事實 [pdf]**：實驗是「1 node with 4 GPUs (TP=4) and 2 nodes with 8 GPUs (TP=8)」，皆在 GB200 NVL72 內（NVLink 域），不經 IB。對比較對象的限制原文：「The same single-node limitation applies to vLLM's custom AllReduce.」；「since multi-node collectives are not supported at the time of writing」（指 MSCCL++ 非 multicast 版）。 | 4×GB200 NVL72 內最多 64 GPU（Fig.11） | 未取得 | https://arxiv.org/abs/2607.16100 |
-| B3 | **PCCL**（The Big Send-off）；Singh 等；arXiv 2504.18658。見 R02_T4 P20 | 兩層階層式 all-reduce 等＋SVM 自動選演算法 | 跨機階層式 recursive doubling | 「In future work, we plan to benchmark PCCL on clusters with InfiniBand interconnects...」（結論，R02 已引）。無新事實 | Frontier（MI250X）、Perlmutter（A100），Slingshot；非 IB | 未說明 | https://arxiv.org/abs/2504.18658 |
-| B4 | **mKernel**：Fast Multi-GPU, Multi-Node Fused Kernels；Mao 等；arXiv 2609.13585；見 R02_T2 | 多機融合 kernel（GEMM+AllReduce 等），tile 級 NVLink＋RDMA 重疊 | 多機 TP 的 GEMM+AllReduce；**IBGDA 對比**（B-5 用） | **新事實 [pdf]**：「In the scenarios we tested, GPUDirect Async provides little performance gain over host-assisted GPU-initiated communication.」（§3 附近，Fig.4）；「GPUDirect Async (IBGDA) can also be used in small-message, latency-sensitive workloads (Markthub et al., 2022; Zhao et al., 2025b).」（即未在小訊息場景測 IBGDA 優勢）。 | 兩個 16-GPU H200 叢集（2×8 H200，ConnectX-7 IB 與 AWS EFA）；GEMM+AllReduce 最高 1.72× | 未取得 | https://arxiv.org/abs/2609.13585 |
-| B5 | **GPU-Initiated Communication: Dissecting Down to the Bone**；Baydamirli, Ismayilov, Oktay, Unat；arXiv 2610.01380（2026-10-01）[abs]；**R02 沒有** | 量 GPU 直發 RDMA（NVSHMEM IBGDA、NCCL GIN、DeepEP、UCCL-EP、MSCCL++、fabric-lib）與 CPU proxy 的 issue／完成延遲 | 直接回答「IBGDA 對小訊息延遲值不值得」與「需要什麼系統條件」 | **數字 [pdf]**（Table 3，P-IB：4 節點×4 H200，ConnectX-7 200 Gb/s IB，NVSHMEM 3.4.5／NCCL 2.30.7）：單次 8 B 操作 mini-gda issue 0.70 µs／put+完成 4.03 µs；NVSHMEM public API issue 5.31 µs／put+完成 11.10 µs；NVSHMEM IBRC（CPU proxy）issue 0.99 µs／put+完成 6.40 µs；調校過的 CPU proxy 0.13／4.10 µs。**系統條件（原文，§3.1）**：「the NVIDIA kernel module permits it only with the option PeerMappingOverride=1」；「NVSHMEM's CPU-assisted mode keeps GPU-built WQEs and has a host thread forward the doorbell value to the UAR for systems where the mapping is disallowed」。另有 P-H100 平台（100 節點×4 H100，CX-7 200 Gb/s）「without NIC doorbell mapping support」（§4 平台說明） | H100／H200／B200／GB200 小規模（見 Table 2）；未測 collective all-reduce | https://github.com/ParCoreLab/Dissecting-GPU-Communication-Experiments | https://arxiv.org/abs/2610.01380 |
-| B6 | **Eliminating Hidden Serialization in Multi-Node Megakernel Communication**（Perseus）；Oh, Singh；arXiv 2605.00686（2026-05-01）[abs]；**R02 沒有** | 找出 proxy 式 RDMA 的 fence 序列化，提出 decoupled signaling＋NIC-side ordering；MoE megakernel | 多機、GPU 直發 vs proxy 的實測比較（H100＋CX-7＋IB，2–4 節點） | 摘要原文：「Perseus on IBRC matches or exceeds IBGDA GPU-direct by up to 1.2×, which shows that serialization, rather than the choice between proxy-based and GPU-direct transport, is what bounds multi-node megakernel performance.」；對象是 MoE，不是 all-reduce | 商用雲 8×H100／節點，ConnectX-7，2–4 節點（16–32 GPU）；另有 Perlmutter 64 A100（§5） | 未取得 | https://arxiv.org/abs/2605.00686 |
-| B7 | **GPU-Initiated Networking for NCCL**（GIN）；Hamidouche 等；arXiv 2511.15076。見 R02_T4 P10 | NCCL 2.28 Device API（LSA／Multimem／GIN），GIN 有 GDAKI 與 Proxy 兩後端 | GIN Proxy 後端可在不用 IBGDA 的標準 RDMA 上跑 | 結論（R02 已引）：未來要擴到 PyTorch、TRT-LLM 等。無新事實 | DGX H100，2／4／8 節點，NVSHMEM 3.4.5、NCCL 2.28 | NCCL 開源 | https://arxiv.org/abs/2511.15076 |
-| B8 | **NCCL EP**；Goldman 等（NVIDIA）；arXiv 2603.13606（2026-03-13）[abs]；R02 無（R02_T3 可能有，未核對編號） | 以 NCCL Device API 建 MoE dispatch/combine，LL 模式針對 decode（1–128 token） | 提供「NCCL Device API 在 H100 多機＋vLLM 整合」的實例 | 摘要：「competitive LL kernel performance and ... end-to-end results with vLLM integration」；非 all-reduce | H100 多機叢集（節點數見論文，未擷取） | NCCL 內 | https://arxiv.org/abs/2603.13606 |
-| B9 | **Llama 3 Herd of Models**；Grattafiori 等；arXiv 2407.21783；R02 無 | Llama 3 405B 的推論並行方式 | 提供「跨機 TP 不是官方做法」的原廠自述 | 「Llama 3 405B does not fit in the GPU memory of a single machine with 8 Nvidia H100 GPUs... we parallelize model inference using BF16 precision across 16 GPUs on two machines. Within each machine, the high NVLink bandwidth enables the use of tensor parallelism. Across nodes, however, connectivity has lower bandwidth and higher latency, so we use pipeline parallelism instead.」（§6.1 Pipeline Parallelism，PDF 抽出文字） | 2 機×8 H100 | — | https://arxiv.org/abs/2407.21783 |
-| B10 | **SiFAR**；arXiv 2607.08973；R02_T5 #2 | 去 barrier 的單機 all-reduce | 提供 decode 小批量 payload 大小 | **新事實 [pdf]**：「payloads... 4–32 KB in low-batch inference」；僅單機 8×H200 | 8×H200 單機 | 未公開 | https://arxiv.org/abs/2607.08973 |
-| B11 | **flash-comm**；Wang, Li, Zhao；arXiv 2611.06634（2026-11-04）[abs]；R02_T1 可能有（未核對） | 自同步集體通訊（單機）；摘要稱 all-reduce 佔 baseline decode 時間 11.4% | 提供單機 decode 中 all-reduce 佔比 | 摘要原文：「all-reduce accounts for 11.4% of the baseline decoding time, which bounds the latency reduction possible from optimizing this operation alone.」 | 8×B300 單機 | 未取得 | https://arxiv.org/abs/2611.06634 |
-| B12 | **Parallelization Strategies for Dense LLM Deployment**；Topcu 等；arXiv 2603.05692（2026-03-05）[abs，由 arXiv MCP get_abstract 取得]；R02 無 | Llama-3.1-70B／405B 的 TP/PP/hybrid 取捨，聚焦 intra-node | 官方之外的同儕文獻：TP 利延遲、PP 利吞吐 | 摘要：「Tensor Parallelism (TP) improves the latency objectives while Pipeline Parallelism (PP) is better-suited for throughput-oriented applications.」；摘要自述焦點為 intra-node | 單機多卡（硬體見論文，未擷取） | 未取得 | https://arxiv.org/abs/2603.05692 |
-| B13 | **Characterizing Parallelism Strategies in LLM Inference**；Mirzaei, Mitra；arXiv 2610.05305（2026-10-04）[abs]；R02 無 | TP/PP/hybrid 的解析延遲模型（運算＋通訊＋bubble） | 同上，含 decode 通訊模型 | [pdf]：實驗在 8×A100 SXM4 單機（NVLink 600 GB/s）；§「TP decode」觀察到實際通訊頻寬約理論 NVLink 的 25%、「decoding is fundamentally latency-limited」（約 PDF 第 505–513 行） | 8×A100 單機 | 未取得 | https://arxiv.org/abs/2610.05305 |
-| B14 | **Floor-First**（Think Before You Grid-Search）；Yihua Liu；arXiv 2607.05876（2026-07-07）[abs]；R02 無 | 以資源向量估 decode 步驟下限；案例 671B MoE 於 16×H20 | 含「TP16 decode vs EP16+DP-attention」的計算結論 | 摘要：「single-stream latency favors TP by 2.4x」；為解析估算，非實測 | 16×H20（案例） | 專案附計算器（摘要稱） | https://arxiv.org/abs/2607.05876 |
-| B15 | **TokenWeave**；arXiv 2505.11329；R02_T1 P12／T5 #16 | 融合 AllReduce-RMSNorm、2–8 SM | 單機；小 decode batch 效益消失 | R02 已引，無新事實 | 8×H100 DGX | https://github.com/microsoft/tokenweave | https://arxiv.org/abs/2505.11329 |
-| B16 | **fabric-lib**（pplx-garden）；arXiv 2510.27656；R02_T5 #11 | P2P RDMA 通訊庫（KV 傳輸、權重更新、MoE） | 自述 GPU-initiated RDMA（GDA）尚未普及於雲端 | R02 已引；無新事實 | ConnectX-7 400G H100；EFA H200 | https://github.com/perplexityai/pplx-garden | https://arxiv.org/abs/2510.27656 |
-
-另有兩篇有關但非主要的壓縮式 TP 通訊論文（只改訊息大小，不改路徑）：**Flash Communication**（Li 等，arXiv 2412.04964 [abs]；摘要稱 intra-node 通訊快 >3×、TTFT 降 2×）與 **Communication Compression for TP LLM Inference**（Hansen-Palmus 等，arXiv 2411.09510 [abs]；壓縮 3.5–4.5×、TTFT 最高 2×；abs 頁未給硬體）。以及 **cross-instance MLA attention 的 IBGDA 實測**（Ma 等，arXiv 2606.01502 [abs]；「constants we measure on real IBGDA」於多節點 H100 叢集，非 all-reduce，僅證明 IBGDA 在某多節點 H100 叢集上有人跑過）。
-
-## B-3　現成軟體的支援程度
-
-### B-3.1　官方建議的跨機設定（B(1)）
-
-- **vLLM**（官方文件 [doc-web]，https://docs.vllm.ai/en/latest/serving/parallelism_scaling/；本機同內容於 v0.34.0 `docs/`）：
-  - 「if the model is too large for a single node, combine *tensor parallelism* with *pipeline parallelism*.」；「Set `tensor_parallel_size` to the number of GPUs per node and `pipeline_parallel_size` to the number of nodes.」
-  - 兩機各 8 GPU 的範例是 `--tensor-parallel-size 8 --pipeline-parallel-size 2 --distributed-executor-backend ray`；**同一頁也給了純 TP 跨機的範例** `vllm serve ... --tensor-parallel-size 16 --distributed-executor-backend ray`（「all 16 GPUs as TP」）。
-  - 並寫「Efficient tensor parallelism requires fast internode communication, preferably through high-speed network adapters.」；驗證方式：`NCCL_DEBUG=TRACE vllm serve ...`，看到 `[send] via NET/IB/GDRDMA` 表示走 IB＋GPUDirect RDMA，看到 `NET/Socket` 表示退回 TCP（「inefficient for cross-node TP」）。
-  - vLLM EP 文件（https://docs.vllm.ai/en/latest/serving/expert_parallel_deployment/ [doc-web]）：多機建議 `--data-parallel-size 16 --data-parallel-size-local 8`（DP＋EP，範例 `--tensor-parallel-size 1`）、decode 用 `deepep_low_latency`；故障排除段提到「init failed for transport: IBGDA」→ 「The InfiniBand GDA kernel modules are missing」，修法是在每個 GPU 節點跑 `tools/ep_kernels/configure_system_drivers.sh` 並重開機（即需要管理員）。
-- **SGLang**（v0.5.23 repo 內文件 `docs/docs/references/multi_node_deployment/multi_node.mdx:6-32`，[src]）：「Run 405B (fp16) on Two Nodes」`--tp 16 --dist-init-addr 172.16.4.52:20000 --nnodes 2 --node-rank 0/1`；「Note that LLama 405B (fp8) can also be launched on a single node」（`--tp 8`，同檔 :28-32）；同檔 :38-80 有 SLURM 版 `Llama-405B-Online-Inference-TP16-SGL`（2 節點、每節點 `gres=gpu:8`、`tp_size=16`）。官方也有反向說法：`docs/docs/advanced_features/pipeline_parallelism.mdx:8`（同檔 Why Pipeline Parallelism 段）原文「Although Tensor Parallelism (TP) remains the conventional approach for intra-node scaling, it frequently encounters communication bottlenecks during multi-node deployments. On the other hand, pipeline parallelism only requires cross-node communication at the boundaries of each pipeline stage...」。
-- **TensorRT-LLM**（https://nvidia.github.io/TensorRT-LLM/latest/examples/llm_mgmn_trtllm_serve.html [doc-web]）：「IMPORTANT: Total MPI processes (nodes × ntasks-per-node) must equal tp_size.」；「For tensor_parallel_size=16, you may use 2 nodes with 8 gpus for each」；範例 `#SBATCH -N 2 --ntasks-per-node=8`，`srun -l --mpi=pmix ... trtllm-llmapi-launch trtllm-serve $LOCAL_MODEL --tp_size 16`。該頁無 `--pp_size`。（WebSearch 結果另提到第三方鏡像頁說 TP 要同節點，與官方不一致，未採用。）
-- **Meta Llama 3**：見 B9（原廠自述 TP 在機內、PP 跨機）。
-- **NVIDIA 官方部落格**（TP vs PP，單機 HGX H200）：「Boosting Llama 3.1 405B Throughput by Another 1.5x on NVIDIA H200 Tensor Core GPUs and NVLink Switch」https://developer.nvidia.com/blog/boosting-llama-3-1-405b-throughput-by-another-1-5x-on-nvidia-h200-tensor-core-gpus-and-nvlink-switch ；本次只從 WebSearch 摘要看到「TP 最低延遲 5.6× 優於 PP、PP 最大吞吐 1.5×」，**未開啟原文核對**，標「待核」。非跨機資料。
-
-### B-3.2　TP 跨機時 all-reduce 實際路徑（B(2)）
-
-**vLLM**（TP=16，2 機×8 H100 為例）：
-- custom all-reduce：`[v0.34.0] vllm/vllm/distributed/device_communicators/custom_all_reduce.py:202-203`：`same_node = all(in_the_same_node_as(group, source_rank=0)); self.mnnvl_only = not same_node`；`:232-237`：`if not same_node and not _group_can_attempt_mnnvl(group, device): logger.warning("Custom collectives are disabled because this multi-node group does not have MNNVL-capable GPUs on every rank."); return`（MNNVL 判斷函式 `_group_can_attempt_mnnvl` 在 `:65`，註解「MNNVL is available only on Blackwell-class GPUs」）；`:501`：`if self.disabled or self.mnnvl_only or self.world_size > 8: return False`。**世界大小 16 本身也超過 8**（`:501`）。
-- `[0.32.0]` 同檔 `:204-205` 有 `mnnvl_only`，`:234` 有多機停用，`:500-501` 為 `if self.disabled or self.world_size > 8: return False`（0.32.0 的 `should_custom_ar` 少了 `mnnvl_only` 條件，其他相同；多機 H100 仍被 `:234` 停用）。
-- torch symm_mem：`[v0.34.0] all_reduce_utils.py:58-64`：`SYMM_MEM_ALL_REDUCE_MAX_SIZES["9.0"]` 只有世界大小 2、4、6、8；`symm_mem.py` 初始化時「World size %d not supported, communicator is not available」（`symm_mem.py:75`）；若 multicast ptr 為 0 則「multicast operations are not supported」停用（`:109`）。故 TP=16 的 H100 不走 symm_mem。
-- FlashInfer AR：`flashinfer_all_reduce.py:157-190`：`node_count == 1` 才選 `mnnvl`（單機 NVSwitch）；多機且 `has_device_capability(100)`（Blackwell）才選 `mnnvl`；否則 `logger.debug_once("FlashInfer allreduce fusion is disabled: multi-node process groups require an MNNVL-capable Blackwell system.")` 並回傳 None；`trtllm` backend 在 `node_count > 1` 直接報不支援（`:225-229`、`:294-298`）。`[0.32.0]` 同檔 `:157-172` 有同樣邏輯。
-- NCCL symmetric memory：`all_reduce_utils.py:111-156`：`min_world_size=4`、`always_use_above_world_size: 8`（註解「Always use symm mem for world_size > 8」），但整體由 `VLLM_USE_NCCL_SYMM_MEM`（預設 False，`envs.py:316`）與 `is_symmetric_memory_enabled()` 控制；預設關閉。
-- 結果：H100 TP=16 預設走 `cuda_communicator.py:459-463` 的 `pynccl_comm.all_reduce`（NCCL）。**這是靜態閱讀推論，未在機器上開 log 驗證**（待 M20／M23，指令見 B-4）。
-
-**SGLang**（v0.5.23）：
-- `python/sglang/srt/distributed/device_communicators/custom_all_reduce_v2.py:579-597`：`can_use_custom_all_reduce_v2`：世界大小須在 `get_supported_world_sizes()`（sm90 為 2–8，`configs/custom_all_reduce_v2.py:264-310`）；跨機時 `if not all(in_the_same_node_as(group, source_rank=0)): return is_one_nvlink_clique(group, device) and _is_vmm_backed_allocator(device)`。`is_one_nvlink_clique` 在 `custom_all_reduce_utils.py:396`。H100 的 NVSwitch 域限單機，故 16 卡跨機為 False → 回 NCCL。
-- `parallel_state.py:717-766`：FlashInfer AR 融合 `_can_use_flashinfer_allreduce` 的自動啟用條件含「單機（sm90）」（R03 `overrides.py:980-1001`）。
-- 世界大小 16 時的舊版 `CustomAllreduce.should_custom_ar`：`world_size == 2 or full_nvlink`（`custom_all_reduce.py:260-283`，R03）。
-
-**TensorRT-LLM**（v1.2.1）：
-- `cpp/tensorrt_llm/thop/allreduceOp.cpp:1113-1148`：`setGroupTopology()`，`is_inter_node = (mGroup.size() != local_group.size())`；跨機時 `mIsMNNVLSupported = mIsNVLINKSupported && all_ranks_support_mnnvl; mIsP2PSupported = false; // P2P doesn't work across nodes`。
-- `allreduceOp.cpp:1248-1257`（`ifFallbackToNCCL`）：`message_size_bytes > max_workspace_size || !mIsP2PSupported || !mIsNVLINKSupported` → `NCCL`。故跨機 TP（P2P=false）一律回 NCCL（AUTO 與 ONESHOT／TWOSHOT 都先走這個檢查，見 `selectImplementation` 在 `:1199-1243`）。
-- Python 端 MNNVL 策略：`_torch/distributed/ops.py:535-550`：`is_testing or (dtype 支援 and not mapping.has_cp() and mapping.is_multi_node() and MnnvlMemory.supports_mnnvl() and is_on_aarch64)`；x86 H100 不啟用。
-
-**NCCL 本身**：R03 §1.1 NCCL 列（NVLSTree、CollNet 預設關等）；演算法與協定的選擇屬方向 A、D，本節不重複。
-
-### B-3.3　decode all-reduce 訊息大小（B(3)）
-
-- 公式：每層 2 次 all-reduce（attention 後、MLP 後），訊息 = batch（decode 每請求 1 token）× hidden × bytes。NVRAR 原文：「message size [is] B × H, where B is the batch size and H the hidden dimension. For the 70B model with B=8 and H=8192, this message size is 128 KB. Across our workloads, message sizes range from 128 KB to 1 MB.」（§4 開頭，[pdf]）；另「NVRAR primarily benefits small messages (128 KB–4 MB)」，且 C=256 併發下「pushes the decode message sizes towards the upper bound of this range」（§5.2.3）。
-- hidden 大小（Llama 3 Table 3，[pdf] 2407.21783）：8B 4096、70B 8192、405B 16384。bf16（2 B）：每 token 8 KB／16 KB／32 KB；batch 8 時 64 KB／128 KB／256 KB（**此為算術換算，非文獻直接報告**；NVRAR 405B 的「256 KB 與 1024 KB」對應其實驗的 batch，見 §5.2.1）。
-- 低批量：SiFAR「4-32 KB payloads in low-batch inference」（[pdf]，單機）。
-- **實測分佈（訊息大小隨時間或隨 trace 的直方圖）**：沒有找到（見 B-5）。
-
-## B-4　在 Nano5 的前置條件（B(5)）
-
-登入節點觀察（2026-11-16，主機 `cbi-lgn01`，只讀指令，**計算節點狀態未知**）：驅動 `550.127.08`（`/proc/driver/nvidia/version`）；核心 `4.18.0-553.144.1.el8_10.x86_64`；`/proc/driver/nvidia/params`：`RegistryDwords: ""`、`EnableStreamMemOPs: 0`、`DmaRemapPeerMmio: 1`；`/dev/gdrdrv` 存在（`crw-rw-rw-`，root:root，Nov 12），`lsmod` 有 `gdrdrv`、**沒看到 `nvidia_peermem`**；`ofed_info -s` = `MLNX_OFED_LINUX-23.10-2.1.3.1.201`；`/sys/class/infiniband/` 有 `mlx5_0`–`mlx5_3`。venv 內已裝 `nvidia-nvshmem-cu12 3.4.5`（`.../site-packages/nvidia_nvshmem_cu12-3.4.5.dist-info`，lib 含 `nvshmem_transport_ibgda.so.3`、`ibrc`、`ucx`、`libfabric`、`ibdevx`）；NVHPC 24.7 內另有 NVSHMEM（`comm_libs/nvshmem/lib/libnvshmem_host.so.3.0.6`）；venv **沒有** `nixl`、`mooncake`、`lmcache`、`ucx` 套件。
-
-| 條件 | 文件出處 | 檢查方法（指令＋在哪跑） | 目前狀態 | 需要管理員 |
-|---|---|---|---|---|
-| IBGDA（預設模式）需 `nvidia.ko` 以 `PeerMappingOverride=1` 載入，且 nvidia.ko ≥ 510.40.3、MLNX_OFED ≥ 5.0 | NVSHMEM Installation Guide「Software Requirements → IBGDA」，https://docs.nvidia.com/nvshmem/release-notes-install-guide/install-guide/abstract.html [doc-web]：「In the default case, `nvidia.ko` must be loaded with `PeerMappingOverride=1`」，設定在 `/etc/modprobe.d/nvidia.conf`：`options nvidia NVreg_RegistryDwords="PeerMappingOverride=1;"`。Dissecting（B5）§3.1 同樣說明（原文見 B-2 B5 列） | 計算節點上：`srun ... cat /proc/driver/nvidia/params \| grep -i RegistryDwords`（待 M20／M23） | 登入節點：`RegistryDwords: ""`（**未設**）；計算節點未知 | 是（改驅動參數需 root 並重載模組） |
-| IBGDA「CPU-assisted」模式：「`PeerMappingOverride` is not required」；但需 GDRCopy | 同上：「GDRCopy ... required if CPU-assisted IBGDA is enabled on the system」 | 計算節點：`ls -l /dev/gdrdrv`；`lsmod \| grep gdrdrv` | 登入節點有 `gdrdrv`；計算節點未知 | 否（使用者只需 `/dev/gdrdrv` 可讀寫；載入 `gdrdrv` 模組需 root，已由站方載入於登入節點） |
-| GDRCopy 一般需求：核心模組需 root 載入 | GDRCopy README，https://github.com/NVIDIA/gdrcopy [doc-web]：「Root privileges are necessary to load/install the kernel-mode device driver.」；README 擷取未說明使用者空間函式庫是否不需 root（擷取結果寫「does not state」）；另述 DMA-BUF mmap 後端「does not require the GDRCopy kernel module」但需「CUDA driver 13.3 or newer」（我們驅動 550 → CUDA 12.4 世代，不符） | 同上 | 同上 | 載入模組：是；使用已載入的模組：否（`/dev/gdrdrv` 登入節點為 0666） |
-| NVSHMEM IBRC／UCX transport 需 GDRCopy 與 nvidia-peermem（atomics 與 GPUDirect RDMA） | 同 install guide：「(Optional) GDRCopy v2.0 or later... required for atomics support on non-NVLink connections」；「Both the IBRC and UCX transports make use of GDRCopy in order to perform atomic operations.」；nvidia-peermem「required when `NVSHMEM_IBRC_SUPPORT=0` and `NVSHMEM_UCX_SUPPORT=0` are not set at compile time」 | 計算節點：`lsmod \| grep nvidia_peermem` | 登入節點**未見** `nvidia_peermem`；計算節點未知 | 是（`modprobe nvidia-peermem` 需 root：CUDA GPUDirect RDMA 文件 https://docs.nvidia.com/cuda/gpudirect-rdma/ [doc-web]「can be loaded ... with root privileges」「there is no service to automatically load nvidia-peermem」） |
-| IBGDA 若用 dma-buf 取代 peermem：需 rdma-core ≥ 44.0 與上游核心 ≥ 6.1 | install guide IBGDA 節：「For dma-buf support, it requires `rdma-core` >= 44.0 and an upstream kernel >= 6.1.」；缺 dma-buf 時「requires `nvidia-peermem` >= 510.40.3」 | `uname -r`；`rpm -q rdma-core`（計算節點） | 登入節點核心 4.18 < 6.1（RHEL 8 核心；backport 狀況未知） | 是（核心／套件） |
-| NVSHMEM 的環境變數 | NVSHMEM 2.8.0 環境變數文件，https://docs.nvidia.com/nvshmem/archives/nvshmem-280/api/gen/env.html [doc-web]：`NVSHMEM_IB_ENABLE_IBGDA` 預設 false（「Set to enable GPU-initiated communication transport」）；`NVSHMEM_REMOTE_TRANSPORT` 預設 `ibrc`；`NVSHMEM_DISABLE_GDRCOPY` 預設 false。**這是 2.8.0 版文件，3.4.5 的預設值未核對**（最新版網址 `docs/api/gen/env.html` 本次擷取得空內容） | 使用者可自行設，不需 root | 已知（文件） | 否 |
-| NVLink SHARP（驅動） | install guide：「Requires nvidia.ko version 530.30.02 or later.」 | `/proc/driver/nvidia/version` | 550.127.08 滿足 | 否 |
-| 跨機 NCCL 用 GPUDirect RDMA | vLLM 官方文件（B-3.1）：以 `NCCL_DEBUG=TRACE` 看 `NET/IB/GDRDMA`。NCCL GDRDMA 依賴 peermem 或 dma-buf | 計算節點：`NCCL_DEBUG=INFO` 小工作（M20／M23）看 `via NET/IB/... GDRDMA` | 未知 | 判讀不需；若需 peermem 則需 |
-| 登入節點與計算節點相同假設 | — | — | **不能假設相同**；上述登入節點數據只是線索 | — |
-
-備註：mKernel（B4）與 Perseus（B6）都**沒有用 root 做特殊設定的描述**（grep 全文無 root／PeerMappingOverride／modprobe），但兩者的平台是商用雲或 Perlmutter，管理員端設定不明；因此「無 root 能否用 IBGDA」目前只有 NVSHMEM 文件與 Dissecting 的原文可據（見 B-5 與第 6 節）。
-
-## B-5　「找不到有人量過」的清單
-
-- 在 **H100＋InfiniBand（NDR 400G）、2–4 機**上量多機 TP **decode all-reduce（NCCL 對 NVSHMEM／自製）延遲**：NVRAR 只有 A100（Slingshot）與 GH200（IB）；PCCL 只有 Slingshot；Every-µs 在 GB200 NVLink 域內；SiFAR 只單機 H200。**未找到**（查詢見第 8 節 Q1–Q6、Q9）。
-- 在 **H100／H200＋IB** 上量 **IBGDA vs IBRC 對「多機 all-reduce」（非 MoE）延遲**：Dissecting（B5）量了單次 put 延遲，mKernel（B4）量了 GEMM+AllReduce 吞吐（IBGDA 與 host proxy 差異「little」，且它自述未量小訊息），Perseus（B6）量 MoE。沒有找到專門量 all-reduce 的（Q7、Q8）。
-- **decode all-reduce 訊息大小的實測分佈**（直方圖或按 trace 統計）：僅有 NVRAR 的範圍陳述（128 KB–1 MB）與 SiFAR 的 4–32 KB 陳述，**沒有找到**分佈圖或統計（Q9、Q10）。
-- **官方文件明說「跨機 TP 不建議、請改 PP／EP」的 vLLM／TRT-LLM 官方原文**：vLLM 文件只說「combine TP with PP」與「TP=GPUs per node」，並未寫「不建議跨機 TP」，且同頁仍給了 TP=16 的範例；TRT-LLM 官方 Slurm 範例直接給 `--tp_size 16`。SGLang `pipeline_parallelism.mdx` 有「TP frequently encounters communication bottlenecks during multi-node deployments」。「vLLM／TRT-LLM 明文建議避免跨機 TP」**未找到**（Q11–Q13）。
-- **在無 root、IBGDA 預設模式**下實際跑成功的第一手報告：**未找到**（Q14）。
-- 以 `citation_graph` 追 NVRAR 後續引用：**因 Semantic Scholar rate limit 未能執行**。
-
-## B-6　互相矛盾或不確定之處
-
-1. **vLLM 官方文件自己**：同一頁既說「Set `tensor_parallel_size` to the number of GPUs per node and `pipeline_parallel_size` to the number of nodes」，又給出 `--tensor-parallel-size 16` 跨 2 機的範例。
-2. **NVRAR 自身數字**：摘要「1.9×–3.6×、128 KB–2 MB」與結論段「1.06×–1.92×（Slingshot）、1.14×–3.57×（InfiniBand）、256 KB–2 MB」不同（R02 已記）；另 §5.2.1 自述 128 KB 訊息的微基準 NVRAR **慢於** NCCL（歸因於微基準無計算穿插）。
-3. **IBGDA 是否值得**：NVSHMEM 文件把 IBGDA 描述為 GPU 直發；Dissecting 在 H200＋CX-7 量到 NVSHMEM public IBGDA put+完成 11.10 µs，高於 NVSHMEM IBRC proxy 的 6.40 µs（單次 8 B，Table 3）；mKernel 與 Perseus 也都報告 IBGDA 不比 proxy 好。條件不同（200 Gb/s、單 QP 單次操作、MoE／融合 kernel），不裁決。
-4. **vLLM 0.32.0 與 v0.34.0 的差異**：`should_custom_ar` 在 0.34.0 多了 `mnnvl_only` 條件（行號見 B-3.2）；其他多機判斷相同。我們實際跑 0.32.0。
-5. **NVSHMEM 環境變數預設值**：只讀到 2.8.0 文件；我們的 venv 是 3.4.5，NVHPC 內是 3.0.6。IBGDA 預設模式與 CPU-assisted 模式在 3.x 的環境變數名稱，文件擷取結果沒有列出 CPU-assisted 的變數（2.8.0 頁面「does not describe any CPU-assisted IBGDA setting」），Dissecting 腳註 1 提到 `NVSHMEM_IBGDA_SUPPORT_GPUMEM_ONLY=ON`，**用途未核對**。
-6. **NVIDIA TP vs PP 部落格數字**只見搜尋摘要，未開原文。
+- **執行**：Sonnet 5.5，2026-11-16／17　**規格**：`docs/specs/S04_direction_deep_dive.md`（BE 組）
+- **性質**：文獻＋原始碼＋官方文件＋登入節點唯讀檢查。未跑任何運算、未送 Slurm。只寫事實，不評價題目。
+- **路徑慣例**：`檔案:行號` 的根目錄為 `/work/allen0117/comm_opt_env/src/`（release tag：vLLM v0.34.0、SGLang v0.5.23、TRT-LLM v1.2.1、NCCL v2.32.6-1）。「0.32.0」指我們安裝的 `/work/allen0117/comm_opt_env/venvs/vllm/lib/python3.12/site-packages/vllm/`。
+- **證據標記**：`[src]` 原始碼已讀；`[doc-local]` 隨 release tag 下載的官方文件原檔（逐字）；`[pdf]` 已下載 PDF 並用 `pdftotext` 讀過（PDF 在 `papers/`，檔名為 arXiv 編號）；`[web-sum]` WebFetch／WebSearch 摘要（非逐字，引用前要再核對）；`[login]` 登入節點 `cbi-lgn01` 的唯讀檢查（**計算節點可能不同**）。
+- **工具限制（誠實揭露）**：本次 arXiv MCP 的 `search_papers` 與 `citation_graph` 全程回傳 HTTP 429（arXiv／Semantic Scholar 限流），paper-search MCP 的 semantic／arxiv 搜尋回傳空結果。改用 WebSearch（部分限定 `arxiv.org`）找論文，再用 `curl` 抓 arXiv PDF 逐篇打開核實。因此**沒有做 citation_graph 的後續追蹤**（見第 7 節）。
 
 ---
 
-# 第二部分：方向 E
+## 白話結論（先看這裡）
 
-## E-1　方向定義（照抄 Opus）
-
-**E：prefill／decode 分離時的 KV cache 傳輸**在 H100＋IB 上是不是瓶頸。一定要回答：(6) vLLM 0.32／SGLang 支援哪些 KV 傳輸連接器（NIXL、Mooncake、LMCache 等），需要什麼前置條件（UCX、GPUDirect RDMA、nvidia_peermem 或 dmabuf）；(7) 在 H100＋IB 上實測 KV 傳輸佔比的論文或廠商數據，條件為何；R02_T5 §3-F 的矛盾有沒有新資料。
-
-## E-2　最接近的既有工作
-
-R02_T5 已列：DistServe（#23）、Splitwise（#24）、Mooncake（#22）、KVDirect（#19）、Beyond the Buzz（#15）、PDD（#1）、Lynx（#3）、TENT（#7）、PrfaaS（#6）、LMCache（#13）、fabric-lib（#11）。這裡只補新事實與 R02 沒有的。
-
-| 編號 | 標題／作者／年／出處 | 做了什麼 | 和方向 E 重疊 | 原文明確沒做或自述限制／重要條件 | 硬體與規模 | 程式碼 | 出處網址 |
-|---|---|---|---|---|---|---|---|
-| E1 | **Revisiting Disaggregated LLM Serving for Performance and Energy Implications**；Li, Zhu, Lee, Nahrstedt；arXiv 2601.08833（頁面 v1 日期 2025-11-14）[abs]；OpenAlex 顯示 DOI 10.1145/3805621.3807662；R02 無 | 在不同 KV 傳輸路徑（含 NIXL）下比較分離式與並置式的效能與能耗 | 直接比較「KV 傳輸媒介」對分離式效益的影響 | 摘要原文（OpenAlex 全文）：「performance benefits from prefill-decode disaggregation are not guaranteed and depend on the request load and KV transfer mediums.」；**硬體 [pdf]**：單一節點 2×A100 40GB，同一 PCIe Gen3 bridge，GPU P2P 傳 KV；不是 H100、不是 IB | 2×A100（PCIe）單節點 | 未取得 | https://arxiv.org/abs/2601.08833 |
-| E2 | **TraCT**：Disaggregated LLM Serving with CXL Shared Memory KV Cache at Rack-Scale；Yoon 等；arXiv 2512.18194（2025-12-20）[abs] | 以 CXL 共享記憶體取代 RDMA 作 KV 傳輸基底；建在 Dynamo | 作者把 RDMA KV 傳輸視為瓶頸，並與 NIXL/UCX 比 | 摘要原文：「KV transfer dominates both time-to-first-token (TTFT) and peak throughput, and remains highly sensitive to network contention」（OpenAlex 摘要；arXiv 摘要同義）；**條件 [pdf]**：兩台伺服器各 1×NVIDIA A6000（48 GB）、**100 Gbps** Mellanox MT2892 NIC，baseline 為 NIXL/UCX；非 H100 | 2 節點×1 A6000，100 Gb/s | 未取得 | https://arxiv.org/abs/2512.18194 |
-| E3 | **FlowKV**；Li 等；arXiv 2504.03775（2025-04-03）[abs] | 降低 KV 傳輸呼叫次數（連續記憶體配置），並做負載感知排程 | 量到分離式的 KV 傳輸延遲與其佔總延遲比 | 摘要：「reduces the average transmission latency of KV cache by 96%, from 0.944s to 0.053s, almost eliminating the transfer time relative to the total request latency」；**硬體 [pdf]**：A100-SXM4-80GB×8（NVLink）、L20／H20；非 H100＋IB | 8×A100（NVLink），L20／H20 異質 | 未取得 | https://arxiv.org/abs/2504.03775 |
-| E4 | **From Tensor Buffer to Distributed Memory Hierarchy: A Survey of KV Cache Management for LLM Serving**；Li, Wang, Chen；arXiv 2607.02574（2026-06-30）[abs]；R02 無 | 分類 30 多個 KV 管理系統並稽核評估缺口 | 稽核「KV 移動」的量測是否被報告 | 原文（§5.5，[pdf]）：「Systems that move KV rarely report the event distribution underneath their end-to-end numbers: bytes moved per token, remote blocks touched per token, operation sizes, or critical-path stalls (MG1).」；「Transfer or access latency sometimes appears for a single microbenchmark, but not in a form that can explain P99 TTFT or TPOT.」 | 調查，無實驗 | — | https://arxiv.org/abs/2607.02574 |
-| E5 | **ARK**：Avoiding Routing Collisions for KV Cache Transfer in Disaggregated LLM Inference；Lin, Hsu, Ho, Saeed；DOI 10.1145/3789240.3828750（OpenAlex，2026-08-11）；**僅 OpenAlex 摘要，未開 DOI 頁核實** | 以來源埠選擇避免 ECMP 碰撞的 KV 傳輸流 | KV 傳輸視為「mega elephant flows」 | OpenAlex 摘要：「Packet-level RDMA simulations」→ 模擬結果，非實機 | 模擬 | 未取得 | https://doi.org/10.1145/3789240.3828750（**未核實**） |
-| E6 | **An Optical KV Cache Network for Disaggregated LLM Serving**；Yoon, Yu；arXiv 2610.18444（2026-10-13）[abs] | 光交換器傳 KV，隱藏重組延遲 | 以「H100 實測 prefill 時間」搭配模擬 | 摘要：「In simulations of GPU clusters on real serving traces with prefill times measured on H100 GPUs」→ 傳輸為模擬 | 模擬（prefill 時間來自 H100 實測） | 未取得 | https://arxiv.org/abs/2610.18444 |
-| E7 | **KVDirect**（arXiv 2501.14743，R02_T5 #19）、**Beyond the Buzz**（2506.05508，#15）、**DistServe**（2401.09670，#23）、**Splitwise**（2311.18677，#24） | R02 已列 | R02 §3-F 矛盾的原始來源 | R02 已引；本節無新事實 | 見 R02_T5 | 見 R02_T5 | 見 R02_T5 |
-
-**廠商／專案資料（非同儕審查）**：
-- **vLLM 官方部落格「Taking vLLM Apart: A Practical Guide to Disaggregated Serving」**（2026-09-29，IBM Research 作者），https://vllm.ai/blog/2026-09-29-disaggregated-serving-guide [doc-web]：測試機為 **2×L40S（PCIe、無 NVLink、無 P2P）**、Qwen2.5-7B、約 8k token prompt；「~470 MB of KV cache (56 KiB per token for Qwen2.5-7B) took about 1.3 s to reach decode」；0.2 req/s 時中位 TTFT「2.2 s against 0.7 s collocated」；文中估算 10k token Llama-3.1-70B（約 3 GB KV）在 400 Gb/s line rate「roughly 65 ms ... before any overhead」（**假設值，非實測**）；文章結論「Every first token pays for the transfer」。需要 vLLM ≥ v0.31.0、`UCX_NET_DEVICES=all`、每個 worker 獨立 `VLLM_NIXL_SIDE_CHANNEL_PORT`；未提 GPUDirect RDMA。
-- **LMCache PD 基準部落格**（2025-04-29），https://blog.lmcache.ai/2025-04-29-pdbench/ [doc-web]：8×H100 單機（NVLink）、Llama-3.1-8B；7500 token KV 經 NVLink 傳輸「20ms, if page size is 16 tokens」、「8ms, if page size is 128 tokens」；結論「vLLM v1 (w/ PD) outperforms vLLM (w/o PD) and achieves similar performance as Dynamo across TTFT and ITL」；NIC 型號未指定；非 IB。
-- **vLLM 官方文件（v0.34.0 repo `docs/features/disagg_prefill.md`）**：「Disaggregated prefill DOES NOT improve throughput.」（[src]，該檔「Why disaggregated prefilling?」節末尾 note）。
-- **vLLM 官方部落格「Bi-Directional KV Transfer」**（2026-10-12）https://vllm.ai/blog/2026-10-12-bidirectional-kvxfer-multiturn-agentic-workload ：只從 WebSearch 摘要得知「AWS EFA、P5en、1P1D、TTFT 最高降 1.6×」，**未開啟原文**，且為 EFA 非 IB。
-- **llm-d RDMA 文件** https://llm-d.ai/docs/resources/rdma/rdma-configuration ：WebSearch 摘要稱「KV cache transfer time lands directly on TTFT」，**未開啟原文**。
-- **DRANET NIXL KV transfer 範例** https://dranet.sigs.k8s.io/docs/user/nixl-kv-transfer/ ：WebSearch 摘要：2 節點×8 H100 80GB、8×Mellanox ConnectX VF NIC，1 GiB NIXL WRITE，同 NUMA 對齊 39.07 GB/s／27.49 ms，未對齊 27.54 GB/s／38.99 ms（4-GPU 集合）；**未開原文**、非 LLM 端到端佔比。
-
-## E-3　現成軟體的支援程度（E(6)）
-
-**vLLM**
-- v0.34.0 `vllm/vllm/distributed/kv_transfer/kv_connector/factory.py:154-276` 註冊的 connector：`ExampleConnector`、`ExampleHiddenStatesConnector`、`LMCacheConnectorV1`、`LMCacheMPConnector`、`NixlConnector`（含 `NixlPullConnector`／`NixlPushConnector`，`:125-130` 依 `transfer_mode`=pull|push 轉換）、`MultiConnector`、`HiSparseConnector`、`MoRIIOConnector`（ROCm）、`OffloadingConnector`、`DecodeBenchConnector`、`MooncakeConnector`、`MooncakeStoreConnector`、`UMBPStoreConnector`、`FlexKVConnectorV1`、`SimpleCPUOffloadConnector`、`HF3FSKVConnector`。
-- **安裝的 0.32.0** 同檔（`.../site-packages/vllm/distributed/kv_transfer/kv_connector/factory.py:154-238`）有：Example、ExampleHiddenStates、LMCacheConnectorV1、LMCacheMPConnector、NixlConnector、NixlPullConnector、NixlPushConnector、MultiConnector、HiSparseConnector、MoRIIOConnector、OffloadingConnector、DecodeBenchConnector、MooncakeConnector、MooncakeStoreConnector、FlexKVConnectorV1。**差異（相對 v0.34.0）**：0.32.0 沒有 `UMBPStoreConnector`、`SimpleCPUOffloadConnector`、`HF3FSKVConnector`，且 `NixlConnector` 名稱在 0.32.0 的處理方式少了 `transfer_mode` 轉換。
-- 預設：**沒有預設連接器**；需 `--kv-transfer-config`（JSON）指定，例 `{"kv_connector":"NixlConnector","kv_role":"kv_producer"}`（`docs/features/nixl_connector_usage.md:102-122`）；`docs/features/disagg_prefill.md` 稱「experimental」。
-- NIXL：`requirements/kv_connectors.txt:5`：`nixl == 1.5.2`；文件（`nixl_connector_usage.md:11`）：`uv pip install nixl`；「UCX is the primary default transport library used by NIXL」，需設定 `UCX_TLS`、`UCX_NET_DEVICES`（`:30-31`）；「Transfers across hosts use RDMA」（`:91`）；GB 系列需 `UCX_CUDA_IPC_ENABLE_MNNVL`（`:428`）；`kv_connector_extra_config.backends` 可選 LIBFABRIC 等（`:41-60`）。
-- Mooncake：`docs/features/mooncake_connector_usage.md`：`uv pip install mooncake-transfer-engine-cuda13`（vLLM 預設 CUDA 13；CUDA 12 環境裝 `mooncake-transfer-engine`）；環境變數 `WITH_NVIDIA_PEERMEM`：「Default: 1, which uses `ibv_reg_mr()` and requires the `nvidia-peermem` kernel module to be loaded」「Set to 0 to use the DMA-BUF path, which does not need that module」（`:60-63`）。**我們的 vLLM 0.32.0+cu129 是 CUDA 12.9 版**。
-- LMCache：`LMCacheConnectorV1` 經 NIXL 傳 KV（`disagg_prefill.md` 對應條目）；LMCache 套件非 vLLM 內建。
-
-**SGLang v0.5.23**
-- `python/sglang/srt/arg_groups/choices.py:122-129`：`DISAGG_TRANSFER_BACKEND_CHOICES = ["mooncake","nixl","ascend","fake","mori","mooncake_tcp"]`；`fields/disagg.py:65-70`：`--disaggregation-transfer-backend` 預設 `mooncake`；`:81-83` `--disaggregation-ib-device`（「Supported by Mooncake and NIXL UCX」）；`disaggregation/utils.py:681-686` 列舉 `TransferBackend`。
-- 文件（`docs/docs/advanced_features/pd_disaggregation.mdx`）：「Currently, we support Mooncake and NIXL as the transfer engine.」（:21）；Mooncake 安裝 `uv pip install mooncake-transfer-engine`（:231-235）；NIXL `pip install nixl` 或自建 UCX（:590-606）；`SGLANG_MOONCAKE_CUSTOM_MEM_POOL` 的 `INTRA_NODE_NVLINK` 建議用於「A100, H20, H100, etc.」（:425-431）；`mooncake_tcp` 為 TCP 後備。**該文件擷取內容未見 nvidia_peermem／dmabuf 的明文需求**（`grep -i "gdr\|peermem\|dmabuf" pd_disaggregation.mdx` 無結果）。
-
-**TensorRT-LLM**：本次**未調查**其 KV 傳輸（只讀了 R03 範圍）。R03 沒有 TRT-LLM PD 項目；NVIDIA Dynamo／TRT-LLM `kv-cache-transfer` 文件（https://docs.nvidia.com/dynamo/v1.0.0/additional-resources/tensor-rt-llm-details/kv-cache-transfer.md，僅 WebSearch 結果列出）**未開啟**。
-
-**NIXL 本身**（https://github.com/ai-dynamo/nixl [doc-web]）：「NIXL was tested with UCX version 1.23.x.」；「GDRCopy ... is necessary for maximum performance, but UCX and NIXL will work without it.」；README 擷取**沒有**提 GPUDirect RDMA／nvidia_peermem／dmabuf／root 需求。HPC-X 的 UCX 在本機為 1.16.0（`ucx_info -v`，`/lib64/libucs.so.0` 與 API headers 1.17.0），**低於 NIXL 測試版 1.23.x**（NIXL pip 版是否自帶 UCX 未核對）。
-
-## E-4　在 Nano5 的前置條件
-
-| 條件 | 文件出處 | 檢查方法（指令＋在哪跑） | 目前狀態 | 需要管理員 |
-|---|---|---|---|---|
-| NIXL 套件（vLLM 0.32.0 用 `nixl == 1.5.2`） | `vllm/requirements/kv_connectors.txt:5` [v0.34.0]；0.32.0 版所需 nixl 版本**未確認** | `uv pip install nixl`（登入節點可裝，不跑運算）；`python -c "import nixl"` | venv 目前無 `nixl`（2026-11-16 `ls site-packages`） | 否 |
-| Mooncake 套件 | vLLM／SGLang 文件（見 E-3） | 同上 | venv 目前無 `mooncake` | 否 |
-| GPUDirect RDMA 路徑：Mooncake 預設需 `nvidia-peermem`；可設 `WITH_NVIDIA_PEERMEM=0` 走 DMA-BUF | `mooncake_connector_usage.md:60-63` | 計算節點：`lsmod \| grep nvidia_peermem`；跑小 KV 傳輸時看有沒有 `Failed to register memory ... Bad address [14]` | 登入節點未見 `nvidia_peermem`；DMA-BUF 路徑所需核心／驅動版本，Mooncake 文件**未說明**；NVSHMEM IBGDA 的 dma-buf 條件是核心 ≥ 6.1（見 B-4），Mooncake 是否同條件**未核對** | peermem：是；DMA-BUF：視核心 |
-| UCX 傳輸可用 RDMA（rc／ud）與 GPU 記憶體 | vLLM NIXL 文件：`UCX_TLS`、`UCX_NET_DEVICES`；驗證用 `UCX_PROTO_INFO=y`（`nixl_connector_usage.md:91` 對 cuda_ipc）；另 vLLM 官方 IB 指引：`NCCL_DEBUG=TRACE` 看 GDRDMA（B-3.1） | 計算節點，兩機各 1 GPU 的小工作：`UCX_PROTO_INFO=y vllm serve ...`／`ucx_info -d`（HPC-X 內有 `ucx_info`） | 未知 | 否（若 peermem 缺，GPUDirect RDMA 不通，UCX 可能退回主機中轉，需實測） |
-| GDRCopy（NIXL／UCX 非必須，但「necessary for maximum performance」） | NIXL README [doc-web] | 計算節點：`ls -l /dev/gdrdrv` | 登入節點有（0666） | 否（已存在時） |
-| 跨機網路拓樸：需兩台以上同時獨佔（D048） | `CLAUDE.md` 規則 7 | `sbatch -N 2` | 已知可行（M 系列已用） | 否 |
-| vLLM 版本差異：0.32.0 的 connector 清單與 v0.34.0 不同 | 見 E-3 | `python -c "import vllm; print(vllm.__version__)"` | 已確認 0.32.0 | 否 |
-| NIXL 與 UCX 版本相容 | NIXL README：測試版 UCX 1.23.x | `pip show nixl`、`ucx_info -v` | HPC-X UCX 1.16.0（本機） | 否（若 pip 版自帶 UCX 則無此問題，**未核對**） |
-
-## E-5　「找不到有人量過」的清單
-
-- 在 **H100＋InfiniBand NDR（400 Gb/s）**上量 **PD 分離的 KV 傳輸佔 TTFT 或 e2e 比例**（含 NIXL／Mooncake 實際傳輸）：**未找到**。已找到的條件都不同：KVDirect 為 2 張 H100 的微基準（R02）；Splitwise 為 IB（DGX-H100，R02，傳輸 ≤3% e2e）；TraCT 為 A6000＋100 Gb/s；vLLM 官方部落格為 L40S PCIe；LMCache 為 H100 單機 NVLink；E1 為 2×A100 PCIe；FlowKV 為 A100 NVLink／L20／H20（查詢見第 8 節 Q15–Q20）。
-- 在 **H100＋IB** 上量 **layer-wise／pipelined KV 傳輸與 prefill 計算的重疊程度**（隱藏了多少）：**未找到**（Q21）。
-- **vLLM 0.32.0** 上 NixlConnector／MooncakeConnector 的跨機 **bandwidth 與 per-transfer 延遲**官方數字：**未找到**；vLLM 提供指標 `vllm:nixl_xfer_time_seconds`、`vllm:nixl_post_time_seconds`（`nixl_connector_usage.md:477-478`）可用來量，但沒有發佈數字（Q22）。
-- SGLang **mooncake／nixl** 在 **H100＋IB** 的 KV 傳輸延遲分解：SGLang 部落格 V1（96×H100，R02_T5）不是以 KV 傳輸為焦點；其他**未找到**（Q23）。
-- **新資料是否解決 R02_T5 §3-F 的矛盾**：新找到的條件都在非 H100＋IB 的環境（見上），因此**沒有消除矛盾**，只是增加了「PCIe／低速網路下傳輸佔比大」的例子（E2、vLLM 部落格）與「NVLink 下傳輸可忽略」的例子（LMCache、E3）。
-
-## E-6　互相矛盾或不確定之處
-
-1. **傳輸是否為瓶頸**：TraCT 摘要「KV transfer dominates both TTFT and peak throughput」（100 Gb/s、A6000）；vLLM 官方文件「Disaggregated prefill DOES NOT improve throughput」；LMCache 部落格「vLLM v1 (w/ PD) outperforms vLLM (w/o PD)」（8×H100 NVLink 單機）；FlowKV「almost eliminating the transfer time」；Beyond the Buzz「existing provisioned datacenter bandwidth is sufficient」（R02）。硬體、模型、context 長度、傳輸庫版本都不同。
-2. **vLLM 部落格自己的數字**：1.3 s 傳 470 MB（約 0.36 GB/s）遠低於任何 PCIe 4.0 頻寬，作者自述「Bandwidth alone doesn't explain 1.3 s」並歸因於「overhead around the copy」；此為單一部落格的測量，條件為 L40S 無 P2P。
-3. **KV 傳輸量**：vLLM 部落格 56 KiB／token（Qwen2.5-7B）與 3 GB／10k token（Llama-3.1-70B，估算）屬不同模型；用於 Llama 405B 的數字**未找到**。
-4. **vLLM 0.32.0 vs v0.34.0 connector 清單不同**（E-3），任何 0.32.0 以外的連接器行為要先在 0.32.0 驗證。
-5. **E1 的 arXiv 日期**：abs 頁寫 2025-11-14 但編號為 2601；OpenAlex 的發表日 2026-04-27；原因未查。
-6. **Mooncake 的 DMA-BUF 路徑所需核心／驅動版本**：文件只說「does not need that module」，未列需求；NVSHMEM 的 dma-buf 條件（核心 ≥ 6.1）是否適用 Mooncake 未知。
+1. 三個主流系統的官方文件，遇到「一台 8 張 H100 放不下」的模型，**都不建議把 TP 拉到跨機**：vLLM 文件寫「TP 設成每台 GPU 數、PP 設成機器數」，TRT-LLM 文件直接寫「跨機的 TP 會被慢速互連拖住，建議機內 TP＋機間 PP」，Meta 的 Llama 3.1 論文也是兩台 16 張 H100 用 pipeline parallelism。**但** SGLang 官方文件的 405B 兩機範例與 Nemotron 3 Ultra 的 H100 配方就是 `--tp 16`（跨機 TP），vLLM 文件也列出 `--tensor-parallel-size 16` 的寫法。所以「有人跨機 TP」是事實，只是官方預設建議不是它。
+2. 有一篇實測（NVRAR，UMD／LLNL）發現：**decode 為主的負載，TP 比「TP＋PP」好**（因為 PP 切 micro-batch 後 decode 的小矩陣乘法沒變快），但跨機 TP 的 all-reduce 通訊時間在 8→16 張卡時增加約 1.6 倍。另一篇（TKNP，64 張 H100、8×400G InfiniBand）量到：跨機 TP64 時單次 all-reduce 比 TP8 貴 6.5 倍。這兩篇是目前找到最直接的「跨機 TP 通訊很貴」的實測。
+3. 在我們會用的 H100＋InfiniBand（非 NVL72）環境，vLLM、SGLang、TRT-LLM 的自製 all-reduce（custom AR、FlashInfer AR、torch symm_mem）**跨機一律關閉，退回 NCCL**（附行號）。也就是說，跨機 TP 的小訊息 all-reduce 目前實際走的是 NCCL 的 Tree／Ring＋LL／LL128。NCCL 2.29.7 已有新的對稱記憶體 all-reduce 核心，但它們是「單一 NVLink 領域」用的；GPU 直發 RDMA（GIN）的專用核心在 v2.32.6 只有 reduce-scatter 與 all-gather，**沒有 all-reduce**。
+4. 與既有工作的條件差異：NVRAR 只在 A100（Slingshot）與 GH200（每台 1 張 GPU、InfiniBand）測過；PCCL 只在 Frontier／Perlmutter；Every-µs 全在 GB200 NVL72；MSCCL++ 的多機 all-reduce 只在 A100 圖表，H100 只有單機。**沒有找到** H100 八卡機加 InfiniBand NDR、TP 跨機的小訊息 all-reduce 實測。
+5. 「GPU 直接發 RDMA」要不要 root：NVSHMEM 官方安裝指南寫預設模式需要把 `nvidia.ko` 以 `PeerMappingOverride=1` 載入（要改 `/etc/modprobe.d`，需管理員），但 3.4.5 起有「CPU-assisted IBGDA」不需要管理員；NCCL GIN 也有不需要 GPU 直發的 Proxy 後端。登入節點檢查：驅動 550.127.08、`nvidia_peermem` 模組檔存在但**沒載入**、`RegistryDwords` 為空、`gdrdrv` 已載入、核心 4.18。計算節點要在 M20 再確認。
+6. E 方向：PD 分離的 KV 傳輸在 H100＋IB 上的實測很少。H100＋400 Gbps 的直接資料點有 KVDirect（2 台 H100 間 22.23 GB/s，UCX 基線 4.05 GB/s）與 Splitwise（用 IB 傳輸量測外推到 DGX-H100：序列化傳輸最多佔端到端 3%，逐層傳輸 0.8%，但第二個 token 延遲 +16.5%）。R02_T5 §3-F 的矛盾，後續論文沒有找到正面處理；新找到的都是「條件不同」（模擬、A100／A40 單機）。
 
 ---
 
-# 共用部分
+## 1. 重點事實（附出處）
 
-## 7　arXiv ID／DOI 清單（供匯出 BibTeX）
+**B1：實務上怎麼放 8×H100 放不下的模型**
 
-**已核實（開 abs 頁、arXiv MCP 或 PDF 確認）**
-- 2511.09557（NVRAR；DOI 10.1145/3786335.3813165）
-- 2607.16100（Every-µs，R02 已核實）
-- 2504.18658（PCCL，R02 已核實）
-- 2609.13585（mKernel，R02 已核實；本次讀 PDF 全文）
-- 2610.01380（Dissecting GPU-Initiated Communication；[abs]）
-- 2605.00686（Perseus；[abs]）
-- 2511.15076（GIN for NCCL，R02 已核實）
-- 2603.13606（NCCL EP；[abs]）
-- 2407.21783（Llama 3；[abs]）
-- 2607.08973（SiFAR，R02 已核實）
-- 2611.06634（flash-comm；[abs]）
-- 2603.05692（Parallelization Strategies for Dense LLM Deployment；arXiv MCP get_abstract）
-- 2610.05305（Characterizing Parallelism Strategies；[abs]）
-- 2607.05876（Floor-First；[abs]）
-- 2412.04964（Flash Communication；[abs]）
-- 2411.09510（Communication Compression for TP；[abs]）
-- 2606.01502（Move the Query, Not the Cache；[abs]）
-- 2505.11329（TokenWeave，R02 已核實）
-- 2510.27656（fabric-lib，R02 已核實）
-- 2601.08833（Revisiting Disaggregated LLM Serving；[abs]）
-- 2512.18194（TraCT；[abs]）
-- 2504.03775（FlowKV；[abs]）
-- 2607.02574（KV cache survey；[abs]）
-- 2610.18444（Optical KV Cache Network；[abs]）
-- 2506.05508、2401.09670、2311.18677、2501.14743、2407.00079、2604.00368、2609.13161、2607.01831、2510.09665（皆 R02_T5 已核實，本次未重複開頁）
+1. **vLLM 官方文件**：`vllm/docs/serving/parallelism_scaling.md:8-9` [doc-local]：「if the model is too large for a single GPU but fits on a single node with multiple GPUs, use *tensor parallelism*」；「**Multi-node multi-GPU using tensor parallel and pipeline parallel inference:** if the model is too large for a single node, combine *tensor parallelism* with *pipeline parallelism*. Set `tensor_parallel_size` to the number of GPUs per node and `pipeline_parallel_size` to the number of nodes.」同檔 `:122`「The common practice is to set the tensor parallel size to the number of GPUs in each node, and the pipeline parallel size to the number of nodes.」；但 `:130-136` 也列：「Alternatively, you can set `tensor_parallel_size` to the total number of GPUs in the cluster」並給 `--tensor-parallel-size 16`。`:163`「Efficient tensor parallelism requires fast internode communication, preferably through high-speed network adapters such as InfiniBand.」`:219`「`[send] via NET/Socket` … *is not* efficient for cross-node tensor parallelism.」
+2. **vLLM 對 Llama-3.1-405B**：`vllm/docs/deployment/frameworks/lws.md:43` [doc-local]：`vllm serve meta-llama/Meta-Llama-3.1-405B-Instruct --tensor-parallel-size 8 --pipeline-parallel-size $(LWS_GROUP_SIZE) --nnodes ...`（LeaderWorkerSet 範例；TP=8、PP=機器數）。
+3. **vLLM 對 DeepSeek-V3（H100）**：`vllm/docs/serving/expert_parallel_deployment.md:87` [doc-local]：「It will work on a H200 (or H20) node with 8 GPUs. For H100, you can try to serve a smaller model or refer to the multi-node deployment section.」多機範例 `:151` 用 `deepep_low_latency` 模式（`--data-parallel-size 16`＋EP，TP=1；摘要見 [web-sum]，請讀 `:139-200` 確認）。`context_parallel_deployment.md:46` [doc-local]：Kimi-K2 用 `-tp 16` 時 KV cache 重複 16 倍，建議加 `-dcp`，「the communication overhead is smaller since the DCP communication only happens inside one node.」（`-tp 16` 在這裡指兩台 H100 級機器的跨機 TP）。
+4. **SGLang 官方文件**：`sglang/docs/docs/references/multi_node_deployment/multi_node.mdx:6-31` [doc-local]：「**Run 405B (fp16) on Two Nodes**」，兩台各執行 `--tp 16 --dist-init-addr ... --nnodes 2 --node-rank <0|1>`；並註「Note that LLama 405B (fp8) can also be launched on a single node」附 `--tp 8`。`sglang/docs/cookbook/autoregressive/NVIDIA/Nemotron3-Ultra.mdx:80,85` [doc-local]：「BF16: `--tp 16` on H100/H200」「The 16×H100 BF16 setup spans two nodes. … keep `--tp 16`.」→ SGLang 文件有官方的**跨機 TP=16 H100 配方**。
+5. **SGLang 對 DeepSeek-V3.x**：`cookbook/autoregressive/DeepSeek/DeepSeek-V3.mdx:51,55`（權重類型表）列 FP8「2×8× H100/H800/H20」、BF16「4×8× H100/H800」；單節點 DP-attention 指令 `--tp 8 --attn-dp-size 8`。`DeepSeek-V3_2.mdx:461-468`：兩機 `--tp 16 --attn-dp-size 2 ... EAGLE`（附 benchmark 註解：dp2＋mtp 6842.51 toks/sec）；`:486`：`--tp 8 --pp-size 2 --moe-a2a-backend deepep --ep-size 16`，文字「CP is currently enabled with PP=2 on Hopper platform and we can reduce TP=16 to TP=8 from standalone deployment」（兩者並存）。
+6. **TensorRT-LLM 官方文件**：`trtllm/docs/source/legacy/performance/performance-tuning-guide/deciding-model-sharding-strategy.md`（「If your model is sharded across multiple nodes」段）[doc-local]：「Inter-node connections are typically significantly slower than intra-node connections, so if you have tensor parallelism across nodes it will be bottlenecked by the slow interconects. Consequently, a good starting point is having tensor parallelism within the node and pipeline parallelism between nodes. An exception is if you are running on NVL36 or NVL72 Blackwell systems.」範例：405B、`tensor_parallel_size=8, pipeline_parallel_size=2`。`trtllm/examples/models/core/llama/README.md:1437-1454`：405B BF16 用 `tp8-pp2` engine、Slurm 多機。註：此頁位於 `legacy/`。
+7. **Meta Llama 3 論文**（arXiv 2407.21783 §6.1）[pdf]：「Llama 3 405B does not fit in the GPU memory of a single machine with 8 Nvidia H100 GPUs. To address this issue, we parallelize model inference using BF16 precision across 16 GPUs on two machines.」「Across nodes, however, connectivity has lower bandwidth and higher latency, so we use pipeline parallelism … instead.」
+8. **DeepSeek-V3 技術報告**（arXiv 2412.19437 §3.4）[pdf]：prefill 最小單元 4 節點 32 GPU，「attention … TP4 with SP, combined with DP8 … Its small TP size of 4 limits the overhead of TP communication」，MoE 用 EP32；decode 最小單元 40 節點 320 GPU，「TP4 with SP, combined with DP80 … EP320 … direct point-to-point transfers over IB … leverage the IBGDA」（H800）。
+9. **NVRAR 論文對 TP vs TP＋PP 的實測**（arXiv 2511.09557，CAIS '26）[pdf]：「HP outperforms TP for the most compute-bound and prefill-heavy workload (Figure 1, left), but TP starts to outperform HP as workloads become more memory-bound and decode-heavy.」「Observation 1: … HP is advantageous in compute-bound regimes, whereas TP is better for memory-bound and decode-heavy cases.」原因（Table 4 合成 GEMM）：decode 小 M 時把 M 減半（PP micro-batch）幾乎不減時間，把 K 減半（TP）則明顯減少。TP 的通訊代價：「the communication time in YALIS (TP) increases by ∼1.6×, offsetting the gains from reduced computation time when going from eight to 16 GPUs」（70B、Perlmutter A100）。
+10. **TKNP 論文（Decode Token Parallelism，arXiv 2611.13293）** [pdf]：「at batch 128, one all-reduce costs 6.5× more at TP64 than at TP8. Despite 8× less local compute per GPU, end-to-end MLP latency rises by 55%.」硬體：「Each node contains 8×80GB H100 GPUs connected via 4th-generation NVLink … nodes interconnected by 8×400 Gb/s InfiniBand」；軟體「NCCL 2.27.5, vLLM 0.19.0」；Llama 3.1 405B（FP8）。→ 這是 H100＋NDR InfiniBand、vLLM 上、跨機 TP 的實測；作者的對策是讓 dense all-reduce 留在 NVLink 內。
 
-**未核實，勿直接引用**
-- DOI 10.1145/3789240.3828750（ARK，只在 OpenAlex 見摘要）
-- DualPath，DOI 10.1145/3789240.3829159（只在 OpenAlex 見摘要，本報告未用）
-- NVIDIA 技術部落格 Llama 3.1 405B TP vs PP（只見 WebSearch 摘要）
-- 2610.14277（Echo，4-bit TP 通訊，A100；只在 OpenAlex 見摘要，本報告未用）
+**B2：TP 跨節點時的 all-reduce 路徑**
 
-**非同儕審查資料（網址）**
-- vLLM 官方文件 https://docs.vllm.ai/en/latest/serving/parallelism_scaling/ 、https://docs.vllm.ai/en/latest/serving/expert_parallel_deployment/
-- vLLM 部落格 https://vllm.ai/blog/2026-09-29-disaggregated-serving-guide
-- LMCache 部落格 https://blog.lmcache.ai/2025-04-29-pdbench/
-- SGLang 文件（repo 內）`docs/docs/references/multi_node_deployment/multi_node.mdx`、`docs/docs/advanced_features/pipeline_parallelism.mdx`、`docs/docs/advanced_features/pd_disaggregation.mdx`
-- TRT-LLM https://nvidia.github.io/TensorRT-LLM/latest/examples/llm_mgmn_trtllm_serve.html
-- NVSHMEM install guide https://docs.nvidia.com/nvshmem/release-notes-install-guide/install-guide/abstract.html ；NVSHMEM 2.8.0 env https://docs.nvidia.com/nvshmem/archives/nvshmem-280/api/gen/env.html
-- GDRCopy https://github.com/NVIDIA/gdrcopy ；NIXL https://github.com/ai-dynamo/nixl ；CUDA GPUDirect RDMA https://docs.nvidia.com/cuda/gpudirect-rdma/
+11. **vLLM（v0.34.0 與 0.32.0 行為相同）**：custom AR 在跨機且無 MNNVL 時整個停用，退回 NCCL。`vllm/vllm/distributed/device_communicators/custom_all_reduce.py:202-203`（`same_node = all(in_the_same_node_as(group, source_rank=0))`、`self.mnnvl_only = not same_node`）；`:232-237`：`if not same_node and not _group_can_attempt_mnnvl(group, device): logger.warning("Custom collectives are disabled because this multi-node group does not have MNNVL-capable GPUs on every rank."); return`（`self.disabled` 初值為 True，`:165`）；`:350-356` 同樣訊息（無 MNNVL multicast）。另 `should_custom_ar` 在 world_size > 8 時直接 False（`:501`，0.32.0 為 `:500`，0.34.0 多了 `self.mnnvl_only`）。torch symm_mem：`symm_mem.py:73-79` world size 不在表內就停用，cc9.0 只有 {2,4,6,8}（`all_reduce_utils.py:58-64`），故 TP=16 停用。FlashInfer AR：`flashinfer_all_reduce.py:174-192`：多機且非 Blackwell → `"FlashInfer allreduce fusion is disabled: multi-node process groups require an MNNVL-capable Blackwell system."`；`:225-227`、`:294-297`：trtllm backend 不支援多機。0.32.0 同樣有這些判斷（`flashinfer_all_reduce.py:157-175, 204, 273`）。→ H100＋IB 跨機 TP 的 all-reduce 在 vLLM 走 `pynccl_comm.all_reduce`（`cuda_communicator.py:459-463`，R03）。
+12. **vLLM 0.32.0 → 0.34.0 的差異（與此議題相關的）**：用 `diff` 比對 `custom_all_reduce.py`（22 行）、`all_reduce_utils.py`（13 行）、`flashinfer_all_reduce.py`（55 行）、`cuda_communicator.py`（90 行）：差異為（a）0.34.0 的 `should_custom_ar` 多一個 `mnnvl_only` 判斷、docstring 明寫「CUDA IPC collectives require all ranks to be on the same node; cross-node groups only support MNNVL all-gather and reduce-scatter」；（b）FlashInfer AR 多了 HiSparse 例外與 16 B 對齊檢查；（c）cc10.0／10.3 的 MNNVL 上限表；（d）ROCm AITER／MoRI 相關。**H100 跨機 all-reduce 路徑沒有行為差異**。`symm_mem.py` 兩版逐字相同。
+13. **SGLang v0.5.23**：`custom_all_reduce.py:384-385`：「Multi-node v2 is admitted only for a single NVLink clique (see can_use_custom_all_reduce_v2); other cross-node groups fall back to NCCL.」`custom_all_reduce_v2.py:582-597`：跨機時 `return is_one_nvlink_clique(group, device) and _is_vmm_backed_allocator(device)`；`custom_all_reduce_utils.py:396-418`：「True iff every rank's GPU is in the same NVLink fabric clique (one NVL72 / MNNVL domain)」。H100＋IB 兩台不在同一 clique → 退回 NCCL（pynccl／`torch.distributed`，R03 `parallel_state.py:673-770`）。FlashInfer AR 融合另限單機（sm90）（R03：`overrides.py:980-1001`）。
+14. **TensorRT-LLM v1.2.1**：`trtllm/cpp/tensorrt_llm/thop/allreduceOp.cpp:1013-1017, 1187`：跨節點時 `mIsP2PSupported = false; // P2P doesn't work across nodes`，`mIsMNNVLSupported = mIsNVLINKSupported && all_ranks_support_mnnvl`；`:1199-1262`（R03）：`!mIsP2PSupported` → `ifFallbackToNCCL`。Python 層 `ops.py:540-550`：MNNVL 策略需 `is_multi_node() and MnnvlMemory.supports_mnnvl() and is_on_aarch64`（R03）。→ x86 H100 跨機 TP 走 NCCL。
+15. **NCCL（跨機小訊息）**：NVLSTree 只有 SIMPLE 協定：`nccl/src/config/algorithm_registry.cc:48-50`（註解「NVLS_TREE x LL — combo not implemented」「NVLS_TREE x LL128 — combo not implemented」，`NVLSTREE_SIMPLE` 為 `F_AR`）；`tuning/nvls.cc:22`：NVLS／NVLS_TREE 非 SIMPLE 時排除；`:27`：單節點不用 NVLS_TREE。跨機小訊息候選為 Ring／Tree 的 LL／LL128（`tuning/ring.cc`、`tuning/tree.cc`）。
+16. **NCCL 對稱記憶體 all-reduce 與 GIN**：v2.32.6 `src/sym_kernels.cc:60-67` AR 核心集合（`AllReduce_AGxLL_R`、`AGxLLMC_R`、`RSxLD_AGxST`、`RSxLDMC_AGxSTMC`、`RSxTmaLD_AGxTmaST` 等）；`:92-94`：「GinOnly」核心只有 `ReduceScatter_RailA2A_LsaLD`、`ReduceScatter_RailA2A_LsaLDMC`、`AllGather_RailRing_LsaSTMC`——**沒有 all-reduce 的 GIN 專用核心**；`src/init.cc:2048-2050`：`symmetricSupport = isAllCudaP2p && WinEnable && cuMemEnable && (globalGinSupport != NONE || isOneLsaTeams)`。我們安裝的 NCCL 2.29.7 的 `libnccl.so.2`（`/work/allen0117/comm_opt_env/venvs/vllm/lib/python3.12/site-packages/nvidia/nccl/lib/`）用 `strings -a | grep -c` 查到 `AllReduce_AGxLL_R`（27）、`AllReduce_RSxLD_AGxST`（36）、`RailA2A_LsaLD`（91）、`AllGather_RailRing`（16）、`ncclGin`（617）、`NCCL_GIN_TYPE_GDAKI`、`NCCL_GIN_GDAKI_QP_DEPTH` 等字串，`NCCL version 2.29.7+cuda12.9`。（字串存在 ≠ 功能可用；`NCCL_GIN_BACKEND` 在 2.29.7 查不到，GIN 論文用此名，2.29.7 的名稱是 `NCCL_GIN_TYPE`。）
 
-## 8　搜尋紀錄
+**B3：既有工作（細節見第 2 節）、B4：GPU 直發 RDMA、E**
 
-工具縮寫：AX = arXiv MCP `search_papers`；OA = paper-search `search_openalex`；SS = paper-search `search_semantic`；GS = paper-search `search_google_scholar`；WS = WebSearch；WF = WebFetch。
+17. **NCCL GIN 實測（arXiv 2511.15076，NVIDIA）** [pdf]：2 張 H100（EOS DGX H100）間 put-with-signal ping-pong：「NCCL GIN GDAKI achieves 16.7 µs round-trip latency, comparable to NVSHMEM IBRC at 16.0 µs, while NVSHMEM IBGDA achieves 24.3 µs … the Proxy backend achieves 18.0 µs」（4–128 B）。
+18. **NVSHMEM 分析（arXiv 2606.05951）** [pdf]：CoreWeave **H200**＋ConnectX-7（每節點 8 NIC）、NVSHMEM 3.3.9：「With IBGDA, inter-node put/get take about 9.4–9.5 µs at 256 B」。
+19. **MSCCL++（arXiv 2504.09014，ASPLOS '26）Table 1** [pdf]：H100＋Quantum-2 CX7 400 Gb/s：InfiniBand 延遲 MSCCL++ 4.89 µs vs 最佳可達（perftest）3.76 µs（PortChannel，即 CPU proxy 路徑）；NVLink 吞吐／延遲與最佳可達持平。
+20. **KVDirect（arXiv 2501.14743）** [pdf]：最多 4 台 H100、每 GPU 一張 400 Gbps RDMA NIC；「We transfer 1024 blocks between 2 H100 GPUs on two nodes via 400 Gbps NIC … KVDirect achieves 22.23 GB/s bandwidth … while UCX only uses 4.05 GB/s when using 4 connections.」摘要：「reduces per-request latency by 55% compared to the baseline」；vLLM v0.5.3、CUDA 12.4。
+21. **Splitwise（arXiv 2311.18677 §VI）** [pdf]：以 IB 實作的 KV 傳輸量測建模（DGX-A100 200 Gbps；DGX-H100 400 Gbps），「The latency impact of serially transferring the KV-cache grows up to 3% of the E2E with large prompts. However, Splitwise only incurs 0.8% of E2E.」「Splitwise adds a 16.5% latency to the second token, as compared to the 64% overhead from a serialized transfer.」
+22. **DistServe（arXiv 2401.09670 §6.3）** [pdf]：「even for OPT-175B, the KV Cache transmission only accounts for less than 0.1% of the total latency」，但原因是放置演算法讓 prefill／decode 在同一台機器、走 NVLink；其測試機「cross-node bandwidth is 25Gbps」，A100。
 
-- Q1 OA「multi-node LLM inference all-reduce InfiniBand tensor parallelism bottleneck NCCL」，約 12 筆；採用 NVRAR（已有）、Flash Communication、GIN、mKernel、MSCCL++（未列，單機為主）；排除 Nereus、LLMEasyQuant（無關）。
-- Q2 OA「all-reduce latency LLM inference tensor parallelism small messages GPU」，約 10 筆；採用 SCIN（R02 已有）、2610.05305、2411.09510；排除 CPU-induced slowdown、EnergyLens、Echo（A100，壓縮式）。
-- Q3 SS「low-latency all-reduce multi-node tensor parallel LLM decode small messages」：0 筆；Q4 GS「multi-node tensor parallel LLM decode all-reduce latency InfiniBand small message NVSHMEM」：0 筆（兩個工具本次回傳空）。
-- Q5 AX `abs:"all-reduce" AND abs:"decode" AND abs:"tensor parallel" AND abs:"multi-node"`：回傳 1 筆（NVRAR）。
-- Q6–Q8 AX（`abs:"all-reduce" AND abs:"LLM inference" AND abs:"low-latency"`、`abs:"tensor parallelism" AND abs:"across nodes"`、`abs:"KV cache transfer" AND abs:"InfiniBand"`、`abs:"all-reduce" AND abs:"tensor parallelism" AND abs:"inter-node"`）：全部 HTTP 429 rate limited，重試數次均失敗，**無結果**。
-- Q9 `mcp__arxiv__citation_graph(2511.09557)`：Semantic Scholar rate limited，**無結果**。
-- Q10 OA「decode all-reduce message size distribution tensor parallel LLM serving hidden size batch size profiling」，約 12 筆；採用 flash-comm、Floor-First；排除 PagedAttention、LLM-PQ、ConServe 等（無關）。
-- Q11 OA「GPU-initiated RDMA IBGDA NVSHMEM low-latency collective small message H100 InfiniBand」，約 12 筆；採用 Dissecting、Perseus、mKernel、NCCL EP、2606.01502；排除 SigmaTrace（觀測工具）、FlexLink、UCCL-EP、MSCCL++（R02 範圍或單機）。
-- Q12 WS「SGLang Llama 3.1 405B two nodes --tp 16 --nnodes 2 ...」；WF docs.sglang.ai（301 轉址）、docs.sglang.io/references/multi_node.html（404）→ 改讀 repo 內文件。
-- Q13 WS「TensorRT-LLM multi-node tensor parallelism ... trtllm-llmapi-launch slurm」；WF TRT-LLM Slurm 範例頁。
-- Q14 WS「NVIDIA technical blog Llama 3.1 405B H200 NVLink Switch TP vs PP」；只讀搜尋摘要。
-- Q15 WS「NVSHMEM IBGDA PeerMappingOverride NVreg_RegistryDwords nvidia.conf modprobe requirement documentation」；WF NVSHMEM install guide、NVSHMEM env、GDRCopy GitHub、CUDA GPUDirect RDMA 文件、NIXL README。
-- Q16 OA「prefill-decode disaggregation KV cache transfer overhead measured InfiniBand GPUDirect RDMA NIXL Mooncake evaluation」，3 筆；Q17 OA「layer-wise KV cache transfer overlap prefill disaggregated serving network bandwidth requirement analysis」，約 15 筆；採用 E1–E6（TraCT、FlowKV、Revisiting、ARK、Optical、Survey）；排除 LayerKV、BanaServe、semi-PD、ShadowServe、SwiftCache、KVStream、OrbitFlow、DUET、Janus、HAWK（異質、模擬或單機記憶體管理，與 H100＋IB 傳輸無直接量測）。
-- Q18 WS「NIXL KV cache transfer latency measured H100 ConnectX-7 InfiniBand disaggregated serving Dynamo blog GB/s per GPU」；Q19 WS「vLLM blog disaggregated prefill NIXL KV transfer overhead TTFT H100 InfiniBand measurement 2026」；WF vLLM 部落格、LMCache 部落格。
-- Q20 對原始碼：`grep` 於 `/work/allen0117/comm_opt_env/src/{vllm,sglang,trtllm}` 的 `device_communicators/*.py`、`kv_transfer/kv_connector/factory.py`、`arg_groups/`、`disaggregation/`、`docs/`；與 venv 內 `venvs/vllm/lib/python3.12/site-packages/vllm/` 的對應檔。
-- Q21–Q23：針對「layer-wise 傳輸與 prefill 重疊」「vLLM 0.32.0 NixlConnector 發佈數字」「SGLang mooncake/nixl H100 IB 延遲分解」：在 Q16、Q17、Q18、Q19 結果中未見，**無專門查詢，視為未找到**。
-- 登入節點唯讀指令：`ls -la /dev/gdrdrv`、`ls /dev | grep ...`、`cat /proc/driver/nvidia/{version,params}`、`lsmod`、`ofed_info -s`、`ls /sys/class/infiniband`、`uname -r`、`ucx_info -v`、`ls`（venv 與 NVHPC 目錄）。
-- PDF 下載（`/home/allen0117/comm_opt/papers/`，皆非 0 位元組）：2511.09557（既有）、2610.01380、2605.00686、2610.05305、2601.08833、2512.18194、2504.03775、2607.08973、2505.11329、2607.02574。
-- 核實篇數：本報告新核實 17 篇（[abs] 或 MCP get_abstract：2610.01380、2605.00686、2603.13606、2407.21783、2611.06634、2603.05692、2610.05305、2607.05876、2412.04964、2411.09510、2606.01502、2601.08833、2512.18194、2504.03775、2607.02574、2610.18444；另重讀 PDF 補新事實：2511.09557、2607.16100、2609.13585、2607.08973）；其餘為 R02 已核實的編號。
+---
+
+## 2. 最接近的既有工作表
+
+欄位：工作／出處／做了什麼／硬體與規模／與本方向重疊／沒涵蓋的條件。R02 已列者用 R02 編號並只補新資訊；「新」表示本次新找到。
+
+### 2.1 B：跨機小訊息 all-reduce 與跨機 TP
+
+| 工作 | 出處 | 做了什麼 | 硬體與規模 | 重疊 | 沒涵蓋／條件差異 |
+|---|---|---|---|---|---|
+| **NVRAR**（R02_T5 #10／R02_T4 P9；本次核實 PDF） | Singhania et al., arXiv 2511.09557 v4；CAIS '26；https://arxiv.org/abs/2511.09557 | NVSHMEM 階層式 all-reduce：機內 reduce-scatter → 機間 recursive doubling（`put_nbi`，8 B 資料＋旗標融合 payload，序號同步）→ 機內 all-gather；整合進 YALIS／vLLM | Perlmutter：A100，每節點 4 GPU，Slingshot-11；Vista：GH200，**每節點 1 GPU**，InfiniBand；NCCL 2.27.3；最多約 32 GPU（Perlmutter） | 直接重疊：多機 TP decode 的小訊息（128 KB–2 MB）all-reduce。原文：摘要「1.9×–3.6×」，內文「Between 256 KB and 1 MB, NVRAR achieves significant speedups over NCCL (1.06×–1.92×)」（Perlmutter）；Vista「up to 3.5× lower latency」；端到端 405B 最多 1.72×（Perlmutter） | 無 H100、無 8 GPU／機的 InfiniBand 資料。原文自述：「We attribute these higher speedups to the architecture of Vista, where each node has one GPU. As a result, NVRAR only executes the inter-node recursive-doubling phase」；Perlmutter 上「NVRAR is slower than NCCL for 64 KB and 128 KB messages, partly due to kernel launch overheads from its three-phase design」；「We plan to investigate and reduce idle time in future versions」「We leave heuristic-based hyperparameter tuning to future work」。機內階段用 NVSHMEM host API reduce-scatter／all-gather。 |
+| **TKNP（Decode Token Parallelism）**（新） | arXiv 2611.13293；https://arxiv.org/abs/2611.13293（本次僅下載 PDF，未見 venue） | 讓 dense 層 TP 留在 NVLink 內、attention 跨節點依請求分擔；vLLM 實作 | 最多 64×H100（8×80GB，NVLink4，8×400 Gb/s InfiniBand）；Llama 3.1 405B、Nemotron-4 340B（FP8）；NCCL 2.27.5、vLLM 0.19.0 | 量到跨機 TP 的 all-reduce 成本：「one all-reduce costs 6.5× more at TP64 than at TP8 … MLP latency rises by 55%」；與我們硬體最接近的一篇 | 目標是 long-context／高併發 decode 吞吐，不是改進 all-reduce；原文限制：「At small batches or short contexts, communication and synchronization can outweigh the benefit」；PD 分離設定（2 prefill 節點＋4／8 decode 節點） |
+| **Every µs Matters**（R02 T1-P3） | Shen et al.（NVIDIA＋ETH），arXiv 2607.16100；https://arxiv.org/abs/2607.16100；本次讀 PDF | NCCL device API 上的 barrier-free LLBuffer 單發／雙發對稱 all-reduce；NVLS multicast；vLLM 整合 | **GB200 NVL72**（每節點 4 GPU，72 GPU 同一 NVLink 領域）；vLLM 0.15.1、CUDA 13.1；TP=4（1 節點）與 TP=8（2 節點）皆在 NVLink 領域內 | 小訊息 all-reduce 延遲逼近 SoL（單機 2 GPU 約 7% 開銷）；vLLM ITL TP=8 改善 9–11% | 「multi-node」指 NVL72 內跨節點 NVLink，非 InfiniBand；原文對比：vLLM custom AR、NCCLX ctdirect「only single-node」，「MSCCL++ … multi-node collectives are not supported at the time of writing」；kernel 限制「It requires NVLink to guarantee cache-line–level atomic addition」；未來工作「kernel selection … driven by empirical measurements and could be improved with an accurate performance model」 |
+| **MSCCL++**（R02 T4／T1 提及；本次讀 PDF） | Hwang et al.，arXiv 2504.09014 v4，ASPLOS '26；https://arxiv.org/abs/2504.09014 | PortChannel（CPU proxy RDMA）／MemoryChannel／SwitchChannel（NVLS）；DSL；多機 all-reduce 用兩階段階層式（2PH，小訊息用 LL） | A100-40G、A100-80G、H100（8 GPU／節點，**Quantum-2 CX7 400 Gb/s，每 GPU 一 NIC**）、MI300x；baseline NCCL 2.26.2 | H100＋NDR 的 IB 延遲 4.89 µs（Table 1）；H100 單機 all-reduce 小訊息最多 2.8×、SwitchChannel 比 MemoryChannel 最多 +56% 頻寬 | 多機 all-reduce 圖表（Fig. 7，`2n16g` 等）為 **A100-40G**；H100 圖（Fig. 9）標題為「single-node (8 GPUs)」；Every-µs 對 MSCCL++ 的評語見上列 |
+| **PCCL: The Big Send-off**（R02_T4 P20；本次核實結論句） | Singh et al.，arXiv 2504.18658；https://arxiv.org/abs/2504.18658 | 兩層階層式 all-gather／reduce-scatter／all-reduce，跨機 recursive doubling／halving，自適應選演算法 | Frontier（MI250X，Slingshot，至 2048 GCD）、Perlmutter（A100，Slingshot） | 階層式＋跨機 recursive doubling 的同類設計 | 原文：「In future work, we plan to benchmark PCCL on clusters with InfiniBand interconnects」；重點為大訊息（訓練 all-gather／reduce-scatter），不是 decode 小訊息 |
+| **GIN: GPU-Initiated Networking for NCCL**（R02_T4 P10；本次讀 PDF） | Hamidouche et al.（NVIDIA），arXiv 2511.15076；https://arxiv.org/abs/2511.15076 | NCCL 2.28 Device API：LSA／Multimem／GIN（GDAKI＝DOCA GPUNetIO 直發；Proxy＝CPU 代發）；整合 DeepEP | EOS DGX H100，2／4／8 節點；NVSHMEM 3.4.5、NCCL 2.28 | H100＋IB 上 GPU 直發的點對點延遲（見重點事實 17） | 應用為 MoE all-to-all（DeepEP），不是 all-reduce；原文要求：「GPU-initiated networking requires the nv_peer_mem kernel module … and appropriate driver stacks」 |
+| **Demystifying NVSHMEM**（新） | Langer et al.（NVIDIA＋ETH），arXiv 2606.05951；https://arxiv.org/abs/2606.05951 | NVSHMEM 的對稱記憶體、單邊操作、device 端 collective 的系統級量測（含 AllReduce） | CoreWeave **H200**×8／節點，ConnectX-7（8 NIC／節點）；NVSHMEM 3.3.9、CUDA 13.0 | IBGDA 跨機小訊息 put/get ≈ 9.4–9.5 µs（256 B）；含 NVSHMEM AllReduce 結果 | H200、CUDA 13；「few inter-node NVSHMEM measurements are missing due to timeouts」；非 TP decode 情境 |
+| **GPU-Initiated Communication: Dissecting Down to the Bone**（新） | Baydamirli et al.，arXiv 2610.01380；https://arxiv.org/abs/2610.01380 | 拆解 GPU 直發 RDMA 的每操作成本（GPU 發 doorbell 的 mini-gda 與 host proxy 比較）；跨 H100／H200／B200／GB200 | P-IB：4×4 H200、CX-7 200 Gb/s IB；P-H100：100×4 H100、CX-7 200 Gb/s IB，驅動 580.95／CUDA 13.0；NVSHMEM 3.4.5／3.7.2、NCCL 2.30.7／2.31.2 | 說明 GPU 直發的前提：「the NVIDIA kernel module permits it only with the option PeerMappingOverride=1 [23]」「NVSHMEM's CPU-assisted mode … for systems where the mapping is disallowed」；並指出「P-H100 is a larger cluster without NIC doorbell mapping support」 | 驅動 580+、CUDA 13；非 all-reduce |
+| **SiFAR**（R02_T5 #2；本次讀 PDF） | Taneja et al.（GaTech＋NVIDIA），arXiv 2607.08973 | 去同步 all-reduce（雙緩衝、in-switch 「redundant pull」、跨 all-reduce 去 barrier） | 單機 8×H200，TP=2/4/8 | 量到 Llama-3.1-8B TP=8 all-reduce 占 TPOT 30% | 單機；Hopper multimem；無跨機 |
+| **TokenWeave**（R02_T5 #16） | arXiv 2505.11329，MLSys '26 | 融合 AllReduce＋RMSNorm、計算通訊重疊 | 8×H100 單機 | 小 decode batch 效益消失（R02 引文） | 單機、不支援 CUDA Graph（R02） |
+| **Flash Communication**（新） | Li et al.，arXiv 2412.04964；https://arxiv.org/abs/2412.04964 | TP all-reduce 低位元壓縮（INT8 等） | 機內為主（摘要：「substantially boosts intranode communication speed by more than 3×」） | 減少 TP all-reduce 的資料量（另一條路線） | 機內；準確度取捨 |
+| **SCIN**（R02_T5 #8） | arXiv 2603.28239 | 交換器中心的網路內架構（FPGA＋模擬） | FPGA 原型＋cycle-level 模擬（R02） | 網路內加總（A 組範圍） | 規模受限（R02 引文） |
+| **Prime PCCL**（R02_T4 P19） | arXiv 2505.14065 | 公網容錯 CCL | WAN TCP | — | 與 IB 無關（R02 已排除） |
+
+### 2.2 E：PD 分離的 KV cache 傳輸
+
+| 工作 | 出處 | 做了什麼 | 硬體與規模 | 與 E 重疊 | 沒涵蓋／條件 |
+|---|---|---|---|---|---|
+| **KVDirect**（R02_T5 #19；本次讀 PDF） | Chen et al.（Rutgers／ByteDance），arXiv 2501.14743 | pull 式 RDMA 張量通訊庫，比 UCX 訊息式傳輸省 CPU | **最多 4 台 H100（8×H100-80G），每 GPU 400 Gbps RDMA NIC**；vLLM v0.5.3 | 兩台 H100 經 400 Gbps NIC：KVDirect 22.23 GB/s、UCX（4 連線）4.05 GB/s | 原文未提 InfiniBand 或 RoCE 的字樣（grep 未命中）；vLLM 0.5.3 很舊；自述未來：閒置記憶體當 prefix cache、prefill／decode 角色互換 |
+| **Splitwise**（R02_T5 #24；本次讀 PDF） | Patel et al.，arXiv 2311.18677 | 階段分離；KV 序列化傳輸 vs 逐層傳輸 | DGX-A100（200 Gbps IB）、DGX-H100（400 Gbps IB）；傳輸開銷由 IB 實作量測建模（§VI-A） | 見重點事實 21：端到端 ≤3%（序列化）／0.8%（逐層），第二 token +16.5%（逐層）vs +64%（序列化） | 傳輸用「建模」而非即時多機服務；原文：「Since we do not have access to such hardware and/or optimized LLM implementations, we leave this to future work」（R02 引文） |
+| **DistServe**（R02_T5 #23） | arXiv 2401.09670 | 搭配放置演算法；傳輸占比 | 4 節點 32×A100-80GB，跨機 25 Gbps | <0.1% 總延遲（OPT-175B）；但經 NVLink | 自述「does not implement advanced runtime policies like preemption and fault tolerance」（R02）；非 H100／IB |
+| **Mooncake**（R02_T5 #22） | arXiv 2407.00079；FAST '25 | KV 中心架構、Transfer Engine | 每節點 8×A800，RDMA NIC 合計最高 800 Gbps | Transfer Engine 為 vLLM／SGLang 的 KV 連接器後端 | A800；dummy 模型 |
+| **Beyond the Buzz**（R02_T5 #15；本次核實引文） | arXiv 2506.05508 | 解析模型：PD 分離的適用條件 | 專有高保真 GPU 模擬器；Blackwell、FP4 | 「Our analysis indicates that existing provisioned datacenter bandwidth is sufficient to support KV cache transfer without becoming a bottleneck.」 | 模擬；Blackwell；R02 已記 |
+| **Revisiting Disaggregated LLM Serving for Performance and Energy**（新） | Li et al.（UIUC／IBM），arXiv 2601.08833；https://arxiv.org/abs/2601.08833 | 比較 KV 傳輸路徑（GPU P2P via NIXL cuda_ipc、CPU DRAM 等）的效能與能耗 | **2×A100，同一台、PCIe bridge**；vLLM V1＋LMCacheConnectorV1＋NIXL | 摘要：「performance benefits from prefill–decode disaggregation are not guaranteed and depend on the request load and KV transfer mediums」 | A100、單機、無 IB |
+| **ConServe（Observation, Not Prediction）**（新） | Ding et al.，arXiv 2606.01839；https://arxiv.org/abs/2606.01839 | 以「對話」為排程單位；KV 傳輸占 TTFT 的量測 | **4×A40**，Qwen3-0.6B（§實驗） | 「While KV-transfer contributes significantly to TTFT at low input tokens (> 20%), it scales linearly … overshadowed by quadratic prefill latency at long inputs」（Fig. 3） | A40＋小模型；傳輸介質未在我讀到的段落說明 |
+| **NetKV**（新） | Ojewale，arXiv 2606.03910；https://arxiv.org/abs/2606.03910 | 以網路成本選 decode 實例 | **64 GPU 四層 fat-tree 模擬器**，Mooncake trace；參數「64-H100 class」（B0=450 GB/s…） | TTFT 最多 −21.2%（模擬） | 全為模擬；「no changes to the transport」 |
+| **TENT**（R02_T5 #7）、**fabric-lib**（#11）、**PDD**（#1）、**Lynx**（#3）、**LMCache**（#13，arXiv 2510.09665，已下載 PDF） | 見 R02_T5 | 多軌噴灑／one-sided WRITE／跨資料中心／量化傳輸／KV 搬運層 | R02 已列：H800／H20 RoCE、H200 EFA 等 | — | 無 H100＋IB NDR 資料（R02 §5） |
+
+---
+
+## 3. 現成軟體的支援程度
+
+**NCCL（我們：2.29.7；原始碼：2.32.6-1）**
+- 跨機 all-reduce 的小訊息路徑為 Ring／Tree × LL／LL128（見重點事實 15）；NVLSTree 僅 SIMPLE（`algorithm_registry.cc:48-50`），故小訊息不會走 NVLSTree。2.29.7 的 NVLS 預設行為見 R03 §2.8（`NCCL_NVLS_ENABLE` 預設 2）。
+- 對稱記憶體 all-reduce 核心（AGxLL 等）與 GIN 相關字串都在 2.29.7 的二進位內（重點事實 16，`strings` 檢查）。2.27.3 起對稱記憶體 API、2.28.3 起 device API／GIN（R03 §2.8）。**但**我們沒有跑，所以「2.29.7 能否在 H100＋IB 兩台上啟用這些核心」是未驗證：`init.cc:2048-2050` 的 `symmetricSupport` 要求 `isAllCudaP2p`（跨機時的值未追到）且「GIN 連線或單一 LSA team」。
+- GIN 後端版本相容表：`src/gin/gin_host.cc:23-26`：proxy 後端 `{0, 2.30.3, 2.30.5, 2.32.0}`、gdaki `{0, 2.30.3, 2.30.5}`（陣列索引為後端版本，值為最低相容 NCCL 版本）。此表的語意（後端外掛版本 vs NCCL 版本）未逐行追，**2.29.7 內建 GIN 後端的行為需實測**。
+- 前提文件：`nccl/docs/userguide/source/usage/deviceapi.rst:25-55`（見第 4 節）。
+
+**vLLM（我們：0.32.0；原始碼：0.34.0）**：跨機 TP 在 H100＋IB 全走 NCCL（重點事實 11–12）；官方文件建議 TP＝每機 GPU 數、PP＝機器數（重點事實 1），並提供 `--tensor-parallel-size 16`＋Ray 的替代寫法（`parallelism_scaling.md:130-136`）。symm_mem 的 `multimem_all_reduce_` 只在 ws∈{4,6,8}。兩版在此路徑**無行為差異**。
+
+**SGLang（v0.5.23）**：官方兩機 `--tp 16` 範例（重點事實 4）；all-reduce 跨機退回 NCCL（重點事實 13）。另有 `--enable-nccl-nvls`、`--enable-symm-mem`（NCCL 對稱記憶體，預設 False，R03 `exec_.py:715-724`）。
+
+**TensorRT-LLM（v1.2.1）**：官方建議機內 TP＋機間 PP（重點事實 6）；跨機 TP 走 NCCL（重點事實 14）。
+
+**FlashInfer（v0.7.4）**：trtllm backend 僅單機；mnnvl backend 跨機需 Blackwell MNNVL（R03 §1.1）。
+
+**NVSHMEM／NVRAR**：NVRAR 為獨立實作（`https://github.com/hpcgroup/nvrar`，MIT；`https://github.com/axonn-ai/yalis`，Apache-2.0；R02 §6），**未整合進** vLLM／SGLang／TRT-LLM 主線（本次對 vLLM `vllm/`、SGLang `python/`、TRT-LLM `tensorrt_llm/` 與 `cpp/` 做不分大小寫 `grep -rli nvrar`，無命中）。
+
+---
+
+## 4. 在 Nano5 的前提條件
+
+登入節點為 `cbi-lgn01`（`hostname` 輸出）。登入節點有兩張 GPU（`/proc/driver/nvidia/gpus`：`0000:a8:00.0`、`0000:b8:00.0`）與 mlx5 網卡，**與 H100 計算節點的設定不一定相同**，以下僅供參考。
+
+| 前提 | 為什麼需要 | 怎麼檢查 | 登入節點結果（[login]）／狀態 |
+|---|---|---|---|
+| 驅動 ≥ 510.40.3 | NCCL GIN：「NVIDIA GPU drivers >= 510.40.3」（`deviceapi.rst:33`）；NVSHMEM IBGDA：「Requires nvidia.ko >= 510.40.3」[web-sum] | `cat /proc/driver/nvidia/version` | `NVRM version: NVIDIA UNIX x86_64 Kernel Module  550.127.08  Fri Oct 25 22:14:46 UTC 2024` → 符合；計算節點需於 M20 確認同版 |
+| `nvidia.ko` 以 `PeerMappingOverride=1` 載入（NVSHMEM 預設 IBGDA 模式；GIN GDAKI 的 GPU 直發 doorbell 也屬此類機制） | NVSHMEM 安裝指南 [web-sum]：「In the default case, `nvidia.ko` must be loaded with `PeerMappingOverride=1` … `/etc/modprobe.d/nvidia.conf` … options nvidia `NVreg_RegistryDwords="PeerMappingOverride=1;"`」；CPU-assisted 模式「PeerMappingOverride is not required」；Dissecting 論文 [pdf]：「the NVIDIA kernel module permits it only with the option PeerMappingOverride=1」 | `cat /proc/driver/nvidia/params \| grep -E "RegistryDwords\|EnableStreamMemOPs"`；計算節點同 | `RegistryDwords: ""`、`RegistryDwordsPerDevice: ""`、`EnableStreamMemOPs: 0` → **登入節點未設 PeerMappingOverride**；無 root 無法自行更改；計算節點需在 M20 確認 |
+| `nvidia_peermem` 已載入（或改用 DMA-BUF） | GIN：「If using nvidia-peermem, Mellanox OFED >= 5.0 or DOCA」（Proxy，`deviceapi.rst:45`）；GDAKI：「If using DMA-BUF, linux kernel >= 6.1. If using nvidia-peermem on baremetal, linux kernel >= 5.12 and either Mellanox OFED or DOCA driver.」（`:50-54`）；Mooncake：`WITH_NVIDIA_PEERMEM` 預設 1 需 `nvidia-peermem`，設 0 走 DMA-BUF（`vllm/docs/features/mooncake_connector_usage.md:62-65`） | `lsmod \| grep -i peermem`；`modinfo nvidia_peermem` | `lsmod` 無 `nvidia_peermem`（未載入）；`modinfo nvidia_peermem` 顯示 `/lib/modules/4.18.0-553.144.1.el8_10.x86_64/extra/nvidia-peermem.ko.xz`、`version: 550.127.08`、`license: Linux-OpenIB` → 模組檔存在、未載入。計算節點需在 M20 確認（可能由 Slurm prolog 載入） |
+| `gdrdrv`（GDRCopy） | NVSHMEM：「GDRCopy v2.0 or later … required for atomics support on non-NVLink connections … required if CPU-assisted IBGDA is enabled」[web-sum]；GIN Proxy：完成狀態可放 GPU 可見記憶體（GDRCopy 可用時）[pdf 2511.15076] | `lsmod \| grep gdrdrv`；`ls /dev/gdrdrv` | `gdrdrv 24576 0`（`nvidia` 的使用者之一）、`/dev/gdrdrv` 存在 → 登入節點有 |
+| Linux 核心版本 | GIN GDAKI：DMA-BUF 需 kernel ≥ 6.1；nvidia-peermem 裸機需 ≥ 5.12（`deviceapi.rst:50-54`）；NVSHMEM DMA-BUF：「rdma-core >= 44.0 and an upstream kernel >= 6.1」[web-sum] | `uname -r` | `4.18.0-553.144.1.el8_10.x86_64`（RHEL 8 核心，上游版號 4.18；RHEL 有大量 backport，文件的版本門檻是否以上游版號計未知）。**GDAKI 在此環境的可用性無法由文件單獨判定** |
+| Mellanox OFED／rdma-core 版本 | GIN：rdma-core ≥ 34.0（Proxy＋DMA-BUF）、≥ 44.0（GDAKI）；OFED ≥ 5.0（Proxy）／≥ 5.8（GDAKI）（`deviceapi.rst:41-55`） | `ofed_info -s`；`rpm -q rdma-core` | `ofed_info -s`：`MLNX_OFED_LINUX-23.10-2.1.3.1.201:`（≥ 5.8 符合）；`ibstat`：`CA 'mlx5_0' CA type: MT4129`（ConnectX-7）、韌體 `28.40.1000`。`rdma-core` 版本未查（`rpm -q` 未執行） |
+| NIC 型號 ≥ ConnectX-6 Dx（GDAKI）／CX4（Proxy） | `deviceapi.rst:41,50`；GIN 論文 [pdf]：「ConnectX-6 Dx or newer」 | `ibstat`／`ibv_devinfo` | 登入節點為 MT4129（ConnectX-7）；計算節點每台 8× NDR（plan 文件）需於 M20 確認型號 |
+| CUDA 版本 | GIN 編譯：「CUDA 12.2 or later when compiling」（`deviceapi.rst:35`）；NCCL 2.29.7 為 cuda12.9 版；NVSHMEM 3.4.5 說明：CPU-assisted IBGDA 免 GDRCopy、免 x86 regkey [web-sum] | 計算節點 `nvidia-smi`、模組 | 我們的環境為 CUDA 12.x（驅動 550）；較新的論文（2606.05951、2610.01380）用 CUDA 13／驅動 580+，其結果與 12.x 的相容性未知 |
+| 同節點 GPU↔NIC 親和（PIX） | GIN 論文 [pdf]：「Optimal performance requires co-location of GPUs and NICs on the same PCIe root complex」 | 計算節點 `nvidia-smi topo -m` | 需在計算節點檢查（給 M20） |
+| IB 交換器為 NDR、有無 SHARP | 與 B 關聯：SHARP 屬 A 組 | — | 見 A 組報告；需在計算節點檢查 |
+
+NVSHMEM 官方釋出說明（3.4.5）[web-sum]：「Added support for CPU-Assisted IBGDA without the use of GDRCopy or the x86 regkey setting. It enables the use of IBGDA on a broad range of systems without the need for administrator intervention.」「IBGDA does not work with CX-4 when the link layer is Ethernet (RoCE).」
+
+---
+
+## 5. 尚未有人量過或作者自述未解的問題（只列事實）
+
+1. **H100（每機 8 GPU）＋InfiniBand 的跨機小訊息 all-reduce**：在本次檢視的文獻中未找到。NVRAR（A100／GH200 單 GPU 節點）、PCCL（Slingshot）、Every-µs（GB200 NVL72）、MSCCL++（多機圖表僅 A100）、GIN（H100 但為 MoE all-to-all）、TKNP（H100＋IB 但只量 NCCL all-reduce）各自缺此條件。
+2. **NVRAR 作者自述未解**：「We plan to investigate and reduce idle time in future versions of NVRAR」（§5.2.2，Perlmutter 上 NVRAR 空閒時間略高）；「We leave heuristic-based hyperparameter tuning to future work」（附錄）；vLLM（HP）的 GPU 空閒時間異常高：「we leave detailed investigation to future work」。
+3. **PCCL**：「we plan to benchmark PCCL on clusters with InfiniBand interconnects」（結論段，arXiv 2504.18658）。
+4. **GIN**：結論段稱未來將推廣至 PyTorch 分散式訓練、TensorRT-LLM 等（R02_T4 P10 引文）；本次檢視的版本只提供 MoE（DeepEP）數據。NCCL v2.32.6 的 GIN 專用核心只有 reduce-scatter／all-gather（重點事實 16）。
+5. **Every-µs**：kernel 選擇靠經驗，「could be improved with an accurate performance model」；僅限 NVLink 領域（「It requires NVLink to guarantee cache-line–level atomic addition」）。
+6. **NIMBLE**（R02_T4 P5）：未來工作含 IBGDA 版本（R02 引文）。
+7. **TKNP**：「At small batches or short contexts, communication and synchronization can outweigh the benefit of distributed attention」；「larger NVLink domains shift the balance」；DCP 需要跨機 TP 的問題留待未來（文中列為延伸方向）。
+8. **E（PD 分離 KV 傳輸）**：KVDirect 自述的未來：「use the idling memory as a prefix cache」「occasionally switch the role of prefill and decode workers」；Splitwise 在無硬體時「we leave this to future work」（R02 引文）；NetKV 與 ConServe 為模擬／小模型。**沒有找到** 用 NIXL／UCX／Mooncake 在 H100＋IB NDR 上量 KV 傳輸占端到端比例的論文；UCCL 部落格稱「nearly no benchmarks of open-source KV transfer engines」（[web-sum]，https://uccl-project.github.io/posts/kv-transfer-engine ，未打開全文）。
+
+---
+
+## 6. 矛盾或不確定之處（不裁決）
+
+1. **文件間的跨機 TP 建議不一致**：vLLM／TRT-LLM 文件建議機內 TP＋機間 PP（TRT-LLM 明講跨機 TP 會被慢速互連拖住）；SGLang 文件的 405B 與 Nemotron 3 Ultra 配方是 `--tp 16`；SGLang 的 DeepSeek-V3.2 文件同時列 `--tp 16 --attn-dp-size 2` 與 `--tp 8 --pp-size 2`。TRT-LLM 的建議頁位於 `legacy/`，是否仍為現行建議未確認。
+2. **NVRAR 的 PP vs TP 結論取決於條件**：HP（TP＋PP）在 prefill 重的負載較好、TP 在 decode 重的負載較好（同一篇）。NVRAR 論文中的 vLLM HP 使用 V0 引擎，因為 V1 的 Ray PP 出現 hang（原文：「we observed persistent hangs with the V1 engine when using Ray-based PP」）。
+3. **NVRAR 數字的版本差異**：摘要「1.9×–3.6×」「128 KB–2 MB」（Slingshot／InfiniBand 合併敘述）；內文：Perlmutter「256 KB–1 MB … 1.06×–1.92×」、Vista「up to 3.5×」、同論文另處出現「1.14×–3.57×」（InfiniBand，圖表標示）。R02 已記此矛盾。
+4. **GIN 延遲數字的「往返」定義**：GIN 論文的 16.7 µs 為 ping-pong「round-trip」；NVSHMEM 分析論文的 9.4–9.5 µs 為「inter-node put/get」（單向或完成？本次未逐段確認），硬體（H100 vs H200）、NVSHMEM 版本（3.4.5 vs 3.3.9）、CUDA 版本（12.x vs 13.0）皆不同，數字不可直接比較。
+5. **NCCL GIN 環境變數名**：GIN 論文寫 `NCCL_GIN_BACKEND`；2.29.7 二進位內查到 `NCCL_GIN_TYPE`（`NCCL_GIN_BACKEND` 字串數 0）。
+6. **NCCL 2.29.7 vs 2.32.6**：R03 版本表指出 2.29.2 起內建 hybrid AllGather 對稱核心；`gin_host.cc:23-26` 的後端版本表最低出現 2.30.3。2.29.7 的 GIN 能力僅以字串存在為證，未執行驗證。
+7. **IBGDA 的管理員需求**：NVSHMEM 安裝指南（[web-sum]）寫預設模式需 `PeerMappingOverride=1`（改 `/etc/modprobe.d`），3.4.5 說明（[web-sum]）稱 CPU-assisted IBGDA 免管理員；實際在 Nano5 計算節點上哪個模式可用，未知。
+8. **WebFetch 摘要與原檔**：vLLM 官方網站 `https://docs.vllm.ai/en/latest/serving/parallelism_scaling/` 的 WebFetch 摘要與 `[doc-local]` 的逐字內容一致（`multi-node`、`InfiniBand`、`NCCL_IB_HCA=mlx5` 等）；SGLang 的 `docs.sglang.ai` 會 301 到 `docs.sglang.io`，其 `multi_node.html` 回 404，故改以 `[doc-local]` 為準。
+9. **vLLM 0.32.0 實際跑 TP=16 時的路徑**：由 `diff` 與原始碼判斷與 0.34.0 相同，但**未實際執行**（無 GPU／Slurm）；日誌上應可看到「Custom collectives are disabled because this multi-node group does not have MNNVL-capable GPUs on every rank.」可作為 M20 的檢查項。
+
+---
+
+## 7. 搜尋紀錄
+
+**官方文件／原始碼**
+- 本地 `grep`／`sed`：`vllm/docs/serving/{parallelism_scaling,expert_parallel_deployment,context_parallel_deployment}.md`、`vllm/docs/deployment/frameworks/lws.md`、`vllm/docs/features/{disagg_prefill,nixl_connector_usage,mooncake_connector_usage}.md`、`sglang/docs/docs/references/multi_node_deployment/multi_node.mdx`、`sglang/docs/cookbook/autoregressive/{DeepSeek,NVIDIA}/…`、`sglang/docs/docs/advanced_features/pd_disaggregation.mdx`、`trtllm/docs/source/{legacy/performance/performance-tuning-guide/deciding-model-sharding-strategy.md,features/disagg-serving.md,blogs/tech_blog/blog5_Disaggregated_Serving_in_TensorRT-LLM.md,deployment-guide/*}`、`trtllm/examples/models/core/llama/README.md`、`nccl/docs/userguide/source/usage/deviceapi.rst`、`nccl/src/{sym_kernels.cc,init.cc,gin/gin_host.cc,config/algorithm_registry.cc,tuning/*.cc}`。
+- `diff` vLLM 0.32.0（venv）vs 0.34.0（src）：`custom_all_reduce.py`、`all_reduce_utils.py`、`cuda_communicator.py`、`flashinfer_all_reduce.py`、`symm_mem.py`。
+- `strings -a libnccl.so.2 | grep`（2.29.7）。
+- WebFetch：`docs.vllm.ai/en/latest/serving/parallelism_scaling.html`（重導）、`.../parallelism_scaling/`；`docs.sglang.ai/...`（301→404，棄用）；`docs.sglang.io/basic_usage/deepseek_v3.html`；`docs.nvidia.com/nvshmem/release-notes-install-guide/install-guide/abstract.html`；`.../prior-releases/release-3405.html`。皆為 `[web-sum]`。
+
+**文獻（工具與查詢）**
+- arXiv MCP `search_papers`（欄位前綴查詢，如 `abs:"all-reduce" AND abs:"multi-node" AND abs:"decode"`、`abs:"KV cache transfer" AND abs:"disaggregated" AND abs:"InfiniBand"`、`ti:"MSCCL++"…`）與 `citation_graph(2511.09557)`：**皆回 429，無結果**；paper-search `search_semantic`（3 個查詢）／`search_arxiv`（1 個）：空結果。
+- WebSearch（standard）：「SGLang multi-node tensor parallel Llama 3.1 405B 2 nodes --tp 16」「TensorRT-LLM Llama 3.1 405B multi-node tensor parallelism pipeline parallelism 16 GPUs H100」「vLLM DeepSeek-V3 deployment multi-node 2x8 H100 …」「arXiv MSCCL++ GPU-driven communication … multi-node allreduce small message」「arXiv cross-node tensor parallelism LLM decode all-reduce latency H100 InfiniBand NVSHMEM custom kernel 2026」「arXiv KV cache transfer time fraction of TTFT … H100 InfiniBand NIXL UCX」「multi-node tensor parallelism inference decode all-reduce latency across nodes InfiniBand low-latency collective（限 arxiv.org）」「NVSHMEM GPU-initiated allreduce hierarchical inter-node latency … H100 IBGDA（限 arxiv.org）」「Mooncake Transfer Engine KV cache transfer H100 InfiniBand NDR …」「NVSHMEM IBGDA PeerMappingOverride … requirement」「NVIDIA SHARP low-latency aggregation small message allreduce …」。每查詢看約 10 筆標題＋摘要。
+- 逐篇核實（curl 下載 PDF 到 `papers/`，檔案大小皆非 0，`pdftotext` 後 grep 原文）：2511.09557、2407.21783、2412.19437、2511.15076、2607.16100、2504.18658、2607.08973、2603.28239（僅下載）、2505.11329（僅下載）、2501.14743、2506.05508、2311.18677、2401.09670、2510.09665（僅下載）、2407.00079（僅下載）、2510.27656（僅下載）、2604.00368（僅下載）、2505.09343（僅下載）、2606.03910、2606.01839、2601.08833、2504.09014、2606.29986（僅下載）、2611.13293、2606.05951、2610.01380、2607.07862、2412.04964、2606.01502。「僅下載」者未逐段讀，表中引用內容皆來自 R02 或已讀段落。
+- **排除／未列入**：2607.07862（CTA-Pipelining，8×H200／B200 單機，與跨機無關）；2606.01502（Move the Query，H100 多機 IBGDA，標題與摘要顯示為跨實例注意力搬運，**非 all-reduce**；其「real multi-node H100 cluster … real IBGDA」可能對 B4 的可行性有參考價值，**本次只讀摘要，未讀全文**）；SHARP 低延遲：屬 A 組，只做了一次 WebSearch（只找到 NVIDIA 官方文件與部落格，無 SHARP 開關對照的論文；`docs.nvidia.com/networking/display/sharpv370/…` 的 OSU allreduce 表為 [web-sum]，未核實硬體世代）；UCCL KV transfer engine 部落格（未開全文）；第三方 skill 頁面（TRT-LLM 405B TP/PP 配置互相矛盾，WebSearch 摘要已註明）。
+
+---
+
+## 8. 引用清單（arXiv 編號或 DOI；BibTeX 由 Opus 之後以 arXiv MCP／DOI 匯出）
+
+- 2511.09557 NVRAR／Understanding and Improving Communication Performance in Multi-node LLM Inference（CAIS '26，DOI 10.1145/3786335.3813165，取自 R02）
+- 2611.13293 Decode Token Parallelism (TKNP)
+- 2607.16100 Every Microsecond Matters
+- 2504.09014 MSCCL++（ASPLOS '26）
+- 2504.18658 The Big Send-off (PCCL)
+- 2511.15076 GPU-Initiated Networking for NCCL
+- 2606.05951 Demystifying NVSHMEM
+- 2610.01380 GPU-Initiated Communication: Dissecting Down to the Bone
+- 2607.08973 SiFAR
+- 2505.11329 TokenWeave
+- 2412.04964 Flash Communication
+- 2603.28239 SCIN（switch-centric in-network architecture）
+- 2407.21783 The Llama 3 Herd of Models
+- 2412.19437 DeepSeek-V3 Technical Report
+- 2501.14743 KVDirect
+- 2311.18677 Splitwise
+- 2401.09670 DistServe
+- 2407.00079 Mooncake
+- 2506.05508 Beyond the Buzz
+- 2601.08833 Revisiting Disaggregated LLM Serving for Performance and Energy Implications
+- 2606.01839 Observation, Not Prediction（ConServe）
+- 2606.03910 NetKV
+- 2510.09665 LMCache、2510.27656 fabric-lib、2604.00368 TENT（R02 已列）
+- 官方文件（非論文）：vLLM `docs/serving/parallelism_scaling.md`、`expert_parallel_deployment.md`（v0.34.0 tag）；SGLang `docs/references/multi_node_deployment/multi_node.mdx`（v0.5.23 tag）；TRT-LLM `deciding-model-sharding-strategy.md`（v1.2.1 tag）；NCCL `deviceapi.rst`（v2.32.6-1 tag）；NVSHMEM Install Guide 與 3.4.5 Release Notes（`https://docs.nvidia.com/nvshmem/release-notes-install-guide/…`，[web-sum]）
