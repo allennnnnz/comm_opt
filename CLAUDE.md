@@ -2,6 +2,8 @@
 
 一篇 GPU 間通訊優化論文的完整研究過程：量測 → 找現象 → 選題 → 實驗 → 寫作。題目尚未決定（見 `docs/project.md`）。
 
+**2026-11-16 起在 `nano5` 分支、國網中心 Nano5（8× H100／H200 每台）重新開始**（計畫：`docs/plan_nano5.md`，D050）。A100 時期（M0–M19）保留在 `main`、標記 `a100-final`。
+
 ## 每次 session
 
 - **開始**：讀 `docs/status.md`。需要背景時再讀 `docs/project.md`、`docs/decisions.md`、`docs/research_rules.md`。
@@ -23,7 +25,7 @@
 - **語言**：**給使用者的所有回覆一律用繁體中文**（使用者已兩次要求）。守則、實驗卡、筆記、決策用繁體中文，技術名詞保留英文；`paper/` 用英文。
 - **結論寫法**：每個實驗卡和每次回報結果，都先給「白話結論」——用中文、高層次、3–5 點，讓使用者不看數字也能快速懂：發現了什麼、代表什麼、下一步要做什麼。數字、表格、細節放在後面。
 - **白話結論不用英文術語與代號**（不寫 channel、chunk、SM、F1、G1、commit 這類詞）；非用不可的概念用中文說明，可以用比喻（例如 channel →「傳輸通道，像高速公路的車道」）。回報給使用者的訊息整體也照這個原則。
-- **Git**：每完成一個段落（一個實驗、一次分析、一個決策）就在 main 上 commit，訊息寫清楚做了什麼、數據在哪，**然後 push 到 GitHub**（`origin` = `allennnnnz/comm_opt`，公開 repo，經 `ssh.github.com:443`；使用者 2026-11-04 要求「每個版本的改動都有紀錄」）。單檔 > 100 MB 不能進 git（`.nsys-rep`／`.sqlite` 已在 `.gitignore`，raw 檔的 sha256 記在 `results/MANIFEST_large_files.txt`）。2026-11-04 曾改寫歷史，舊 commit 編號對照見 `docs/git_history_rewrite_20261104.md`。每完成一個研究階段，加一個 annotated tag（`pNN-<名稱>`）並更新 `docs/progress_log.md`。
+- **Git**：每完成一個段落（一個實驗、一次分析、一個決策）就在 **`nano5` 分支**上 commit（2026-11-16 起；`main` 停在 `a100-final`，不再改動），訊息寫清楚做了什麼、數據在哪，**然後 push 到 GitHub**（`origin` = `allennnnnz/comm_opt`，公開 repo，經 `ssh.github.com:443`，本機 SSH 別名 `github-comm-opt`；使用者 2026-11-04 要求「每個版本的改動都有紀錄」）。單檔 > 100 MB 不能進 git（`.nsys-rep`／`.sqlite` 已在 `.gitignore`，raw 檔的 sha256 記在 `results/MANIFEST_large_files.txt`）。2026-11-04 曾改寫歷史，舊 commit 編號對照見 `docs/git_history_rewrite_20261104.md`。每完成一個研究階段，加一個 annotated tag（`pNN-<名稱>`）並更新 `docs/progress_log.md`。
 - **實驗 ID**：`M*` = 環境特性量測；`E*` = 驗證題目假說的實驗。`S*` = 規格書、`R*` = 對應的報告（同編號，例如 S01 → R01）。
 
 ## 資料夾地圖
@@ -32,6 +34,7 @@
 |---|---|
 | `docs/project.md` | 研究問題、claims、non-goals（G2 後才填） |
 | `docs/status.md` | 目前進度、下一步、已核准的實驗 |
+| `docs/plan_nano5.md` | Nano5 階段的研究計畫 |
 | `docs/decisions.md` | 決策紀錄（append-only） |
 | `docs/research_rules.md` | 研究守則與出處 |
 | `docs/specs/S<NN>_<名稱>.md` | Opus 寫給小助手的工作規格書 |

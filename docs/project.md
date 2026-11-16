@@ -29,6 +29,16 @@ GPU 間通訊優化。先用 nccl-tests 量測本機的通訊特性，從中找�
 | NCCL | 2.32.3（系統安裝） |
 | nccl-tests | v2.21.1 @ afd59ab（MPI 版，只編 sm_80） |
 
+## 硬體與軟體：Nano5（2026-11-16 起，正式數值以 M20 的環境快照為準）
+
+| 項目 | 值 |
+|---|---|
+| 平台 | 國網中心 Nano5，Slurm 排程（帳號 MST114546） |
+| GPU | 每台 8× H100 80GB HBM3（`dev`／`normal`／`4nodes`）或 8× H200（`normal2`） |
+| 節點 | 2× Xeon 8480，約 1.9 TB 記憶體；跨節點 8× InfiniBand NDR 400 Gb/s |
+| Driver | 550.127.08（測試工作 475347） |
+| 其他 | 待 M20 量測 |
+
 ## 目標產出
 
 （待 G2 決定投稿類型：系統會議、HPC 會議、ML systems 或 workshop）
