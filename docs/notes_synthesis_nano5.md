@@ -91,3 +91,19 @@
   - 文獻空白確定比 B／C／D 大；軟體層面看起來可行
   - **單一最大風險＝Nano5 的 IB 交換器有沒有跑 SHARP Aggregation Manager**。使用者端只能用 `sharp_hello`／NCCL 日誌判斷 → M20 P10 一定要做；**同時建議使用者直接問 NCHC**（AM 是否啟用、每個 job 的 SHARP 配額、是否 rail-optimized 拓樸）
   - 若 SHARP 不可用：A 退化成「機內 NVLS × SM 稅 × 跨機 NVLS_TREE」的特性量測，仍有空白（R04_CD §5-1、5-2），但主張變弱
+
+## R04_CD（方向 C、D 深入調查）與 Opus 抽查（2026-11-17）
+
+- **NCCL 內建的 copy engine 集體通訊在 Nano5 用不了**（Opus 讀原始碼確認）：`src/ce_coll.cc:175-189`（v2.32.6）`ncclCeImplemented` 要求 `driverVersion >= 12050`，且只支援 AllGather／AlltoAll／Scatter／Gather，沒有 reduction；我們的驅動 550.127.08 回報 CUDA 12.4（R01:43）。2.29.7 是否同門檻未確認。自己用 `cudaMemcpyPeerAsync` 等寫 copy engine 傳輸不受此門檻限制（判斷，未驗證）
+- **方向 C 正在快速變擠**（Opus 以 WebFetch 開 arXiv 頁確認）：
+  - TIDE（arXiv 2610.38228，2026-10-28）：FSDP 用 copy engine＋RDMA＋NVSwitch multicast 的零拷貝集體通訊，64 GPU，reduce-scatter 的 SM 時間降 12.5–14.5×，step time 對 FSDP2 最多 −27.1%（GPU 型號摘要未寫）
+  - Zero-SM NCCL（2611.18075，GB200／B200）、VCCL（2510.00991）、ConCCL（AMD）
+  - 仍未找到：H100 上以 CTA 數或 CTA policy 為變數、四種實作（ring／NVLS／symmetric／CE）對同一個 GEMM 拖慢的系統對照（R04_CD §C-5）
+- **方向 D 已有 NVIDIA 本身在做**（Opus 確認）：NCCL-BOT（arXiv 2611.11303，2026-11-08，作者含 NCCL 團隊）：H100 上用 per-context bandit 修正 NCCL 成本模型，損失 >10% 的 context 從 19 降到 1；<1 MiB 輸給 stock；自述「do not show a net end-to-end win」；只選 algo×proto
+- 其他事實（R04_CD，未抽查）：2.29.7 的 tuner plugin 只有 v2–v5（`strings` 比對）；tuner 只能改舊式 algo×proto 表，改不了 symmetric／CE 候選（讀碼推論）；NVLS 在 SM90 預設 16 channel（`nvls.cc:201`）
+
+### 判斷更新
+
+- **D 降級**：NVIDIA 已在做模型修正，且 2.29.7 的 tuner 介面受限；除非與 C 結合（「有並行計算時最佳選擇會變」——只有一個課程專案提過，非同儕審查），否則不單獨做
+- **C 保留但只當 A／B 的評估維度**：「省多少 GPU 計算資源」是 A（交換器加總理論上不用 SM 做加法）的重要指標，可在 A 的實驗中一起量；單獨做 C 與 TIDE／Zero-SM 重疊高、且 NCCL CE 路徑受驅動限制
+- 主推仍為 A，等 R04_A、R04_BE
