@@ -124,3 +124,22 @@
 - **B 保留，但動機需補強**：「H100 跨機 TP 只能用 NCCL」已確認，空間存在；但業界主流跨機用 PP／EP，要先證明跨機 TP decode 有真實需求或優勢。B 與 A 可合併：A 的 SHARP 正好是跨機小訊息加總的硬體路徑
 - **E 降級**：需另裝多套軟體、系統整合重，且偏量測；不當主線
 - **下一個關卡**：M20 P4（NVLS）、P6（GPUDirect RDMA）、P10（SHARP）
+
+## R04_BE（B 跨機 TP decode、E PD 分離 KV 傳輸）讀後與抽查（2026-11-17）
+
+- **Opus 抽查**：
+  - vLLM v0.34.0 `docs/serving/parallelism_scaling.md`：多機時「set `tensor_parallel_size` to the number of GPUs per node and `pipeline_parallel_size` to the number of nodes」，並稱這是「common practice」；`--tensor-parallel-size 16` 只列為「Alternatively」
+  - vLLM `custom_all_reduce.py:202-234`：不在同一台（且非 MNNVL）時停用自製 all-reduce → 跨機 TP 回到 NCCL
+  - 登入節點：`gdrdrv` 已載入、`nvidia_peermem` 沒載入；kernel 4.18 → 報告說 NCCL GIN GDAKI 需要 kernel ≥ 5.12（peermem）或 ≥ 6.1（DMA-BUF）→ GPU 直接發 RDMA 的路線在這裡大概不可行（計算節點待 M20）
+  - TKNP（arXiv 2611.13293，2026-11-09，64 H100，摘要核實）：設計原則是「dense all-reduces remain within NVLink」，刻意不讓 dense all-reduce 跨機
+- **報告事實（未逐條抽查）**：SGLang 文件有 405B 兩台 `--tp 16` 範例；TRT-LLM（legacy 文件）說跨機 TP 會被慢的互連卡住；NVRAR 發現 decode-heavy 時 TP 勝過 TP+PP；TKNP 量到 TP64 的單次 all-reduce 是 TP8 的 6.5×；H100 8 卡＋IB NDR 的跨機小訊息 all-reduce 量測沒有找到；E：沒有論文在 H100＋IB NDR 上量 KV 傳輸佔端到端比例
+- **判斷**：
+  - **B 單獨成題的動機弱**：主流建議與最新研究（TKNP）都在避開跨機 dense all-reduce；GPU 直接發 RDMA 的優化手段在這裡大概不可用（kernel 4.18、無 root）
+  - **B 作為 A 的應用很合適**：「為什麼大家避開跨機 TP？因為跨機 all-reduce 慢。若兩層交換器加總（SHARP 低延遲模式）讓它變快，這個取捨會不會改變？」——這是可檢驗的問題，而且有實際後果（405B 在 2 台 H100 上要用 TP16 還是 TP8×PP2）
+  - E 有量測空白但工程重、與 A 無關 → 列為備案
+
+## 綜合建議（2026-11-17，給使用者決定）
+
+- **主線 A＋（C 的量測軸）＋（B 的應用場景）**：在 H100 小型叢集上，量化並利用兩層交換器加總（機內 NVLS、機間 IB SHARP）——延遲（小訊息）、頻寬、SM 用量與對同時計算的干擾；應用到 (1) 跨機 TP decode 的平行方式選擇、(2) 訓練的 reduce-scatter／all-gather
+- **不做**：D（NCCL-BOT 已覆蓋）、單機 all-reduce＋norm 融合
+- **關卡**：SHARP 是否可用（M20 P10＋詢問 NCHC）。不可用時的備案：C 縮小為「單機 NVLS × SM 稅 × 同時 GEMM」＋跨機 NVLS_TREE 的特性量測，或 E
