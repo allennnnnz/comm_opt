@@ -13,3 +13,5 @@ Copied on 2026-11-02. To update, re-copy the same directories from upstream.
 Notes:
 - `academic-plotting`: the data-chart workflow (matplotlib) needs no key; the architecture-diagram workflow calls Gemini and needs `GEMINI_API_KEY`.
 - MCP servers are configured in `../.mcp.json`. `paper-search-mcp@0.1.4` on PyPI breaks with `mcp` 2.x, hence `--with "mcp<2"`. Its Sci-Hub fallback is off by default; leave it off.
+
+- `slurm-submit`：本專案自寫（2026-11-16，D048），非外部來源。

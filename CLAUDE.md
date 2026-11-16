@@ -15,6 +15,7 @@
 4. **數據不可手改**：`results/` 原始數據不改、不刪；每個數字要能追到 `results/` 路徑、腳本、commit（D1、D2、D9）。
 5. **引用只用 arXiv MCP 或 DOI 匯出的 BibTeX**，不憑記憶寫（W3）。
 6. **決策權**：已核准的實驗可自己跑和分析；新增或改變實驗、改研究問題或 claims、過關卡（G1–G5）、結果和預期矛盾時，都要停下來問使用者（第七節）。
+7. **在 Nano5 叢集上，運算一律經 Slurm 送到計算節點**，照 skill `.claude/skills/slurm-submit/`（模板 `template.sbatch`、送出用 `submit.sh`）；登入節點不跑運算；不輪詢 `squeue`；量測一律獨佔整台（D048）。
 
 ## 慣例
 
