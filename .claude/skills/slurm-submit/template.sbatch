@@ -40,6 +40,9 @@ if [[ -n "$others" ]]; then
   exit 1
 fi
 
+# --- co-tenancy record (D054): Nano5 strips --exclusive, so log every job on our nodes at start and exit ---
+source "$ROOT/exp/lib/cotenants.sh"
+
 ### BODY — replace with the experiment's commands; write all data under $OUT ###
 srun -n 1 --gpus-per-task=8 <program and args>
 ### END BODY ###

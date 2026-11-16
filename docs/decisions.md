@@ -343,3 +343,10 @@
   - M21 改用 `dev`（同一批 H100），每台一個 ≤1.5 小時的工作，Opus 看過 M20 第 1 台後才送。
   - M23 改為一個 4 台 H100 工作（內含 2 台同組／跨組子集）＋一個 2 台 H200 工作；所有演算法都跑，以日誌中實際使用的為準。
 - **待使用者決定**（未執行）：是否以方向 A（兩層交換器加總）為主線（`docs/notes_synthesis_nano5.md` 的「整合判斷」）；是否寄出 `docs/nchc_inquiry_20261117.md`。
+
+## D054（2026-11-17）叢集拿掉 `--exclusive`：改以「同節點工作紀錄」補強 D048
+
+- **事實**：M20 三個工作送出時都出現 `sbatch: WARNING: Exclusive mode is not allowed. --exclusive is removed.`（`dev`／`normal`／`normal2`）。`scontrol show job` 顯示申請 `cpu=96, mem=1600G, gres/gpu=8`；節點可排程資源 `cpu=104, mem=1900000M, gpu=8`（hgpn03）。叢集上限每 GPU 12 顆 CPU，96 已是最大值。
+- **影響**：別人的 GPU 工作排不進我們的節點（8 張 GPU 都在我們手上），但最多 8 顆 CPU、約 300 GB 記憶體的純 CPU 工作理論上可能共用節點。跨機網路本來就與其他節點共用，`--exclusive` 從來無法排除。
+- **做法**（Opus，使用者不在場；不降低既有保護，只增加紀錄）：新增 `exp/lib/cotenants.sh`，量測工作在開始與結束時各記錄一次同節點上的所有 Slurm 工作（`cotenants_summary.txt`）；分析時標出有其他工作的數據。M20 透過執行時讀入的 `common.sh` 套用（已排隊的工作也生效）；模板與 S06 的 M21／M23 腳本都加入。腳本仍保留 `--exclusive`。
+- **待使用者確認**：這樣是否可接受為 D048「量測一律獨佔整台」的實際做法。

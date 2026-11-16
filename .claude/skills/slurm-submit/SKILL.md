@@ -14,6 +14,7 @@ description: Submit any job on the Nano5 (NCHC) cluster through Slurm, the proje
 2. **不輪詢**：不用 `watch`、迴圈、Monitor until-loop 查 `squeue`。等工作只用「背景延遲後查一次」（見步驟 4）或等結束通知信。
 3. **送出前要有授權**：只送 `docs/status.md` 已核准的實驗，或使用者在這次對話明確說可以的任務。新增或改變實驗先問（CLAUDE.md 第 6 條）。
 4. **量測一律獨佔整台**（`--exclusive`，使用者 2026-11-16 決定）。非量測（編譯、流程測試）可不獨佔，但要在送出時明說。
+   - **2026-11-17 發現**：叢集會拿掉 `--exclusive`（`sbatch: WARNING: Exclusive mode is not allowed. --exclusive is removed.`），`dev`／`normal`／`normal2` 都是。實際效果：申請 8 張 GPU 時，叢集上限是每 GPU 12 顆 CPU（共 96／104）、預設記憶體 1600G／約 1.9 TB，別人的 GPU 工作排不進來，但小型純 CPU 工作理論上可能。對策（D054）：量測工作一律 `source exp/lib/cotenants.sh`（模板已含），開始與結束各記錄一次同節點上的所有工作；分析時有其他工作的數據要標出來。
 5. **帳號**一律 `MST114546`；**通知信**寄到 `~/.config/comm_opt/slurm.env` 裡的 `SLURM_MAIL_USER`（信箱不寫進 repo，因為 repo 是公開的）。
 6. **輸出放 `/home` 底下**（計算節點看不到登入節點的 `/tmp`）。量測數據照專案慣例寫到 `results/<ID>_<名稱>/<時間>/`。
 7. 不用 `sudo`／`apt`；Python 套件用自己的 Miniconda 或專案 `.venv`。

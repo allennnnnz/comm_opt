@@ -96,7 +96,11 @@ Nano5 的 H100 與 H200 節點，在「卡怎麼互連、交換器能不能幫�
 
 ## 指令
 
-（Sonnet 依本卡實作後補上；腳本放本資料夾，輸出到 `results/M20_env_snapshot/<時間>_job<id>/`）
+（Sonnet 於 2026-11-17 補上）腳本：`exp/M20_env_snapshot/{node.sbatch,sharp.sbatch,common.sh,mcast_query.cu,analyze.py}`；輸出 `results/M20_env_snapshot/<時間>_job<id>[_sharp2n]/`。
+- H100：`submit.sh exp/M20_env_snapshot/node.sbatch --dependency=afterok:475444:475459 -J M20h100a`（job 475733，`dev`）；後續台加 `--exclude=<已量節點>`
+- 2 台 SHARP：`submit.sh exp/M20_env_snapshot/sharp.sbatch -p normal -N 2 --dependency=afterok:475444:475459`（job 475734）
+- H200：`submit.sh exp/M20_env_snapshot/node.sbatch -p normal2 -J M20h200a --dependency=afterok:475444:475459`（job 475735）
+- 分析：`python3 exp/M20_env_snapshot/analyze.py`
 
 ## 結果
 
