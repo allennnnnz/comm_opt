@@ -8,11 +8,12 @@
 - **文獻與原始碼調查完成**：R02_T1–T5（約 134 項核實）、R03（8 個系統原始碼）。Opus 整理與抽查：**`docs/notes_synthesis_nano5.md`**
 - **候選方向**（D052，使用者選擇全部繼續深入）：A 兩層交換器加總（NVLS＋IB SHARP，主推）、B 跨機 TP decode 小訊息延遲、C 通訊的 SM 資源稅、D 效能模型選 collective／E PD 分離 KV 傳輸
 - **S01 環境建置**：部分完成（R01）。vLLM 0.32.0+cu129、torch 2.13.0+cu129、NCCL 2.29.7、nccl-tests v2.21.1 已編譯；安裝在 `/work/allen0117/comm_opt_env`；`/home` 配額 100 GB
-  - **待辦**：8 卡驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊，預估 2026-11-17 02:27／02:47 開始 → 讀 `results/S01_env_setup/*_job475444`、`*_job475459`；確認 torch NCCL 版本＝nccl-tests 執行時版本
+  - **待辦**：8 卡驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊，預估 2026-11-17 01:42／02:02 開始（23:45 查詢） → 讀 `results/S01_env_setup/*_job475444`、`*_job475459`；確認 torch NCCL 版本＝nccl-tests 執行時版本
   - **待送**（一次一個，不要同時排太多）：2 台 H100、單台 H200、2 台 H200 的 all_reduce 冒煙測試；用 `exp/lib/nano5_env.sh` 再跑一次單台驗證
   - 之後把 R01 補完並驗收；vLLM 0.32.0 正式記為決策
 - **M20**：已核准，加了 P10（SHARP，2 台 H100）；S01 通過後交給 Sonnet 執行
-- **論文搜尋工具**：`.mcp.json` 已改到本使用者路徑；2026-11-16 使用者重新啟動 Claude Code（改在 tmux 中執行）
+- **論文搜尋工具**：2026-11-16 使用者重開 VS Code 後可用（arXiv MCP、paper-search MCP）。arXiv 搜尋**要用欄位前綴**（`abs:"..."`）＋`sort_by: relevance`，否則回傳無關的最新論文
+- **S04 候選方向深入調查**（2026-11-16 23:55 交給三位 Sonnet）：規格 `docs/specs/S04_direction_deep_dive.md`；報告 `R04_A_switch_reduction`、`R04_BE_crossnode_inference`、`R04_CD_smtax_model`（待交回後 Opus 讀＋抽查）
 
 ## 已核准的實驗
 
