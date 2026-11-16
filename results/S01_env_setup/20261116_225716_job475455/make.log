@@ -1,0 +1,49 @@
+make -C src build BUILDDIR=/home/allen0117/comm_opt/third_party/nccl-tests/build
+make[1]: Entering directory '/home/allen0117/comm_opt/third_party/nccl-tests/src'
+Makefile:177: Skipping GIN device API performance tests: NCCL version code 22907 is older than 23007
+make[2]: Entering directory '/home/allen0117/comm_opt/third_party/nccl-tests/os'
+Compiling  timer.cc                            > /home/allen0117/comm_opt/third_party/nccl-tests/build/timer.o
+Compiling /home/allen0117/comm_opt/third_party/nccl-tests/build/verifiable/verifiable.o
+Compiling  all_reduce.cu                       > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce.o
+Compiling  common.cu                           > /home/allen0117/comm_opt/third_party/nccl-tests/build/common.o
+Compiling  broadcast.cu                        > /home/allen0117/comm_opt/third_party/nccl-tests/build/broadcast.o
+Compiling  all_gather.cu                       > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_gather.o
+Compiling  reduce_scatter.cu                   > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_scatter.o
+Compiling  reduce.cu                           > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce.o
+Compiling  alltoall.cu                         > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoall.o
+Compiling  alltoallv.cu                        > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoallv.o
+Compiling  scatter.cu                          > /home/allen0117/comm_opt/third_party/nccl-tests/build/scatter.o
+Compiling  gather.cu                           > /home/allen0117/comm_opt/third_party/nccl-tests/build/gather.o
+Compiling  linux.cc                            > /home/allen0117/comm_opt/third_party/nccl-tests/build/os/linux.o
+Creating archive /home/allen0117/comm_opt/third_party/nccl-tests/build/os/linux.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/os/libnccl_test_os.a
+make[2]: Leaving directory '/home/allen0117/comm_opt/third_party/nccl-tests/os'
+Compiling  sendrecv.cu                         > /home/allen0117/comm_opt/third_party/nccl-tests/build/sendrecv.o
+Compiling  hypercube.cu                        > /home/allen0117/comm_opt/third_party/nccl-tests/build/hypercube.o
+Compiling  comm_ops.cu                         > /home/allen0117/comm_opt/third_party/nccl-tests/build/comm_ops.o
+Compiling  util.cu                             > /home/allen0117/comm_opt/third_party/nccl-tests/build/util.o
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/comm_ops.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/comm_ops_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/all_gather.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_gather_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/broadcast.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/broadcast_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_scatter.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_scatter_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoall.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoall_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoallv.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoallv_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/hypercube.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/hypercube_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/scatter.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/scatter_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/gather.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/gather_perf
+Linking  /home/allen0117/comm_opt/third_party/nccl-tests/build/sendrecv.o > /home/allen0117/comm_opt/third_party/nccl-tests/build/sendrecv_perf
+make[1]: Leaving directory '/home/allen0117/comm_opt/third_party/nccl-tests/src'
+make rc=0
+-rwxr-xr-x 1 allen0117 MST114029 5905744 Nov 16 22:57 build/all_gather_perf
+-rwxr-xr-x 1 allen0117 MST114029 6866224 Nov 16 22:57 build/all_reduce_perf
+-rwxr-xr-x 1 allen0117 MST114029 7452584 Nov 16 22:57 build/alltoall_perf
+-rwxr-xr-x 1 allen0117 MST114029 5945704 Nov 16 22:57 build/alltoallv_perf
+-rwxr-xr-x 1 allen0117 MST114029 5904248 Nov 16 22:57 build/broadcast_perf
+-rwxr-xr-x 1 allen0117 MST114029  265888 Nov 16 22:57 build/comm_ops_perf
+-rwxr-xr-x 1 allen0117 MST114029 5907176 Nov 16 22:57 build/gather_perf
+-rwxr-xr-x 1 allen0117 MST114029 5902072 Nov 16 22:57 build/hypercube_perf
+-rwxr-xr-x 1 allen0117 MST114029 5893056 Nov 16 22:57 build/reduce_perf
+-rwxr-xr-x 1 allen0117 MST114029 5893712 Nov 16 22:57 build/reduce_scatter_perf
+-rwxr-xr-x 1 allen0117 MST114029 5906528 Nov 16 22:57 build/scatter_perf
+-rwxr-xr-x 1 allen0117 MST114029 5910440 Nov 16 22:57 build/sendrecv_perf

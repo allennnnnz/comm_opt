@@ -1,0 +1,21 @@
+=== curl -sI -m 20 https://pypi.org/simple/
+HTTP/2 200 
+referrer-policy: origin-when-cross-origin
+access-control-allow-headers: Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since
+etag: "eWyc6lkmzWFQhUleSxkC1g"
+x-pypi-last-serial: 43679006
+exit=0
+=== curl -sI -m 20 https://huggingface.co
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 175870
+date: Mon, 16 Nov 2026 14:45:11 GMT
+etag: W/"2aefe-VbIelkjEINGOb3IXyJ6wgWjPCpA"
+exit=0
+=== curl -sI -m 20 https://github.com
+HTTP/2 200 
+date: Mon, 16 Nov 2026 14:45:30 GMT
+content-type: text/html; charset=utf-8
+vary: X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, X-Requested-With, X-GitHub-Client-Version, Accept-Language, Sec-Fetch-Site,Accept-Encoding, Accept, X-Requested-With
+content-language: en-US
+exit=0

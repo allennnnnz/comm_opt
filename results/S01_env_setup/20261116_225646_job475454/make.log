@@ -1,0 +1,53 @@
+make -C src build BUILDDIR=/home/allen0117/comm_opt/third_party/nccl-tests/build
+make[1]: Entering directory '/home/allen0117/comm_opt/third_party/nccl-tests/src'
+Makefile:177: Skipping GIN device API performance tests: NCCL version code 22907 is older than 23007
+make[2]: Entering directory '/home/allen0117/comm_opt/third_party/nccl-tests/os'
+Compiling  timer.cc                            > /home/allen0117/comm_opt/third_party/nccl-tests/build/timer.o
+Compiling /home/allen0117/comm_opt/third_party/nccl-tests/build/verifiable/verifiable.o
+Compiling  all_gather.cu                       > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_gather.o
+Compiling  common.cu                           > /home/allen0117/comm_opt/third_party/nccl-tests/build/common.o
+Compiling  all_reduce.cu                       > /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce.o
+Compiling  broadcast.cu                        > /home/allen0117/comm_opt/third_party/nccl-tests/build/broadcast.o
+Compiling  reduce_scatter.cu                   > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_scatter.o
+Compiling  reduce.cu                           > /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce.o
+Compiling  alltoall.cu                         > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoall.o
+Compiling  alltoallv.cu                        > /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoallv.o
+make[1]: g++: Command not found
+g++: No such file or directory
+g++: No such file or directory
+make[1]: *** [Makefile:119: /home/allen0117/comm_opt/third_party/nccl-tests/build/timer.o] Error 127
+make[1]: *** Waiting for unfinished jobs....
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+g++: No such file or directory
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/all_gather.o] Error 1
+g++: No such file or directory
+g++: No such file or directory
+g++: No such file or directory
+g++: No such file or directory
+g++: No such file or directory
+make[1]: *** [../verifiable/verifiable.mk:12: /home/allen0117/comm_opt/third_party/nccl-tests/build/verifiable/verifiable.o] Error 1
+nvcc fatal   : Failed to preprocess host compiler properties.
+g++: No such file or directory
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/broadcast.o] Error 1
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+nvcc fatal   : Failed to preprocess host compiler properties.
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoall.o] Error 1
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce.o] Error 1
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/common.o] Error 1
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce_scatter.o] Error 1
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/reduce.o] Error 1
+make[1]: *** [Makefile:112: /home/allen0117/comm_opt/third_party/nccl-tests/build/alltoallv.o] Error 1
+Compiling  linux.cc                            > /home/allen0117/comm_opt/third_party/nccl-tests/build/os/linux.o
+make[2]: g++: Command not found
+make[2]: *** [Makefile:30: /home/allen0117/comm_opt/third_party/nccl-tests/build/os/linux.o] Error 127
+make[2]: Leaving directory '/home/allen0117/comm_opt/third_party/nccl-tests/os'
+make[1]: *** [Makefile:100: os.build] Error 2
+make[1]: Leaving directory '/home/allen0117/comm_opt/third_party/nccl-tests/src'
+make: *** [Makefile:20: src.build] Error 2
+make rc=2
+ls: cannot access 'build/*_perf': No such file or directory
