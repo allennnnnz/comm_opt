@@ -1,7 +1,7 @@
 # M20_env_snapshot
 
-- **狀態**：提案（等使用者核准）
-- **核准**：—
+- **狀態**：已核准，待 S01 完成後執行
+- **核准**：2026-11-16（D051：使用者「通用的就去測試」）；P10（SHARP）於 2026-11-16 經使用者同意加入（D052）
 - **類型**：環境事實（拓樸、版本、設定：確定性，逐台記錄）＋結論性（時脈行為：依 R3 重複）
 - **依賴**：S01 環境建置完成（`exp/lib/nano5_env.sh`、nccl-tests、NCCL 版本）
 - **分工**：Opus 寫本卡與預期、做結論；Sonnet 依本卡寫 `run.sh`／`collect.sh`／`analyze.py`、送工作、整理表格（規格書 S 編號另開）
@@ -36,6 +36,7 @@ Nano5 的 H100 與 H200 節點，在「卡怎麼互連、交換器能不能幫�
 | P7 | 使用者**不能**鎖定時脈（不嘗試修改，只查權限與設定）；持續通訊負載下，SM 時脈在 2 秒內升到最高（約 1980 MHz）並維持在 ±2% 內 60 秒；沒有功耗或溫度降頻 | 穩定時脈 < 1900 MHz、波動 > 2%、升頻要 > 5 秒，或出現降頻原因 |
 | P8 | 抽樣的同類節點（H100 3 台、H200 2 台）完全一致：GPU 型號、VBIOS 系列、驅動、ECC 開、MIG 關、persistence mode 開、拓樸 | 任何一項不同 |
 | P9 | GPU 與 400G 網卡都是 PCIe Gen5 x16 | 任何一個不是 |
+| P10 | **InfiniBand SHARP 可用**（寫於 2026-11-16，加入時尚未量測；信心低，約五五波）：2 台 H100 上載入 HPC-X 的 SHARP 外掛後，NCCL 初始化回報 CollNet 可用，指定 `NCCL_ALGO=CollnetDirect`（或 `CollnetChain`）時 all_reduce 能跑且 `#wrong`=0 | 外掛載入失敗、NCCL 回報 CollNet 不可用或退回其他演算法、或結果錯誤 |
 
 ## 設定
 
@@ -63,6 +64,11 @@ Nano5 的 H100 與 H200 節點，在「卡怎麼互連、交換器能不能幫�
      - 另外查一次 `nvidia-smi -q -d CLOCK,PERFORMANCE,POWER`（只讀，不嘗試 `-lgc`／`-ac`）
 - **固定條件**：S01 定下的 vLLM venv 中的 NCCL、nccl-tests 版本、`exp/lib/nano5_env.sh`
 - **GPU**：每次整台 8 張
+- **SHARP 檢查**（P10，2 台 H100，`normal`，`--exclusive`，約 10 分鐘，**不看速度**）：
+  - 外掛位置（Opus 已讀檔確認存在）：`/work/HPC_software/LMOD/nvidia/packages/hpc_sdk-24.7/Linux_x86_64/24.7/comm_libs/12.5/hpcx/latest/nccl_rdma_sharp_plugin/lib/libnccl-net.so`；SHARP 函式庫在同層 `sharp/lib/`
+  - 記錄：`ibstat`、SHARP 相關環境與服務（例如 `sharp_hello` 或 HPC-X 附的檢查工具，若存在）、外掛與 NCCL 版本相容性訊息
+  - nccl-tests all_reduce `-b 8 -e 64M -f 4`，16 個行程，在 `NCCL_DEBUG=INFO`、`NCCL_DEBUG_SUBSYS=INIT,NET,COLL` 下：(a) 預設；(b) `NCCL_COLLNET_ENABLE=1`＋外掛；(c) (b) 加 `NCCL_ALGO=CollnetDirect`；(d) (b) 加 `NCCL_ALGO=CollnetChain`
+  - 只記錄能否啟用、`#wrong`、log 中 CollNet／SHARP 相關原文
 - **工具與版本**：以 S01 報告 R01 為準，並在每個工作的 `job_env.txt` 記錄
 - **統計方式**：
   - 快照：逐台列表，標出節點之間的差異

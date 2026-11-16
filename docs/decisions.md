@@ -326,3 +326,9 @@
   - M22、M24 延後到方向確定之後。
   - 計畫更新：`docs/plan_nano5.md`。
 - **Opus 的判斷**：M20／M21／M23 不管選什麼題目都需要（硬體事實、對照基準、理論上限）；M24 只量推論，會把方向預設在推論，因此延後。
+
+## D052（2026-11-16）候選方向 A–E 全部繼續深入；M20 加入 SHARP 檢查
+
+- **依據**：R02_T1–T5、R03 與 Opus 整理 `docs/notes_synthesis_nano5.md`（含抽查：vLLM 選擇順序、DeepEP v1.2.1 要求 CUDA 12.3+、HPC-X 內有 SHARP 外掛）。
+- **Opus 的判斷**：單機 all-reduce＋norm 融合在 H100 已擁擠（TokenWeave、Every-µs、flash-comm），不當主線；MoE EP 擁擠；最有機會的是跨機器：2024 後沒有 IB SHARP 的獨立 LLM 實測，跨機 TP decode 小訊息延遲在 H100＋IB 上沒人量過。主推 A，B 為其應用場景；若 SHARP 不可用改走 B＋C。
+- **使用者選擇**：A、B、C、D／E 全部繼續深入；M20 加上「SHARP 能不能用」的 2 台檢查（P10，寫於量測前）；現在重新啟動 Claude Code 讓論文搜尋工具生效。
