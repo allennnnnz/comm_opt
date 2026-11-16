@@ -2,6 +2,8 @@
 
 > Opus 自己的工作筆記：從 R02_T1–T5、R03 讀出的重點與初步判斷。判斷標「判斷」，事實附報告與論文編號。關鍵論點在用於決策前要回原文抽查（守則第八節 5）。
 
+> **讀法（2026-11-17）**：2026-11-16 深夜兩個 Claude 對話同時執行 S04，各自寫了 R04 的讀後段落，下面有重複。**以最後一節「整合判斷」為準。**
+
 ## T1 單機集體通訊（R02_T1，27 篇）
 
 - 小訊息低延遲 collective 是熱點，而且大廠／ETH 在做：
@@ -143,3 +145,15 @@
 - **主線 A＋（C 的量測軸）＋（B 的應用場景）**：在 H100 小型叢集上，量化並利用兩層交換器加總（機內 NVLS、機間 IB SHARP）——延遲（小訊息）、頻寬、SM 用量與對同時計算的干擾；應用到 (1) 跨機 TP decode 的平行方式選擇、(2) 訓練的 reduce-scatter／all-gather
 - **不做**：D（NCCL-BOT 已覆蓋）、單機 all-reduce＋norm 融合
 - **關卡**：SHARP 是否可用（M20 P10＋詢問 NCHC）。不可用時的備案：C 縮小為「單機 NVLS × SM 稅 × 同時 GEMM」＋跨機 NVLS_TREE 的特性量測，或 E
+
+## 整合判斷（Opus，2026-11-17 01:10，合併兩個對話的結論；以本節為準）
+
+- **兩個對話獨立得出相同結論**：主線 A（兩層交換器加總：機內 NVLS＋機間 IB SHARP），C（SM 稅、對同時計算的干擾）作為量測軸，B（跨機 TP decode）作為應用場景；D 不做（NCCL-BOT 已覆蓋）；E 備案
+- **再次抽查（本對話，01:05）**：`src/tuning/nvls.cc:149` 跨機 NVLS 需要 collNetSupport；HPC-X 外掛 `nm -D` 匯出 net／collnet v5–v8，2.29.7 `strings` 含 v6–v11（重疊 v6–v8）
+- **實驗設計注意**：載入 HPC-X 外掛（`libnccl-net.so`）後，NCCL 的網路傳輸也改由外掛提供 → 「SHARP 開／關」的公平對照是「外掛載入＋`NCCL_COLLNET_ENABLE=1`」對「外掛載入＋`NCCL_COLLNET_ENABLE=0`」，另加「不載外掛（NCCL 內建 IB）」作為參考
+- **研究問題的雛形**（待使用者決定是否採用）：在 ≤4 台 H100 的小型叢集上，兩層交換器加總在小訊息延遲、大訊息頻寬、GPU 計算資源用量三方面各帶來多少？能不能讓「跨機 TP」這個業界刻意避開的選項（vLLM 文件、TKNP）在 decode 時變得划算？
+- **關卡（依序）**：
+  1. M20 P6：計算節點有沒有 GPUDirect RDMA（核心 4.18 不能走 dma-buf，只能靠 `nvidia_peermem`）——所有跨機方向都受影響
+  2. M20 P10：SHARP 能不能用（`sharp_hello`＋NCCL 日誌）
+  3. 向 NCHC 詢問：Aggregation Manager 是否啟用、每個 job 的 SHARP 配額、是否 rail-optimized 拓樸、計算節點是否載入 `nvidia_peermem`
+- **SHARP 不可用時的備案**：單機 NVLS × SM 稅 × 同時 GEMM ＋ 跨機 NVLS_TREE 的特性量測（主張較弱），或 E
