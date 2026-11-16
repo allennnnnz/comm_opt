@@ -2,20 +2,17 @@
 
 > 每次 session 開始先讀本檔，結束時更新「目前狀態」與「下一步」。
 
-## 目前狀態（2026-11-16 深夜，nano5 分支）
+## 目前狀態（2026-11-17 02:00，nano5 分支）
 
-- **2026-11-17 00:1x 使用者要求暫停一小時（用量滿）**：S04 的 A 小助手已被 Opus 中止，恢復時用 SendMessage 叫它從原進度繼續（`R04_A_two_level_switch_reduction.md` 可能只寫了一部分）；R04_BE、R04_CD 已完成並抽查（`docs/notes_synthesis_nano5.md`）。S01 工作 475444、475459 仍在排隊，計算節點上照常跑
-
-- **換環境、重新開始**（D050、D051）：Nano5（8× H100／H200 每台，Slurm，D048）；文獻優先、不受 A100 題目限制。計畫 `docs/plan_nano5.md`
-- **文獻與原始碼調查完成**：R02_T1–T5（約 134 項核實）、R03（8 個系統原始碼）。Opus 整理與抽查：**`docs/notes_synthesis_nano5.md`**
-- **候選方向**（D052，使用者選擇全部繼續深入）：A 兩層交換器加總（NVLS＋IB SHARP，主推）、B 跨機 TP decode 小訊息延遲、C 通訊的 SM 資源稅、D 效能模型選 collective／E PD 分離 KV 傳輸
-- **S01 環境建置**：部分完成（R01）。vLLM 0.32.0+cu129、torch 2.13.0+cu129、NCCL 2.29.7、nccl-tests v2.21.1 已編譯；安裝在 `/work/allen0117/comm_opt_env`；`/home` 配額 100 GB
-  - **待辦**：8 卡驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊，預估 2026-11-17 01:42／02:02 開始（23:45 查詢） → 讀 `results/S01_env_setup/*_job475444`、`*_job475459`；確認 torch NCCL 版本＝nccl-tests 執行時版本
-  - **待送**（一次一個，不要同時排太多）：2 台 H100、單台 H200、2 台 H200 的 all_reduce 冒煙測試；用 `exp/lib/nano5_env.sh` 再跑一次單台驗證
-  - 之後把 R01 補完並驗收；vLLM 0.32.0 正式記為決策
-- **M20**：已核准，加了 P10（SHARP，2 台 H100）；S01 通過後交給 Sonnet 執行
-- **論文搜尋工具**：2026-11-16 使用者重開 VS Code 後可用（arXiv MCP、paper-search MCP）。arXiv 搜尋**要用欄位前綴**（`abs:"..."`）＋`sort_by: relevance`，否則回傳無關的最新論文
-- **S04 候選方向深入調查**（2026-11-16 23:55 交給三位 Sonnet）：規格 `docs/specs/S04_direction_deep_dive.md`；報告 `R04_A_switch_reduction`、`R04_BE_crossnode_inference`、`R04_CD_smtax_model`（待交回後 Opus 讀＋抽查）
+- **使用者 01:15 離開約五小時，指示「做完所有剩下的任務」**。執行方式因排隊壅塞調整（D053）
+- **候選方向**：S04 完成（R04_A、R04_BE＋session2 版、R04_CD＋smtax_model 版）。整合判斷見 `docs/notes_synthesis_nano5.md` 最後一節：主線 A（兩層交換器加總），C 當量測軸，B 當應用；D 不做；E 備案。**待使用者決定是否採用 A 為主線**
+- **待使用者處理**：是否寄出給國網中心的詢問稿 `docs/nchc_inquiry_20261117.md`（SHARP、`nvidia_peermem`、IB 拓樸）
+- **S01**：驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊（預估 04:00 前後）。Opus 待辦：讀結果、補完並驗收 R01、把 vLLM 0.32.0 記為決策。其餘冒煙測試併入 M20／M23（D053）
+- **M20**：Sonnet 依 S05 執行中（實驗卡有「Opus 補充」）。H100 第 1 台（`dev`）、2 台 SHARP（`normal`）、H200 第 1 台（`normal2`）以 `afterok` 綁 S01 送出；之後依序 H100 第 2、3 台、H200 第 2 台。報告 `R05_M20_env_snapshot.md`
+- **M21**：Sonnet 依 S06 準備腳本（只乾跑）；Opus 看過 M20 第 1 台（P4、P7）後再送
+- **M23**：Sonnet 依 S06 送出 4 台 H100（`4nodes`）與 2 台 H200（`normal2`），以 `afterok` 綁 S01；預估 11-19／11-26 才開始
+- **工作環境**：H100 分兩組 hgpn01–06、hgpn17–21；H200 為 hgpn39–41、43–46。論文搜尋 MCP 可用，但 arXiv 常回 429
+- **注意**：同一專案只開一個 Claude 對話（2026-11-16 深夜曾有兩個對話同時寫入，R04_BE 被覆蓋後已還原）
 
 ## 已核准的實驗
 
@@ -46,7 +43,7 @@
 
 ## 下一步
 
-1. 讀 S01 驗證工作 475444、475459 的結果；依序送其餘冒煙測試；補完並驗收 R01
-2. S01 通過後，把 S05（M20）交給 Sonnet；R04_A 回來後補 SHARP 設定給 `sharp.sbatch`
-3. 讀 R04_A／BE／CD，抽查關鍵論點，更新候選方向判斷（`docs/notes_synthesis_nano5.md`），回報使用者
-4. M20 完成後：判定 P1–P10，寫 M21、M23 的執行規格書
+1. S01 工作完成後：讀結果、驗收 R01；把 vLLM 0.32.0 記為決策
+2. M20 H100 第 1 台完成後：判讀 P4（NVLS）、P6（GPUDirect RDMA）、P7（時脈）、`sharp_hello`；決定 M21 暖機長度並送 M21
+3. 讀 R05、R06，抽查；M20 全部完成後逐條判定 P1–P10
+4. 使用者回來後：決定主線（A？）、是否寄國網中心詢問
