@@ -55,6 +55,7 @@
   - **H100 改為一個 4 台工作**（`4nodes`，只接受 4 台；2026-11-17 01:20 試算約 11-19 開始；`normal` 的 2 台同樣約 11-19）。在這 4 台內：先跑 4 台的全部設定；再把 4 台分成兩台一組，跑 2 台的設定。4 台若橫跨 hgpn01–06 與 hgpn17–21 兩組，就各挑一組「同組」與「跨組」的組合（Q7）；若 4 台都在同一組，Q7 標「本次無法判定」並照實記錄節點
   - **H200 一個 2 台工作**（`normal2`，約 11-26）
   - **SHARP、NVLSTree 等演算法一律都跑**，不等 M20 的判定：不可用時 NCCL 會報錯或退回其他演算法，照實記錄；分析時以 NCCL 日誌中實際使用的演算法為準。載入 SHARP 外掛的方式與 M20「Opus 補充」相同（不 load hpcx 模組），對照組為「外掛載入＋`NCCL_COLLNET_ENABLE=0`」
+  - **Opus 補充 2（2026-11-17 01:35，量測前）**：all_reduce 的外掛設定加一項「外掛載入＋`NCCL_COLLNET_ENABLE=1`＋`NCCL_ALGO=NVLS`」——跨機時 NCCL 的 NVLS 演算法＝機內 NVLS＋機間 IB SHARP（v2.32.6 `src/tuning/nvls.cc:149`，Opus 已讀碼確認），是方向 A 的核心。加在執行時讀入的 `m23_lib.sh`，已排隊的工作 475773、475774 也會套用。`NCCL_NET_GDR_LEVEL=LOC` 的意義經 NCCL 文件確認為「Never use GPU Direct RDMA (always disabled)」（v2.32.6 `docs/userguide/source/env.rst:1340`）
   - 兩個工作都以 `--dependency=afterok:475444:475459`（S01 驗證）送出；開始前若 M20 顯示設定需要改，Opus 會取消或修改排隊中的工作
 - **工具與版本**：nccl-tests v2.21.1（commit `afd59ab`）；每個工作的 `job_env.txt` 記錄節點、NCCL 版本、模組
 - **統計方式**：
@@ -67,7 +68,13 @@
 
 ## 指令
 
-（Sonnet 依本卡實作後補上；輸出到 `results/M23_internode_baseline/<時間>_job<id>/`）
+（S06 實作，2026-11-17）
+
+- 腳本：`h100_4node.sbatch`（`4nodes`、4 台：先 4 台全部設定，再依節點編號分成兩台一組，跑同組／跨組各一組的 2 台設定）、`h200_2node.sbatch`（`normal2`、2 台）；共用 `m23_lib.sh`、`../lib/nccl_bench.sh`
+- 送出：`submit.sh <腳本> --dependency=afterok:475444:475459`；輸出：`results/M23_internode_baseline/<時間>_job<id>_<h100|h200>/`
+- 設定名：`n4_*`（4 台）、`n2same_*`／`n2cross_*`（H100 2 台；`pairs.tsv` 記實際節點）、`h200n2_*`；`ar_*` = all_reduce（`default/ring/tree/nvlstree`；`arP0_*` = 載外掛＋COLLNET=0；`arP1_*` = 載外掛＋COLLNET=1：`default/cdirect/cchain`）、`ag/rs/a2a`、`sr1`（兩台各一卡）、`sr8`（兩台各 8 卡，rank 輪流排在兩台上，每個 send/recv 都跨機）、`*_gdroff`（`NCCL_NET_GDR_LEVEL=LOC`，只在 H100 2 台）
+- 每個啟動分兩段（同 M21：小段 `-n 2000`、大段 `-n 20`）＋每設定 1 次 probe；種子 20261118，實際順序 `plan_order.tsv`
+- 分析：`python exp/M23_internode_baseline/analyze.py`
 
 ## 結果
 

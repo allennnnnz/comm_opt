@@ -60,7 +60,13 @@
 
 ## 指令
 
-（Sonnet 依本卡實作後補上；輸出到 `results/M21_intranode_baseline/<時間>_job<id>/`）
+（S06 實作，2026-11-17；**尚未送出**，等 Opus 看過 M20 第 1 台結果）
+
+- 腳本：`node_a.sbatch`（all_reduce／all_gather／reduce_scatter × 2/4/8 卡 × NVLS 開/關，加 8 卡 all_reduce 的 Ring／Tree／NVLS 與 Ring×LL／LL128／Simple）、`node_b.sbatch`（broadcast／reduce／alltoall × 2/4/8 卡 × NVLS 開/關）；共用 `m21_lib.sh`、`../lib/nccl_bench.sh`、`../lib/launch.sh`、`../lib/rankwrap.sh`
+- 送出：`.claude/skills/slurm-submit/submit.sh exp/M21_intranode_baseline/node_a.sbatch`（再送 `node_b.sbatch`）；輸出：`results/M21_intranode_baseline/<時間>_job<id>_<a|b>/`
+- 每個啟動分兩段（小：`-b 8 -e 64M -f 2 -n 2000 -w 5 -a 3`；大：`-b 128M -e 8G -f 2 -n 20 -w 5 -a 3`；`-a 3` = 跨 rank 取 MAX）；每設定另有 1 次 probe 啟動（`-n 1`、`NCCL_DEBUG_SUBSYS=INIT,NET,TUNING`）記錄實際演算法
+- 順序：種子 20261117，實際順序在 `plan_order.tsv`；2/4 卡用前 2/4 張（`GPU_LIST` 在 rank 內設定 `CUDA_VISIBLE_DEVICES`）
+- 分析：`python exp/M21_intranode_baseline/analyze.py`（需 numpy；圖需 matplotlib）
 
 ## 結果
 
