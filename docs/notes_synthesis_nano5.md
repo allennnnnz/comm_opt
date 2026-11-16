@@ -107,3 +107,20 @@
 - **D 降級**：NVIDIA 已在做模型修正，且 2.29.7 的 tuner 介面受限；除非與 C 結合（「有並行計算時最佳選擇會變」——只有一個課程專案提過，非同儕審查），否則不單獨做
 - **C 保留但只當 A／B 的評估維度**：「省多少 GPU 計算資源」是 A（交換器加總理論上不用 SM 做加法）的重要指標，可在 A 的實驗中一起量；單獨做 C 與 TIDE／Zero-SM 重疊高、且 NCCL CE 路徑受驅動限制
 - 主推仍為 A，等 R04_A、R04_BE
+
+## R04_BE（方向 B、E 深入調查）與 Opus 抽查（2026-11-17）
+
+- **跨機 TP 在 H100 上一律退回 NCCL**（Opus 讀已安裝的 vLLM 0.32.0 確認）：`site-packages/vllm/distributed/device_communicators/custom_all_reduce.py:204-238`——跨機群組要通過 `_group_can_attempt_mnnvl`，其條件為 `has_device_capability(100)`（Blackwell）且有 multicast；H100（9.0）不符 → 自訂 all-reduce 停用。註：0.32.0 的 `_SUPPORTED_WORLD_SIZES` 含 16（R04_BE 說「16 超過 8」的理由不正確，但結論相同）。TRT-LLM `allreduceOp.cpp:1250-1257` `ifFallbackToNCCL` 在 `!mIsP2PSupported || !mIsNVLINKSupported` 時回 NCCL（Opus 讀碼確認）
+- **跨機 TP 的實務**：vLLM、SGLang、TRT-LLM 官方都有 TP=16 跨 2 台的範例；但 vLLM 同頁建議 TP＝每台卡數、PP＝台數，Llama 3 論文 §6.1 跨機用 PP（R04_BE，未抽查）→ 方向 B 的動機要靠「為什麼要跨機 TP」（例如 decode 延遲、PP 的 bubble）撐住，需要更強證據
+- **decode all-reduce 訊息大小**：NVRAR 原文 B×H，70B、B=8 時 128 KB，工作負載 128 KB–1 MB；SiFAR 低批量 4–32 KB（R04_BE）
+- **IBGDA 需要管理員或 GDRCopy**（Opus 以 WebFetch 讀 NVSHMEM install guide 確認）：預設模式需 `nvidia.ko` 以 `PeerMappingOverride=1` 載入（改 `/etc/modprobe.d/nvidia.conf`）；CPU-assisted 模式不需要，但要 GDRCopy。dma-buf 需 rdma-core ≥44 且核心 ≥6.1；沒有 dma-buf 時需 `nvidia-peermem`
+  - 登入節點：核心 4.18（→ dma-buf 路徑不可用）、`/dev/gdrdrv` 存在、未見 `nvidia_peermem`（R04_BE；計算節點未知）
+  - **M20 P6（GPUDirect RDMA）是所有跨機方向的關卡**：計算節點若沒有 `nvidia_peermem`，NCCL 跨機只能繞主機記憶體
+- 新的低延遲 GPU 發起通訊量測（R04_BE，未抽查）：Dissecting（2610.01380，H200＋CX-7）NVSHMEM IBGDA put＋完成 11.10 µs vs IBRC 6.40 µs（報告者提醒表格可能錯位）；Perseus（2605.00686，H100＋CX-7，2–4 節點）IBRC 持平或勝過 IBGDA；mKernel 自述 IBGDA 增益小
+- **方向 E**：vLLM 0.32.0 有 NIXL／Mooncake／LMCache 連接器但需另裝；在 H100＋IB 上量 KV 傳輸佔比的資料仍未找到；矛盾未消除（R04_BE）
+
+### 判斷更新
+
+- **B 保留，但動機需補強**：「H100 跨機 TP 只能用 NCCL」已確認，空間存在；但業界主流跨機用 PP／EP，要先證明跨機 TP decode 有真實需求或優勢。B 與 A 可合併：A 的 SHARP 正好是跨機小訊息加總的硬體路徑
+- **E 降級**：需另裝多套軟體、系統整合重，且偏量測；不當主線
+- **下一個關卡**：M20 P4（NVLS）、P6（GPUDirect RDMA）、P10（SHARP）
