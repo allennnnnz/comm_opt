@@ -9,7 +9,7 @@
 - **待使用者處理**：是否寄出給國網中心的詢問稿 `docs/nchc_inquiry_20261117.md`（SHARP、`nvidia_peermem`、IB 拓樸）
 - **S01**：驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊（預估 04:00 前後）。Opus 待辦：讀結果、補完並驗收 R01、把 vLLM 0.32.0 記為決策。其餘冒煙測試併入 M20／M23（D053）
 - **M20**：腳本完成（S05，Sonnet），已排隊：475780（H100 第 1 台，`dev`）、475781（2 台 SHARP，`normal`）、475782（H200 第 1 台，`normal2`），以 `afterok:475459` 綁 S01 的 nccl-tests 冒煙測試（原 475733–475735 綁兩個 S01 工作，但 vLLM 測試 475444 預估要到 11-18；`scontrol update` 被叢集拒絕，01:50 取消重送）。R05 為階段性報告。**H100 第 2、3 台、H200 第 2 台尚未送**：Opus 看過 475780 輸出正常後送（`exp/M20_env_snapshot/node.sbatch`，`--exclude` 已量節點）
-- **M21**：腳本完成（`node_a.sbatch` 約 70 分、`node_b.sbatch` 約 50 分，`dev`，只乾跑過）；Opus 看過 M20 第 1 台（P4、P7）後決定暖機長度再送。R06 第 5 節有 16 條執行者自行決定之處，送出前 Opus 要審
+- **M21**：腳本完成（`node_a.sbatch` 約 70 分、`node_b.sbatch` 約 50 分，`dev`，只乾跑過）；Opus 看過 M20 第 1 台（P4、P7）後決定暖機長度再送。R06 第 5 節 16 條已由 Opus 審過（01:55）：全部同意；#5 已補跨機 NVLS＋SHARP；#12 已確認 `Bytes -> Algo` 屬 NCCL_TUNING（v2.32.6 `src/enqueue/enqueue.cc:900`）；#15 已建分析環境；#9（M23 無暖機）待 M20 P7 決定，可改執行時讀入的 `m23_lib.sh`
 - **M23**：已排隊 475783（4 台 H100，`4nodes`，9 h）、475784（2 台 H200，`normal2`，3 h），以 `afterok:475459` 綁 S01（原 475773／475774 取消重送）；預估 11-19／11-26。設定清單在執行時讀入的 `m23_lib.sh`（Opus 已加入跨機 NVLS＋SHARP）
 - **同節點紀錄**：叢集拿掉 `--exclusive`，量測工作改以 `exp/lib/cotenants.sh` 記錄同節點工作（D054，待使用者確認）
 - **分析用 Python**：`/work/allen0117/comm_opt_env/venvs/analysis/bin/python`
