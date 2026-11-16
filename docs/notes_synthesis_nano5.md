@@ -66,3 +66,15 @@
 - **DeepEP**：唯一 tag v1.2.1 要求「CUDA 12.3 and above for SM90」＋NVSHMEM（Opus 抽查 README 第 48–49 行）→ 在驅動 550 下應可建置；T3 報告說的 CUDA 13.1 是主線 README，不適用 tag 版
 - **SHARP 軟體存在**：`/work/HPC_software/LMOD/nvidia/packages/hpc_sdk-24.7/Linux_x86_64/24.7/comm_libs/12.5/hpcx/latest/` 下有 `sharp/lib/libsharp_coll*` 與 `nccl_rdma_sharp_plugin/lib/libnccl-net.so`（Opus 讀檔確認）。交換器端（Aggregation Manager）有沒有開，要在計算節點實測 → 加進 M20／M23
 
+
+## R04_CD（C 通訊的 SM 稅、D 效能模型選 collective）讀後與抽查（2026-11-17）
+
+- **Opus 抽查**：
+  - NCCL `src/ce_coll.cc:174-190`（v2.32.6）：copy-engine collective 要 `driverVersion >= 12050`，且只支援 AllGather／AlltoAll／Scatter／Gather（**沒有 reduction**）。登入節點 `nvidia-smi` 驅動 550.127.08（CUDA 12.4）→ 零 SM 的 copy-engine 路線在我們環境大概不能用（計算節點待 M20 確認）
+  - NCCL-BOT（arXiv 2611.11303，NVIDIA，2026-11-08，讀 PDF 摘要）：H100 上用 tuner plugin＋bandit 修正 AUTO；AUTO 平均多 6.1%、p99 多 103%；「We do not show a net end-to-end win」；小於 1 MiB 時 cost model 在 H100 上已準
+  - Weave（2609.21483，4×H100，MoE megakernel 動態 SM 分工）、OverlapAdvisor（2611.11857，MoE EP 重疊效能模型，MAPE 3.3–15.9%）：摘要核實
+- **判斷**：
+  - **D 不建議當主線**：NVIDIA 自己剛在 H100 上做（NCCL-BOT），且其結論是「小訊息時內建模型已準、端到端沒有淨收益」→ 空間小
+  - **C 單獨做也擁擠**：MoE 的動態 SM 分工（Weave、OverlapAdvisor、Analytical Resource Mgmt、Resource-aware Overlap）2026 下半年密集出現；SM-free 路線（Zero-SM、VCCL、T-CCL）也在做，且 copy engine 在驅動 550 上可能不可用
+  - **但 C 可以併入 A**：交換器內加總（NVLS 機內、SHARP 機間）把「加法」從 GPU 運算單元搬到交換器，本來就該減少 SM 用量與對 GEMM 的干擾（NCCL 2.27 部落格宣稱 SHARP 讓 AG／RS 需要的 SM 從 ≥16 降到 ≤6，無數據）。R04_CD §5-1、5-2：H100 上「collective 實作 × SM 數 × GEMM 拖慢」沒有系統性量測，NVLS 對同時執行的 GEMM 的影響也沒人量 → **A 的主要量測軸可以是「延遲」與「SM 稅」兩個**
+  - 這也繞開了 copy engine 在驅動 550 不可用的問題：交換器加總不需要 copy engine
