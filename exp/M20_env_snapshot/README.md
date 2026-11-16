@@ -69,6 +69,21 @@ Nano5 的 H100 與 H200 節點，在「卡怎麼互連、交換器能不能幫�
   - 記錄：`ibstat`、SHARP 相關環境與服務（例如 `sharp_hello` 或 HPC-X 附的檢查工具，若存在）、外掛與 NCCL 版本相容性訊息
   - nccl-tests all_reduce `-b 8 -e 64M -f 4`，16 個行程，在 `NCCL_DEBUG=INFO`、`NCCL_DEBUG_SUBSYS=INIT,NET,COLL` 下：(a) 預設；(b) `NCCL_COLLNET_ENABLE=1`＋外掛；(c) (b) 加 `NCCL_ALGO=CollnetDirect`；(d) (b) 加 `NCCL_ALGO=CollnetChain`
   - 只記錄能否啟用、`#wrong`、log 中 CollNet／SHARP 相關原文
+- **Opus 補充（2026-11-17 01:30，量測前寫；P1–P10 的預期不變，只補設定）**，依據 R04_A（`docs/reports/R04_A_switch_reduction.md`）與 Opus 抽查：
+  - **單台 SHARP 預檢**（加在每個 H100／H200 單台工作的快照後；P10 的前置觀察，不取代 P10）：
+    - `ip -br addr | grep -i ib`（IPoIB；SHARP 用 UD multicast 分送結果）
+    - `ldd <外掛>/libnccl-net.so`，在設好下面的 `LD_LIBRARY_PATH` 前後各一次，記錄 `not found`
+    - `SHARP_COLL_LOG_LEVEL=3 <HPCX>/sharp/bin/sharp_hello -d mlx5_0:1 -v 3`（`timeout 60`），以及加 `SHARP_COLL_ENABLE_SAT=1` 再一次；網卡名稱以 `ibstat` 中第一個 NDR Active 埠為準。記錄完整輸出（期待 `Test Passed.` 與 tree 類型）
+  - **SHARP 環境的設定方式**：**不要** `module load nvhpc-hpcx-cuda12/24.7`——該模組會把 HPC SDK 自帶的 NCCL（`$nvcommdir/nccl/lib`）放到 `LD_LIBRARY_PATH` 前面，蓋掉 S01 的 NCCL 2.29.7。改為手動：`HPCX=/work/HPC_software/LMOD/nvidia/packages/hpc_sdk-24.7/Linux_x86_64/24.7/comm_libs/12.5/hpcx/latest`；`LD_LIBRARY_PATH` 依序為 venv 的 NCCL lib、`$HPCX/nccl_rdma_sharp_plugin/lib`、`$HPCX/sharp/lib`、`$HPCX/ucx/lib`、原值。每次執行都從 NCCL 日誌確認版本為 2.29.7、以及外掛是否載入成功（原文）
+  - **2 台 SHARP 檢查的設定擴充**（原 (a)–(d) 之外加兩項，仍只記錄能否啟用、`#wrong`、日誌原文，不看速度）：
+    - (a) 不載外掛、預設（NCCL 內建 IB）
+    - (b) 載外掛、`NCCL_COLLNET_ENABLE=0`——**公平對照**：載入外掛後網路傳輸也改由外掛提供，SHARP 開／關要在都載外掛的條件下比
+    - (c) 載外掛、`NCCL_COLLNET_ENABLE=1`；(d) (c)＋`NCCL_ALGO=CollnetDirect`；(e) (c)＋`NCCL_ALGO=CollnetChain`
+    - (f) (c)＋`NCCL_ALGO=NVLS`（跨機的 NVLS 演算法＝機內 NVLS＋機間 SHARP，NCCL v2.32.6 `src/tuning/nvls.cc:149`）
+    - (c) 另跑 `all_gather_perf`、`reduce_scatter_perf` 各一次（NCCL 2.27 起 SHARP 支援 AG／RS，R04_A §1-5）
+    - 每個設定 `-b 8 -e 64M -f 4 -n 5 -w 2`、`NCCL_DEBUG=INFO`、`NCCL_DEBUG_SUBSYS=INIT,NET,COLL,TUNING`
+  - **與 S01 合併**：2 台 SHARP 工作的設定 (a) 同時作為 S01 的「2 台 H100 冒煙測試」；H200 第 1 台的 NVLS 檢查 (a) 同時作為 S01 的「單台 H200 冒煙測試」。S01 的「2 台 H200 冒煙測試」併入 M23
+  - **排隊**：2026-11-17 01:20 試算（`sbatch --test-only`）：`dev` 單台約數小時；`normal` 2 台約 11-19；`normal2` 單台約 11-25；`4nodes` 只接受 4 台。因此 2 台 SHARP（`normal`）與 H200 第 1 台（`normal2`）提早送出排隊，以 `--dependency=afterok:<S01 的兩個工作>` 確保 S01 驗證通過後才開始
 - **工具與版本**：以 S01 報告 R01 為準，並在每個工作的 `job_env.txt` 記錄
 - **統計方式**：
   - 快照：逐台列表，標出節點之間的差異
