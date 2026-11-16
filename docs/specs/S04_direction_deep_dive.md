@@ -1,84 +1,63 @@
-# S04 候選方向深入調查：既有工作、現成軟體、可行性前提
+# S04 候選方向深入調查：既有工作、現成軟體、在 Nano5 的前置條件
 
-- **寫給**：Sonnet 5.5 執行者（三位並行，各負責一組方向）　**撰寫**：Opus 5.5，2026-11-16（D052）
-- **類型**：文獻＋原始碼＋登入節點唯讀檢查；**不需 GPU、不送 Slurm 工作**
-- **報告**：`docs/reports/R04_<組>_<slug>.md`（見下表）
+- **寫給**：Sonnet 5.5 執行者，三位並行（分工見下表）　**撰寫**：Opus 5.5，2026-11-16（D052）
+- **類型**：文獻＋原始碼＋文件調查，不需 GPU、不送 Slurm 工作
+- **報告**：`docs/reports/R04_<分工代號>_<slug>.md`
 
 ## 背景
 
-S02（文獻地圖，`docs/reports/R02_T1`–`T5`）與 S03（主流系統原始碼，`docs/reports/R03_system_code_survey.md`）已完成。Opus 整理出候選方向，使用者決定全部繼續深入（D052）。整理筆記：`docs/notes_synthesis_nano5.md`（**先讀**，尤其「初步候選方向」表）。
+S02（文獻地圖）與 S03（主流系統原始碼）已完成，Opus 依此提出五個候選方向（`docs/notes_synthesis_nano5.md` 的「初步候選方向」表），使用者決定全部深入（D052）。**這一輪的目的是回答三個問題，選題判斷仍由 Opus 做，你只提供有出處的事實：**
 
-你的任務：針對分到的方向，回答三件事——**(1) 最接近的既有工作做到哪裡、沒做什麼；(2) 現成軟體（NCCL、vLLM、SGLang、TensorRT-LLM、Megatron）已經支援到哪裡；(3) 在我們環境要做這個方向，有哪些前提條件、各怎麼檢查。** 判斷「值不值得做」由 Opus 負責，你只提供有出處的事實。
+1. **最接近的既有工作是什麼**：誰已經做了這個方向的哪一部分、沒做哪一部分（以原文為證）。
+2. **現成軟體已經做到哪**：NCCL、vLLM、SGLang、TensorRT-LLM、Megatron 是否已經內建、預設是否開啟（附原始碼 `檔案:行號` 或官方文件網址）。
+3. **在 Nano5 上做這個方向需要什麼前置條件**：需不需要管理員權限、特定服務、驅動參數、版本；每項怎麼檢查。
+
+**先讀**（避免重複）：`docs/notes_synthesis_nano5.md`；和你方向相關的 `docs/reports/R02_T*.md` 段落與 `docs/reports/R03_system_code_survey.md`。已在 R02 核實過的論文可以直接引用其編號，不必重新核實；你要找的是 **R02 沒涵蓋的** 與 **更細的事實**。
 
 ## 我們的環境
 
-- 國網中心 Nano5：每台 8× H100 80GB SXM（或 8× H200），NVLink4＋NVSwitch，每台 8× InfiniBand NDR 400 Gb/s；最多 H100 4 台（32 GPU）、H200 2 台
-- 驅動 550（CUDA 12.x）；**沒有 root**；Slurm
-- 已安裝：NCCL 2.29.7（在 vLLM venv 內）、vLLM 0.32.0、torch 2.13.0（見 `docs/reports/R01_env_setup.md`）
-- 原始碼（S03 下載，release tag，唯讀）：`/work/allen0117/comm_opt_env/src/{nccl,vllm,sglang,trtllm,flashinfer,megatron,deepep,pytorch}`；NCCL 是 v2.32.6-1（**比我們裝的 2.29.7 新**，引用功能時要確認 2.29 是否已有：查 release notes 或 git tag 日期）
-- HPC-X（系統模組 `nvhpc-hpcx-cuda12/24.7`）：`/work/HPC_software/LMOD/nvidia/packages/hpc_sdk-24.7/Linux_x86_64/24.7/comm_libs/12.5/hpcx/latest/`，內含 `sharp/`、`nccl_rdma_sharp_plugin/`、`ucc/`、`ucx/`、`README.txt`
+- 每台 8× H100 80GB SXM（或 8× H200），NVLink4＋NVSwitch，每台 8× InfiniBand NDR 400 Gb/s；最多 H100 4 台（32 GPU）或 H200 2 台
+- 驅動 550（CUDA 12.x）；沒有 root；Slurm
+- 已裝：NCCL 2.29.7（venv 內）、vLLM 0.32.0+cu129、torch 2.13.0+cu129、nccl-tests v2.21.1（`/home/allen0117/comm_opt/third_party/nccl-tests`）
+- 原始碼（2026-11-16 的 release tag，`--depth 1`）：`/work/allen0117/comm_opt_env/src/{nccl,vllm,sglang,trtllm,flashinfer,megatron,deepep,pytorch}`。注意 NCCL 原始碼是 v2.32.6，我們實際跑的是 2.29.7；引用時標明版本，若可能看 git tag 間差異就寫出來，查不到就寫「未確認 2.29.7 是否相同」
+- HPC-X（含 SHARP）：`/work/HPC_software/LMOD/nvidia/packages/hpc_sdk-24.7/Linux_x86_64/24.7/comm_libs/12.5/hpcx/latest/`，其中有 `sharp/`、`nccl_rdma_sharp_plugin/`（Opus 已確認存在）
 
-## 分組
+## 分工
 
-| 組 | 報告檔名 | 方向 |
-|---|---|---|
-| A | `R04_A_switch_reduction.md` | **A 兩層交換器加總**：機內 NVLS（NVLink SHARP，multimem）＋機間 InfiniBand SHARP，用於小型 H100 叢集的 LLM 集體通訊（含延遲導向的小訊息） |
-| BE | `R04_BE_crossnode_inference.md` | **B 跨機 TP decode 的小訊息 all-reduce**（模型一台放不下時）；**E** prefill／decode 分離時 KV cache 在 H100＋IB 上的傳輸（E 比重較輕，約全篇四分之一） |
-| CD | `R04_CD_smtax_model.md` | **C 通訊的「SM 稅」**：各種 collective 實作佔多少 SM、對同時執行的 GEMM 拖慢多少、如何減少；**D** 用效能模型選擇 collective 演算法與參數 |
+| 代號 | slug | 方向（Opus 的定義） | 一定要回答的事實問題 |
+|---|---|---|---|
+| A | two_level_switch_reduction | **兩層交換器加總**：機器內用 NVSwitch 的 NVLS（multimem），機器之間用 InfiniBand 交換器的 SHARP，讓小型 H100 叢集（≤4 台）的 LLM 集體通訊更快、佔用更少 GPU 計算資源；同時看頻寬導向（訓練）與延遲導向（推論）| (1) NCCL 有哪些演算法同時用到 NVLS 與網路 SHARP（例如 NVLSTree、CollNet＋NVLS 的組合）？啟用條件、限制、預設開關各是什麼（原始碼 `檔案:行號`）？(2) 2023 年後有沒有論文或廠商資料實測「NVLS＋IB SHARP」或「IB SHARP」在 H100／NDR 上的 LLM 集體通訊？規模、訊息大小、有沒有小訊息延遲、有沒有量 GPU 計算資源（SM）用量？(3) SHARP（Quantum-2 世代）有哪些資源限制：同時能有幾個加總樹、幾個 communicator、streaming aggregation 與 low-latency 模式的差異、訊息大小限制？(4) 使用者端需要什麼才能用：外掛、`sharp_am` 等服務是否由管理員端提供、環境變數；有哪些不需 root 的檢查方法？(5) 主流推論／訓練框架有沒有文件或程式碼提到 SHARP／CollNet？(6) 交換器內加總的學術研究（可程式化交換器、Rina 這類）2023 年後有哪些，和 NVIDIA SHARP 的關係 |
+| BE | crossnode_inference | **B：跨機器 TP decode 的小訊息 all-reduce**（模型一台放不下、TP 跨兩台以上時）；**E：prefill／decode 分離時的 KV cache 傳輸**在 H100＋IB 上是不是瓶頸 | B：(1) 實務上有沒有人跨機器做 TP 推論？找框架官方文件或部落格的具體設定（例如某模型用 TP=16 跨 2 台），以及「跨機器建議改用 PP／EP」的官方說法；(2) vLLM／SGLang／TRT-LLM 在 TP 跨機器時，all-reduce 實際走哪條路徑（自訂 all-reduce 是否只限單機、跨機時退回 NCCL）——附原始碼 `檔案:行號`；(3) decode 時 all-reduce 的訊息大小範圍（隱藏維度×batch×位元組），有沒有論文報告實測分佈；(4) 低延遲跨機 all-reduce 的既有工作（NVRAR、Every-µs 的多節點部分、PCCL、其他 R02 沒有的）各自硬體；(5) GPU 直接發起 RDMA（IBGDA）與 GDRCopy 在**沒有 root** 的情況下能不能用：NVSHMEM 官方文件對驅動參數（例如 PeerMappingOverride）與核心模組的要求。E：(6) vLLM 0.32／SGLang 支援哪些 KV 傳輸連接器（NIXL、Mooncake、LMCache 等），需要什麼前置條件（UCX、GPUDirect RDMA、nvidia_peermem 或 dmabuf）；(7) 在 H100＋IB 上實測 KV 傳輸佔比的論文或廠商數據，條件為何；R02_T5 §3-F 的矛盾有沒有新資料 |
+| CD | sm_tax_and_selection | **C：通訊的「SM 稅」**——各種集體通訊實作（ring、NVLS／symmetric kernel、copy engine、SHARP）佔用多少 GPU 計算單元、讓同時執行的 GEMM 慢多少，並據此分配；**D：用效能模型挑選集體通訊做法**（演算法、協定、通道數） | C：(1) NCCL 控制佔用計算單元數的參數（例如 `NCCL_MAX_CTAS`、`NCCL_MIN_CTAS`、`NCCL_NCHANNELS*`、CTA policy、symmetric kernel 的 CTA 數）與 copy engine 相關功能，在原始碼中的位置、預設值、從哪一版開始；(2) 2023 年後在 H100 上量「集體通訊佔用計算單元 vs 頻寬 vs GEMM 變慢」的論文（Lee et al.、Zero-SM NCCL、ConCCL、ParallelKittens、其他 R02 沒有的），各自量了什麼、沒量什麼；(3) 「用 DMA／copy engine 做集體通訊」的既有實作與限制（是否支援 reduction、需要什麼權限）。D：(4) NCCL tuner plugin 介面（原始碼位置、能控制什麼、哪一版開始）與既有 tuner 實作（官方範例、雲端廠商、AutoCCL、Lagom 等）；(5) NCCL 內部的效能模型在哪（`檔案:行號`），有沒有論文評估它的準確度；(6) 用模型或學習方法選集體通訊參數的論文（2023 年後），硬體與效益 |
 
-## 各組必答問題
+## 步驟
 
-### A 組
-1. **NCCL 怎麼組合 NVLS 與 IB SHARP**：在 NCCL 原始碼找出相關演算法（例如 NVLS、NVLS_TREE、COLLNET_DIRECT、COLLNET_CHAIN）各自在機內、機間用什麼路徑；哪些 collective 支援（all_reduce、all_gather、reduce_scatter）；啟用條件與環境變數；附 `檔案:行號`。也查 release notes：各功能在哪一版加入，2.29.7 是否已有。
-2. **外掛相容性（登入節點唯讀檢查）**：HPC-X 內 `nccl_rdma_sharp_plugin/lib/libnccl-net.so` 匯出的外掛介面版本（`nm -D --defined-only <檔案> | grep -i -E "net|collnet"`），與 NCCL 2.29 能載入的版本（NCCL 原始碼 `src/include/plugin/` 等處）是否相容；`sharp/` 的版本（`README.txt` 或檔名）。
-3. **SHARP 的硬體與服務前提**：Quantum-2（NDR）SHARP 需要哪些服務（例如 Aggregation Manager、subnet manager 設定）、使用者端環境變數、資源上限（可同時用的 aggregation tree 數、每個 job 限制、streaming aggregation 與低延遲模式的訊息大小範圍）。來源：NVIDIA 官方文件（標版本）、HPC-X 本地文件。哪些需要管理員開、使用者端怎麼確認有沒有開——寫成「給 M20 計算節點的檢查項目」。
-4. **既有工作**：
-   - 網路內加總（in-network aggregation）用於分散式訓練或推論：可程式交換器路線（SwitchML、ATP、NetReduce、Rina 等）與 SHARP 路線（含 Mellanox／NVIDIA 的 SHARP 論文、SHARP 用於 MPI／深度學習的量測）
-   - NVLS／multimem 的量測或使用（R02 已列的 MSCCL++、TokenWeave、Every-µs、SiFAR、ForestColl 等，**只補充與 A 有關的部分，不重抄**）
-   - **兩層都用交換器加總**（NVLink SHARP＋IB SHARP，或 NVL72 等級的多層）的任何量測、分析、廠商資料
-   - SHARP 用於推論或小訊息延遲的任何資料
-5. 每篇既有工作要寫：它量了什麼、在什麼硬體（是否 H100、是否 IB NDR、是否真的開了 SHARP）、與 A 重疊的部分、它沒涵蓋的條件（原文自述優先）。
+1. 讀上面「先讀」的檔案。
+2. **原始碼與文件**：在指定的原始碼目錄內用 `grep -rn`／`sed -n` 讀；只在指定目錄內搜尋。NVIDIA 官方文件（NCCL、NVSHMEM、HPC-X／SHARP 文件、NCCL release notes）用 WebFetch 讀，附網址。
+3. **文獻**：
+   - 工具：arXiv MCP（`mcp__arxiv__*`）、paper-search MCP（`mcp__paper-search__*`，例如 `search_semantic`、`search_dblp`、`search_google_scholar`，適合找會議論文）、WebSearch、WebFetch。工具是延遲載入的，先用 ToolSearch 載入（例如 `select:mcp__arxiv__search_papers,mcp__arxiv__citation_graph,mcp__arxiv__get_abstract`）。
+   - **arXiv MCP 的用法提醒（Opus 實測）**：`search_papers` 要用欄位前綴與詞組，例如 `abs:"in-network aggregation"`、`ti:"SHARP"`，搭配 `sort_by: "relevance"`；不加前綴又按日期排序時，關鍵字幾乎被忽略，只會回傳最新的無關論文。`citation_graph` 可以找「引用某篇關鍵論文的後續論文」，用它從 R02 的關鍵論文往後找。
+   - 範圍 2023–2026，重點 2024-01 至今（2026-11-16）。每個方向 **10–25 篇**，寧缺勿濫。
+4. **核實**：每篇都要實際打開 arXiv abs 頁、DOI 頁或會議頁確認標題、作者、年份、出處；打不開的不列。廠商部落格或文件標明「非同儕審查」。
+5. **前置條件檢查**：只寫「怎麼檢查」與「文件怎麼說」。可以在登入節點跑**幾秒內結束的唯讀指令**（例如 `ls`、`cat` 指定檔案、`module show`、讀 HPC-X 內的文件）；**不要**在登入節點跑任何量測、GPU 程式或長時間指令。需要在計算節點確認的項目，寫成「待 M20／M23 在計算節點確認」並給出指令。
 
-### BE 組
-1. **實務上有沒有人跨機做 TP 推論**（關鍵，影響 B 的動機）：vLLM、SGLang、TensorRT-LLM 的官方文件或部署指南，對「模型一台 8× H100 放不下」（例如 Llama-3.1-405B BF16、DeepSeek-V3／R1）建議用什麼平行方式（跨機 TP、TP＋PP、EP、DP-attention 等）；附網址與原文。也找業界部署報告。
-2. **TP 跨機時三個系統實際用什麼 all-reduce**：在原始碼找出 TP 跨節點時的路徑（自製 all-reduce 是否只在單機啟用、跨機是否回到 NCCL、有沒有階層式），附 `檔案:行號`（用 S03 已下載的 release tag；注意我們裝的是 vLLM 0.32.0，若關鍵行為在 0.32.0 與 0.34.0 之間有變，用 `git log`／release notes 標出）。
-3. **跨機小訊息 all-reduce 的既有工作**：NVRAR、PCCL（Big Send-off）、Every-µs（GB200 多機 NVLink）、NCCL 的 tree／LL／LL128、MSCCL++ 多機、NVSHMEM 或 GIN 實作、SHARP 低延遲模式。每篇寫硬體、訊息大小、延遲數字（附條件）、與 H100＋IB NDR 的差異。
-4. **GPU 直接發 RDMA（IBGDA／GIN GDAKI）在沒有 root 時的可行性**：官方文件列出的前提（驅動參數、kernel module 如 `nvidia_peermem`、`gdrdrv`、dmabuf）；登入節點唯讀檢查（例如 `lsmod`、`cat /proc/driver/nvidia/params`，**標明這是登入節點，計算節點要在 M20 確認**）。
-5. **E（較輕）**：vLLM 0.32、SGLang 的 PD 分離連接器（NIXL、Mooncake、LMCache 等）在 H100＋IB 上的支援與前提；有沒有論文在 H100＋IB NDR 實測 KV 傳輸佔端到端的比例；R02_T5 §3-F 的矛盾有沒有後續論文處理。
+## 產出：`docs/reports/R04_<代號>_<slug>.md`（每個方向一節；BE、CD 各有兩節）
 
-### CD 組
-1. **C：干擾與 SM 用量的既有量測**：在 H100（或 Hopper）上量化「collective 同時執行時 GEMM 變慢多少」「各 collective 實作用幾個 SM／CTA」的論文（R02 已列的 Lee et al.、Comet、ParallelKittens、Zero-SM NCCL，加上 AMD 的 DMA 引擎路線如 ConCCL、FiCCO 等）；每篇寫量測條件與數字。
-2. **C：NCCL 減少 SM 用量的機制**：例如 `NCCL_MAX_CTAS`／`NCCL_MIN_CTAS`、communicator 設定中的 CTA 政策、symmetric kernel、NVLS、copy engine 類 collective；在 NCCL v2.32.6 原始碼附 `檔案:行號`，並標出 2.29.7 是否已有。
-3. **C：主流系統分給通訊多少 SM**：TransformerEngine／Megatron 的 userbuffers、DeepEP 的 SM 數、vLLM／SGLang 自製 all-reduce 的 block 數，附 `檔案:行號`。
-4. **D：效能模型與選擇**：NCCL 內建的演算法／協定選擇（`src/graph/tuning.cc` 等）怎麼算、tuner plugin 介面（`nccl_tuner.h`）能改什麼；既有的選擇或調參研究（AutoCCL、Lagom、PICO、MPI 集體通訊選擇模型、機器學習選擇器等）；作者自述限制。特別找：有沒有考慮 NVLS、SHARP、或「同時有計算」情況的模型。
-
-## 方法
-
-- **先讀** `docs/notes_synthesis_nano5.md` 與你方向相關的 R02、R03 段落；R02 已列的論文用 R02 編號引用，只補新資訊。
-- **搜尋工具**（先用 ToolSearch 載入）：
-  - arXiv MCP（`mcp__arxiv__search_papers`）：**一定要用欄位前綴**（`abs:"..."`、`ti:"..."`）並用 `sort_by: relevance`；沒有前綴又按日期排序時，關鍵字幾乎被忽略、只回傳最新論文。`mcp__arxiv__citation_graph` 可查某篇論文被誰引用，用來找關鍵論文的後續工作。
-  - paper-search MCP（`mcp__paper-search__search_semantic`、`search_dblp`、`search_google_scholar`）：找會議論文與非 arXiv 論文。
-  - WebSearch（先 standard）、WebFetch：官方文件、release notes、部落格。
-- **核實**：每篇都要實際打開 abs 頁、DOI 頁或會議頁；打不開就不列。需要全文時下載 PDF 到 `papers/`（不進 git，檔名用 arXiv 編號），用 `pdftotext` 讀；**下載後確認檔案大小不是 0**。
-- **數量**：每組 10–25 篇關鍵既有工作，重深度不重數量。
-- **登入節點**：只做輕量、唯讀、指定路徑的檢查（`ls`、`cat`、`nm -D`、`lsmod`、`grep` 特定檔案）；**不要用 `find /` 或掃描整個共用檔案系統**；不跑任何運算。
-
-## 產出：`docs/reports/R04_<組>_<slug>.md`
-
-1. **重點事實**（8–12 條，每條附出處）
-2. **最接近的既有工作表**：工作／出處（venue＋年份＋網址）／做了什麼／硬體與規模／與本方向重疊的部分／沒涵蓋的條件（原文自述附引文與位置；或明顯的條件差異，例如「只在 GB200」「沒開 SHARP」）
-3. **現成軟體的支援程度**：每個系統一段，附 `檔案:行號` 與版本；標出我們安裝的版本（NCCL 2.29.7、vLLM 0.32.0）是否已有
-4. **在 Nano5 的前提條件**：表格——前提／為什麼需要／怎麼檢查／登入節點檢查結果（附指令與輸出原文）或「需在計算節點檢查（給 M20）」
-5. **尚未有人量過或作者自述未解的問題**：每項附出處；只列事實，不評價
-6. **矛盾或不確定之處**：列出，不裁決
-7. **搜尋紀錄**：查詢字串、工具、約看幾筆、排除的項目與原因
-8. **引用清單**：arXiv 編號或 DOI（Opus 之後用 arXiv MCP 或 DOI 匯出 BibTeX）
+1. **方向定義**：照抄上表 Opus 的定義。
+2. **最接近的既有工作**（表格）：編號、標題／作者／年／出處、做了什麼、和這個方向重疊的部分、**原文明確沒做或自述限制的部分**（引文 ≤2 句＋位置）、硬體與規模、程式碼網址、出處網址。R02 已有的論文標「見 R02_T<k> P<n>」並只補新事實。
+3. **現成軟體的支援程度**：每個系統一段，附 `檔案:行號`（標版本）或文件網址；寫清楚「有沒有」「預設開不開」「啟用條件」。
+4. **在 Nano5 的前置條件**（表格）：條件、文件出處、檢查方法（指令＋在哪裡跑）、目前狀態（已知／未知）、是否需要管理員。
+5. **「找不到有人量過」的清單**：只列事實，格式為「在〈硬體／規模〉上量〈什麼〉的論文或資料：未找到（查詢見第 8 節第 n 條）」。找到了就列出來，不要寫成未找到。
+6. **互相矛盾或不確定之處**：列出，不裁決。
+7. **arXiv ID／DOI 清單**：給 Opus 匯出 BibTeX 用。
+8. **搜尋紀錄**：查詢字串（含用的是哪個工具）、大約看了幾筆、排除了哪些與原因。
 
 ## 規則
 
-- 只寫事實與原文；不寫「這是好題目」「建議做」之類的判斷。
-- 每個論點要有網址、原文位置或 `檔案:行號`。
-- 不改 `lit/refs.bib`、`exp/`、`results/`；不 commit、不 push；不送 Slurm 工作、不在登入節點跑運算。
-- 不讀 `~/TP_opt`、`~/tp_opt`、`~/flux`。
-- 用繁體中文撰寫，技術名詞與論文標題保留英文。
-- 交回時用 3–6 點摘要：最重要的發現、無法核實的部分、偏離規格之處。
+- 只寫事實與原文；**不寫**「這是好題目」「建議做」之類的判斷。
+- 每個論點都要有網址、原文位置或 `檔案:行號`。不可憑記憶寫論文、版本號、環境變數名稱或預設值——一律在原始碼或文件中找到才寫。
+- **不要對大型共用檔案系統做大範圍搜尋**（例如 `find /`、`find /work`、`find /home`、`locate`）；只在上面列出的目錄內搜尋。
+- 下載 PDF 存到 `/home/allen0117/comm_opt/papers/<arXiv編號>.pdf`（不進 git）；下載後確認檔案大小不是 0（之前家目錄滿時留下過 0 位元組的檔案，遇到就重新下載覆蓋）。
+- 不改 `lit/refs.bib`；不 commit、不 push；不送任何 GPU 或 Slurm 工作；不讀 `~/TP_opt`、`~/tp_opt`、`~/flux`。
+- 用繁體中文撰寫，技術名詞、論文標題、環境變數保留英文。
+- 最後回報（給 Opus）：報告路徑、每節的重點各 2–3 句、核實篇數、未能核實的項目。
