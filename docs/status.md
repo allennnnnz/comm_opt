@@ -2,15 +2,17 @@
 
 > 每次 session 開始先讀本檔，結束時更新「目前狀態」與「下一步」。
 
-## 目前狀態（2026-11-17 02:00，nano5 分支）
+## 目前狀態（2026-11-17 01:40，nano5 分支）
 
 - **使用者 01:15 離開約五小時，指示「做完所有剩下的任務」**。執行方式因排隊壅塞調整（D053）
 - **候選方向**：S04 完成（R04_A、R04_BE＋session2 版、R04_CD＋smtax_model 版）。整合判斷見 `docs/notes_synthesis_nano5.md` 最後一節：主線 A（兩層交換器加總），C 當量測軸，B 當應用；D 不做；E 備案。**待使用者決定是否採用 A 為主線**
 - **待使用者處理**：是否寄出給國網中心的詢問稿 `docs/nchc_inquiry_20261117.md`（SHARP、`nvidia_peermem`、IB 拓樸）
 - **S01**：驗證工作 475444（torch／vLLM TP=8）、475459（單台 H100 nccl-tests）在 `dev` 排隊（預估 04:00 前後）。Opus 待辦：讀結果、補完並驗收 R01、把 vLLM 0.32.0 記為決策。其餘冒煙測試併入 M20／M23（D053）
-- **M20**：Sonnet 依 S05 執行中（實驗卡有「Opus 補充」）。H100 第 1 台（`dev`）、2 台 SHARP（`normal`）、H200 第 1 台（`normal2`）以 `afterok` 綁 S01 送出；之後依序 H100 第 2、3 台、H200 第 2 台。報告 `R05_M20_env_snapshot.md`
-- **M21**：Sonnet 依 S06 準備腳本（只乾跑）；Opus 看過 M20 第 1 台（P4、P7）後再送
-- **M23**：Sonnet 依 S06 送出 4 台 H100（`4nodes`）與 2 台 H200（`normal2`），以 `afterok` 綁 S01；預估 11-19／11-26 才開始
+- **M20**：腳本完成（S05，Sonnet），已排隊：475733（H100 第 1 台，`dev`）、475734（2 台 SHARP，`normal`）、475735（H200 第 1 台，`normal2`），都以 `afterok:475444:475459` 綁 S01。R05 為階段性報告。**H100 第 2、3 台、H200 第 2 台尚未送**：Opus 看過 475733 輸出正常後送（`exp/M20_env_snapshot/node.sbatch`，`--exclude` 已量節點）
+- **M21**：腳本完成（`node_a.sbatch` 約 70 分、`node_b.sbatch` 約 50 分，`dev`，只乾跑過）；Opus 看過 M20 第 1 台（P4、P7）後決定暖機長度再送。R06 第 5 節有 16 條執行者自行決定之處，送出前 Opus 要審
+- **M23**：已排隊 475773（4 台 H100，`4nodes`，9 h）、475774（2 台 H200，`normal2`，3 h），以 `afterok` 綁 S01；預估 11-19／11-26。設定清單在執行時讀入的 `m23_lib.sh`（Opus 已加入跨機 NVLS＋SHARP）
+- **同節點紀錄**：叢集拿掉 `--exclusive`，量測工作改以 `exp/lib/cotenants.sh` 記錄同節點工作（D054，待使用者確認）
+- **分析用 Python**：`/work/allen0117/comm_opt_env/venvs/analysis/bin/python`
 - **工作環境**：H100 分兩組 hgpn01–06、hgpn17–21；H200 為 hgpn39–41、43–46。論文搜尋 MCP 可用，但 arXiv 常回 429
 - **注意**：同一專案只開一個 Claude 對話（2026-11-16 深夜曾有兩個對話同時寫入，R04_BE 被覆蓋後已還原）
 
