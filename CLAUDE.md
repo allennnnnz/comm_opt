@@ -6,7 +6,7 @@
 
 ## 每次 session
 
-- **開始**：讀 `docs/status.md`。需要背景時再讀 `docs/project.md`、`docs/decisions.md`、`docs/research_rules.md`。
+- **開始**：讀 `docs/status.md`。需要背景時再讀 `docs/project.md`、`docs/decisions.md`、`docs/research_rules.md`；硬體、NCCL、量測方法、白話用語等共通知識在 `docs/knowledge.md`（寫規格書時引用相關小節給小助手）。
 - **結束**：更新 `docs/status.md` 的「目前狀態」與「下一步」；有新決策就附加到 `docs/decisions.md`（只能新增，不改舊條目）；commit。
 
 ## 必守規則（完整版與出處：`docs/research_rules.md`）
@@ -35,6 +35,7 @@
 | `docs/project.md` | 研究問題、claims、non-goals（G2 後才填） |
 | `docs/status.md` | 目前進度、下一步、已核准的實驗 |
 | `docs/plan_nano5.md` | Nano5 階段的研究計畫 |
+| `docs/knowledge.md` | 共通知識（叢集、硬體、NCCL、推論通訊、量測教訓、統計、白話用語），每條標可信度 |
 | `docs/decisions.md` | 決策紀錄（append-only） |
 | `docs/research_rules.md` | 研究守則與出處 |
 | `docs/specs/S<NN>_<名稱>.md` | Opus 寫給小助手的工作規格書 |
