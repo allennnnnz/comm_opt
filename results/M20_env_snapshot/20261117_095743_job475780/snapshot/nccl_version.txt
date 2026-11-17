@@ -1,0 +1,9 @@
+# cmd: python -c "import torch;print(torch.cuda.nccl.version())"; ls -l $NCCL_LIB_DIR; strings $NCCL_LIB_DIR/libnccl.so.2 | grep -m3 -E "NCCL version|^2\.[0-9]+\.[0-9]+"
+bash: python: command not found
+total 391612
+-rw-r--r-- 2 allen0117 MST114029    166240 Nov 16 22:47 libnccl_device.bc
+-rw-r--r-- 2 allen0117 MST114029 400842456 Nov 16 22:47 libnccl.so.2
+NCCL version 2.29.7+cuda12.9
+Mismatched NCCL version detected : rank %d version %d rank %d version %d
+NCCL library version is too old. This application was compiled with NCCL version %d, but is running with NCCL library version %d.
+# rc=0

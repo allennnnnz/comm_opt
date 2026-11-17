@@ -1,0 +1,19 @@
+# cmd: SHARP_COLL_LOG_LEVEL=3 sharp_hello -d mlx5_0:1 -v 3 (timeout 60)
+[hgpn01:0:451312 - context.c:669][2026-11-17 09:57:56] INFO job (ID: 1561635696467410873) resource request quota: ( osts:0 user_data_per_ost:0 max_groups:0 max_qps:1 max_group_channels:1, num_trees:1)
+[hgpn01][Nov 17 09:57:57 835723][SR     ][451312][error] - no AM service record found(SA query)
+[hgpn01][Nov 17 09:57:57 857894][RDMA_SR][451312][error] - Error event recieved: event: RDMA_CM_EVENT_UNREACHABLE,  error: 1
+[hgpn01][Nov 17 09:57:57 857917][RDMA_SR][451312][error] - Error occured during connection event handle
+[hgpn01][Nov 17 09:58:00 860944][RDMA_SR][451312][error] - poll failed due to poll_timeout=3000.000000, stop
+[hgpn01][Nov 17 09:58:00 860985][RDMA_SR][451312][error] - Poll failed
+[hgpn01][Nov 17 09:58:00 860994][RDMA_SR][451312][error] - Failed to connect
+[hgpn01][Nov 17 09:58:00 862558][RDMA_SR][451312][error] - rdma_resolve_addr failed with error: -1
+[hgpn01][Nov 17 09:58:00 862574][RDMA_SR][451312][error] - rdma_resolve_addr failed with error: -1
+[hgpn01][Nov 17 09:58:00 862582][GENERAL][451312][error] - unable to query AM service record(AM query)
+[hgpn01][Nov 17 09:58:00 862589][GENERAL][451312][error] - Could not query AM address, error: -52
+[hgpn01][Nov 17 09:58:00 862596][GENERAL][451312][error] - failed to connect to AM - error -1 received
+[hgpn01][Nov 17 09:58:00 863624][GENERAL][451312][error] - unable to connect to AM
+[hgpn01:0:451312 unique id 1561635696467410873][2026-11-17 09:58:00] ERROR Failed to connect to Aggregation Manager (sharp_am) in sharp_create_job.
+
+[hgpn01:0:451312 - context.c:687][2026-11-17 09:58:00] ERROR sharp_create_job failed: Failed to connect to Aggregation Manager (sharp_am)(-53)
+sharp_coll_init failed: Cannot create SHARP job
+# rc=245

@@ -2,6 +2,16 @@
 
 > 每次 session 開始先讀本檔，結束時更新「目前狀態」與「下一步」。
 
+## 2026-11-17 12:30 更新（第一批工作已跑完；以下 05:55 段落部分過時）
+
+- **已完成**：475459（S01 nccl-tests，09:57，hgpn01）、475444（S01 vLLM，hgpn01）、475780（M20 H100 #1，hgpn01）、475782（M20 H200 #1，hgpn44）。仍排隊：475781（M20 SHARP 2 台）、475783、475784（M23）。原始數據已 commit
+- **方向 A 的關卡出現負面訊號（與 P10 的五五波預期相關，待使用者決定）**：兩台不同節點（H100 hgpn01、H200 hgpn44）的 `sharp_hello` 都失敗：`no AM service record found(SA query)` → `Failed to connect to Aggregation Manager (sharp_am)`（`results/M20_env_snapshot/*/sharp_precheck/sharp_hello.txt`）。代表網路上找不到 SHARP 管理服務，使用者端無法自行啟用。P10 正式判定仍待 475781，但跨機 SHARP 很可能不可用，除非國網中心開啟
+- **P6 正面訊號**：兩台都載入 `nv_peer_mem` 與 `gdrdrv`（`snapshot/lsmod_grep.txt`）；仍需跨機 NCCL 日誌確認 GPUDirect RDMA 實際使用
+- **S01 nccl-tests 冒煙通過（只有 mpirun 能啟動）**：8 卡 128 MB busbw 約 371 GB/s、`#wrong`=0（`results/S01_env_setup/20261117_095709_job475459/allreduce_mpirun.log`）；`srun --mpi=pmix_v4` rc=16、`pmi2` rc=1
+- **M20 單台 NVLS 段失敗、時脈段被跳過**：mpirun 下 NVLS 小訊息正常，但建立 512 MB multicast 群組後 `transport/nvls.cc:257 Cuda failure 999 'unknown error'`（`nvls/nvls_a_default.failed_mpirun.log:678`），整個程式失敗 → 腳本判定「沒有可用的啟動方式」而跳過 NVLS 對照與時脈輪次。另 `mcast_query.cu` 編譯失敗（計算節點沒有 `cc1plus`）。是否為可重現的現象待查
+- **S01 vLLM 驗證失敗（環境問題）**：venv 的 python 指向 `/usr/bin/python3.12`，計算節點上不存在（`bad interpreter`）。需改用計算節點可見的 Python 重建 venv
+- **M21 暫不送**：M20 第 1 台沒有產生時脈暖機結果（P7）
+
 ## 目前狀態（2026-11-17 05:55，nano5 分支）
 
 - **05:51 所有工作仍在排隊**：`dev` 被小工作分佔，整台工作難以排上；475459 預估 08:48、475444 預估 09:08（一路延後）。M20／M23 綁 475459，之後才會開始

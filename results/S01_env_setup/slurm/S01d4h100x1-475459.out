@@ -1,0 +1,7 @@
+### try pmix_v4: srun --mpi=pmix_v4 --nodes=1 --ntasks-per-node=8 --gpus-per-node=8 /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf -b 8 -e 128M -f 4 -g 1 -n 5 -w 2
+    rc=16  #wrong values seen (out-of-place/in-place): 
+### try pmi2: srun --mpi=pmi2 --nodes=1 --ntasks-per-node=8 --gpus-per-node=8 /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf -b 8 -e 128M -f 4 -g 1 -n 5 -w 2
+    rc=1  #wrong values seen (out-of-place/in-place): 
+### try mpirun: mpirun -np 8 --map-by ppr:8:node /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf -b 8 -e 128M -f 4 -g 1 -n 5 -w 2
+    rc=0  #wrong values seen (out-of-place/in-place): 0.00 0.01 0.05 0.20 0.78 11.00 170.80 277.72 2.78 370.73 42.73 nvlsTotalSize VA 
+done: /home/allen0117/comm_opt/results/S01_env_setup/20261117_095709_job475459

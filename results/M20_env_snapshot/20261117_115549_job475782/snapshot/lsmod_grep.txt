@@ -1,0 +1,20 @@
+# cmd: lsmod | grep -E "nvidia|peermem|mlx|gdr"
+gdrdrv                 24576  0
+nvidia_drm             98304  0
+nvidia_modeset       1343488  1 nvidia_drm
+nvidia_uvm           4685824  6
+nvidia              54231040  216 nvidia_uvm,nv_peer_mem,gdrdrv,nvidia_modeset
+video                  53248  1 nvidia_modeset
+mlx5_ib               466944  0
+ib_uverbs             143360  98 rdma_ucm,mlx5_ib
+ib_core               442368  25 rdma_cm,ib_ipoib,nv_peer_mem,iw_cm,ib_umad,rdma_ucm,ib_uverbs,mlx5_ib,ib_cm
+drm_kms_helper        184320  4 ast,nvidia_drm
+mlx5_core            2158592  1 mlx5_ib
+mlxfw                  32768  1 mlx5_core
+psample                20480  1 mlx5_core
+pci_hyperv_intf        16384  1 mlx5_core
+mlxdevm               180224  1 mlx5_core
+drm                   602112  6 drm_kms_helper,ast,drm_shmem_helper,nvidia,nvidia_drm
+mlx_compat             16384  11 rdma_cm,ib_ipoib,mlxdevm,iw_cm,ib_umad,ib_core,rdma_ucm,ib_uverbs,mlx5_ib,ib_cm,mlx5_core
+tls                   110592  2 bonding,mlx5_core
+# rc=0

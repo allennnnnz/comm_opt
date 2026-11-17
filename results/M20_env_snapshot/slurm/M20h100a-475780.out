@@ -1,0 +1,11 @@
+### probe launcher pmix_v4 for nvls_a_default
+nvls_a_default rc=16 start=2026-11-17T09:58:05+08:00 end=2026-11-17T09:58:15+08:00 wrong(oop/ip)= mode=pmix_v4
+    -> pmix_v4 failed (see nvls_a_default.log; kept as nvls_a_default.failed_pmix_v4.log)
+### probe launcher pmi2 for nvls_a_default
+nvls_a_default rc=1 start=2026-11-17T09:58:15+08:00 end=2026-11-17T09:58:17+08:00 wrong(oop/ip)= mode=pmi2
+    -> pmi2 failed (see nvls_a_default.log; kept as nvls_a_default.failed_pmi2.log)
+### probe launcher mpirun for nvls_a_default
+nvls_a_default rc=3 start=2026-11-17T09:58:17+08:00 end=2026-11-17T09:58:39+08:00 wrong(oop/ip)=0/0 NVLS/0 Symmetric/  mode=mpirun
+    -> mpirun failed (see nvls_a_default.log; kept as nvls_a_default.failed_mpirun.log)
+no launcher worked; NVLS b/c and clock rounds skipped
+done: /home/allen0117/comm_opt/results/M20_env_snapshot/20261117_095743_job475780
