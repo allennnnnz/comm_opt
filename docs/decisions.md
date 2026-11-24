@@ -363,3 +363,9 @@
 - **事實**：M20 兩台 SHARP 檢查（475781）與 M23 兩台 H200（475784）都在啟動階段失敗：`srun --mpi=pmix_v4` rc=16、`pmi2` rc=1、`mpirun` 在兩台間 UCX wireup 錯誤（rc=134），沒有量到數據。475783 用同一套啟動方式，排到也會失敗。
 - **使用者指示**：「取消四台的M23」。已 `scancel 475783`。
 - **之後**：修好多台機器的啟動方式後再重送跨機器量測；選題（M25，8 卡單台）優先。
+
+## D057（2026-11-24）叢集 `wallet` 指令壞掉期間，送出工具可跳過額度檢查
+
+- **事實**：登入節點 `wallet MST114546` 只輸出 `/opt/walletcmd/bin/walletcmd.sh.x: ... location has changed!`（叢集端程式問題），`submit.sh` 讀不到餘額而拒送；S07 執行者與 Opus 各試一次皆同。
+- **使用者**：「我確定還有額度 盡量花錢沒關係」。
+- **做法**：`submit.sh` 新增 `--skip-wallet`（其他檢查不變；`jobs.tsv`／輸出記為 `wallet=skipped(D057)`）。只在 `wallet` 壞掉期間使用。

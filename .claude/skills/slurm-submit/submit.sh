@@ -9,16 +9,17 @@ CONF=$HOME/.config/comm_opt/slurm.env
 LOG=$HOME/.config/comm_opt/jobs.tsv
 MAX_RUNNING=2
 
-measurement=1; dry=0
+measurement=1; dry=0; skipwallet=0
 while [[ $# -gt 0 && $1 == --* ]]; do
   case $1 in
     --not-measurement) measurement=0 ;;
     --dry-run) dry=1 ;;
+    --skip-wallet) skipwallet=1 ;;  # D057: only while the cluster's wallet command is broken; user confirmed balance
     *) echo "unknown option: $1" >&2; exit 2 ;;
   esac
   shift
 done
-script=${1:?usage: submit.sh [--not-measurement] [--dry-run] <job.sbatch> [sbatch args]}; shift
+script=${1:?usage: submit.sh [--not-measurement] [--dry-run] [--skip-wallet] <job.sbatch> [sbatch args]}; shift
 [[ -f $script ]] || { echo "no such file: $script" >&2; exit 2; }
 
 fail() { echo "NOT SUBMITTED: $*" >&2; exit 1; }
@@ -46,9 +47,13 @@ done
 source "$CONF"
 [[ -n ${SLURM_MAIL_USER:-} ]] || fail "SLURM_MAIL_USER not set in $CONF"
 
-bal=$(timeout 60 wallet "$ACCOUNT" 2>/dev/null | sed -nE 's/.*SU_BALANCE:[[:space:]]*([0-9.]+).*/\1/p')
-[[ -n $bal ]] || fail "could not read wallet balance for $ACCOUNT"
-awk -v b="$bal" 'BEGIN{exit !(b>0)}' || fail "wallet balance is $bal"
+if (( skipwallet )); then
+  bal="skipped(D057)"
+else
+  bal=$(timeout 60 wallet "$ACCOUNT" 2>/dev/null | sed -nE 's/.*SU_BALANCE:[[:space:]]*([0-9.]+).*/\1/p')
+  [[ -n $bal ]] || fail "could not read wallet balance for $ACCOUNT (if the cluster's wallet command is broken, see D057 / --skip-wallet)"
+  awk -v b="$bal" 'BEGIN{exit !(b>0)}' || fail "wallet balance is $bal"
+fi
 
 running=$(squeue -h -u "$USER" -t RUNNING | wc -l)
 (( running < MAX_RUNNING )) || fail "already $running running jobs (limit $MAX_RUNNING)"
