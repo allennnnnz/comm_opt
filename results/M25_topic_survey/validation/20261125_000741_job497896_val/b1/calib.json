@@ -1,0 +1,42 @@
+{
+ "n_g": {
+  "8192": 68,
+  "4096": 493
+ },
+ "t_gemm_ms": {
+  "8192": 1.4654515075683594,
+  "4096": 0.20273088455200194
+ },
+ "n_c": {
+  "all_reduce|4|8192": 1186,
+  "all_reduce|4|4096": 1189,
+  "all_reduce|32|8192": 331,
+  "all_reduce|32|4096": 332,
+  "all_reduce|256|8192": 54,
+  "all_reduce|256|4096": 54,
+  "reduce_scatter|4|8192": 1780,
+  "reduce_scatter|4|4096": 1786,
+  "reduce_scatter|32|8192": 473,
+  "reduce_scatter|32|4096": 475,
+  "reduce_scatter|256|8192": 82,
+  "reduce_scatter|256|4096": 82,
+  "all_gather|4|8192": 1703,
+  "all_gather|4|4096": 1708,
+  "all_gather|32|8192": 523,
+  "all_gather|32|4096": 525,
+  "all_gather|256|8192": 89,
+  "all_gather|256|4096": 89
+ },
+ "t_comm_ms": {
+  "all_reduce|4": 0.04201279878616333,
+  "all_reduce|32": 0.15030879974365235,
+  "all_reduce|256": 0.9295920372009278,
+  "reduce_scatter|4": 0.027987200021743774,
+  "reduce_scatter|32": 0.10524799823760986,
+  "reduce_scatter|256": 0.6091663837432861,
+  "all_gather|4": 0.029260799288749695,
+  "all_gather|32": 0.09525920152664184,
+  "all_gather|256": 0.5616415977478028
+ },
+ "world_size": 2
+}

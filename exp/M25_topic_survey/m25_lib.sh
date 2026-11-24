@@ -93,14 +93,14 @@ b0() {
   # warm-up: calibrate -n so that all_reduce 64 MB runs about WARM_S seconds
   mkdir -p $OUT/b0
   local bin=$NCCL_TESTS/all_reduce_perf a="-b 64M -e 64M -g 1 -c 0"
-  NCCL_DEBUG=WARN timeout 120 mpirun -np $NGPU --map-by ppr:$NGPU:node -x LD_LIBRARY_PATH -x NCCL_DEBUG $bin $a -n 200 -w 20 > $OUT/b0/calibration.log 2>&1
+  NCCL_DEBUG=WARN timeout 120 m25_mpirun $NGPU $bin $a -n 200 -w 20 > $OUT/b0/calibration.log 2>&1
   local cal niter
   cal=$(grep -E '^ +[0-9]+ +[0-9]+ +float +sum' $OUT/b0/calibration.log | awk '{print $6" "$10}')
   niter=$(echo "$cal" | awk -v s=$WARM_S '{t=$1+$2; if(t>0) printf "%d", s*1e6/t; else print 100000}')
   [[ -z $niter || $niter -lt 1 ]] && niter=100000
   echo "warmup calibration oop_us ip_us=$cal n=$niter" | tee -a $OUT/summary.txt
   local t0=$SECONDS
-  NCCL_DEBUG=WARN timeout $((WARM_S*3+60)) mpirun -np $NGPU --map-by ppr:$NGPU:node -x LD_LIBRARY_PATH -x NCCL_DEBUG $bin $a -n $niter -w 5 > $OUT/b0/warmup.log 2>&1
+  NCCL_DEBUG=WARN timeout $((WARM_S*3+60)) m25_mpirun $NGPU $bin $a -n $niter -w 5 > $OUT/b0/warmup.log 2>&1
   local rc=$?
   echo "warmup rc=$rc seconds=$((SECONDS-t0))" | tee -a $OUT/summary.txt
   rec_rc $rc; blk_end $([[ $rc == 0 ]] && echo OK || echo WARN)
@@ -201,6 +201,11 @@ b2_engine() {  # b2_engine <name> <model> <tp> <ep> <eager> <maxlen> <decode> <p
 }
 b2() {
   blk_begin B2 $LIM_B2
+  # Opus 2026-11-25: vLLM 0.32 dispatches FLASHINFER all-reduce first; its JIT needs nvcc >= 12.8 (--compress-mode=size,
+  # flashinfer/jit/core.py:693) but this cluster has CUDA <= 12.6 and driver 12.4 -> validation 497896 failed. Use vLLM's other
+  # backends (CUSTOM, SYMM_MEM, PYNCCL). gcc module gives JIT/Triton a full host compiler.
+  export VLLM_ALLREDUCE_USE_FLASHINFER=0
+  module load gcc/12.5.0 2>/dev/null || true
   mkdir -p $OUT/b2 $ENVROOT/traces/$(basename $OUT)
   printf 'engine\trc\tseconds\n' > $OUT/b2/engines.tsv
   if [[ $M25_MODE == smoke ]]; then

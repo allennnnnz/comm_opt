@@ -1,0 +1,19 @@
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=1 seconds=0
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=8s
+=== B4 begin elapsed=8s block_end=188s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+=== B4 end status=DONE run=5 fail=0 skipped=0 elapsed=32s
+=== B1 begin elapsed=32s block_end=392s
+B1 calibration rc=0 seconds=8
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=11
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=61s
+=== B2 begin elapsed=61s block_end=1261s
+B2 engine=q7_tp2 rc=1 seconds=91
+B2 engine=q7_tp2_eager rc=1 seconds=49

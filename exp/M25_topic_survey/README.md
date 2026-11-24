@@ -84,6 +84,7 @@
   3. B1 通訊與矩陣乘法同時執行（O1–O4）— 上限 30 分
   4. B2 vLLM 推論（I1–I5）— 上限 40 分
   5. B3 集體通訊曲線（C1–C5）— 上限 25 分
+- **Opus 補充（2026-11-25，主量測前寫；預期與判讀規則不變）**：vLLM 0.32 預設優先用 FlashInfer 的 all-reduce，但它要現場用 nvcc ≥ 12.8 編譯（`flashinfer/jit/core.py:693` 的 `--compress-mode=size`），本叢集 CUDA 最高 12.6、驅動 12.4，驗證工作 497896 因此失敗。B2 改設 `VLLM_ALLREDUCE_USE_FLASHINFER=0`，vLLM 依序用 CUSTOM（vLLM 自製）、SYMM_MEM、PYNCCL。另移除選用套件 torchcodec（計算節點載入失敗）。I2、I3 量到的是這組加總實作的比例
 - **B1 細節**：
   - 集體通訊：all_reduce、reduce_scatter、all_gather；大小 4、32、256 MB
   - 矩陣乘法：8192×8192×8192 與 4096×4096×4096（bf16）
