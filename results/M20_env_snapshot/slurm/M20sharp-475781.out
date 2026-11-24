@@ -1,0 +1,10 @@
+### probe launcher pmix_v4 for a_noplugin_default
+a_noplugin_default rc=16 start=2026-11-20T09:35:41+08:00 end=2026-11-20T09:35:57+08:00 wrong(oop/ip)= mode=pmix_v4
+    -> pmix_v4 failed (see a_noplugin_default.log; kept as a_noplugin_default.failed_pmix_v4.log)
+### probe launcher pmi2 for a_noplugin_default
+a_noplugin_default rc=1 start=2026-11-20T09:35:57+08:00 end=2026-11-20T09:35:58+08:00 wrong(oop/ip)= mode=pmi2
+    -> pmi2 failed (see a_noplugin_default.log; kept as a_noplugin_default.failed_pmi2.log)
+### probe launcher mpirun for a_noplugin_default
+a_noplugin_default rc=134 start=2026-11-20T09:35:58+08:00 end=2026-11-20T09:36:21+08:00 wrong(oop/ip)= mode=mpirun
+    -> mpirun failed (see a_noplugin_default.log; kept as a_noplugin_default.failed_mpirun.log)
+no launcher worked; stopping

@@ -1,0 +1,595 @@
+--------------------------------------------------------------------------
+WARNING: Could not generate an xpmem segment id for this process'
+address space.
+
+The vader shared memory BTL will fall back on another single-copy
+mechanism if one is available. This may result in lower performance.
+
+  Local host: hgpn20
+  Error code: 2 (No such file or directory)
+--------------------------------------------------------------------------
+[hgpn17:3043230] 15 more processes have sent help message help-btl-vader.txt / xpmem-make-failed
+[hgpn17:3043230] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[1795138573.345432] [hgpn20:724686:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.345451] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.345456] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.345460] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.345464] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.345466] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.345469] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.345472] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.345475] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.345479] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.345482] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.345485] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.345488] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.345493] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.345496] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.345500] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.345503] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.345507] [hgpn20:724686:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.345510] [hgpn20:724686:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.345514] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.345517] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.345520] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.345523] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.345526] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.345530] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.345533] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.345536] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.345539] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.345542] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.345545] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.345549] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.345552] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.345555] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.345559] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.345562] [hgpn20:724686:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.345565] [hgpn20:724686:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[hgpn20:724686:0:724686]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.350366] [hgpn20:724687:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.350384] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.350389] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.350393] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.350396] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.350400] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.350403] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.350382] [hgpn20:724682:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.350398] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.350403] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.350407] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.350405] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.350409] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.350413] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.350415] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.350418] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.350422] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.350425] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.350427] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.350431] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.350434] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.350410] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.350413] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.350416] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.350418] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.350422] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.350425] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.350428] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.350431] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.350436] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.350441] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.350447] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.350438] [hgpn20:724687:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.350442] [hgpn20:724687:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.350448] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.350453] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.350458] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.350462] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.350466] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.350469] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.350451] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.350456] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.350460] [hgpn20:724682:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.350463] [hgpn20:724682:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.350466] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.350469] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.350473] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.350477] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.350481] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.350483] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.350474] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.350477] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.350480] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.350482] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.350486] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.350489] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.350492] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.350496] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.350500] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.350502] [hgpn20:724687:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.350506] [hgpn20:724687:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[1795138573.350488] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.350492] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.350496] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.350500] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.350503] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.350506] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[hgpn20:724687:0:724687]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.350509] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.350512] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.350514] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.350517] [hgpn20:724682:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.350519] [hgpn20:724682:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[hgpn20:724682:0:724682]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.351042] [hgpn20:724685:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.351059] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.351063] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.351068] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.351072] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.351076] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.351078] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.351081] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.351089] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.351092] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.351095] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.351098] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.351102] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.351105] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.351107] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.351111] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.351115] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.351118] [hgpn20:724685:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.351122] [hgpn20:724685:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.351125] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.351129] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.351132] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.351135] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.351139] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.351143] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.351146] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.351149] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.351152] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.351156] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.351159] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.351163] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.351166] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.351169] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.351172] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.351175] [hgpn20:724685:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.351178] [hgpn20:724685:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[1795138573.351175] [hgpn20:724680:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.351192] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.351197] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.351201] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[hgpn20:724685:0:724685]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.351204] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.351207] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.351210] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.351214] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.351217] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.351221] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.351224] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.351227] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.351231] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.351234] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.351237] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.351241] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.351244] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.351247] [hgpn20:724680:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.351251] [hgpn20:724680:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.351254] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.351258] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.351261] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.351264] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.351268] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.351271] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.351274] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.351277] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.351280] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.351284] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.351287] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.351291] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.351294] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.351298] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.351301] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.351304] [hgpn20:724680:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.351307] [hgpn20:724680:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[hgpn20:724680:0:724680]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.362504] [hgpn20:724684:a]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.362520] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.362524] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.362528] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.362532] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.362535] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.362539] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.362542] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.362545] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.362548] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.362551] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.362555] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.362558] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.362561] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.362566] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.362569] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.362572] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.362575] [hgpn20:724684:a]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.362579] [hgpn20:724684:a]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.362583] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.362586] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.362590] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.362593] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.362596] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.362599] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.362602] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.362605] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.362609] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.362612] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.362615] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.362618] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.362622] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.362625] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.362628] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.362631] [hgpn20:724684:a]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.362634] [hgpn20:724684:a]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[hgpn20:724684:a:725270]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+[1795138573.399814] [hgpn20:724683:0]          wireup.c:1236 UCX  ERROR   old: am_lane 0 wireup_msg_lane 14 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.399831] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.399836] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#1
+[1795138573.399840] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.399844] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.399848] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.399851] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#5
+[1795138573.399855] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#7
+[1795138573.399858] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#8
+[1795138573.399861] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#6
+[1795138573.399864] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#9
+[1795138573.399868] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.399871] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.399874] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#12
+[1795138573.399878] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#13
+[1795138573.399881] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14 wireup
+[1795138573.399885] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   old: lane[15]: 18:cuda_ipc/cuda.0 md[5]         -> md[5]/cuda_ipc/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.399888] [hgpn20:724683:0]          wireup.c:1250 UCX  ERROR   old: err mode 0, flags 0x2
+[1795138573.399891] [hgpn20:724683:0]          wireup.c:1236 UCX  ERROR   new: am_lane 0 wireup_msg_lane 15 cm_lane <none> keepalive_lane <none> reachable_mds 0x1fffae
+[1795138573.399894] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[0]: 15:sysv/memory.0 md[2]           -> md[2]/sysv/sysdev[255] seg 4294967295 am am_bw#0
+[1795138573.399898] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[1]: 81:knem/memory.0 md[20]          -> md[20]/knem/sysdev[255] seg 4294967295 rma_bw#0
+[1795138573.399901] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[2]: 22:rc_mlx5/mlx5_0:1.0 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#2
+[1795138573.399905] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[3]: 37:rc_mlx5/mlx5_3:1.0 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#3
+[1795138573.399908] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[4]: 42:rc_mlx5/mlx5_4:1.0 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#4
+[1795138573.399911] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[5]: 47:rc_mlx5/mlx5_5:1.0 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#1
+[1795138573.399914] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[6]: 52:rc_mlx5/mlx5_6:1.0 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#6
+[1795138573.399918] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[7]: 67:rc_mlx5/mlx5_9:1.0 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#7
+[1795138573.399921] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[8]: 72:rc_mlx5/mlx5_10:1.0 md[17]    -> md[17]/ib/sysdev[17] seg 4294967295 rma_bw#5
+[1795138573.399924] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[9]: 77:rc_mlx5/mlx5_11:1.0 md[18]    -> md[18]/ib/sysdev[18] seg 4294967295 rma_bw#8
+[1795138573.399927] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[10]: 22:rc_mlx5/mlx5_0:1.1 md[7]      -> md[7]/ib/sysdev[9] seg 4294967295 rma_bw#10
+[1795138573.399930] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[11]: 37:rc_mlx5/mlx5_3:1.1 md[10]     -> md[10]/ib/sysdev[11] seg 4294967295 rma_bw#11
+[1795138573.399933] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[12]: 42:rc_mlx5/mlx5_4:1.1 md[11]     -> md[11]/ib/sysdev[12] seg 4294967295 rma_bw#9
+[1795138573.399937] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[13]: 47:rc_mlx5/mlx5_5:1.1 md[12]     -> md[12]/ib/sysdev[13] seg 4294967295 rma_bw#12
+[1795138573.399940] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[14]: 52:rc_mlx5/mlx5_6:1.1 md[13]     -> md[13]/ib/sysdev[14] seg 4294967295 rma_bw#14
+[1795138573.399944] [hgpn20:724683:0]          wireup.c:1246 UCX  ERROR   new: lane[15]: 67:rc_mlx5/mlx5_9:1.1 md[16]     -> md[16]/ib/sysdev[16] seg 4294967295 rma_bw#13 wireup
+[1795138573.399946] [hgpn20:724683:0]          wireup.c:1250 UCX  ERROR   new: err mode 0, flags 0x2
+[hgpn20:724683:0:724683]      wireup.c:1617 Fatal: endpoint reconfiguration not supported yet
+==== backtrace (tid: 725270) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006d516 uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006d516 uct_ud_mlx5_iface_async_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:604
+ 7 0x000000000006da3b uct_ud_iface_async_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_inl.h:274
+ 8 0x000000000006da3b uct_ud_mlx5_iface_async_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:707
+ 9 0x000000000004d16c ucs_async_handler_invoke()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/async/async.c:252
+10 0x000000000004d16c ucs_async_handler_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/async/async.c:274
+11 0x000000000004d335 ucs_async_dispatch_handlers()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/async/async.c:306
+12 0x00000000000500b6 ucs_async_thread_ev_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/async/thread.c:88
+13 0x0000000000071663 ucs_event_set_wait()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/sys/event_set.c:215
+14 0x00000000000501fc ucs_async_thread_func()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/async/thread.c:131
+15 0x00000000000081ca start_thread()  ???:0
+16 0x00000000000398d3 __GI___clone()  :0
+=================================
+[hgpn20:724684] *** Process received signal ***
+[hgpn20:724684] Signal: Aborted (6)
+[hgpn20:724684] Signal code:  (-6)
+[hgpn20:724684] [ 0] /lib64/libpthread.so.0(+0x12990)[0x14e273422990]
+[hgpn20:724684] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14e27255452f]
+[hgpn20:724684] [ 2] /lib64/libc.so.6(abort+0x127)[0x14e272527e65]
+[hgpn20:724684] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x14e264b2d1c5]
+[hgpn20:724684] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x14e264b2d299]
+[hgpn20:724684] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x14e26516e390]
+[hgpn20:724684] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x14e26516b97a]
+[hgpn20:724684] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x14e26516c251]
+[hgpn20:724684] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x14e25d05cd61]
+[hgpn20:724684] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6d516)[0x14e25d066516]
+[hgpn20:724684] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6da3b)[0x14e25d066a3b]
+[hgpn20:724684] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x4d16c)[0x14e264b1816c]
+[hgpn20:724684] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(ucs_async_dispatch_handlers+0xe5)[0x14e264b18335]
+[hgpn20:724684] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x500b6)[0x14e264b1b0b6]
+[hgpn20:724684] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(ucs_event_set_wait+0xa3)[0x14e264b3c663]
+[hgpn20:724684] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x501fc)[0x14e264b1b1fc]
+[hgpn20:724684] [16] /lib64/libpthread.so.0(+0x81ca)[0x14e2734181ca]
+[hgpn20:724684] [17] /lib64/libc.so.6(clone+0x43)[0x14e27253f8d3]
+[hgpn20:724684] *** End of error message ***
+==== backtrace (tid: 724686) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+=================================
+[hgpn20:724686] *** Process received signal ***
+[hgpn20:724686] Signal: Aborted (6)
+[hgpn20:724686] Signal code:  (-6)
+[hgpn20:724686] [ 0] /lib64/libpthread.so.0(+0x12990)[0x145edd8fc990]
+[hgpn20:724686] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x145edca2e52f]
+[hgpn20:724686] [ 2] /lib64/libc.so.6(abort+0x127)[0x145edca01e65]
+[hgpn20:724686] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x145ed41e41c5]
+[hgpn20:724686] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x145ed41e4299]
+[hgpn20:724686] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x145ed4825390]
+[hgpn20:724686] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x145ed482297a]
+[hgpn20:724686] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x145ed4823251]
+[hgpn20:724686] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x145ecc9c8d61]
+[hgpn20:724686] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x145ecc9d1f7b]
+[hgpn20:724686] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x145ed41da4ce]
+[hgpn20:724686] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x145ed41da964]
+[hgpn20:724686] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x145ed47b9f3a]
+[hgpn20:724686] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x145edc45128c]
+[hgpn20:724686] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x145ef3ee9746]
+[hgpn20:724686] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x145ef3e7e7fe]
+[hgpn20:724686] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724686] [17] /lib64/libc.so.6(__libc_start_main+0xe5)[0x145edca1a7e5]
+[hgpn20:724686] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724686] *** End of error message ***
+==== backtrace (tid: 724687) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+=================================
+[hgpn20:724687] *** Process received signal ***
+[hgpn20:724687] Signal: Aborted (6)
+[hgpn20:724687] Signal code:  (-6)
+[hgpn20:724687] [ 0] /lib64/libpthread.so.0(+0x12990)[0x14b57d4da990]
+[hgpn20:724687] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14b57c60c52f]
+[hgpn20:724687] [ 2] /lib64/libc.so.6(abort+0x127)[0x14b57c5dfe65]
+[hgpn20:724687] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x14b56d0e91c5]
+[hgpn20:724687] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x14b56d0e9299]
+[hgpn20:724687] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x14b574403390]
+[hgpn20:724687] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x14b57440097a]
+[hgpn20:724687] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x14b574401251]
+[hgpn20:724687] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x14b56c61cd61]
+[hgpn20:724687] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x14b56c625f7b]
+[hgpn20:724687] [10] ==== backtrace (tid: 724680) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x14b56d0df4ce]
+[hgpn20:724687] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x14b56d0df964]
+[hgpn20:724687] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x14b574397f3a]
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+[hgpn20:724687] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x14b57c02f28c]
+[hgpn20:724687] [14] =================================
+==== backtrace (tid: 724682) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+[hgpn20:724680] *** Process received signal ***
+[hgpn20:724680] Signal: Aborted (6)
+[hgpn20:724680] Signal code:  (-6)
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+=================================
+/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x14b593ac7746]
+[hgpn20:724687] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x14b593a5c7fe]
+[hgpn20:724687] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724687] [17] [hgpn20:724682] *** Process received signal ***
+[hgpn20:724680] [ 0] /lib64/libpthread.so.0(+0x12990)[0x146e62caa990]
+[hgpn20:724680] [ 1] [hgpn20:724682] Signal: Aborted (6)
+[hgpn20:724682] Signal code:  (-6)
+/lib64/libc.so.6(__libc_start_main+0xe5)[0x14b57c5f87e5]
+[hgpn20:724687] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724687] *** End of error message ***
+/lib64/libc.so.6(gsignal+0x10f)[0x146e61ddc52f]
+[hgpn20:724680] [ 2] [hgpn20:724682] [ 0] /lib64/libpthread.so.0(+0x12990)[0x14d4d8631990]
+[hgpn20:724682] [ 1] /lib64/libc.so.6(abort+0x127)[0x146e61dafe65]
+[hgpn20:724680] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x146e544ee1c5]
+[hgpn20:724680] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x146e544ee299]
+[hgpn20:724680] [ 5] /lib64/libc.so.6(gsignal+0x10f)[0x14d4d776352f]
+[hgpn20:724682] [ 2] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x146e54b2f390]
+[hgpn20:724680] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x146e54b2c97a]
+[hgpn20:724680] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x146e54b2d251]
+[hgpn20:724680] [ 8] /lib64/libc.so.6(abort+0x127)[0x14d4d7736e65]
+[hgpn20:724682] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x14d4c81941c5]
+[hgpn20:724682] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x14d4c8194299]
+[hgpn20:724682] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x146e4cc51d61]
+[hgpn20:724680] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x146e4cc5af7b]
+[hgpn20:724680] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x146e544e44ce]
+[hgpn20:724680] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x14d4c87d5390]
+[hgpn20:724682] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x14d4c87d297a]
+[hgpn20:724682] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x14d4c87d3251]
+[hgpn20:724682] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x146e544e4964]
+[hgpn20:724680] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x146e54ac3f3a]
+[hgpn20:724680] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x14d4c23ebd61]
+[hgpn20:724682] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x14d4c23f4f7b]
+[hgpn20:724682] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x14d4c818a4ce]
+[hgpn20:724682] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x146e617ff28c]
+[hgpn20:724680] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x14d4c818a964]
+[hgpn20:724682] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x14d4c8769f3a]
+[hgpn20:724682] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x146e79297746]
+[hgpn20:724680] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x14d4d718628c]
+[hgpn20:724682] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x146e7922c7fe]
+[hgpn20:724680] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724680] [17] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x14d4eec1e746]
+[hgpn20:724682] [15] /lib64/libc.so.6(__libc_start_main+0xe5)[0x146e61dc87e5]
+[hgpn20:724680] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724680] *** End of error message ***
+/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x14d4eebb37fe]
+[hgpn20:724682] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724682] [17] /lib64/libc.so.6(__libc_start_main+0xe5)[0x14d4d774f7e5]
+[hgpn20:724682] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724682] *** End of error message ***
+==== backtrace (tid: 724685) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+=================================
+[hgpn20:724685] *** Process received signal ***
+[hgpn20:724685] Signal: Aborted (6)
+[hgpn20:724685] Signal code:  (-6)
+[hgpn20:724685] [ 0] /lib64/libpthread.so.0(+0x12990)[0x1501b2874990]
+[hgpn20:724685] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1501b19a652f]
+[hgpn20:724685] [ 2] /lib64/libc.so.6(abort+0x127)[0x1501b1979e65]
+[hgpn20:724685] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x1501a40ee1c5]
+[hgpn20:724685] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x1501a40ee299]
+[hgpn20:724685] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x1501a472f390]
+[hgpn20:724685] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x1501a472c97a]
+[hgpn20:724685] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x1501a472d251]
+[hgpn20:724685] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x15019c81fd61]
+[hgpn20:724685] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x15019c828f7b]
+[hgpn20:724685] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x1501a40e44ce]
+[hgpn20:724685] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x1501a40e4964]
+[hgpn20:724685] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x1501a46c3f3a]
+[hgpn20:724685] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x1501b13c928c]
+[hgpn20:724685] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x1501c8e61746]
+[hgpn20:724685] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x1501c8df67fe]
+[hgpn20:724685] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724685] [17] /lib64/libc.so.6(__libc_start_main+0xe5)[0x1501b19927e5]
+[hgpn20:724685] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724685] *** End of error message ***
+==== backtrace (tid: 724683) ====
+ 0 0x00000000000bc390 ucp_wireup_init_lanes()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:1617
+ 1 0x00000000000b997a ucp_wireup_process_request()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:683
+ 2 0x00000000000ba251 ucp_wireup_msg_handler()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/wireup/wireup.c:932
+ 3 0x0000000000063d61 uct_iface_invoke_am()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/base/uct_iface.h:942
+ 4 0x0000000000063d61 uct_ud_ep_process_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/base/ud_ep.c:1064
+ 5 0x000000000006cf7b uct_ud_mlx5_iface_poll_rx()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:527
+ 6 0x000000000006cf7b uct_ud_mlx5_iface_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/ib/ud/accel/ud_mlx5.c:585
+ 7 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:383
+ 8 0x00000000000584ce ucs_callbackq_spill_elems_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:385
+ 9 0x0000000000058964 ucs_callbackq_proxy_callback()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.c:479
+10 0x0000000000050f3a ucs_callbackq_dispatch()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucs/datastruct/callbackq.h:215
+11 0x0000000000050f3a uct_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/uct/api/uct.h:2787
+12 0x0000000000050f3a ucp_worker_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/ucx-1.16.0/src/ucp/core/ucp_worker.c:2991
+13 0x000000000003328c opal_progress()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/opal/runtime/opal_progress.c:231
+14 0x00000000000e0746 ompi_mpi_init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/runtime/ompi_mpi_init.c:904
+15 0x00000000000757fe PMPI_Init()  /hpc_sys/HPC_software/LMOD/nvidia/packages/openmpi-4.1.6/ompi/mpi/c/profile/pinit.c:67
+16 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1530
+17 0x00000000004127ab classifyOutputFile()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:169
+18 0x00000000004127ab main()  /home/allen0117/comm_opt/third_party/nccl-tests/src/common.cu:1533
+19 0x000000000003a7e5 __libc_start_main()  ???:0
+20 0x0000000000415aae _start()  ???:0
+=================================
+[hgpn20:724683] *** Process received signal ***
+[hgpn20:724683] Signal: Aborted (6)
+[hgpn20:724683] Signal code:  (-6)
+[hgpn20:724683] [ 0] /lib64/libpthread.so.0(+0x12990)[0x146bc7d5f990]
+[hgpn20:724683] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x146bc6e9152f]
+[hgpn20:724683] [ 2] /lib64/libc.so.6(abort+0x127)[0x146bc6e64e65]
+[hgpn20:724683] [ 3] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x621c5)[0x146bb378a1c5]
+[hgpn20:724683] [ 4] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x62299)[0x146bb378a299]
+[hgpn20:724683] [ 5] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_wireup_init_lanes+0x600)[0x146bb3dcb390]
+[hgpn20:724683] [ 6] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xb997a)[0x146bb3dc897a]
+[hgpn20:724683] [ 7] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(+0xba251)[0x146bb3dc9251]
+[hgpn20:724683] [ 8] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(uct_ud_ep_process_rx+0x1f1)[0x146bb1b13d61]
+[hgpn20:724683] [ 9] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx/libuct_ib.so.0(+0x6cf7b)[0x146bb1b1cf7b]
+[hgpn20:724683] [10] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x584ce)[0x146bb37804ce]
+[hgpn20:724683] [11] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucs.so.0(+0x58964)[0x146bb3780964]
+[hgpn20:724683] [12] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/libucp.so.0(ucp_worker_progress+0x6a)[0x146bb3d5ff3a]
+[hgpn20:724683] [13] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libopen-pal.so.40(opal_progress+0x2c)[0x146bc68b428c]
+[hgpn20:724683] [14] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(ompi_mpi_init+0xa16)[0x146bde34c746]
+[hgpn20:724683] [15] /work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib/libmpi.so.40(MPI_Init+0x5e)[0x146bde2e17fe]
+[hgpn20:724683] [16] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(main+0x81b)[0x4127ab]
+[hgpn20:724683] [17] /lib64/libc.so.6(__libc_start_main+0xe5)[0x146bc6e7d7e5]
+[hgpn20:724683] [18] /home/allen0117/comm_opt/third_party/nccl-tests/build/all_reduce_perf(_start+0x2e)[0x415aae]
+[hgpn20:724683] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 15 with PID 724687 on node hgpn20 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------
