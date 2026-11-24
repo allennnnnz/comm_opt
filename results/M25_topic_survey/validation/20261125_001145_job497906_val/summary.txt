@@ -1,1 +1,27 @@
 === B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=127 seconds=0
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=7s
+=== B4 begin elapsed=7s block_end=187s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+=== B4 end status=DONE run=5 fail=0 skipped=0 elapsed=32s
+=== B1 begin elapsed=32s block_end=392s
+B1 calibration rc=0 seconds=7
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=12
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=61s
+=== B2 begin elapsed=61s block_end=1261s
+B2 engine=q7_tp2 rc=1 seconds=64
+B2 engine=q7_tp2_eager rc=0 seconds=53
+B2 engine=q30_tp2 rc=1 seconds=86
+B2 engine=q30_tp2_ep rc=1 seconds=67
+=== B2 end status=DONE run=4 fail=3 skipped=0 elapsed=333s
+=== B3 begin elapsed=333s block_end=573s
+B3 seq=1 cfg=sr_default run1 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=1 cfg=sr_default run1 big rc=0 wrong=0/N/A Channel/-> 
+=== B3 end status=DONE run=2 fail=0 skipped=0 elapsed=343s
+end=2026-11-25T00:17:28+08:00 total_elapsed=343s

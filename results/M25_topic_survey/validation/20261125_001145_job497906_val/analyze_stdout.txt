@@ -1,0 +1,64 @@
+# M25 analysis of /home/allen0117/comm_opt/results/M25_topic_survey/validation/20261125_001145_job497906_val
+block	start	end	start_s	end_s	status	counts	skipped
+B0	2026-11-25T00:11:45+08:00	2026-11-25T00:11:52+08:00	0	7	WARN	run=1 fail=1	skipped=0
+B4	2026-11-25T00:11:52+08:00	2026-11-25T00:12:17+08:00	7	32	DONE	run=5 fail=0	skipped=0
+B1	2026-11-25T00:12:17+08:00	2026-11-25T00:12:46+08:00	32	61	DONE	run=3 fail=0	skipped=0
+B2	2026-11-25T00:12:46+08:00	2026-11-25T00:17:18+08:00	61	333	DONE	run=4 fail=3	skipped=0
+B3	2026-11-25T00:17:18+08:00	2026-11-25T00:17:28+08:00	333	343	DONE	run=2 fail=0	skipped=0
+
+
+## B4 NVLS crash (N1: a1,a2 should show cuda999>0 in >=1; N2: e256 completes with wrong=0)
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+
+
+## B1_cells
+cfg	op	size_mb	gemm	n	gemm_alone_ms	comm_alone_ms	gemm_slow_pct	comm_slow_pct	makespan_ms	makespan_range
+default	all_gather	256	8192	3	112.3	52.87	5.298	144.5	131.5	128.9..131.7
+default	all_reduce	4	8192	3	106.3	49.72	7.142	220.2	159.2	158.2..159.7
+default	reduce_scatter	32	4096	3	102.9	50.15	19.28	147.5	124.3	123.4..125.8
+ring_cta4	all_gather	256	8192	3	105.5	217.7	7.918	21.01	264.9	260.6..265.3
+ring_cta4	all_reduce	4	8192	3	106.3	98.74	0.8303	99.97	197.5	195.6..198
+ring_cta4	reduce_scatter	32	4096	3	99.2	132.4	15.22	39.6	184.8	183.6..185.2
+
+## B1 judgements
+
+## B1_O4
+op	size_mb	gemm	best_comm_alone_cfg	best_makespan_cfg	makespan_diff_pct	O4_cell	max_gemm_slow_pct
+all_gather	256	8192	default	default	0	False	7.918
+all_reduce	4	8192	default	default	0	False	7.142
+reduce_scatter	32	4096	default	default	0	False	19.28
+O4 cells with different best cfg and diff>=5%: 0 of 3
+
+## B2_engines
+engine	startup_s	max_batched	n_errors	allreduce_backend_log
+q7_tp2_eager	34.4	16384	0	(Worker pid=3942254) INFO 11-25 00:14:27 [cuda_communicator.py:353] Using ['CUSTOM', 'SYMM_MEM', 'PYNCCL'] all-reduce backends (in dispatch order) for group 'tp:0' out of potential backends: ['FLASHINFER_PCIE_IPC', 'FLASHINFER', 'NCCL_SYMM_MEM', 'QUICK_REDUCE', 'AITER_CUSTOM', 'CUSTOM', 'SYMM_MEM', 
+
+## B2_decode
+engine	batch	ms_per_token_median	range	t1_s_median
+
+## B2_prefill
+engine	len	prefill_s_median	range
+
+## B2_profile
+engine	batch	n_kernels	kernel_us	share_allreduce	share_other_coll	share_gemm	share_attn	share_other
+q7_tp2_eager	1	2665	9.672e+04	0.7509	0.02125	0.1787	0.02312	0.02606
+
+I5: KV bytes for 16384 tokens (72B, bf16) = 5.369 GB
+
+## B3_curves
+cfg	bytes	n	busbw_oop_median	busbw_range	time_us_median	wrong
+sr_default	64	2	0.01	0.01..0.01	6.98	0
+sr_default	512	2	0.03	0.03..0.03	17.58	0
+sr_default	4096	2	0.54	0.54..0.54	7.59	0
+sr_default	32768	2	2.62	2.62..2.62	12.49	0
+sr_default	262144	2	17.06	17.06..17.06	15.37	0
+sr_default	268435456	2	301.2	301.2..301.2	891.1	0
+
+## B3 judgements
+C5 sr_default 268435456B busbw 301.2
+
+## K1 SM clock (MHz): median while util>=50%: 1890 (n=41); all samples median 1875 (n=1344)

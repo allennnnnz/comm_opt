@@ -1,2 +1,68 @@
 OUT=/home/allen0117/comm_opt/results/M25_topic_survey/validation/20261125_001145_job497906_val
 === B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=127 seconds=0
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=7s
+=== B4 begin elapsed=7s block_end=187s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+=== B4 end status=DONE run=5 fail=0 skipped=0 elapsed=32s
+=== B1 begin elapsed=32s block_end=392s
+B1 calibration rc=0 seconds=7
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=12
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=61s
+=== B2 begin elapsed=61s block_end=1261s
+B2 engine=q7_tp2 rc=1 seconds=64
+B2 engine=q7_tp2_eager rc=0 seconds=53
+B2 engine=q30_tp2 rc=1 seconds=86
+B2 engine=q30_tp2_ep rc=1 seconds=67
+=== B2 end status=DONE run=4 fail=3 skipped=0 elapsed=333s
+=== B3 begin elapsed=333s block_end=573s
+B3 seq=1 cfg=sr_default run1 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=1 cfg=sr_default run1 big rc=0 wrong=0/N/A Channel/-> 
+=== B3 end status=DONE run=2 fail=0 skipped=0 elapsed=343s
+end=2026-11-25T00:17:28+08:00 total_elapsed=343s
+--- blocks.tsv
+block	start	end	start_s	end_s	status	counts	skipped
+B0	2026-11-25T00:11:45+08:00	2026-11-25T00:11:52+08:00	0	7	WARN	run=1 fail=1	skipped=0
+B4	2026-11-25T00:11:52+08:00	2026-11-25T00:12:17+08:00	7	32	DONE	run=5 fail=0	skipped=0
+B1	2026-11-25T00:12:17+08:00	2026-11-25T00:12:46+08:00	32	61	DONE	run=3 fail=0	skipped=0
+B2	2026-11-25T00:12:46+08:00	2026-11-25T00:17:18+08:00	61	333	DONE	run=4 fail=3	skipped=0
+B3	2026-11-25T00:17:18+08:00	2026-11-25T00:17:28+08:00	333	343	DONE	run=2 fail=0	skipped=0
+done: /home/allen0117/comm_opt/results/M25_topic_survey/validation/20261125_001145_job497906_val
+--- analyze.py smoke run
+analyze rc=0
+
+## B2_engines
+engine	startup_s	max_batched	n_errors	allreduce_backend_log
+q7_tp2_eager	34.4	16384	0	(Worker pid=3942254) INFO 11-25 00:14:27 [cuda_communicator.py:353] Using ['CUSTOM', 'SYMM_MEM', 'PYNCCL'] all-reduce backends (in dispatch order) for group 'tp:0' out of potential backends: ['FLASHINFER_PCIE_IPC', 'FLASHINFER', 'NCCL_SYMM_MEM', 'QUICK_REDUCE', 'AITER_CUSTOM', 'CUSTOM', 'SYMM_MEM', 
+
+## B2_decode
+engine	batch	ms_per_token_median	range	t1_s_median
+
+## B2_prefill
+engine	len	prefill_s_median	range
+
+## B2_profile
+engine	batch	n_kernels	kernel_us	share_allreduce	share_other_coll	share_gemm	share_attn	share_other
+q7_tp2_eager	1	2665	9.672e+04	0.7509	0.02125	0.1787	0.02312	0.02606
+
+I5: KV bytes for 16384 tokens (72B, bf16) = 5.369 GB
+
+## B3_curves
+cfg	bytes	n	busbw_oop_median	busbw_range	time_us_median	wrong
+sr_default	64	2	0.01	0.01..0.01	6.98	0
+sr_default	512	2	0.03	0.03..0.03	17.58	0
+sr_default	4096	2	0.54	0.54..0.54	7.59	0
+sr_default	32768	2	2.62	2.62..2.62	12.49	0
+sr_default	262144	2	17.06	17.06..17.06	15.37	0
+sr_default	268435456	2	301.2	301.2..301.2	891.1	0
+
+## B3 judgements
+C5 sr_default 268435456B busbw 301.2
+
+## K1 SM clock (MHz): median while util>=50%: 1890 (n=41); all samples median 1875 (n=1344)

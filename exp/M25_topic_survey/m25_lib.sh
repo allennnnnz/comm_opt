@@ -204,7 +204,7 @@ b2() {
   # Opus 2026-11-25: vLLM 0.32 dispatches FLASHINFER all-reduce first; its JIT needs nvcc >= 12.8 (--compress-mode=size,
   # flashinfer/jit/core.py:693) but this cluster has CUDA <= 12.6 and driver 12.4 -> validation 497896 failed. Use vLLM's other
   # backends (CUSTOM, SYMM_MEM, PYNCCL). gcc module gives JIT/Triton a full host compiler.
-  export VLLM_ALLREDUCE_USE_FLASHINFER=0
+  export VLLM_ALLREDUCE_USE_FLASHINFER=0 VLLM_ALLREDUCE_USE_FLASHINFER_PCIE_IPC=0 VLLM_USE_FLASHINFER_SAMPLER=0   # validation 497916: FlashInfer sampling JIT also fails (same nvcc>=12.8 need)
   module load gcc/12.5.0 2>/dev/null || true
   mkdir -p $OUT/b2 $ENVROOT/traces/$(basename $OUT)
   printf 'engine\trc\tseconds\n' > $OUT/b2/engines.tsv
