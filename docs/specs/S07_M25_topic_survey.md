@@ -86,6 +86,12 @@
 - 等結果：照 `.claude/skills/slurm-submit/SKILL.md` 第 4 步，**背景延遲後查一次 `sacct`，不輪詢**
 - 失敗就修、再送一次驗證（最多 3 次）。第 3 次還不行就停下來，在報告寫明原因
 
+### 4b. 2026-11-24 補充（Opus；使用者：維持 8 卡，「務必收集好所有做題目決策需要的資料」）
+
+- **不能因為時間不夠而丟掉任何區塊**。依驗證工作量到的實際耗時推算主工作；若估計總時間 > 105 分鐘，就把主工作拆成兩個 2 小時的 `dev` 工作（例如 `job_a.sbatch`：B0＋B4＋B1＋B3；`job_b.sbatch`：B0＋B2），兩者共用同一份 `m25_lib.sh`，用環境變數選區塊，兩個都要在驗證工作中走過。在報告寫明拆法與每個工作的估計時間
+- 每個工作仍保留 B0（環境紀錄、GPU 行程檢查、暖機、時脈紀錄）
+- 上次中斷前已完成：venv Python 改指 `/work/allen0117/comm_opt_env/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12`、三個模型設定檔已下載、`overlap_bench.py` 與 `vllm_bench.py` 已寫。先檢查這些是否完整正確，再繼續
+
 ### 5. 交回
 
 - **不要送主工作**（Opus 審過後送）。先用 `submit.sh --dry-run exp/M25_topic_survey/job.sbatch` 確認能通過檢查
