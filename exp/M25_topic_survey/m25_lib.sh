@@ -109,7 +109,7 @@ b0() {
   echo "warmup rc=$rc seconds=$((SECONDS-t0))" | tee -a $OUT/summary.txt
   rec_rc $rc
   # thermal gate (Opus 2026-11-25; job 497945 hgpn01 GPU 7 thermally throttled to ~345 MHz under B1 load): 8-GPU GEMM burn
-  local bs=${M25_BURN_S:-120} ts i trc
+  local bs=${M25_BURN_S:-120} ts i trc bpids=()
   ts=$(date '+%Y/%m/%d %H:%M:%S')
   for i in $(seq 0 $((NGPU-1))); do
     CUDA_VISIBLE_DEVICES=$i timeout $((bs+90)) python -c "
@@ -119,8 +119,9 @@ while time.time()-t<$bs:
     for _ in range(20): torch.mm(a,b,out=c)
     torch.cuda.synchronize(); n+=20
 print('gemms',n,'tflops',n*2*8192**3/(time.time()-t)/1e12)" > $OUT/b0/burn_gpu$i.log 2>&1 &
+    bpids+=($!)
   done
-  wait
+  wait "${bpids[@]}"   # NOT a bare wait: that also waits for the GPU monitor and hung job 498237 (rescued by hand)
   sleep 2
   python $EXPD/thermal_check.py $OUT/gpu_monitor.csv "$ts" $NGPU > $OUT/b0/thermal.txt 2>&1; trc=$?
   for i in $(seq 0 $((NGPU-1))); do echo "burn gpu$i: $(tail -1 $OUT/b0/burn_gpu$i.log)"; done | tee -a $OUT/summary.txt
