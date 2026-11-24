@@ -1,0 +1,23 @@
+== T1a old flags, 8 ranks
+rc=16 ucx_wireup_lines=15 allgather_err=1
+== T1b new flags, 8 ranks
+rc=5 ucx_wireup_lines=0 allgather_err=0
+* Error occurred in topology.c line 1384
+* Error occurred in topology.c line 1384
+  Error code: 2 (No such file or directory)
+* Error occurred in topology.c line 1384
+* Error occurred in topology.c line 1384
+== T1c new flags, 2 ranks, real all_reduce
+rc=0
+      262144         65536     float     sum      -1    10.62   24.68   24.68       0     9.98   26.27   26.27       0
+     2097152        524288     float     sum      -1    34.27   61.20   61.20       0    33.97   61.74   61.74       0
+    16777216       4194304     float     sum      -1    88.00  190.66  190.66       0    85.47  196.30  196.30       0
+# Avg bus bandwidth    : 35.5958 
+== T2 stdin
+line=a
+line=b
+line=c
+== T3 overlap_bench NVLS (2 GPUs)
+calib rc=0
+nvls rc=0 lines=1
+done

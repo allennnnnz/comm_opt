@@ -105,9 +105,13 @@ class Runner:
         return s.elapsed_time(eg), s.elapsed_time(ec)
 
 
+CTRL = None  # gloo group for timing bookkeeping (Opus 2026-11-25: job 497945 NVLS cfgs died here -- NCCL_ALGO=NVLS has no
+             # float64 all-reduce; control-plane reductions must not go through the NCCL config under test)
+
+
 def maxreduce(vals, dev):
-    t = torch.tensor(vals, dtype=torch.float64, device=dev)
-    dist.all_reduce(t, op=dist.ReduceOp.MAX)
+    t = torch.tensor(vals, dtype=torch.float64)
+    dist.all_reduce(t, op=dist.ReduceOp.MAX, group=CTRL)
     return t.tolist()
 
 
@@ -144,6 +148,8 @@ def main():
     torch.cuda.set_device(lr)
     dev = torch.device("cuda", lr)
     dist.init_process_group("nccl", device_id=dev)
+    global CTRL
+    CTRL = dist.new_group(backend="gloo")
     r = Runner(dev, ws)
     cells = cell_list(a.cells)
 

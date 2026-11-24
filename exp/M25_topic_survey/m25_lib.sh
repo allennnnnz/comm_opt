@@ -51,7 +51,11 @@ m25_mpirun() {  # m25_mpirun <np> <cmd...> ; exports names listed in M25_XENV in
   for v in LD_LIBRARY_PATH NCCL_DEBUG NCCL_DEBUG_SUBSYS NCCL_DEBUG_FILE CUDA_VISIBLE_DEVICES ${M25_XNAMES:-}; do
     [[ -n $v && -n ${!v+x} ]] && xs+=(-x "$v")
   done
-  mpirun -np "$np" --oversubscribe --bind-to none "${xs[@]}" "$@"   # job has 1 Slurm task; M25 validation 497760 failed with "not enough slots"
+  # job has 1 Slurm task -> --oversubscribe (validation 497760: "not enough slots").
+  # Opus 2026-11-25: main job 497945 (8 ranks, hgpn01) died in MPI_Allgather with UCX "wireup.c:408 no remote ep address" ->
+  # single node: bypass UCX (pml ob1 + shared-memory btl); MPI only carries nccl-tests' bootstrap, not the measured traffic.
+  # </dev/null: mpirun read the rest of B3's plan file from stdin, so B3 stopped after its first entry.
+  mpirun -np "$np" --oversubscribe --bind-to none --mca pml ob1 --mca btl self,vader --mca osc ^ucx "${xs[@]}" "$@" < /dev/null
 }
 with_env() {  # with_env "K=V K=V" cmd... : run cmd in a subshell with those variables exported (and passed to mpirun)
   local envs=$1; shift
@@ -103,7 +107,30 @@ b0() {
   NCCL_DEBUG=WARN timeout $((WARM_S*3+60)) bash -c "$(declare -f m25_mpirun); m25_mpirun $NGPU $bin $a -n $niter -w 5" > $OUT/b0/warmup.log 2>&1
   local rc=$?
   echo "warmup rc=$rc seconds=$((SECONDS-t0))" | tee -a $OUT/summary.txt
-  rec_rc $rc; blk_end $([[ $rc == 0 ]] && echo OK || echo WARN)
+  rec_rc $rc
+  # thermal gate (Opus 2026-11-25; job 497945 hgpn01 GPU 7 thermally throttled to ~345 MHz under B1 load): 8-GPU GEMM burn
+  local bs=${M25_BURN_S:-120} ts i trc
+  ts=$(date '+%Y/%m/%d %H:%M:%S')
+  for i in $(seq 0 $((NGPU-1))); do
+    CUDA_VISIBLE_DEVICES=$i timeout $((bs+90)) python -c "
+import torch,time
+a=torch.randn(8192,8192,device='cuda',dtype=torch.bfloat16);b=a.clone();c=torch.empty_like(a);n=0;t=time.time()
+while time.time()-t<$bs:
+    for _ in range(20): torch.mm(a,b,out=c)
+    torch.cuda.synchronize(); n+=20
+print('gemms',n,'tflops',n*2*8192**3/(time.time()-t)/1e12)" > $OUT/b0/burn_gpu$i.log 2>&1 &
+  done
+  wait
+  sleep 2
+  python $EXPD/thermal_check.py $OUT/gpu_monitor.csv "$ts" $NGPU > $OUT/b0/thermal.txt 2>&1; trc=$?
+  for i in $(seq 0 $((NGPU-1))); do echo "burn gpu$i: $(tail -1 $OUT/b0/burn_gpu$i.log)"; done | tee -a $OUT/summary.txt
+  echo "thermal gate rc=$trc: $(tail -1 $OUT/b0/thermal.txt)" | tee -a $OUT/summary.txt
+  cat $OUT/b0/thermal.txt >> $OUT/summary.txt
+  if [[ $trc == 3 && $M25_MODE == full ]]; then
+    echo "ABORT: thermally limited GPU on $(hostname); resubmit with --exclude=$(hostname)" | tee -a $OUT/summary.txt
+    blk_end ABORT_THERMAL; return 1
+  fi
+  blk_end $([[ $rc == 0 ]] && echo OK || echo WARN)
   return 0
 }
 
@@ -183,12 +210,14 @@ b1() {
 }
 
 # ---------------------------------------------------------------- B2  vLLM
-b2_engine() {  # b2_engine <name> <model> <tp> <ep> <eager> <maxlen> <decode> <prefill> <prof> <maxbatched>
-  local name=$1 model=$2 tp=$3 ep=$4 eager=$5 maxlen=$6 dec=$7 pre=$8 prof=$9 mb=${10}
+b2_engine() {  # b2_engine <name> <model> <tp> <ep> <eager> <maxlen> <decode> <prefill> <prof> <maxbatched> [envs|-] [timeout_s]
+  local name=$1 model=$2 tp=$3 ep=$4 eager=$5 maxlen=$6 dec=$7 pre=$8 prof=$9 mb=${10} envs=${11:--} to=${12:-720}
   local d=$OUT/b2/$name; mkdir -p $d
   can_run 300 || { skip_rec "engine $name"; return; }
-  local t0=$SECONDS rc
-  timeout $(cap 720) python $EXPD/vllm_bench.py --name $name --model $MODELS/$model --tp $tp --ep $ep --eager $eager \
+  local t0=$SECONDS rc envv=()
+  [[ $envs != - ]] && read -r -a envv <<< "$envs"
+  echo "$envs" > $d/extra_env.txt
+  env "${envv[@]}" timeout $(cap $to) python $EXPD/vllm_bench.py --name $name --model $MODELS/$model --tp $tp --ep $ep --eager $eager \
     --maxlen $maxlen --decode "$dec" --prefill "$pre" --prof "$prof" ${mb:+--max-batched $mb} --outdir $d --trace-root $ENVROOT/traces/$(basename $OUT) \
     > $d/engine.log 2>&1
   rc=$?
@@ -214,7 +243,15 @@ b2() {
     b2_engine q30_tp2       Qwen3-30B-A3B       2 0 0 2048 "1"   ""     "1"   ""
     b2_engine q30_tp2_ep    Qwen3-30B-A3B       2 1 0 2048 "1"   ""     "1"   ""
   else
-    b2_engine q72_tp8     Qwen2.5-72B-Instruct 8 0 0 17408 "1,8,32,128" "1024,4096,16384" "1,8,32,128" 17408
+    # Opus 2026-11-25: in 497945 q72_tp8 hung for 10 min right after torch.compile (first 17408-token dummy run, ~285 MB
+    # all-reduce; q72_tp4 and q30_tp8 with 16384x2048 were fine). Same engine again with NCCL INIT/NVLS logging, then two
+    # diagnostic variants that isolate (a) message size (8192-token batches) and (b) NVLS (disabled).
+    b2_engine q72_tp8        Qwen2.5-72B-Instruct 8 0 0 17408 "1,8,32,128" "1024,4096,16384" "1,8,32,128" 17408 \
+      "NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=INIT,NVLS,ENV" 480
+    b2_engine q72_tp8_mb8k   Qwen2.5-72B-Instruct 8 0 0 17408 "1,8,32,128" "1024,4096,16384" "1,8,32,128" 8192 \
+      "NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=INIT,NVLS,ENV" 420
+    b2_engine q72_tp8_nonvls Qwen2.5-72B-Instruct 8 0 0 17408 "1,8,32,128" "1024,4096,16384" "1,8,32,128" 17408 \
+      "NCCL_NVLS_ENABLE=0 NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=INIT,ENV" 420
     b2_engine q72_tp4     Qwen2.5-72B-Instruct 4 0 0 17408 "1,32"       "1024,4096,16384" "1,32"       17408
     b2_engine q30_tp8     Qwen3-30B-A3B        8 0 0 2048  "1,32,128"   ""               "1,32,128"   ""
     b2_engine q30_tp8_ep  Qwen3-30B-A3B        8 1 0 2048  "1,32,128"   ""               "1,32,128"   ""

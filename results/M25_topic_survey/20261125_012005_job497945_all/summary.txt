@@ -1,0 +1,45 @@
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=16 seconds=8
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=28s
+=== B4 begin elapsed=28s block_end=508s
+b4_a1	-	-b 8 -e 64M -f 4 -g 1	rc=16	cuda999_lines=0	wrong=
+b4_a2	-	-b 8 -e 64M -f 4 -g 1	rc=16	cuda999_lines=0	wrong=
+b4_e256	-	-b 8 -e 256M -f 4 -g 1	rc=16	cuda999_lines=0	wrong=
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 64M -f 4 -g 1	rc=16	cuda999_lines=0	wrong=
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 64M -f 4 -g 1	rc=16	cuda999_lines=0	wrong=
+=== B4 end status=DONE run=5 fail=5 skipped=0 elapsed=73s
+=== B1 begin elapsed=73s block_end=1873s
+B1 calibration rc=0 seconds=19
+B1 seq=1 cfg=nvls launch=2 rc=1 seconds=19
+B1 seq=2 cfg=default launch=2 rc=0 seconds=52
+B1 seq=3 cfg=ring_cta32 launch=1 rc=0 seconds=65
+B1 seq=4 cfg=ring_cta16 launch=1 rc=0 seconds=72
+B1 seq=5 cfg=nvls launch=1 rc=1 seconds=19
+B1 seq=6 cfg=nvls_nch4 launch=2 rc=1 seconds=19
+B1 seq=7 cfg=ring launch=1 rc=0 seconds=69
+B1 seq=8 cfg=ring_cta32 launch=2 rc=0 seconds=76
+B1 seq=9 cfg=ring_cta16 launch=2 rc=0 seconds=75
+B1 seq=10 cfg=efficiency launch=1 rc=0 seconds=77
+B1 seq=11 cfg=nvls_nch8 launch=2 rc=1 seconds=19
+B1 seq=12 cfg=nvls_nch4 launch=1 rc=1 seconds=19
+B1 seq=13 cfg=ring launch=2 rc=0 seconds=68
+B1 seq=14 cfg=efficiency launch=2 rc=0 seconds=74
+B1 seq=15 cfg=ring_cta4 launch=2 rc=0 seconds=87
+B1 seq=16 cfg=nvls_nch8 launch=1 rc=1 seconds=19
+B1 seq=17 cfg=ring_cta8 launch=1 rc=0 seconds=74
+B1 seq=18 cfg=ring_cta8 launch=2 rc=0 seconds=77
+B1 seq=19 cfg=default launch=1 rc=0 seconds=78
+B1 seq=20 cfg=ring_cta4 launch=1 rc=0 seconds=87
+=== B1 end status=DONE run=21 fail=6 skipped=0 elapsed=1245s
+=== B2 begin elapsed=1245s block_end=3645s
+B2 engine=q72_tp8 rc=124 seconds=720
+B2 engine=q72_tp4 rc=0 seconds=139
+B2 engine=q30_tp8 rc=0 seconds=144
+B2 engine=q30_tp8_ep rc=0 seconds=128
+=== B2 end status=DONE run=4 fail=1 skipped=0 elapsed=2399s
+=== B3 begin elapsed=2399s block_end=3899s
+B3 seq=1 cfg=ar4_default run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=1 cfg=ar4_default run1 big rc=0 wrong=0/0 Symmetric/ 
+=== B3 end status=DONE run=2 fail=0 skipped=0 elapsed=2421s
+end=2026-11-25T02:00:26+08:00 total_elapsed=2421s
