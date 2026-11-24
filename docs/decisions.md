@@ -369,3 +369,9 @@
 - **事實**：登入節點 `wallet MST114546` 只輸出 `/opt/walletcmd/bin/walletcmd.sh.x: ... location has changed!`（叢集端程式問題），`submit.sh` 讀不到餘額而拒送；S07 執行者與 Opus 各試一次皆同。
 - **使用者**：「我確定還有額度 盡量花錢沒關係」。
 - **做法**：`submit.sh` 新增 `--skip-wallet`（其他檢查不變；`jobs.tsv`／輸出記為 `wallet=skipped(D057)`）。只在 `wallet` 壞掉期間使用。
+
+## D058（2026-11-25 03:00）M25 第二次主量測：排除 hgpn01，H200 與 H100 各送一張（待使用者確認）
+
+- **事實**：第一次主量測 497945（hgpn01）中第 7 張卡在負載下過熱降頻（中位數 345 MHz、93°C），8 卡數據不能用（`results/M25_topic_survey/20261125_012005_job497945_all/gpu_monitor.csv.gz`，`exp/M25_topic_survey/thermal_check.py` 判定 THERMAL_FAIL gpus=[7]）。`dev` 分區與 `normal` 共用 hgpn02–06、17–21 且優先權較低，實際只排得到 hgpn01；H100 其他整台 `--test-only` 預估 11-26 11:53（dev）／21:28（normal）；H200 `normal2` 可立即開始。
+- **Opus 的處置（使用者先前指示「修好之後送主任務」「盡量花錢沒關係」）**：498237 = H200 整台（hgpn46，03:00 已開始）；498238 = H100 排除 hgpn01（`dev,normal`）。兩者同一套 `m25_lib.sh`（含溫度檢查）。`--mem=400G`（原預設 1600G 使排程更難；vLLM 用 dummy 權重，不需大量主記憶體）。
+- **待使用者決定**：選題以哪一台的數據為準（H200 先到；H100 對照）；是否保留 498238；是否向國網中心回報 hgpn01 第 7 張卡過熱。
