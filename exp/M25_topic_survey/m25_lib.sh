@@ -51,7 +51,7 @@ m25_mpirun() {  # m25_mpirun <np> <cmd...> ; exports names listed in M25_XENV in
   for v in LD_LIBRARY_PATH NCCL_DEBUG NCCL_DEBUG_SUBSYS NCCL_DEBUG_FILE CUDA_VISIBLE_DEVICES ${M25_XNAMES:-}; do
     [[ -n $v && -n ${!v+x} ]] && xs+=(-x "$v")
   done
-  mpirun -np "$np" --map-by ppr:$np:node "${xs[@]}" "$@"
+  mpirun -np "$np" --oversubscribe --bind-to none "${xs[@]}" "$@"   # job has 1 Slurm task; M25 validation 497760 failed with "not enough slots"
 }
 with_env() {  # with_env "K=V K=V" cmd... : run cmd in a subshell with those variables exported (and passed to mpirun)
   local envs=$1; shift

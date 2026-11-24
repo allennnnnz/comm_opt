@@ -1,0 +1,78 @@
+OUT=/home/allen0117/comm_opt/results/M25_topic_survey/validation/20261124_232919_job497760_val
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=1 seconds=0
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=8s
+=== B4 begin elapsed=8s block_end=188s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+=== B4 end status=DONE run=5 fail=5 skipped=0 elapsed=10s
+=== B1 begin elapsed=10s block_end=370s
+B1 calibration rc=0 seconds=7
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=11
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=39s
+=== B2 begin elapsed=39s block_end=1239s
+B2 engine=q7_tp2 rc=1 seconds=15
+B2 engine=q7_tp2_eager rc=1 seconds=9
+B2 engine=q30_tp2 rc=1 seconds=9
+B2 engine=q30_tp2_ep rc=1 seconds=8
+=== B2 end status=DONE run=4 fail=4 skipped=0 elapsed=80s
+=== B3 begin elapsed=80s block_end=320s
+B3 seq=1 cfg=sr_default run1 small rc=1 wrong=
+B3 seq=1 cfg=sr_default run1 big rc=1 wrong=
+B3 seq=2 cfg=ar_default probe0 probe rc=1 wrong=
+B3 seq=3 cfg=sr_default probe0 probe rc=1 wrong=
+B3 seq=4 cfg=a2a_default run1 small rc=1 wrong=
+B3 seq=4 cfg=a2a_default run1 big rc=1 wrong=
+B3 seq=5 cfg=a2a_default probe0 probe rc=1 wrong=
+B3 seq=6 cfg=ar_default run1 small rc=1 wrong=
+B3 seq=6 cfg=ar_default run1 big rc=1 wrong=
+B3 seq=7 cfg=rs_default run1 small rc=1 wrong=
+B3 seq=7 cfg=rs_default run1 big rc=1 wrong=
+B3 seq=8 cfg=rs_default probe0 probe rc=1 wrong=
+=== B3 end status=DONE run=12 fail=12 skipped=0 elapsed=83s
+end=2026-11-24T23:30:42+08:00 total_elapsed=83s
+--- blocks.tsv
+block	start	end	start_s	end_s	status	counts	skipped
+B0	2026-11-24T23:29:19+08:00	2026-11-24T23:29:27+08:00	0	8	WARN	run=1 fail=1	skipped=0
+B4	2026-11-24T23:29:27+08:00	2026-11-24T23:29:29+08:00	8	10	DONE	run=5 fail=5	skipped=0
+B1	2026-11-24T23:29:29+08:00	2026-11-24T23:29:58+08:00	10	39	DONE	run=3 fail=0	skipped=0
+B2	2026-11-24T23:29:58+08:00	2026-11-24T23:30:39+08:00	39	80	DONE	run=4 fail=4	skipped=0
+B3	2026-11-24T23:30:39+08:00	2026-11-24T23:30:42+08:00	80	83	DONE	run=12 fail=12	skipped=0
+done: /home/allen0117/comm_opt/results/M25_topic_survey/validation/20261124_232919_job497760_val
+--- analyze.py smoke run
+analyze rc=0
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+
+
+## B1_cells
+cfg	op	size_mb	gemm	n	gemm_alone_ms	comm_alone_ms	gemm_slow_pct	comm_slow_pct	makespan_ms	makespan_range
+default	all_gather	256	8192	3	101.3	49.87	8.751	145.4	121.9	121.6..123
+default	all_reduce	4	8192	3	99.69	44.39	9.258	239.1	150	149.7..150.5
+default	reduce_scatter	32	4096	3	99.82	48.81	22.51	153.2	122.5	122.4..125.4
+ring_cta4	all_gather	256	8192	3	100.7	228.9	6.094	17.37	271.7	266..271.8
+ring_cta4	all_reduce	4	8192	3	99.92	94.96	0.7127	94.57	184.8	184.6..190.2
+ring_cta4	reduce_scatter	32	4096	3	99	138.7	17.33	35.28	187.9	187.7..188
+
+## B1 judgements
+
+## B1_O4
+op	size_mb	gemm	best_comm_alone_cfg	best_makespan_cfg	makespan_diff_pct	O4_cell	max_gemm_slow_pct
+all_gather	256	8192	default	default	0	False	8.751
+all_reduce	4	8192	default	default	0	False	9.258
+reduce_scatter	32	4096	default	default	0	False	22.51
+O4 cells with different best cfg and diff>=5%: 0 of 3
+
+## B2: no result.json
+
+## B3: no parsed rows
+
+## K1 SM clock (MHz): median while util>=50%: nan (n=0); all samples median nan (n=0)

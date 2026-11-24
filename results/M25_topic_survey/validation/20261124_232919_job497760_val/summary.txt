@@ -1,0 +1,37 @@
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us= n=100000
+warmup rc=1 seconds=0
+=== B0 end status=WARN run=1 fail=1 skipped=0 elapsed=8s
+=== B4 begin elapsed=8s block_end=188s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=1	cuda999_lines=0	wrong=
+=== B4 end status=DONE run=5 fail=5 skipped=0 elapsed=10s
+=== B1 begin elapsed=10s block_end=370s
+B1 calibration rc=0 seconds=7
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=11
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=39s
+=== B2 begin elapsed=39s block_end=1239s
+B2 engine=q7_tp2 rc=1 seconds=15
+B2 engine=q7_tp2_eager rc=1 seconds=9
+B2 engine=q30_tp2 rc=1 seconds=9
+B2 engine=q30_tp2_ep rc=1 seconds=8
+=== B2 end status=DONE run=4 fail=4 skipped=0 elapsed=80s
+=== B3 begin elapsed=80s block_end=320s
+B3 seq=1 cfg=sr_default run1 small rc=1 wrong=
+B3 seq=1 cfg=sr_default run1 big rc=1 wrong=
+B3 seq=2 cfg=ar_default probe0 probe rc=1 wrong=
+B3 seq=3 cfg=sr_default probe0 probe rc=1 wrong=
+B3 seq=4 cfg=a2a_default run1 small rc=1 wrong=
+B3 seq=4 cfg=a2a_default run1 big rc=1 wrong=
+B3 seq=5 cfg=a2a_default probe0 probe rc=1 wrong=
+B3 seq=6 cfg=ar_default run1 small rc=1 wrong=
+B3 seq=6 cfg=ar_default run1 big rc=1 wrong=
+B3 seq=7 cfg=rs_default run1 small rc=1 wrong=
+B3 seq=7 cfg=rs_default run1 big rc=1 wrong=
+B3 seq=8 cfg=rs_default probe0 probe rc=1 wrong=
+=== B3 end status=DONE run=12 fail=12 skipped=0 elapsed=83s
+end=2026-11-24T23:30:42+08:00 total_elapsed=83s

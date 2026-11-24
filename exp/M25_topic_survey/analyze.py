@@ -198,7 +198,7 @@ def clocks():
     sm, allsm = [], []
     for r in csv.DictReader(opengz(p), skipinitialspace=True):
         try:
-            c = float(r["clocks.sm [MHz]"].split()[0]); u = float(r["utilization.gpu [%]"].split()[0])
+            c = float((r.get("clocks.current.sm [MHz]") or r["clocks.sm [MHz]"]).split()[0]); u = float(r["utilization.gpu [%]"].split()[0])
         except Exception:
             continue
         allsm.append(c)
