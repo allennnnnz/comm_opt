@@ -118,6 +118,11 @@ def main():
                                "torch_profiler_dump_cuda_time_total": False})
     if a.max_batched:
         kw["max_num_batched_tokens"] = a.max_batched
+    # Opus 2026-11-25: the all-reduce+RMSNorm fusion pass calls FlashInfer trtllm_mnnvl kernels, whose JIT needs nvcc>=12.8
+    # (not available: CUDA<=12.6, driver 12.4); validation 497906 failed in graph mode. Keep vLLM's plain all-reduce path.
+    if not a.eager:
+        kw["compilation_config"] = {"pass_config": {"fuse_allreduce_rms": False}}
+    res["fuse_allreduce_rms"] = False
     t_init0 = time.perf_counter()
     llm = LLM(**kw)
     gen(prompts(1, 16, "warm"), 2)  # first generate = engine ready
