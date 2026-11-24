@@ -1,0 +1,25 @@
+OUT=/home/allen0117/comm_opt/results/M25_topic_survey/validation/20261125_002236_job497929_val
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us=259.77 259.53 n=9628
+warmup rc=0 seconds=9
+=== B0 end status=OK run=1 fail=0 skipped=0 elapsed=22s
+=== B4 begin elapsed=22s block_end=202s
+b4_a1	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_a2	-	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_e256	-	-b 8 -e 8M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 4M -f 8 -g 1	rc=0	cuda999_lines=0	wrong=0/0 Symmetric/ 
+=== B4 end status=DONE run=5 fail=0 skipped=0 elapsed=44s
+=== B1 begin elapsed=44s block_end=404s
+B1 calibration rc=0 seconds=7
+B1 seq=1 cfg=ring_cta4 launch=1 rc=0 seconds=12
+B1 seq=2 cfg=default launch=1 rc=0 seconds=10
+=== B1 end status=DONE run=3 fail=0 skipped=0 elapsed=73s
+=== B2 begin elapsed=73s block_end=1273s
+B2 engine=q7_tp2 rc=0 seconds=72
+B2 engine=q7_tp2_eager rc=0 seconds=53
+B2 engine=q30_tp2 rc=0 seconds=81
+B2 engine=q30_tp2_ep rc=0 seconds=72
+=== B2 end status=DONE run=4 fail=0 skipped=0 elapsed=351s
+=== B3 begin elapsed=351s block_end=591s
+B3 seq=1 cfg=sr_default run1 small rc=0 wrong=0/N/A Channel/-> 

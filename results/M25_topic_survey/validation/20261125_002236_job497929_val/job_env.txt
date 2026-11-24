@@ -1,0 +1,58 @@
+job_id=497929 job_name=M25val partition=dev
+node=hgpn05 start=2026-11-25T00:22:36+08:00 mode=smoke ngpu=2 blocks=B4 B1 B2 B3 global_min=36
+git_commit=355a3890e9e557a7f3f258431f8186a9ce273a8e dirty=4
+
+Currently Loaded Modules:
+  1) cuda/12.4   2) openmpi/4.1.6
+
+ 
+
+index, name, driver_version, memory.total [MiB], clocks.current.sm [MHz], clocks.max.sm [MHz], temperature.gpu
+0, NVIDIA H100 80GB HBM3, 550.127.08, 81559 MiB, 345 MHz, 1980 MHz, 37
+1, NVIDIA H100 80GB HBM3, 550.127.08, 81559 MiB, 345 MHz, 1980 MHz, 35
+	[4mGPU0	GPU1	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	NIC9	NIC10	NIC11	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	PXB	PXB	NODE	NODE	NODE	NODE	SYS	SYS	SYS	SYS	SYS	SYS	0-3,8-11,24-39	0		N/A
+GPU1	NV18	 X 	NODE	NODE	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	SYS	SYS	0-3,8-11,24-39	0		N/A
+NIC0	PXB	NODE	 X 	PXB	NODE	NODE	NODE	NODE	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC1	PXB	NODE	PXB	 X 	NODE	NODE	NODE	NODE	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC2	NODE	NODE	NODE	NODE	 X 	PIX	NODE	NODE	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC3	NODE	NODE	NODE	NODE	PIX	 X 	NODE	NODE	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC4	NODE	PXB	NODE	NODE	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC5	NODE	PXB	NODE	NODE	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	SYS	SYS				
+NIC6	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	NODE	NODE				
+NIC7	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	NODE	NODE				
+NIC8	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PIX	NODE	NODE				
+NIC9	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	NODE	NODE	PIX	 X 	NODE	NODE				
+NIC10	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	NODE	NODE	NODE	NODE	 X 	PXB				
+NIC11	SYS	SYS	SYS	SYS	SYS	SYS	SYS	SYS	NODE	NODE	NODE	NODE	PXB	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_2
+  NIC3: mlx5_3
+  NIC4: mlx5_4
+  NIC5: mlx5_5
+  NIC6: mlx5_6
+  NIC7: mlx5_7
+  NIC8: mlx5_8
+  NIC9: mlx5_9
+  NIC10: mlx5_10
+  NIC11: mlx5_11
+
+CUDA_VISIBLE_DEVICES=0,1
+python /work/allen0117/comm_opt_env/venvs/vllm/bin/python
+torch 2.13.0+cu129 cuda_avail True devices 2 nccl (2, 29, 7)
+vllm 0.32.0
+LD_LIBRARY_PATH=/work/allen0117/comm_opt_env/venvs/vllm/lib/python3.12/site-packages/nvidia/nccl/lib:/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/openmpi-4.1.6/lib:/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib/ucx:/work/HPC_software/LMOD/nvidia/packages/cuda-12.2/ucx-1.16.0/lib:/work/HPC_software/LMOD/nvidia/packages/cuda-12.4/lib64
