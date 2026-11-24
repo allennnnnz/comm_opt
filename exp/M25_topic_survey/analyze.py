@@ -193,10 +193,12 @@ def b3():
 
 # ------------------------------------------------------------------ clocks
 def clocks():
-    p = next((q for q in (os.path.join(R, "gpu_monitor.csv"), os.path.join(R, "gpu_monitor.csv.gz")) if os.path.exists(q)), None)
-    if not p: return
+    # Opus 2026-11-25: job 498237 has a replacement monitor gpu_monitor_2.csv (original monitor stopped in-job); read all
+    ps = sorted(glob.glob(os.path.join(R, "gpu_monitor*.csv")) + glob.glob(os.path.join(R, "gpu_monitor*.csv.gz")))
+    if not ps: return
+    print("\n# monitor files:", [os.path.basename(q) for q in ps])
     sm, allsm = [], []
-    for r in csv.DictReader(opengz(p), skipinitialspace=True):
+    for r in (row for q in ps for row in csv.DictReader(opengz(q), skipinitialspace=True)):
         try:
             c = float((r.get("clocks.current.sm [MHz]") or r["clocks.sm [MHz]"]).split()[0]); u = float(r["utilization.gpu [%]"].split()[0])
         except Exception:
