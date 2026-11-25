@@ -2,7 +2,14 @@
 
 > 每次 session 開始先讀本檔，結束時更新「目前狀態」與「下一步」。
 
-## 2026-11-25 22:00 更新（以本節為準）
+## 2026-11-25 21:55 更新（以本節為準）
+
+- **E1 已核准（D060）並送出主工作**：500258 = H100（`normal`，排除 hgpn01）、500259 = H200（`normal2`），各 8 卡、5 小時，排隊中。腳本見 `exp/E1_prefill_overlap/`，實作報告 `docs/reports/R09_E1_impl.md`，冒煙驗證 500244（`results/E1_prefill_overlap/validation/20261125_211720_job500244_val/`）
+- **量測前改動（已記在實驗卡）**：C 段有效條件改為「對同 k 依序版本 ≤1e-4」＋「對 C0 ≤3e-2」（切塊捨入經 8 層累積 1.1–1.4%）；主工作時間 3→5 小時
+- **下一步**：工作跑完後跑 `analyze.py --c-valid seq`，逐條判定 A1–C3 與判讀規則，回報使用者
+- **待使用者（舊）**：I2 量法；hgpn01 回報；D058 確認
+
+## 2026-11-25 22:00 更新（部分過時）
 
 - **S08 文獻與可行性調查完成**：`docs/reports/R08_A_papers.md`（論文細節、空白格）、`R08_B_code_env.md`（vLLM 內建功能、論文程式碼可行性）。Opus 抽查：vLLM 0.32.0 無 SP／async-TP pass（`compilation/passes/` 清單），AR＋RMSNorm 融合 SM90 TP8 上限 0.5 MB（`allreduce_rms_fusion.py:104-108`）；FLUX 對 vLLM 在 H800「1.66x prefill, and no decoding speedups」（全文 l.783-784）；Ladder-residual Table 2（8×H100、TP8、批次 1、gpt-fast）預填上限 30.54% 而 Ladder 只得 5.78%；ISO §3.2 A800 上 NCCL 佔 SM 使計算慢 15–20%
 - **研究空間（Opus 整理，待使用者選）**：Hopper 8 卡預填 TP 的雙向拖慢未見量測；端到端執行時依大小自適應的重疊未見；沒有論文以 vLLM custom AR＋CUDA graph 為基準在 Hopper 8 卡評估
