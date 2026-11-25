@@ -1,0 +1,31 @@
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us=251.56 252.22 n=9924
+warmup rc=0 seconds=9
+burn gpu0: gemms 12340 tflops 678.0279763974244
+burn gpu1: gemms 3520 tflops 193.44211512764966
+thermal gate rc=3: THERMAL_FAIL gpus=[1]
+gpu0 busy_samples=40 clk_median=1365.0 temp_max=59 thermal_frac=0.000 ok
+gpu1 busy_samples=39 clk_median=375 temp_max=89 thermal_frac=1.000 BAD
+THERMAL_FAIL gpus=[1]
+=== B0 end status=OK run=1 fail=0 skipped=0 elapsed=45s
+=== A begin elapsed=45s block_end=765s
+A launch=1 rc=0 seconds=59
+=== A end status=DONE run=1 fail=0 skipped=0 elapsed=104s
+=== B begin elapsed=104s block_end=464s
+B seq=1 mech=cta8 launch=1 rc=0 seconds=10
+B seq=2 mech=default launch=1 rc=0 seconds=10
+B seq=3 mech=symm launch=1 rc=0 seconds=9
+mech1=symm
+mech2=cta8
+# geometric-mean ratio of median concurrent completion time vs default (smaller = better), and number of cells compared
+# symm	score=1.2845	cells=15	(symm_mem: only cells with T<=4096)
+# cta8	score=1.4172	cells=20
+=== B end status=DONE run=3 fail=0 skipped=0 elapsed=134s
+=== C begin elapsed=134s block_end=494s
+C mechs: default symm cta8
+C seq=1 mech=symm launch=1 rc=0 seconds=19
+C seq=2 mech=cta8 launch=1 rc=0 seconds=20
+C seq=3 mech=default launch=1 rc=0 seconds=22
+=== C end status=DONE run=3 fail=0 skipped=0 elapsed=195s
+end=2026-11-25T20:59:19+08:00 total_elapsed=195s
+analyze rc=0

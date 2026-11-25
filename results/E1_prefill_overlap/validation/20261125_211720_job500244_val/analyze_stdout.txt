@@ -1,0 +1,184 @@
+##### /home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_211720_job500244_val
+
+=== A: vLLM prefill baseline
+launches: 1 orders: [[2048, 4096]] seeds: [20261126] errors: [[]]
+L	n_prof	AR_share_median	CI95	per_launch_medians	kernel_sum_ms	gpu_span_ms	prefill_ms(vllm)	wall_ms	A2_diff_prefill	A2_diff_wall	n_AR_calls	AR_p50_us
+2048	1	0.1327	[nan, nan]	[0.1327]	24.88	29.68	28.87	30.39	0.160	0.221	57.0	54.2
+   all-reduce kernel names at L=2048: ['void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns']
+4096	1	0.1209	[nan, nan]	[0.1209]	49.08	55.13	55.92	58.78	0.139	0.198	57.0	100.8
+   all-reduce kernel names at L=4096: ['void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns']
+A1: L with share in [0.25,0.38]: 0/2 ; L with share >= 0.25: 0/2 ; L with share < 0.20: 2/2 ; A1 holds (all L in range): False
+A2: all L within 10% using vLLM prefill time: False ; using wall time: False
+
+=== B: operator-level pairs
+mechs: ['cta8', 'default', 'symm'] launches per mech: {'cta8': [1], 'default': [1], 'symm': [1]} attn_mode: ['gqa'] symm_algo: ['two_shot']
+mech	T	comp	n	comm_alone_ms	comp_alone_ms	comm_slow	CI95	comp_slow	CI95	makespan_ms	CI95	eff	CI95	makespan_per_launch
+cta8	1024	attn	10	0.955	0.160	1.022	[1.019, 1.024]	1.090	[1.077, 1.098]	0.976	[0.974, 0.977]	0.866	[0.856, 0.884]	[0.976]
+cta8	1024	down	10	0.956	0.676	1.378	[1.336, 1.541]	1.854	[1.672, 1.893]	1.317	[1.284, 1.473]	0.465	[0.234, 0.517]	[1.317]
+cta8	1024	gate_up	10	0.959	1.279	2.039	[1.815, 2.103]	1.480	[1.467, 1.576]	1.991	[1.891, 2.043]	0.261	[0.193, 0.363]	[1.991]
+cta8	1024	o_proj	10	0.947	0.229	1.169	[1.161, 1.174]	1.685	[1.666, 1.738]	1.107	[1.099, 1.112]	0.297	[0.281, 0.333]	[1.107]
+cta8	1024	qkv	10	0.956	0.355	1.242	[1.212, 1.255]	1.390	[1.360, 1.414]	1.188	[1.160, 1.198]	0.345	[0.315, 0.426]	[1.188]
+cta8	2048	attn	10	0.881	0.134	1.064	[1.024, 1.068]	1.127	[1.105, 1.169]	0.937	[0.903, 0.940]	0.580	[0.550, 0.842]	[0.937]
+cta8	2048	down	10	0.883	0.664	1.492	[1.468, 1.539]	1.242	[1.219, 1.367]	1.315	[1.296, 1.361]	0.348	[0.281, 0.378]	[1.315]
+cta8	2048	gate_up	10	0.880	1.294	1.907	[1.613, 1.923]	1.247	[1.200, 1.435]	1.687	[1.616, 1.857]	0.554	[0.366, 0.634]	[1.687]
+cta8	2048	o_proj	10	0.874	0.218	1.166	[1.144, 1.168]	1.453	[1.424, 1.460]	1.021	[0.999, 1.022]	0.331	[0.323, 0.433]	[1.021]
+cta8	2048	qkv	10	0.881	0.235	1.187	[1.166, 1.199]	1.884	[1.675, 1.891]	1.046	[1.028, 1.055]	0.297	[0.259, 0.382]	[1.046]
+cta8	4096	attn	10	0.863	0.191	1.139	[1.034, 1.151]	1.043	[1.038, 1.056]	0.982	[0.891, 0.993]	0.375	[0.318, 0.848]	[0.982]
+cta8	4096	down	10	0.860	0.652	1.539	[1.411, 1.550]	1.162	[1.115, 1.207]	1.321	[1.213, 1.328]	0.290	[0.276, 0.458]	[1.321]
+cta8	4096	gate_up	10	0.861	1.292	2.034	[1.670, 2.060]	1.071	[1.068, 1.091]	1.754	[1.585, 1.775]	0.463	[0.439, 0.661]	[1.754]
+cta8	4096	o_proj	10	0.856	0.205	1.221	[1.072, 1.235]	1.251	[1.185, 1.259]	1.048	[0.918, 1.057]	0.073	[0.020, 0.697]	[1.048]
+cta8	4096	qkv	10	0.864	0.226	1.184	[1.129, 1.253]	1.874	[1.655, 1.891]	1.019	[0.976, 1.083]	0.294	[0.036, 0.502]	[1.019]
+cta8	8192	attn	10	0.850	0.278	1.366	[1.205, 1.373]	1.034	[0.992, 1.042]	1.159	[1.022, 1.168]	-0.116	[-0.137, 0.373]	[1.159]
+cta8	8192	down	10	0.850	0.664	1.726	[1.224, 1.769]	1.112	[1.105, 1.139]	1.466	[1.037, 1.509]	0.073	[0.013, 0.714]	[1.466]
+cta8	8192	gate_up	10	0.851	1.287	2.517	[2.508, 2.534]	1.100	[1.048, 1.104]	2.142	[2.140, 2.152]	-0.005	[-0.015, 0.001]	[2.142]
+cta8	8192	o_proj	10	0.843	0.198	1.387	[1.376, 1.394]	1.105	[1.050, 1.112]	1.170	[1.155, 1.177]	-0.652	[-0.681, -0.602]	[1.17]
+cta8	8192	qkv	10	0.849	0.224	1.203	[1.197, 1.207]	1.403	[1.002, 1.834]	1.021	[1.018, 1.024]	0.232	[0.217, 0.249]	[1.021]
+default	1024	attn	10	0.609	0.161	1.036	[1.027, 1.044]	1.209	[1.187, 1.225]	0.631	[0.625, 0.634]	0.864	[0.832, 0.897]	[0.631]
+default	1024	down	10	0.615	0.677	1.772	[1.627, 1.861]	1.583	[1.574, 1.668]	1.129	[1.106, 1.134]	0.290	[0.254, 0.331]	[1.129]
+default	1024	gate_up	10	0.622	1.278	2.152	[2.107, 2.369]	1.378	[1.298, 1.403]	1.762	[1.663, 1.795]	0.307	[0.195, 0.429]	[1.762]
+default	1024	o_proj	10	0.616	0.229	1.186	[1.176, 1.203]	1.823	[1.774, 1.868]	0.729	[0.725, 0.737]	0.500	[0.465, 0.538]	[0.729]
+default	1024	qkv	10	0.630	0.353	1.334	[1.322, 1.338]	1.481	[1.466, 1.487]	0.841	[0.831, 0.847]	0.405	[0.393, 0.428]	[0.841]
+default	2048	attn	10	0.552	0.134	1.069	[1.063, 1.076]	1.266	[1.249, 1.277]	0.591	[0.587, 0.592]	0.717	[0.689, 0.740]	[0.591]
+default	2048	down	10	0.551	0.664	1.702	[1.502, 1.814]	1.313	[1.285, 1.343]	0.936	[0.902, 1.001]	0.504	[0.388, 0.566]	[0.936]
+default	2048	gate_up	10	0.554	1.294	2.861	[2.836, 2.883]	1.411	[1.216, 1.415]	1.825	[1.598, 1.830]	0.041	[0.032, 0.448]	[1.825]
+default	2048	o_proj	10	0.549	0.219	1.265	[1.115, 1.276]	1.268	[1.248, 1.510]	0.696	[0.610, 0.703]	0.333	[0.301, 0.713]	[0.696]
+default	2048	qkv	10	0.555	0.236	1.232	[1.222, 1.250]	1.765	[1.720, 1.902]	0.679	[0.679, 0.695]	0.457	[0.407, 0.477]	[0.679]
+default	4096	attn	10	0.501	0.191	1.132	[1.013, 1.149]	1.126	[1.113, 1.131]	0.568	[0.506, 0.578]	0.650	[0.607, 0.967]	[0.568]
+default	4096	down	10	0.499	0.652	1.715	[1.379, 2.055]	1.188	[1.180, 1.198]	0.895	[0.770, 1.025]	0.512	[0.247, 0.765]	[0.895]
+default	4096	gate_up	10	0.500	1.291	3.079	[1.954, 3.116]	1.140	[1.066, 1.272]	1.552	[1.473, 1.645]	0.481	[0.297, 0.631]	[1.552]
+default	4096	o_proj	10	0.500	0.206	1.243	[1.237, 1.250]	1.386	[1.376, 1.402]	0.622	[0.618, 0.624]	0.411	[0.393, 0.422]	[0.622]
+default	4096	qkv	10	0.501	0.227	1.260	[1.210, 1.272]	1.782	[1.647, 1.932]	0.634	[0.606, 0.637]	0.419	[0.401, 0.533]	[0.634]
+default	8192	attn	10	0.469	0.279	1.499	[1.068, 1.526]	1.138	[1.127, 1.147]	0.704	[0.497, 0.716]	0.163	[0.114, 0.886]	[0.704]
+default	8192	down	10	0.468	0.665	2.352	[2.317, 2.407]	1.200	[1.000, 1.222]	1.099	[1.083, 1.130]	0.072	[0.011, 0.104]	[1.099]
+default	8192	gate_up	10	0.470	1.286	3.749	[1.101, 3.777]	1.107	[1.005, 1.234]	1.760	[1.422, 1.764]	0.008	[-0.026, 0.708]	[1.76]
+default	8192	o_proj	10	0.467	0.198	1.484	[1.044, 1.496]	1.211	[0.995, 1.284]	0.693	[0.487, 0.699]	-0.148	[-0.170, 0.896]	[0.693]
+default	8192	qkv	10	0.467	0.224	1.455	[1.223, 1.480]	1.842	[1.419, 1.898]	0.680	[0.566, 0.690]	0.053	[0.002, 0.495]	[0.68]
+symm	1024	attn	10	0.679	0.161	1.047	[1.042, 1.050]	1.331	[1.282, 1.348]	0.710	[0.708, 0.713]	0.802	[0.785, 0.825]	[0.71]
+symm	1024	down	10	0.678	0.677	1.706	[1.632, 1.994]	1.572	[1.526, 1.602]	1.196	[1.146, 1.343]	0.299	[0.013, 0.328]	[1.196]
+symm	1024	gate_up	10	0.705	1.276	2.754	[2.644, 2.832]	1.353	[1.282, 1.365]	1.942	[1.840, 2.069]	0.054	[-0.074, 0.212]	[1.942]
+symm	1024	o_proj	10	0.676	0.230	1.321	[1.319, 1.323]	1.621	[1.613, 1.643]	0.893	[0.891, 0.895]	0.056	[0.052, 0.063]	[0.893]
+symm	1024	qkv	10	0.690	0.351	1.449	[1.436, 1.459]	1.386	[1.346, 1.395]	0.999	[0.993, 1.005]	0.120	[0.101, 0.140]	[0.999]
+symm	2048	attn	10	0.685	0.135	1.147	[1.128, 1.151]	1.347	[1.209, 1.377]	0.784	[0.779, 0.789]	0.249	[0.232, 0.350]	[0.784]
+symm	2048	down	10	0.683	0.664	1.848	[1.719, 1.952]	1.255	[1.228, 1.302]	1.262	[1.174, 1.330]	0.127	[0.025, 0.259]	[1.262]
+symm	2048	gate_up	10	0.682	1.294	2.970	[2.664, 3.016]	1.375	[1.051, 1.379]	2.049	[1.797, 2.056]	-0.097	[-0.120, 0.232]	[2.049]
+symm	2048	o_proj	10	0.685	0.218	1.275	[1.247, 1.281]	1.463	[1.345, 1.484]	0.871	[0.855, 0.875]	0.137	[0.124, 0.215]	[0.871]
+symm	2048	qkv	10	0.688	0.235	1.303	[1.296, 1.319]	1.644	[1.537, 1.731]	0.899	[0.891, 0.906]	0.113	[0.070, 0.136]	[0.899]
+symm	4096	attn	10	0.661	0.192	1.357	[1.324, 1.366]	1.296	[1.169, 1.306]	0.898	[0.877, 0.902]	-0.229	[-0.262, -0.117]	[0.898]
+symm	4096	down	10	0.661	0.651	2.117	[2.104, 2.124]	1.174	[1.057, 1.183]	1.399	[1.396, 1.401]	-0.133	[-0.139, -0.124]	[1.399]
+symm	4096	gate_up	10	0.679	1.291	2.670	[2.540, 2.835]	1.057	[1.055, 1.180]	1.813	[1.729, 1.894]	0.233	[0.099, 0.357]	[1.813]
+symm	4096	o_proj	10	0.666	0.206	1.482	[1.429, 1.489]	1.362	[1.233, 1.384]	0.985	[0.957, 0.987]	-0.564	[-0.580, -0.392]	[0.985]
+symm	4096	qkv	10	0.663	0.227	1.391	[1.327, 1.407]	1.646	[1.225, 1.666]	0.925	[0.920, 0.935]	-0.145	[-0.200, 0.036]	[0.925]
+B1 (default, 20 cells): fraction of cells with comm slowdown >= 1.30 = 0.600 (needs >= 0.5: True); median over cells of comp slowdown = 1.290 (in [1.05,1.30]: True); B1 holds: True
+B2a: median over 20 cells of (comp_slow_cta8-1)/(comp_slow_default-1) = 0.712 (<0.5: False); fraction of cells < 0.5 = 0.300
+B2b: median over 10 cells (T>=4096) of comm_alone(cta8)/comm_alone(default) = 1.765 (>=1.20: True); fraction of cells >= 1.20 = 1.000; B2 holds: False
+   B2 cell T=1024 attn: comp_slow default 1.209 cta8 1.090 ; comm_alone default 0.609 cta8 0.955
+   B2 cell T=1024 down: comp_slow default 1.583 cta8 1.854 ; comm_alone default 0.615 cta8 0.956
+   B2 cell T=1024 gate_up: comp_slow default 1.378 cta8 1.480 ; comm_alone default 0.622 cta8 0.959
+   B2 cell T=1024 o_proj: comp_slow default 1.823 cta8 1.685 ; comm_alone default 0.616 cta8 0.947
+   B2 cell T=1024 qkv: comp_slow default 1.481 cta8 1.390 ; comm_alone default 0.630 cta8 0.956
+   B2 cell T=2048 attn: comp_slow default 1.266 cta8 1.127 ; comm_alone default 0.552 cta8 0.881
+   B2 cell T=2048 down: comp_slow default 1.313 cta8 1.242 ; comm_alone default 0.551 cta8 0.883
+   B2 cell T=2048 gate_up: comp_slow default 1.411 cta8 1.247 ; comm_alone default 0.554 cta8 0.880
+   B2 cell T=2048 o_proj: comp_slow default 1.268 cta8 1.453 ; comm_alone default 0.549 cta8 0.874
+   B2 cell T=2048 qkv: comp_slow default 1.765 cta8 1.884 ; comm_alone default 0.555 cta8 0.881
+   B2 cell T=4096 attn: comp_slow default 1.126 cta8 1.043 ; comm_alone default 0.501 cta8 0.863
+   B2 cell T=4096 down: comp_slow default 1.188 cta8 1.162 ; comm_alone default 0.499 cta8 0.860
+   B2 cell T=4096 gate_up: comp_slow default 1.140 cta8 1.071 ; comm_alone default 0.500 cta8 0.861
+   B2 cell T=4096 o_proj: comp_slow default 1.386 cta8 1.251 ; comm_alone default 0.500 cta8 0.856
+   B2 cell T=4096 qkv: comp_slow default 1.782 cta8 1.874 ; comm_alone default 0.501 cta8 0.864
+   B2 cell T=8192 attn: comp_slow default 1.138 cta8 1.034 ; comm_alone default 0.469 cta8 0.850
+   B2 cell T=8192 down: comp_slow default 1.200 cta8 1.112 ; comm_alone default 0.468 cta8 0.850
+   B2 cell T=8192 gate_up: comp_slow default 1.107 cta8 1.100 ; comm_alone default 0.470 cta8 0.851
+   B2 cell T=8192 o_proj: comp_slow default 1.211 cta8 1.105 ; comm_alone default 0.467 cta8 0.843
+   B2 cell T=8192 qkv: comp_slow default 1.842 cta8 1.403 ; comm_alone default 0.467 cta8 0.849
+B3: mechs with all 20 cells: ['cta8', 'default']; single best by geomean makespan: default {cta8:1.2441, default:0.8776}
+   B3 cell T=1024 attn: best=default 0.631 ms ; single-best(default) 0.631 ms ; gain=0.000
+   B3 cell T=1024 down: best=default 1.129 ms ; single-best(default) 1.129 ms ; gain=0.000
+   B3 cell T=1024 gate_up: best=default 1.762 ms ; single-best(default) 1.762 ms ; gain=0.000
+   B3 cell T=1024 o_proj: best=default 0.729 ms ; single-best(default) 0.729 ms ; gain=0.000
+   B3 cell T=1024 qkv: best=default 0.841 ms ; single-best(default) 0.841 ms ; gain=0.000
+   B3 cell T=2048 attn: best=default 0.591 ms ; single-best(default) 0.591 ms ; gain=0.000
+   B3 cell T=2048 down: best=default 0.936 ms ; single-best(default) 0.936 ms ; gain=0.000
+   B3 cell T=2048 gate_up: best=cta8 1.687 ms ; single-best(default) 1.825 ms ; gain=0.076
+   B3 cell T=2048 o_proj: best=default 0.696 ms ; single-best(default) 0.696 ms ; gain=0.000
+   B3 cell T=2048 qkv: best=default 0.679 ms ; single-best(default) 0.679 ms ; gain=0.000
+   B3 cell T=4096 attn: best=default 0.568 ms ; single-best(default) 0.568 ms ; gain=0.000
+   B3 cell T=4096 down: best=default 0.895 ms ; single-best(default) 0.895 ms ; gain=0.000
+   B3 cell T=4096 gate_up: best=default 1.552 ms ; single-best(default) 1.552 ms ; gain=0.000
+   B3 cell T=4096 o_proj: best=default 0.622 ms ; single-best(default) 0.622 ms ; gain=0.000
+   B3 cell T=4096 qkv: best=default 0.634 ms ; single-best(default) 0.634 ms ; gain=0.000
+   B3 cell T=8192 attn: best=default 0.704 ms ; single-best(default) 0.704 ms ; gain=0.000
+   B3 cell T=8192 down: best=default 1.099 ms ; single-best(default) 1.099 ms ; gain=0.000
+   B3 cell T=8192 gate_up: best=default 1.760 ms ; single-best(default) 1.760 ms ; gain=0.000
+   B3 cell T=8192 o_proj: best=default 0.693 ms ; single-best(default) 0.693 ms ; gain=0.000
+   B3 cell T=8192 qkv: best=default 0.680 ms ; single-best(default) 0.680 ms ; gain=0.000
+B3: cells with per-cell best >= 5% faster than single best: 1 (needs >= 3: False)
+B4 mech=cta8: median overlap efficiency over 20 cells = 0.297 (in [0.40,0.80]: False)
+B4 mech=default: median overlap efficiency over 20 cells = 0.408 (in [0.40,0.80]: True)
+B4 mech=symm: median overlap efficiency over 15 cells = 0.113 (in [0.40,0.80]: False)
+
+=== C: layer-stack prototype
+mechs: ['cta8', 'default', 'symm'] launches: {'cta8': [1], 'default': [1], 'symm': [1]}
+INVALID settings (rel_fro_err > tol): [('cta8', 1, 2048, 2, 0.010656708851456642), ('cta8', 1, 2048, 4, 0.013136746361851692), ('cta8', 1, 4096, 2, 0.010823221877217293), ('cta8', 1, 4096, 4, 0.013358854688704014), ('cta8', 1, 8192, 2, 0.010950895957648754), ('cta8', 1, 8192, 4, 0.01350270863622427), ('cta8', 1, 16384, 2, 0.01101583894342184), ('cta8', 1, 16384, 4, 0.013576117344200611), ('default', 1, 2048, 2, 0.010656708851456642), ('default', 1, 2048, 4, 0.013136746361851692), ('default', 1, 4096, 2, 0.010823221877217293), ('default', 1, 4096, 4, 0.013358854688704014), ('default', 1, 8192, 2, 0.010950895957648754), ('default', 1, 8192, 4, 0.01350270863622427), ('default', 1, 16384, 2, 0.01101583894342184), ('default', 1, 16384, 4, 0.013576117344200611), ('symm', 1, 2048, 2, 0.010656708851456642), ('symm', 1, 2048, 4, 0.013136746361851692), ('symm', 1, 4096, 2, 0.010823221877217293), ('symm', 1, 4096, 4, 0.013358854688704014), ('symm', 1, 8192, 2, 0.010950895957648754), ('symm', 1, 8192, 4, 0.01350270863622427), ('symm', 1, 16384, 2, 0.01101583894342184), ('symm', 1, 16384, 4, 0.013576117344200611)] ; max rel_err among C2: 0.013576117344200611
+C2 correctness (mech, launch, L, k, rel_fro_err after 8 layers, rel_fro_err after layer 1, err vs same-k sequential, valid):
+   cta8	1	2048	2	0.01066	0.003166132839396596	0.0	False
+   cta8	1	2048	4	0.01314	0.003926220815628767	0.0	False
+   cta8	1	4096	2	0.01082	0.0030390264000743628	0.0	False
+   cta8	1	4096	4	0.01336	0.0037693281192332506	0.0	False
+   cta8	1	8192	2	0.01095	0.0029028013814240694	0.0	False
+   cta8	1	8192	4	0.01350	0.0036145478952676058	0.0	False
+   cta8	1	16384	2	0.01102	0.002789441030472517	0.0	False
+   cta8	1	16384	4	0.01358	0.00346445944160223	0.0	False
+   default	1	2048	2	0.01066	0.003166132839396596	0.0	False
+   default	1	2048	4	0.01314	0.003926220815628767	0.0	False
+   default	1	4096	2	0.01082	0.0030390264000743628	0.0	False
+   default	1	4096	4	0.01336	0.0037693281192332506	0.0	False
+   default	1	8192	2	0.01095	0.0029028013814240694	0.0	False
+   default	1	8192	4	0.01350	0.0036145478952676058	0.0	False
+   default	1	16384	2	0.01102	0.002789441030472517	0.0	False
+   default	1	16384	4	0.01358	0.00346445944160223	0.0	False
+   symm	1	2048	2	0.01066	0.003166132839396596	0.0	False
+   symm	1	2048	4	0.01314	0.003926220815628767	0.0	False
+   symm	1	4096	2	0.01082	0.0030390264000743628	0.0	False
+   symm	1	4096	4	0.01336	0.0037693281192332506	0.0	False
+   symm	1	8192	2	0.01095	0.0029028013814240694	0.0	False
+   symm	1	8192	4	0.01350	0.0036145478952676058	0.0	False
+   symm	1	16384	2	0.01102	0.002789441030472517	0.0	False
+   symm	1	16384	4	0.01358	0.00346445944160223	0.0	False
+mech	L	version	n	median_ms	CI95	per_launch_medians
+cta8	2048	C0	5	10.34	[10.32, 10.36]	[10.34]
+cta8	2048	C1	5	6.86	[6.70, 7.00]	[6.86]
+cta8	4096	C0	5	20.46	[20.39, 20.53]	[20.46]
+cta8	4096	C1	5	14.00	[13.83, 14.02]	[14.0]
+cta8	8192	C0	5	40.97	[40.92, 41.16]	[40.97]
+cta8	8192	C1	5	28.69	[28.64, 29.09]	[28.69]
+cta8	16384	C0	5	84.89	[84.34, 85.04]	[84.89]
+cta8	16384	C1	5	62.92	[61.42, 64.01]	[62.92]
+default	2048	C0	5	9.00	[8.98, 9.01]	[9.0]
+default	2048	C1	5	6.70	[6.67, 6.96]	[6.7]
+default	4096	C0	5	17.65	[17.46, 17.73]	[17.65]
+default	4096	C1	5	13.99	[13.89, 14.26]	[13.99]
+default	8192	C0	5	35.32	[35.23, 35.42]	[35.32]
+default	8192	C1	5	29.09	[28.68, 29.47]	[29.09]
+default	16384	C0	5	73.00	[72.78, 73.53]	[73.0]
+default	16384	C1	5	63.33	[62.55, 70.50]	[63.33]
+symm	2048	C0	5	9.40	[9.36, 9.46]	[9.4]
+symm	2048	C1	5	6.78	[6.73, 6.87]	[6.78]
+symm	4096	C0	5	18.79	[18.77, 18.94]	[18.79]
+symm	4096	C1	5	13.84	[13.81, 13.90]	[13.84]
+symm	8192	C0	5	35.29	[35.27, 35.35]	[35.29]
+symm	8192	C1	5	28.93	[28.86, 29.25]	[28.93]
+symm	16384	C0	5	72.84	[72.66, 73.37]	[72.84]
+symm	16384	C1	5	63.64	[63.05, 69.45]	[63.64]
+C cta8 L=2048: C1 gain 0.336 [0.323, 0.352]; no valid C2
+C cta8 L=4096: C1 gain 0.315 [0.313, 0.324]; no valid C2
+C cta8 L=8192: C1 gain 0.300 [0.290, 0.303]; no valid C2
+C cta8 L=16384: C1 gain 0.259 [0.246, 0.277]; no valid C2
+C default L=2048: C1 gain 0.256 [0.227, 0.259]; no valid C2
+C default L=4096: C1 gain 0.207 [0.189, 0.213]; no valid C2
+C default L=8192: C1 gain 0.176 [0.166, 0.188]; no valid C2
+C default L=16384: C1 gain 0.133 [0.034, 0.144]; no valid C2
+C symm L=2048: C1 gain 0.278 [0.269, 0.285]; no valid C2
+C symm L=4096: C1 gain 0.263 [0.260, 0.269]; no valid C2
+C symm L=8192: C1 gain 0.180 [0.171, 0.182]; no valid C2
+C symm L=16384: C1 gain 0.126 [0.046, 0.134]; no valid C2

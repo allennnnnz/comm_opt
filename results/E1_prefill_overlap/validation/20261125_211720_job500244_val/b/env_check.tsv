@@ -1,0 +1,16 @@
+mech	launch	set_check
+cta8	1	NCCL_MAX_CTAS=8	set_by_environment_lines=2
+cta8	1	algo_line	bytes=134217728 algo=RING proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=16777216 algo=RING proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=33554432 algo=RING proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta8	1	algo_line	bytes=67108864 algo=RING proto=SIMPLE channels=0..7
+default	1	algo_line	bytes=134217728 algo=RING proto=SIMPLE channels=0..23
+default	1	algo_line	bytes=16777216 algo=RING proto=SIMPLE channels=0..23
+default	1	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..21
+default	1	algo_line	bytes=33554432 algo=RING proto=SIMPLE channels=0..23
+default	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+default	1	algo_line	bytes=67108864 algo=RING proto=SIMPLE channels=0..23
+symm	1	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..21
+symm	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0

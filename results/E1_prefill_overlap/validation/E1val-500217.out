@@ -1,0 +1,36 @@
+OUT=/home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_211327_job500217_val
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us=250.42 250.54 n=9980
+warmup rc=0 seconds=8
+burn gpu0: gemms 12340 tflops 678.3307491433759
+burn gpu1: gemms 12400 tflops 681.2734501649963
+thermal gate rc=0: THERMAL_OK
+=== B0 end status=OK run=1 fail=0 skipped=0 elapsed=46s
+=== A begin elapsed=46s block_end=766s
+A launch=1 rc=0 seconds=45
+=== A end status=DONE run=1 fail=0 skipped=0 elapsed=91s
+=== B begin elapsed=91s block_end=451s
+B seq=1 mech=cta8 launch=1 rc=0 seconds=13
+B seq=2 mech=default launch=1 rc=0 seconds=9
+B seq=3 mech=symm launch=1 rc=0 seconds=10
+mech1=symm
+mech2=cta8
+# geometric-mean ratio of median concurrent completion time vs default (smaller = better), and number of cells compared
+# symm	score=1.2942	cells=15	(symm_mem: only cells with T<=4096)
+# cta8	score=1.4091	cells=20
+=== B end status=DONE run=3 fail=0 skipped=0 elapsed=123s
+=== C begin elapsed=123s block_end=483s
+C mechs: default symm cta8
+C seq=1 mech=symm launch=1 rc=0 seconds=13
+C seq=2 mech=cta8 launch=1 rc=0 seconds=14
+C seq=3 mech=default launch=1 rc=0 seconds=13
+=== C end status=DONE run=3 fail=0 skipped=0 elapsed=163s
+end=2026-11-25T21:16:10+08:00 total_elapsed=163s
+--- blocks.tsv
+block	start	end	start_s	end_s	status	counts	skipped
+B0	2026-11-25T21:13:27+08:00	2026-11-25T21:14:13+08:00	0	46	OK	run=1 fail=0	skipped=0
+A	2026-11-25T21:14:13+08:00	2026-11-25T21:14:58+08:00	46	91	DONE	run=1 fail=0	skipped=0
+B	2026-11-25T21:14:58+08:00	2026-11-25T21:15:30+08:00	91	123	DONE	run=3 fail=0	skipped=0
+C	2026-11-25T21:15:30+08:00	2026-11-25T21:16:10+08:00	123	163	DONE	run=3 fail=0	skipped=0
+analyze rc=0
+done: /home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_211327_job500217_val

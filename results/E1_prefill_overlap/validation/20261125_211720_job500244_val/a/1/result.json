@@ -1,0 +1,150 @@
+{
+ "model": "/work/allen0117/comm_opt_env/models/Qwen2.5-7B-Instruct",
+ "tp": 2,
+ "launch": 1,
+ "seed": 20261126,
+ "order": [
+  2048,
+  4096
+ ],
+ "reps": 4,
+ "discard": 1,
+ "max_num_batched_tokens": 17408,
+ "maxlen": 17408,
+ "requests": {
+  "2048": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.03833286836743355,
+    "queue_s": 6.0033053159713745e-06,
+    "prefill_s": 0.03613307327032089,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 1,
+    "discarded": false,
+    "wall_s": 0.030385421589016914,
+    "queue_s": 5.677342414855957e-06,
+    "prefill_s": 0.028666386380791664,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.030462931841611862,
+    "queue_s": 5.476176738739014e-06,
+    "prefill_s": 0.028918474912643433,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.03037806786596775,
+    "queue_s": 5.705282092094421e-06,
+    "prefill_s": 0.028871998190879822,
+    "n_prompt_tokens": 2048
+   }
+  ],
+  "4096": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.06145697087049484,
+    "queue_s": 5.494803190231323e-06,
+    "prefill_s": 0.05805655010044575,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 1,
+    "discarded": false,
+    "wall_s": 0.05880768224596977,
+    "queue_s": 5.299225449562073e-06,
+    "prefill_s": 0.0559188649058342,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.058781519532203674,
+    "queue_s": 5.3551048040390015e-06,
+    "prefill_s": 0.05610485561192036,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.05827691592276096,
+    "queue_s": 4.9602240324020386e-06,
+    "prefill_s": 0.055659569799900055,
+    "n_prompt_tokens": 4096
+   }
+  ]
+ },
+ "profile": {
+  "2048": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.036459146067500114,
+    "trace": "e1_L2048_p0_rank0.1795612717221708280.pt.trace.json.gz",
+    "trace_size_mb": 0.08793,
+    "kernel_time_us_total": 24879.953,
+    "allreduce_us_total": 3302.6749999999993,
+    "allreduce_share": 0.13274442278890153,
+    "gpu_span_us": 29679.126953125,
+    "n_kernels": 395,
+    "n_allreduce_calls": 57,
+    "allreduce_p50_us": 54.24,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns": 57
+    },
+    "class_us": {
+     "other": 2531.8579999999997,
+     "other_collective": 10.784,
+     "attention": 1298.7779999999998,
+     "allreduce": 3302.6749999999993,
+     "gemm": 17735.858000000004
+    },
+    "annotations": {
+     "execute_context_1(2048)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_211720_job500244_val/a/1/e1_L2048_p0_rank0.1795612717221708280.pt.trace.json.gz"
+   }
+  ],
+  "4096": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.06186576932668686,
+    "trace": "e1_L4096_p0_rank0.1795612721418164170.pt.trace.json.gz",
+    "trace_size_mb": 0.09247,
+    "kernel_time_us_total": 49077.14799999999,
+    "allreduce_us_total": 5931.230999999998,
+    "allreduce_share": 0.12085525018690979,
+    "gpu_span_us": 55134.3759765625,
+    "n_kernels": 395,
+    "n_allreduce_calls": 57,
+    "allreduce_p50_us": 100.799,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns": 57
+    },
+    "class_us": {
+     "other": 4951.199000000002,
+     "other_collective": 10.72,
+     "attention": 3451.344999999999,
+     "allreduce": 5931.230999999998,
+     "gemm": 34732.652999999984
+    },
+    "annotations": {
+     "execute_context_1(4096)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_211720_job500244_val/a/1/e1_L4096_p0_rank0.1795612721418164170.pt.trace.json.gz"
+   }
+  ]
+ },
+ "errors": [],
+ "fuse_allreduce_rms": false,
+ "enforce_eager": false,
+ "startup_s": 21.611193742603064
+}

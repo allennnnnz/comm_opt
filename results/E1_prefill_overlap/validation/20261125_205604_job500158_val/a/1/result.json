@@ -1,0 +1,150 @@
+{
+ "model": "/work/allen0117/comm_opt_env/models/Qwen2.5-7B-Instruct",
+ "tp": 2,
+ "launch": 1,
+ "seed": 20261126,
+ "order": [
+  2048,
+  4096
+ ],
+ "reps": 4,
+ "discard": 1,
+ "max_num_batched_tokens": 17408,
+ "maxlen": 17408,
+ "requests": {
+  "2048": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.17679027654230595,
+    "queue_s": 7.251277565956116e-06,
+    "prefill_s": 0.17389226704835892,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 1,
+    "discarded": false,
+    "wall_s": 0.032377999275922775,
+    "queue_s": 7.154420018196106e-06,
+    "prefill_s": 0.030265627428889275,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.03130254149436951,
+    "queue_s": 6.712973117828369e-06,
+    "prefill_s": 0.029686136171221733,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.031030844897031784,
+    "queue_s": 6.32554292678833e-06,
+    "prefill_s": 0.029485493898391724,
+    "n_prompt_tokens": 2048
+   }
+  ],
+  "4096": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.0727397408336401,
+    "queue_s": 6.215646862983704e-06,
+    "prefill_s": 0.06896958500146866,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 1,
+    "discarded": false,
+    "wall_s": 0.07081985287368298,
+    "queue_s": 5.807727575302124e-06,
+    "prefill_s": 0.06794854253530502,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.06774113141000271,
+    "queue_s": 6.796792149543762e-06,
+    "prefill_s": 0.06483601219952106,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.0708517525345087,
+    "queue_s": 6.400048732757568e-06,
+    "prefill_s": 0.06789980828762054,
+    "n_prompt_tokens": 4096
+   }
+  ]
+ },
+ "profile": {
+  "2048": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.03806304931640625,
+    "trace": "e1_L2048_p0_rank0.1795611457897761458.pt.trace.json.gz",
+    "trace_size_mb": 0.088158,
+    "kernel_time_us_total": 26226.958000000002,
+    "allreduce_us_total": 4901.728999999998,
+    "allreduce_share": 0.18689658937952308,
+    "gpu_span_us": 30600.1806640625,
+    "n_kernels": 395,
+    "n_allreduce_calls": 57,
+    "allreduce_p50_us": 78.272,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns": 57
+    },
+    "class_us": {
+     "other": 2505.3350000000005,
+     "other_collective": 10.911999999999999,
+     "attention": 1292.7269999999996,
+     "allreduce": 4901.728999999998,
+     "gemm": 17516.255000000005
+    },
+    "annotations": {
+     "execute_context_1(2048)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_205604_job500158_val/a/1/e1_L2048_p0_rank0.1795611457897761458.pt.trace.json.gz"
+   }
+  ],
+  "4096": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.06456216797232628,
+    "trace": "e1_L4096_p0_rank0.1795611462095147923.pt.trace.json.gz",
+    "trace_size_mb": 0.092453,
+    "kernel_time_us_total": 51257.328,
+    "allreduce_us_total": 8437.204,
+    "allreduce_share": 0.1646048346492037,
+    "gpu_span_us": 57109.35546875,
+    "n_kernels": 395,
+    "n_allreduce_calls": 57,
+    "allreduce_p50_us": 152.543,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::two_shot_all_reduce_kernel_inplace<c10::BFloat16, 16, 2>(c10::BFloat16**, unsigned long, uns": 57
+    },
+    "class_us": {
+     "other": 4939.848,
+     "other_collective": 15.168000000000001,
+     "attention": 3531.852,
+     "allreduce": 8437.204,
+     "gemm": 34333.256
+    },
+    "annotations": {
+     "execute_context_1(4096)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/validation/20261125_205604_job500158_val/a/1/e1_L4096_p0_rank0.1795611462095147923.pt.trace.json.gz"
+   }
+  ]
+ },
+ "errors": [],
+ "fuse_allreduce_rms": false,
+ "enforce_eager": false,
+ "startup_s": 35.75425970740616
+}
