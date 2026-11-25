@@ -1,0 +1,48 @@
+ar4_default	run	1	all_reduce_perf	4	0,1,2,3	-
+ar_ring_simple	run	1	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=Simple
+ar2_default	run	1	all_reduce_perf	2	0,1	-
+sr_default	run	2	sendrecv_perf	2	0,1	-
+ar_ring_ll	probe	0	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL
+a2a_default	probe	0	alltoall_perf	8	-	-
+a2a_default	run	1	alltoall_perf	8	-	-
+sr_default	run	1	sendrecv_perf	2	0,1	-
+sr_memcpy	run	1	sendrecv_perf	2	0,1	NCCL_P2P_USE_CUDA_MEMCPY=1
+ag_default	run	2	all_gather_perf	8	-	-
+ar4_default	run	2	all_reduce_perf	4	0,1,2,3	-
+ar_nvls	probe	0	all_reduce_perf	8	-	NCCL_ALGO=NVLS
+ag_nvls_off	run	1	all_gather_perf	8	-	NCCL_NVLS_ENABLE=0
+rs_nvls_off	probe	0	reduce_scatter_perf	8	-	NCCL_NVLS_ENABLE=0
+ar_nvls_off	run	2	all_reduce_perf	8	-	NCCL_NVLS_ENABLE=0
+ar_nvls	run	1	all_reduce_perf	8	-	NCCL_ALGO=NVLS
+rs_nvls_off	run	2	reduce_scatter_perf	8	-	NCCL_NVLS_ENABLE=0
+ar_ring_ll128	run	2	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL128
+sr_memcpy	run	2	sendrecv_perf	2	0,1	NCCL_P2P_USE_CUDA_MEMCPY=1
+rs_default	run	2	reduce_scatter_perf	8	-	-
+ar4_default	probe	0	all_reduce_perf	4	0,1,2,3	-
+ar_tree	run	1	all_reduce_perf	8	-	NCCL_ALGO=Tree
+ag_default	probe	0	all_gather_perf	8	-	-
+ar_nvls	run	2	all_reduce_perf	8	-	NCCL_ALGO=NVLS
+ar_nvls_off	run	1	all_reduce_perf	8	-	NCCL_NVLS_ENABLE=0
+ag_nvls_off	probe	0	all_gather_perf	8	-	NCCL_NVLS_ENABLE=0
+sr_default	probe	0	sendrecv_perf	2	0,1	-
+ar_ring_simple	probe	0	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=Simple
+ar_ring_ll128	probe	0	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL128
+ar_ring_ll128	run	1	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL128
+a2a_default	run	2	alltoall_perf	8	-	-
+rs_default	probe	0	reduce_scatter_perf	8	-	-
+ar_ring_ll	run	1	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL
+ar2_default	probe	0	all_reduce_perf	2	0,1	-
+ar_default	run	1	all_reduce_perf	8	-	-
+ar2_default	run	2	all_reduce_perf	2	0,1	-
+ar_ring_simple	run	2	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=Simple
+ag_default	run	1	all_gather_perf	8	-	-
+ag_nvls_off	run	2	all_gather_perf	8	-	NCCL_NVLS_ENABLE=0
+ar_nvls_off	probe	0	all_reduce_perf	8	-	NCCL_NVLS_ENABLE=0
+rs_nvls_off	run	1	reduce_scatter_perf	8	-	NCCL_NVLS_ENABLE=0
+ar_tree	probe	0	all_reduce_perf	8	-	NCCL_ALGO=Tree
+ar_default	run	2	all_reduce_perf	8	-	-
+ar_default	probe	0	all_reduce_perf	8	-	-
+ar_ring_ll	run	2	all_reduce_perf	8	-	NCCL_ALGO=Ring NCCL_PROTO=LL
+rs_default	run	1	reduce_scatter_perf	8	-	-
+ar_tree	run	2	all_reduce_perf	8	-	NCCL_ALGO=Tree
+sr_memcpy	probe	0	sendrecv_perf	2	0,1	NCCL_P2P_USE_CUDA_MEMCPY=1

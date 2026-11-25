@@ -1,0 +1,70 @@
+seq	cfg	kind	rep	seg	rc	start	end	envs	args
+1	ar4_default	run	1	small	0	2026-11-25T10:12:42+08:00	2026-11-25T10:12:54+08:00	- CUDA_VISIBLE_DEVICES=0,1,2,3	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+1	ar4_default	run	1	big	0	2026-11-25T10:12:54+08:00	2026-11-25T10:13:08+08:00	- CUDA_VISIBLE_DEVICES=0,1,2,3	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+2	ar_ring_simple	run	1	small	0	2026-11-25T10:13:08+08:00	2026-11-25T10:13:33+08:00	NCCL_ALGO=Ring NCCL_PROTO=Simple 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+2	ar_ring_simple	run	1	big	0	2026-11-25T10:13:33+08:00	2026-11-25T10:13:56+08:00	NCCL_ALGO=Ring NCCL_PROTO=Simple 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+3	ar2_default	run	1	small	0	2026-11-25T10:13:57+08:00	2026-11-25T10:14:05+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+3	ar2_default	run	1	big	0	2026-11-25T10:14:05+08:00	2026-11-25T10:14:14+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+4	sr_default	run	2	small	0	2026-11-25T10:14:15+08:00	2026-11-25T10:14:23+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+4	sr_default	run	2	big	0	2026-11-25T10:14:23+08:00	2026-11-25T10:14:32+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+5	ar_ring_ll	probe	0	probe	0	2026-11-25T10:14:32+08:00	2026-11-25T10:14:56+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+6	a2a_default	probe	0	probe	0	2026-11-25T10:14:56+08:00	2026-11-25T10:15:29+08:00	- 	-b 512 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+7	a2a_default	run	1	small	0	2026-11-25T10:15:30+08:00	2026-11-25T10:16:03+08:00	- 	-b 512 -e 64M -f 2 -n 200 -w 5 -a 3
+7	a2a_default	run	1	big	0	2026-11-25T10:16:03+08:00	2026-11-25T10:16:37+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+8	sr_default	run	1	small	0	2026-11-25T10:16:38+08:00	2026-11-25T10:16:46+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+8	sr_default	run	1	big	0	2026-11-25T10:16:46+08:00	2026-11-25T10:16:54+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+9	sr_memcpy	run	1	small	0	2026-11-25T10:16:55+08:00	2026-11-25T10:17:04+08:00	NCCL_P2P_USE_CUDA_MEMCPY=1 CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+9	sr_memcpy	run	1	big	0	2026-11-25T10:17:04+08:00	2026-11-25T10:17:12+08:00	NCCL_P2P_USE_CUDA_MEMCPY=1 CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+10	ag_default	run	2	small	0	2026-11-25T10:17:13+08:00	2026-11-25T10:17:36+08:00	- 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+10	ag_default	run	2	big	0	2026-11-25T10:17:37+08:00	2026-11-25T10:18:00+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+11	ar4_default	run	2	small	0	2026-11-25T10:18:00+08:00	2026-11-25T10:18:14+08:00	- CUDA_VISIBLE_DEVICES=0,1,2,3	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+11	ar4_default	run	2	big	0	2026-11-25T10:18:14+08:00	2026-11-25T10:18:29+08:00	- CUDA_VISIBLE_DEVICES=0,1,2,3	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+12	ar_nvls	probe	0	probe	0	2026-11-25T10:18:29+08:00	2026-11-25T10:18:52+08:00	NCCL_ALGO=NVLS 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+13	ag_nvls_off	run	1	small	0	2026-11-25T10:18:52+08:00	2026-11-25T10:19:16+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+13	ag_nvls_off	run	1	big	0	2026-11-25T10:19:16+08:00	2026-11-25T10:19:39+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+14	rs_nvls_off	probe	0	probe	0	2026-11-25T10:19:40+08:00	2026-11-25T10:20:04+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+15	ar_nvls_off	run	2	small	0	2026-11-25T10:20:04+08:00	2026-11-25T10:20:28+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+15	ar_nvls_off	run	2	big	0	2026-11-25T10:20:28+08:00	2026-11-25T10:20:52+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+16	ar_nvls	run	1	small	0	2026-11-25T10:20:53+08:00	2026-11-25T10:21:15+08:00	NCCL_ALGO=NVLS 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+16	ar_nvls	run	1	big	0	2026-11-25T10:21:15+08:00	2026-11-25T10:21:38+08:00	NCCL_ALGO=NVLS 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+17	rs_nvls_off	run	2	small	0	2026-11-25T10:21:39+08:00	2026-11-25T10:22:02+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+17	rs_nvls_off	run	2	big	0	2026-11-25T10:22:03+08:00	2026-11-25T10:22:27+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+18	ar_ring_ll128	run	2	small	0	2026-11-25T10:22:27+08:00	2026-11-25T10:22:51+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL128 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+18	ar_ring_ll128	run	2	big	0	2026-11-25T10:22:51+08:00	2026-11-25T10:23:15+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL128 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+19	sr_memcpy	run	2	small	0	2026-11-25T10:23:15+08:00	2026-11-25T10:23:24+08:00	NCCL_P2P_USE_CUDA_MEMCPY=1 CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+19	sr_memcpy	run	2	big	0	2026-11-25T10:23:24+08:00	2026-11-25T10:23:33+08:00	NCCL_P2P_USE_CUDA_MEMCPY=1 CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+20	rs_default	run	2	small	0	2026-11-25T10:23:34+08:00	2026-11-25T10:23:57+08:00	- 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+20	rs_default	run	2	big	0	2026-11-25T10:23:57+08:00	2026-11-25T10:24:21+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+21	ar4_default	probe	0	probe	0	2026-11-25T10:24:21+08:00	2026-11-25T10:24:35+08:00	- CUDA_VISIBLE_DEVICES=0,1,2,3	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+22	ar_tree	run	1	small	0	2026-11-25T10:24:35+08:00	2026-11-25T10:25:01+08:00	NCCL_ALGO=Tree 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+22	ar_tree	run	1	big	0	2026-11-25T10:25:01+08:00	2026-11-25T10:25:27+08:00	NCCL_ALGO=Tree 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+23	ag_default	probe	0	probe	0	2026-11-25T10:25:27+08:00	2026-11-25T10:25:50+08:00	- 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+24	ar_nvls	run	2	small	0	2026-11-25T10:25:50+08:00	2026-11-25T10:26:14+08:00	NCCL_ALGO=NVLS 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+24	ar_nvls	run	2	big	0	2026-11-25T10:26:14+08:00	2026-11-25T10:26:37+08:00	NCCL_ALGO=NVLS 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+25	ar_nvls_off	run	1	small	0	2026-11-25T10:26:37+08:00	2026-11-25T10:27:01+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+25	ar_nvls_off	run	1	big	0	2026-11-25T10:27:01+08:00	2026-11-25T10:27:24+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+26	ag_nvls_off	probe	0	probe	0	2026-11-25T10:27:25+08:00	2026-11-25T10:27:48+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+27	sr_default	probe	0	probe	0	2026-11-25T10:27:48+08:00	2026-11-25T10:27:57+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+28	ar_ring_simple	probe	0	probe	0	2026-11-25T10:27:58+08:00	2026-11-25T10:28:21+08:00	NCCL_ALGO=Ring NCCL_PROTO=Simple 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+29	ar_ring_ll128	probe	0	probe	0	2026-11-25T10:28:21+08:00	2026-11-25T10:28:44+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL128 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+30	ar_ring_ll128	run	1	small	0	2026-11-25T10:28:45+08:00	2026-11-25T10:29:09+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL128 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+30	ar_ring_ll128	run	1	big	0	2026-11-25T10:29:09+08:00	2026-11-25T10:29:33+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL128 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+31	a2a_default	run	2	small	0	2026-11-25T10:29:33+08:00	2026-11-25T10:30:07+08:00	- 	-b 512 -e 64M -f 2 -n 200 -w 5 -a 3
+31	a2a_default	run	2	big	0	2026-11-25T10:30:07+08:00	2026-11-25T10:30:41+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+32	rs_default	probe	0	probe	0	2026-11-25T10:30:41+08:00	2026-11-25T10:31:05+08:00	- 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+33	ar_ring_ll	run	1	small	0	2026-11-25T10:31:06+08:00	2026-11-25T10:31:30+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+33	ar_ring_ll	run	1	big	0	2026-11-25T10:31:30+08:00	2026-11-25T10:31:55+08:00	NCCL_ALGO=Ring NCCL_PROTO=LL 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+34	ar2_default	probe	0	probe	0	2026-11-25T10:31:55+08:00	2026-11-25T10:32:04+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+35	ar_default	run	1	small	0	2026-11-25T10:32:04+08:00	2026-11-25T10:32:29+08:00	- 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+35	ar_default	run	1	big	0	2026-11-25T10:32:29+08:00	2026-11-25T10:32:53+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+36	ar2_default	run	2	small	0	2026-11-25T10:32:53+08:00	2026-11-25T10:33:02+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+36	ar2_default	run	2	big	0	2026-11-25T10:33:02+08:00	2026-11-25T10:33:10+08:00	- CUDA_VISIBLE_DEVICES=0,1	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+37	ar_ring_simple	run	2	small	0	2026-11-25T10:33:10+08:00	2026-11-25T10:33:35+08:00	NCCL_ALGO=Ring NCCL_PROTO=Simple 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+37	ar_ring_simple	run	2	big	0	2026-11-25T10:33:35+08:00	2026-11-25T10:33:59+08:00	NCCL_ALGO=Ring NCCL_PROTO=Simple 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+38	ag_default	run	1	small	0	2026-11-25T10:33:59+08:00	2026-11-25T10:34:23+08:00	- 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+38	ag_default	run	1	big	0	2026-11-25T10:34:23+08:00	2026-11-25T10:34:47+08:00	- 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+39	ag_nvls_off	run	2	small	0	2026-11-25T10:34:47+08:00	2026-11-25T10:35:11+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+39	ag_nvls_off	run	2	big	0	2026-11-25T10:35:11+08:00	2026-11-25T10:35:35+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3
+40	ar_nvls_off	probe	0	probe	0	2026-11-25T10:35:36+08:00	2026-11-25T10:35:59+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 1G -f 2 -n 1 -w 0 -c 0 -a 3
+41	rs_nvls_off	run	1	small	0	2026-11-25T10:35:59+08:00	2026-11-25T10:36:22+08:00	NCCL_NVLS_ENABLE=0 	-b 8 -e 64M -f 2 -n 200 -w 5 -a 3
+41	rs_nvls_off	run	1	big	0	2026-11-25T10:36:23+08:00	2026-11-25T10:36:47+08:00	NCCL_NVLS_ENABLE=0 	-b 128M -e 1G -f 2 -n 20 -w 5 -a 3

@@ -1,0 +1,139 @@
+OUT=/home/allen0117/comm_opt/results/M25_topic_survey/20261125_093304_job498238_all
+=== B0 begin elapsed=0s block_end=480s
+warmup calibration oop_us ip_us=322.30 322.14 n=93104
+warmup rc=0 seconds=82
+burn gpu0: gemms 73980 tflops 677.6911009735129
+burn gpu1: gemms 75200 tflops 688.9550152199388
+burn gpu2: gemms 73560 tflops 673.9316782905196
+burn gpu3: gemms 73720 tflops 675.3069216342666
+burn gpu4: gemms 74360 tflops 681.187264158093
+burn gpu5: gemms 73340 tflops 671.8568741678
+burn gpu6: gemms 72760 tflops 666.5708619600225
+burn gpu7: gemms 73840 tflops 676.5171833308953
+thermal gate rc=0: THERMAL_OK
+=== B0 end status=OK run=1 fail=0 skipped=0 elapsed=262s
+=== B4 begin elapsed=262s block_end=742s
+b4_a1	-	-b 8 -e 64M -f 4 -g 1	rc=0	cuda999_lines=0	wrong=0/0 NVLS/0 Symmetric/ 
+b4_a2	-	-b 8 -e 64M -f 4 -g 1	rc=0	cuda999_lines=0	wrong=0/0 NVLS/0 Symmetric/ 
+b4_e256	-	-b 8 -e 256M -f 4 -g 1	rc=0	cuda999_lines=0	wrong=0/0 NVLS/0 Symmetric/ 
+b4_v1_nvlsch4	NCCL_NVLS_NCHANNELS=4	-b 8 -e 64M -f 4 -g 1	rc=0	cuda999_lines=0	wrong=0/0 NVLS/0 Symmetric/ 
+b4_v2_chunk16k	NCCL_NVLS_CHUNKSIZE=16384	-b 8 -e 64M -f 4 -g 1	rc=0	cuda999_lines=0	wrong=0/0 NVLS/0 Symmetric/ 
+=== B4 end status=DONE run=5 fail=0 skipped=0 elapsed=382s
+=== B1 begin elapsed=382s block_end=2182s
+B1 calibration rc=0 seconds=27
+B1 seq=1 cfg=nvls launch=2 rc=0 seconds=44
+B1 seq=2 cfg=default launch=2 rc=0 seconds=44
+B1 seq=3 cfg=ring_cta32 launch=1 rc=0 seconds=44
+B1 seq=4 cfg=ring_cta16 launch=1 rc=0 seconds=44
+B1 seq=5 cfg=nvls launch=1 rc=0 seconds=45
+B1 seq=6 cfg=nvls_nch4 launch=2 rc=0 seconds=50
+B1 seq=7 cfg=ring launch=1 rc=0 seconds=45
+B1 seq=8 cfg=ring_cta32 launch=2 rc=0 seconds=45
+B1 seq=9 cfg=ring_cta16 launch=2 rc=0 seconds=44
+B1 seq=10 cfg=efficiency launch=1 rc=0 seconds=44
+B1 seq=11 cfg=nvls_nch8 launch=2 rc=0 seconds=45
+B1 seq=12 cfg=nvls_nch4 launch=1 rc=0 seconds=51
+B1 seq=13 cfg=ring launch=2 rc=0 seconds=46
+B1 seq=14 cfg=efficiency launch=2 rc=0 seconds=45
+B1 seq=15 cfg=ring_cta4 launch=2 rc=0 seconds=57
+B1 seq=16 cfg=nvls_nch8 launch=1 rc=0 seconds=46
+B1 seq=17 cfg=ring_cta8 launch=1 rc=0 seconds=48
+B1 seq=18 cfg=ring_cta8 launch=2 rc=0 seconds=48
+B1 seq=19 cfg=default launch=1 rc=0 seconds=46
+B1 seq=20 cfg=ring_cta4 launch=1 rc=0 seconds=57
+=== B1 end status=DONE run=21 fail=0 skipped=0 elapsed=1352s
+=== B2 begin elapsed=1352s block_end=3752s
+B2 engine=q72_tp8 rc=0 seconds=229
+B2 engine=q72_tp8_mb8k rc=0 seconds=228
+B2 engine=q72_tp8_nonvls rc=0 seconds=206
+B2 engine=q72_tp4 rc=0 seconds=128
+B2 engine=q30_tp8 rc=0 seconds=116
+B2 engine=q30_tp8_ep rc=0 seconds=115
+=== B2 end status=DONE run=6 fail=0 skipped=0 elapsed=2377s
+=== B3 begin elapsed=2377s block_end=3877s
+B3 seq=1 cfg=ar4_default run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=1 cfg=ar4_default run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=2 cfg=ar_ring_simple run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=2 cfg=ar_ring_simple run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=3 cfg=ar2_default run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=3 cfg=ar2_default run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=4 cfg=sr_default run2 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=4 cfg=sr_default run2 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=5 cfg=ar_ring_ll probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=6 cfg=a2a_default probe0 probe rc=0 wrong=Channel/-> N/A/N/A 
+B3 seq=7 cfg=a2a_default run1 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=7 cfg=a2a_default run1 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=8 cfg=sr_default run1 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=8 cfg=sr_default run1 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=9 cfg=sr_memcpy run1 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=9 cfg=sr_memcpy run1 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=10 cfg=ag_default run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=10 cfg=ag_default run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=11 cfg=ar4_default run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=11 cfg=ar4_default run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=12 cfg=ar_nvls probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=13 cfg=ag_nvls_off run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=13 cfg=ag_nvls_off run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=14 cfg=rs_nvls_off probe0 probe rc=0 wrong=N/A/N/A ReduceScatter:/Algo Symmetric/ 
+B3 seq=15 cfg=ar_nvls_off run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=15 cfg=ar_nvls_off run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=16 cfg=ar_nvls run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=16 cfg=ar_nvls run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=17 cfg=rs_nvls_off run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=17 cfg=rs_nvls_off run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=18 cfg=ar_ring_ll128 run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=18 cfg=ar_ring_ll128 run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=19 cfg=sr_memcpy run2 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=19 cfg=sr_memcpy run2 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=20 cfg=rs_default run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=20 cfg=rs_default run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=21 cfg=ar4_default probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=22 cfg=ar_tree run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=22 cfg=ar_tree run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=23 cfg=ag_default probe0 probe rc=0 wrong=AllGather:/Algo N/A/N/A Symmetric/ 
+B3 seq=24 cfg=ar_nvls run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=24 cfg=ar_nvls run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=25 cfg=ar_nvls_off run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=25 cfg=ar_nvls_off run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=26 cfg=ag_nvls_off probe0 probe rc=0 wrong=AllGather:/Algo N/A/N/A Symmetric/ 
+B3 seq=27 cfg=sr_default probe0 probe rc=0 wrong=Channel/-> N/A/N/A 
+B3 seq=28 cfg=ar_ring_simple probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=29 cfg=ar_ring_ll128 probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=30 cfg=ar_ring_ll128 run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=30 cfg=ar_ring_ll128 run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=31 cfg=a2a_default run2 small rc=0 wrong=0/N/A Channel/-> 
+B3 seq=31 cfg=a2a_default run2 big rc=0 wrong=0/N/A Channel/-> 
+B3 seq=32 cfg=rs_default probe0 probe rc=0 wrong=N/A/N/A ReduceScatter:/Algo Symmetric/ 
+B3 seq=33 cfg=ar_ring_ll run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=33 cfg=ar_ring_ll run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=34 cfg=ar2_default probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=35 cfg=ar_default run1 small rc=0 wrong=0/0 NVLS/0 Symmetric/ 
+B3 seq=35 cfg=ar_default run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=36 cfg=ar2_default run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=36 cfg=ar2_default run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=37 cfg=ar_ring_simple run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=37 cfg=ar_ring_simple run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=38 cfg=ag_default run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=38 cfg=ag_default run1 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=39 cfg=ag_nvls_off run2 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=39 cfg=ag_nvls_off run2 big rc=0 wrong=0/0 Symmetric/ 
+B3 seq=40 cfg=ar_nvls_off probe0 probe rc=0 wrong=AllReduce:/Algo Symmetric/ 
+B3 seq=41 cfg=rs_nvls_off run1 small rc=0 wrong=0/0 Symmetric/ 
+B3 seq=41 cfg=rs_nvls_off run1 big rc=0 wrong=0/0 Symmetric/ 
+SKIPPED(time) B3 seq=42 ar_tree probe0
+SKIPPED(time) B3 seq=43 ar_default run2
+SKIPPED(time) B3 seq=44 ar_default probe0
+SKIPPED(time) B3 seq=45 ar_ring_ll run2
+SKIPPED(time) B3 seq=46 rs_default run1
+SKIPPED(time) B3 seq=47 ar_tree run2
+SKIPPED(time) B3 seq=48 sr_memcpy probe0
+=== B3 end status=DONE run=69 fail=0 skipped=7 elapsed=3823s
+end=2026-11-25T10:36:47+08:00 total_elapsed=3823s
+--- blocks.tsv
+block	start	end	start_s	end_s	status	counts	skipped
+B0	2026-11-25T09:33:04+08:00	2026-11-25T09:37:26+08:00	0	262	OK	run=1 fail=0	skipped=0
+B4	2026-11-25T09:37:26+08:00	2026-11-25T09:39:26+08:00	262	382	DONE	run=5 fail=0	skipped=0
+B1	2026-11-25T09:39:26+08:00	2026-11-25T09:55:36+08:00	382	1352	DONE	run=21 fail=0	skipped=0
+B2	2026-11-25T09:55:36+08:00	2026-11-25T10:12:41+08:00	1352	2377	DONE	run=6 fail=0	skipped=0
+B3	2026-11-25T10:12:41+08:00	2026-11-25T10:36:47+08:00	2377	3823	DONE	run=69 fail=0	skipped=7
+done: /home/allen0117/comm_opt/results/M25_topic_survey/20261125_093304_job498238_all
