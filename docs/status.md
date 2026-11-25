@@ -2,7 +2,13 @@
 
 > 每次 session 開始先讀本檔，結束時更新「目前狀態」與「下一步」。
 
-## 2026-11-25 19:55 更新（以本節為準）
+## 2026-11-25 22:00 更新（以本節為準）
+
+- **S08 文獻與可行性調查完成**：`docs/reports/R08_A_papers.md`（論文細節、空白格）、`R08_B_code_env.md`（vLLM 內建功能、論文程式碼可行性）。Opus 抽查：vLLM 0.32.0 無 SP／async-TP pass（`compilation/passes/` 清單），AR＋RMSNorm 融合 SM90 TP8 上限 0.5 MB（`allreduce_rms_fusion.py:104-108`）；FLUX 對 vLLM 在 H800「1.66x prefill, and no decoding speedups」（全文 l.783-784）；Ladder-residual Table 2（8×H100、TP8、批次 1、gpt-fast）預填上限 30.54% 而 Ladder 只得 5.78%；ISO §3.2 A800 上 NCCL 佔 SM 使計算慢 15–20%
+- **研究空間（Opus 整理，待使用者選）**：Hopper 8 卡預填 TP 的雙向拖慢未見量測；端到端執行時依大小自適應的重疊未見；沒有論文以 vLLM custom AR＋CUDA graph 為基準在 Hopper 8 卡評估
+- **待使用者**：是否以「預填 TP 重疊、干擾感知」為題並核准第一個實驗（預期先寫）；I2 量法；hgpn01 回報；D058 確認
+
+## 2026-11-25 19:55 更新（部分過時）
 
 - **M25 H100 一輪完成**（498238，hgpn18，09:33–10:36，B3 因時間跳過 7 項含 `ar_default run2`）。與 H200 幾乎一致：T1、T2、T4、T5 不成立（T2／T4 用修正量法）；T3 在 H100 只有 8 MB 過 5%（4 MB 4.9%、16 MB 不重現）→ 邊緣。M20 的 NVLS 當機在另一台 H100 也不重現。詳見實驗卡「H100 一輪」
 - **量測後補充（20:30）**：預填步 all-reduce 佔 kernel 時間 72B TP8 30–35%、30B MoE 25–35%（兩台一致；實驗卡末節）。文獻（FLUX 2406.06858、ISO 2409.11155、NanoFlow 2408.12757、Comet 2502.19811、Ladder-residual 2501.06589）的加速主要靠計算與通訊重疊，且多在預填／大批次
