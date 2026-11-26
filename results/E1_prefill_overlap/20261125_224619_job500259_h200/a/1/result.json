@@ -1,0 +1,688 @@
+{
+ "model": "/work/allen0117/comm_opt_env/models/Qwen2.5-72B-Instruct",
+ "tp": 8,
+ "launch": 1,
+ "seed": 20261126,
+ "order": [
+  8192,
+  2048,
+  4096,
+  16384
+ ],
+ "reps": 10,
+ "discard": 2,
+ "max_num_batched_tokens": 17408,
+ "maxlen": 17408,
+ "requests": {
+  "8192": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.34418385196477175,
+    "queue_s": 8.580274879932404e-06,
+    "prefill_s": 0.33753433963283896,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 1,
+    "discarded": true,
+    "wall_s": 0.3341180798597634,
+    "queue_s": 8.952803909778595e-06,
+    "prefill_s": 0.32882468216121197,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.3461699793115258,
+    "queue_s": 8.488073945045471e-06,
+    "prefill_s": 0.3412813558243215,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.3402091241441667,
+    "queue_s": 7.6158903539180756e-06,
+    "prefill_s": 0.33540562028065324,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 4,
+    "discarded": false,
+    "wall_s": 0.3382978327572346,
+    "queue_s": 8.331146091222763e-06,
+    "prefill_s": 0.3334600869566202,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 5,
+    "discarded": false,
+    "wall_s": 0.3394718482159078,
+    "queue_s": 8.357223123311996e-06,
+    "prefill_s": 0.3345824759453535,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 6,
+    "discarded": false,
+    "wall_s": 0.3397760819643736,
+    "queue_s": 1.0020099580287933e-05,
+    "prefill_s": 0.3349281740374863,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 7,
+    "discarded": false,
+    "wall_s": 0.339317224919796,
+    "queue_s": 9.742099791765213e-06,
+    "prefill_s": 0.33438038267195225,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 8,
+    "discarded": false,
+    "wall_s": 0.343281086999923,
+    "queue_s": 8.96211713552475e-06,
+    "prefill_s": 0.3380152387544513,
+    "n_prompt_tokens": 8192
+   },
+   {
+    "idx": 9,
+    "discarded": false,
+    "wall_s": 0.3383920188061893,
+    "queue_s": 8.923932909965515e-06,
+    "prefill_s": 0.3329913951456547,
+    "n_prompt_tokens": 8192
+   }
+  ],
+  "2048": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.09606512309983373,
+    "queue_s": 8.989591151475906e-06,
+    "prefill_s": 0.09406528528779745,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 1,
+    "discarded": true,
+    "wall_s": 0.09036554861813784,
+    "queue_s": 8.069910109043121e-06,
+    "prefill_s": 0.08868464827537537,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.09051326895132661,
+    "queue_s": 7.673166692256927e-06,
+    "prefill_s": 0.08892237581312656,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.09048387687653303,
+    "queue_s": 7.613096386194229e-06,
+    "prefill_s": 0.08889147499576211,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 4,
+    "discarded": false,
+    "wall_s": 0.09049098612740636,
+    "queue_s": 7.666181772947311e-06,
+    "prefill_s": 0.08881711680442095,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 5,
+    "discarded": false,
+    "wall_s": 0.08998897392302752,
+    "queue_s": 7.396098226308823e-06,
+    "prefill_s": 0.08845629496499896,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 6,
+    "discarded": false,
+    "wall_s": 0.0900977379642427,
+    "queue_s": 7.440801709890366e-06,
+    "prefill_s": 0.0885072173550725,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 7,
+    "discarded": false,
+    "wall_s": 0.09002783615142107,
+    "queue_s": 7.595401257276535e-06,
+    "prefill_s": 0.0884811207652092,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 8,
+    "discarded": false,
+    "wall_s": 0.09012048924341798,
+    "queue_s": 7.869210094213486e-06,
+    "prefill_s": 0.08856214070692658,
+    "n_prompt_tokens": 2048
+   },
+   {
+    "idx": 9,
+    "discarded": false,
+    "wall_s": 0.09015490999445319,
+    "queue_s": 7.602851837873459e-06,
+    "prefill_s": 0.08856244990602136,
+    "n_prompt_tokens": 2048
+   }
+  ],
+  "4096": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.17272758902981877,
+    "queue_s": 7.209833711385727e-06,
+    "prefill_s": 0.16959962015971541,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 1,
+    "discarded": true,
+    "wall_s": 0.17251459416002035,
+    "queue_s": 8.12578946352005e-06,
+    "prefill_s": 0.16978399502113461,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.17300072591751814,
+    "queue_s": 7.635913789272308e-06,
+    "prefill_s": 0.17027010209858418,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.1726957829669118,
+    "queue_s": 7.370952516794205e-06,
+    "prefill_s": 0.1700110430829227,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 4,
+    "discarded": false,
+    "wall_s": 0.17350139236077666,
+    "queue_s": 8.130911737680435e-06,
+    "prefill_s": 0.1708492012694478,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 5,
+    "discarded": false,
+    "wall_s": 0.17259456403553486,
+    "queue_s": 7.797032594680786e-06,
+    "prefill_s": 0.16993913426995277,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 6,
+    "discarded": false,
+    "wall_s": 0.17243708297610283,
+    "queue_s": 7.607974112033844e-06,
+    "prefill_s": 0.16979284584522247,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 7,
+    "discarded": false,
+    "wall_s": 0.17392388498410583,
+    "queue_s": 7.91996717453003e-06,
+    "prefill_s": 0.17081612069159746,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 8,
+    "discarded": false,
+    "wall_s": 0.17305274913087487,
+    "queue_s": 8.774921298027039e-06,
+    "prefill_s": 0.1701614260673523,
+    "n_prompt_tokens": 4096
+   },
+   {
+    "idx": 9,
+    "discarded": false,
+    "wall_s": 0.17256899597123265,
+    "queue_s": 7.867347449064255e-06,
+    "prefill_s": 0.16988341277465224,
+    "n_prompt_tokens": 4096
+   }
+  ],
+  "16384": [
+   {
+    "idx": 0,
+    "discarded": true,
+    "wall_s": 0.7038315800018609,
+    "queue_s": 9.153038263320923e-06,
+    "prefill_s": 0.692589120939374,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 1,
+    "discarded": true,
+    "wall_s": 0.7034522942267358,
+    "queue_s": 8.049886673688889e-06,
+    "prefill_s": 0.6939972173422575,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 2,
+    "discarded": false,
+    "wall_s": 0.7057110546156764,
+    "queue_s": 7.349066436290741e-06,
+    "prefill_s": 0.6967332437634468,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 3,
+    "discarded": false,
+    "wall_s": 0.7013856172561646,
+    "queue_s": 6.6980719566345215e-06,
+    "prefill_s": 0.6924949022941291,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 4,
+    "discarded": false,
+    "wall_s": 0.7053723270073533,
+    "queue_s": 7.2089023888111115e-06,
+    "prefill_s": 0.6957905529998243,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 5,
+    "discarded": false,
+    "wall_s": 0.7048774296417832,
+    "queue_s": 7.505994290113449e-06,
+    "prefill_s": 0.6958512361161411,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 6,
+    "discarded": false,
+    "wall_s": 0.7028100569732487,
+    "queue_s": 6.970949470996857e-06,
+    "prefill_s": 0.6939492719247937,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 7,
+    "discarded": false,
+    "wall_s": 0.7028705808334053,
+    "queue_s": 6.713904440402985e-06,
+    "prefill_s": 0.6936641833744943,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 8,
+    "discarded": false,
+    "wall_s": 0.704512604046613,
+    "queue_s": 6.821006536483765e-06,
+    "prefill_s": 0.6949346913024783,
+    "n_prompt_tokens": 16384
+   },
+   {
+    "idx": 9,
+    "discarded": false,
+    "wall_s": 0.7040894627571106,
+    "queue_s": 7.559545338153839e-06,
+    "prefill_s": 0.6951678381301463,
+    "n_prompt_tokens": 16384
+   }
+  ]
+ },
+ "profile": {
+  "8192": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.34269076213240623,
+    "trace": "e1_L8192_p0_rank0.1795618301476182664.pt.trace.json.gz",
+    "trace_size_mb": 0.214748,
+    "kernel_time_us_total": 323560.06899999996,
+    "allreduce_us_total": 95266.52299999997,
+    "allreduce_share": 0.2944322619735873,
+    "gpu_span_us": 329666.353515625,
+    "n_kernels": 1071,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 584.833,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 25894.539999999983,
+     "other_collective": 29.983999999999998,
+     "attention": 18354.222999999998,
+     "allreduce": 95266.52299999997,
+     "gemm": 184014.79900000003
+    },
+    "annotations": {
+     "execute_context_1(8192)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/20261125_224619_job500259_h200/a/1/e1_L8192_p0_rank0.1795618301476182664.pt.trace.json.gz"
+   },
+   {
+    "k": 1,
+    "profiled_wall_s": 0.3414075467735529,
+    "trace": "e1_L8192_p1_rank0.1795618306435107818.pt.trace.json.gz",
+    "trace_size_mb": 0.215681,
+    "kernel_time_us_total": 324709.671,
+    "allreduce_us_total": 93963.27399999996,
+    "allreduce_share": 0.28937627176493913,
+    "gpu_span_us": 330601.6435546875,
+    "n_kernels": 1071,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 578.305,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 25883.597,
+     "other_collective": 20.352,
+     "attention": 18990.15299999999,
+     "allreduce": 93963.27399999996,
+     "gemm": 185852.295
+    },
+    "annotations": {
+     "execute_context_1(8192)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   },
+   {
+    "k": 2,
+    "profiled_wall_s": 0.33908869605511427,
+    "trace": "e1_L8192_p2_rank0.1795618311099698706.pt.trace.json.gz",
+    "trace_size_mb": 0.21501,
+    "kernel_time_us_total": 322571.8420000001,
+    "allreduce_us_total": 93496.594,
+    "allreduce_share": 0.2898473512762467,
+    "gpu_span_us": 328476.9794921875,
+    "n_kernels": 1071,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 580.609,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 25889.418999999994,
+     "other_collective": 20.416,
+     "attention": 18648.287000000008,
+     "allreduce": 93496.594,
+     "gemm": 184517.1260000001
+    },
+    "annotations": {
+     "execute_context_1(8192)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   }
+  ],
+  "2048": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.09637043531984091,
+    "trace": "e1_L2048_p0_rank0.1795618315523525213.pt.trace.json.gz",
+    "trace_size_mb": 0.235421,
+    "kernel_time_us_total": 77690.596,
+    "allreduce_us_total": 22013.632999999994,
+    "allreduce_share": 0.2833500337672785,
+    "gpu_span_us": 90735.736328125,
+    "n_kernels": 1071,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 132.864,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 7477.030999999997,
+     "other_collective": 19.648,
+     "attention": 3283.882000000003,
+     "allreduce": 22013.632999999994,
+     "gemm": 44896.40200000001
+    },
+    "annotations": {
+     "execute_context_1(2048)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/20261125_224619_job500259_h200/a/1/e1_L2048_p0_rank0.1795618315523525213.pt.trace.json.gz"
+   },
+   {
+    "k": 1,
+    "profiled_wall_s": 0.0967153892852366,
+    "trace": "e1_L2048_p1_rank0.1795618319963723193.pt.trace.json.gz",
+    "trace_size_mb": 0.235555,
+    "kernel_time_us_total": 77206.69799999997,
+    "allreduce_us_total": 21558.42199999999,
+    "allreduce_share": 0.27922994453149647,
+    "gpu_span_us": 91097.37109375,
+    "n_kernels": 1070,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 132.704,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 7485.100999999992,
+     "other_collective": 20.352999999999998,
+     "attention": 3279.201000000001,
+     "allreduce": 21558.42199999999,
+     "gemm": 44863.62099999999
+    },
+    "annotations": {
+     "execute_context_1(2048)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   },
+   {
+    "k": 2,
+    "profiled_wall_s": 0.11349612474441528,
+    "trace": "e1_L2048_p2_rank0.1795618324412601204.pt.trace.json.gz",
+    "trace_size_mb": 0.235801,
+    "kernel_time_us_total": 77394.48999999996,
+    "allreduce_us_total": 21630.237999999998,
+    "allreduce_share": 0.2794803350987907,
+    "gpu_span_us": 107418.6083984375,
+    "n_kernels": 1070,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 132.352,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 7477.416999999987,
+     "other_collective": 19.328,
+     "attention": 3290.244000000001,
+     "allreduce": 21630.237999999998,
+     "gemm": 44977.26299999998
+    },
+    "annotations": {
+     "execute_context_1(2048)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   }
+  ],
+  "4096": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.1780186309479177,
+    "trace": "e1_L4096_p0_rank0.1795618328927105019.pt.trace.json.gz",
+    "trace_size_mb": 0.235626,
+    "kernel_time_us_total": 150520.04599999997,
+    "allreduce_us_total": 41604.621999999996,
+    "allreduce_share": 0.276405854938418,
+    "gpu_span_us": 171069.890625,
+    "n_kernels": 1070,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 257.536,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 13572.634999999995,
+     "other_collective": 20.544,
+     "attention": 5618.274000000002,
+     "allreduce": 41604.621999999996,
+     "gemm": 89703.97099999998
+    },
+    "annotations": {
+     "execute_context_1(4096)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/20261125_224619_job500259_h200/a/1/e1_L4096_p0_rank0.1795618328927105019.pt.trace.json.gz"
+   },
+   {
+    "k": 1,
+    "profiled_wall_s": 0.17846753494814038,
+    "trace": "e1_L4096_p1_rank0.1795618333443755081.pt.trace.json.gz",
+    "trace_size_mb": 0.23641,
+    "kernel_time_us_total": 151616.498,
+    "allreduce_us_total": 42850.029999999984,
+    "allreduce_share": 0.2826211564390571,
+    "gpu_span_us": 171529.23828125,
+    "n_kernels": 1069,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 257.121,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 13521.088000000002,
+     "other_collective": 20.288,
+     "attention": 5601.319000000001,
+     "allreduce": 42850.029999999984,
+     "gemm": 89623.77300000002
+    },
+    "annotations": {
+     "execute_context_1(4096)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   },
+   {
+    "k": 2,
+    "profiled_wall_s": 0.17893305234611034,
+    "trace": "e1_L4096_p2_rank0.1795618337962851699.pt.trace.json.gz",
+    "trace_size_mb": 0.236176,
+    "kernel_time_us_total": 152191.16300000006,
+    "allreduce_us_total": 43333.42399999999,
+    "allreduce_share": 0.2847302244480514,
+    "gpu_span_us": 172163.5390625,
+    "n_kernels": 1069,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 256.288,
+    "allreduce_kernel_names": {
+     "void (anonymous namespace)::multimem_all_reduce_kernel<c10::BFloat16, 16>(c10::BFloat16*, unsigned long, unsigned int**,": 161
+    },
+    "class_us": {
+     "other": 13566.376999999995,
+     "other_collective": 22.784,
+     "attention": 5591.306999999996,
+     "allreduce": 43333.42399999999,
+     "gemm": 89677.27100000008
+    },
+    "annotations": {
+     "execute_context_1(4096)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   }
+  ],
+  "16384": [
+   {
+    "k": 0,
+    "profiled_wall_s": 0.6945870369672775,
+    "trace": "e1_L16384_p0_rank0.1795618342994915990.pt.trace.json.gz",
+    "trace_size_mb": 0.222135,
+    "kernel_time_us_total": 671864.2370000002,
+    "allreduce_us_total": 182614.131,
+    "allreduce_share": 0.27180213046523555,
+    "gpu_span_us": 677303.41796875,
+    "n_kernels": 1069,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 1122.433,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 51125.457,
+     "other_collective": 31.808,
+     "attention": 69958.81799999998,
+     "allreduce": 182614.131,
+     "gemm": 368134.02300000016
+    },
+    "annotations": {
+     "execute_context_1(16384)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    },
+    "kept_trace": "/home/allen0117/comm_opt/results/E1_prefill_overlap/20261125_224619_job500259_h200/a/1/e1_L16384_p0_rank0.1795618342994915990.pt.trace.json.gz"
+   },
+   {
+    "k": 1,
+    "profiled_wall_s": 0.6970133609138429,
+    "trace": "e1_L16384_p1_rank0.1795618348020220002.pt.trace.json.gz",
+    "trace_size_mb": 0.222472,
+    "kernel_time_us_total": 673079.5349999999,
+    "allreduce_us_total": 185119.7309999999,
+    "allreduce_share": 0.27503396162535226,
+    "gpu_span_us": 678483.6513671875,
+    "n_kernels": 1069,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 1137.153,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 51009.03699999998,
+     "other_collective": 41.696000000000005,
+     "attention": 69366.625,
+     "allreduce": 185119.7309999999,
+     "gemm": 367542.446
+    },
+    "annotations": {
+     "execute_context_1(16384)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   },
+   {
+    "k": 2,
+    "profiled_wall_s": 0.7248882302083075,
+    "trace": "e1_L16384_p2_rank0.1795618353071394496.pt.trace.json.gz",
+    "trace_size_mb": 0.223399,
+    "kernel_time_us_total": 680111.5110000004,
+    "allreduce_us_total": 190791.64100000006,
+    "allreduce_share": 0.28052993944988525,
+    "gpu_span_us": 706915.404296875,
+    "n_kernels": 1069,
+    "n_allreduce_calls": 161,
+    "allreduce_p50_us": 1125.953,
+    "allreduce_kernel_names": {
+     "ncclDevKernel_AllReduce_Sum_bf16_RING_LL(ncclDevKernelArgsStorage<4096ul>)": 161
+    },
+    "class_us": {
+     "other": 50959.34900000003,
+     "other_collective": 48.577000000000005,
+     "attention": 70083.33200000001,
+     "allreduce": 190791.64100000006,
+     "gemm": 368228.6120000003
+    },
+    "annotations": {
+     "execute_context_1(16384)_generation_0(0)": 2,
+     "execute_context_0(0)_generation_0(0)": 2
+    }
+   }
+  ]
+ },
+ "errors": [],
+ "fuse_allreduce_rms": false,
+ "enforce_eager": false,
+ "startup_s": 58.40624014195055
+}

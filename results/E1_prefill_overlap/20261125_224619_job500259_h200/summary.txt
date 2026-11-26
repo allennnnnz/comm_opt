@@ -1,0 +1,73 @@
+=== B0 begin elapsed=0s block_end=600s
+warmup calibration oop_us ip_us=321.20 321.35 n=93377
+warmup rc=0 seconds=76
+burn gpu0: gemms 73540 tflops 673.6896628061403
+burn gpu1: gemms 72940 tflops 668.2316029140744
+burn gpu2: gemms 73560 tflops 673.9627221798484
+burn gpu3: gemms 74200 tflops 679.7343277377374
+burn gpu4: gemms 74300 tflops 680.7690956370051
+burn gpu5: gemms 73540 tflops 673.741345870867
+burn gpu6: gemms 73560 tflops 673.9891330258066
+burn gpu7: gemms 73940 tflops 677.4139957865979
+thermal gate rc=0: THERMAL_OK
+gpu0 busy_samples=240 clk_median=1485.0 temp_max=52 thermal_frac=0.000 ok
+gpu1 busy_samples=240 clk_median=1470.0 temp_max=50 thermal_frac=0.000 ok
+gpu2 busy_samples=240 clk_median=1500.0 temp_max=50 thermal_frac=0.000 ok
+gpu3 busy_samples=240 clk_median=1515.0 temp_max=51 thermal_frac=0.000 ok
+gpu4 busy_samples=240 clk_median=1500.0 temp_max=50 thermal_frac=0.000 ok
+gpu5 busy_samples=240 clk_median=1485.0 temp_max=50 thermal_frac=0.000 ok
+gpu6 busy_samples=240 clk_median=1485.0 temp_max=49 thermal_frac=0.000 ok
+gpu7 busy_samples=240 clk_median=1500.0 temp_max=50 thermal_frac=0.000 ok
+THERMAL_OK
+=== B0 end status=OK run=1 fail=0 skipped=0 elapsed=238s
+=== A begin elapsed=238s block_end=5638s
+A launch=1 rc=0 seconds=145
+A launch=2 rc=0 seconds=141
+A launch=3 rc=0 seconds=142
+=== A end status=DONE run=3 fail=0 skipped=0 elapsed=673s
+=== B begin elapsed=673s block_end=6073s
+B seq=1 mech=nvls launch=1 rc=0 seconds=31
+B seq=2 mech=default launch=2 rc=0 seconds=31
+B seq=3 mech=ring_ll128 launch=3 rc=0 seconds=31
+B seq=4 mech=nvls launch=3 rc=0 seconds=32
+B seq=5 mech=cta8 launch=3 rc=0 seconds=32
+B seq=6 mech=symm launch=2 rc=0 seconds=30
+B seq=7 mech=cta8 launch=1 rc=0 seconds=32
+B seq=8 mech=ring_simple launch=1 rc=0 seconds=31
+B seq=9 mech=ring_simple launch=2 rc=0 seconds=32
+B seq=10 mech=symm launch=1 rc=0 seconds=29
+B seq=11 mech=cta16 launch=1 rc=0 seconds=31
+B seq=12 mech=nvls launch=2 rc=0 seconds=30
+B seq=13 mech=default launch=1 rc=0 seconds=31
+B seq=14 mech=ring_ll128 launch=1 rc=0 seconds=31
+B seq=15 mech=ring_simple launch=3 rc=0 seconds=32
+B seq=16 mech=cta8 launch=2 rc=0 seconds=32
+B seq=17 mech=default launch=3 rc=0 seconds=32
+B seq=18 mech=cta16 launch=3 rc=0 seconds=31
+B seq=19 mech=symm launch=3 rc=0 seconds=29
+B seq=20 mech=ring_ll128 launch=2 rc=0 seconds=32
+B seq=21 mech=cta16 launch=2 rc=0 seconds=32
+mech1=symm
+mech2=cta16
+# geometric-mean ratio of median concurrent completion time vs default (smaller = better), and number of cells compared
+# symm	score=0.9661	cells=15	(symm_mem: only cells with T<=4096)
+# cta16	score=1.0007	cells=20
+# nvls	score=1.0012	cells=20
+# ring_simple	score=1.0768	cells=20
+# ring_ll128	score=1.0904	cells=20
+# cta8	score=1.3037	cells=20
+=== B end status=DONE run=21 fail=0 skipped=0 elapsed=1339s
+=== C begin elapsed=1339s block_end=4939s
+C mechs: default symm cta16
+C seq=1 mech=symm launch=2 rc=0 seconds=38
+C seq=2 mech=cta16 launch=2 rc=0 seconds=37
+C seq=3 mech=symm launch=3 rc=0 seconds=38
+C seq=4 mech=cta16 launch=3 rc=0 seconds=37
+C seq=5 mech=default launch=3 rc=0 seconds=37
+C seq=6 mech=cta16 launch=1 rc=0 seconds=37
+C seq=7 mech=symm launch=1 rc=0 seconds=38
+C seq=8 mech=default launch=1 rc=0 seconds=37
+C seq=9 mech=default launch=2 rc=0 seconds=37
+=== C end status=DONE run=9 fail=0 skipped=0 elapsed=1678s
+end=2026-11-25T23:14:17+08:00 total_elapsed=1678s
+analyze rc=0

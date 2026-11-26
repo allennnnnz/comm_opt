@@ -1,0 +1,136 @@
+mech	launch	set_check
+nvls	1	NCCL_ALGO=NVLS	set_by_environment_lines=8
+nvls	1	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+nvls	1	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+nvls	1	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+nvls	1	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+nvls	1	algo_line	bytes=4 algo=NVLS proto=SIMPLE channels=0..0
+nvls	1	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+default	2	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+default	2	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+default	2	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+default	2	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+default	2	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+default	2	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+ring_ll128	3	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_ll128	3	NCCL_PROTO=LL128	set_by_environment_lines=8
+ring_ll128	3	algo_line	bytes=134217728 algo=RING proto=LL128 channels=0..23
+ring_ll128	3	algo_line	bytes=16777216 algo=RING proto=LL128 channels=0..23
+ring_ll128	3	algo_line	bytes=2097152 algo=RING proto=LL128 channels=0..21
+ring_ll128	3	algo_line	bytes=33554432 algo=RING proto=LL128 channels=0..23
+ring_ll128	3	algo_line	bytes=4 algo=RING proto=LL128 channels=0..0
+ring_ll128	3	algo_line	bytes=67108864 algo=RING proto=LL128 channels=0..23
+nvls	3	NCCL_ALGO=NVLS	set_by_environment_lines=8
+nvls	3	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+nvls	3	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+nvls	3	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+nvls	3	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+nvls	3	algo_line	bytes=4 algo=NVLS proto=SIMPLE channels=0..0
+nvls	3	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+cta8	3	NCCL_MAX_CTAS=8	set_by_environment_lines=8
+cta8	3	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..7
+cta8	3	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..7
+cta8	3	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..7
+cta8	3	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..7
+cta8	3	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta8	3	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..7
+symm	2	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+symm	2	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta8	1	NCCL_MAX_CTAS=8	set_by_environment_lines=8
+cta8	1	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..7
+cta8	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta8	1	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..7
+ring_simple	1	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_simple	1	NCCL_PROTO=Simple	set_by_environment_lines=8
+ring_simple	1	algo_line	bytes=134217728 algo=RING proto=SIMPLE channels=0..23
+ring_simple	1	algo_line	bytes=16777216 algo=RING proto=SIMPLE channels=0..23
+ring_simple	1	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..21
+ring_simple	1	algo_line	bytes=33554432 algo=RING proto=SIMPLE channels=0..23
+ring_simple	1	algo_line	bytes=4 algo=RING proto=SIMPLE channels=0..0
+ring_simple	1	algo_line	bytes=67108864 algo=RING proto=SIMPLE channels=0..23
+ring_simple	2	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_simple	2	NCCL_PROTO=Simple	set_by_environment_lines=8
+ring_simple	2	algo_line	bytes=134217728 algo=RING proto=SIMPLE channels=0..23
+ring_simple	2	algo_line	bytes=16777216 algo=RING proto=SIMPLE channels=0..23
+ring_simple	2	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..21
+ring_simple	2	algo_line	bytes=33554432 algo=RING proto=SIMPLE channels=0..23
+ring_simple	2	algo_line	bytes=4 algo=RING proto=SIMPLE channels=0..0
+ring_simple	2	algo_line	bytes=67108864 algo=RING proto=SIMPLE channels=0..23
+symm	1	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+symm	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta16	1	NCCL_MAX_CTAS=16	set_by_environment_lines=8
+cta16	1	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+cta16	1	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+cta16	1	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+cta16	1	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+cta16	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta16	1	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+nvls	2	NCCL_ALGO=NVLS	set_by_environment_lines=8
+nvls	2	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+nvls	2	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+nvls	2	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+nvls	2	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+nvls	2	algo_line	bytes=4 algo=NVLS proto=SIMPLE channels=0..0
+nvls	2	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+default	1	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+default	1	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+default	1	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+default	1	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+default	1	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+default	1	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+ring_ll128	1	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_ll128	1	NCCL_PROTO=LL128	set_by_environment_lines=8
+ring_ll128	1	algo_line	bytes=134217728 algo=RING proto=LL128 channels=0..23
+ring_ll128	1	algo_line	bytes=16777216 algo=RING proto=LL128 channels=0..23
+ring_ll128	1	algo_line	bytes=2097152 algo=RING proto=LL128 channels=0..21
+ring_ll128	1	algo_line	bytes=33554432 algo=RING proto=LL128 channels=0..23
+ring_ll128	1	algo_line	bytes=4 algo=RING proto=LL128 channels=0..0
+ring_ll128	1	algo_line	bytes=67108864 algo=RING proto=LL128 channels=0..23
+ring_simple	3	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_simple	3	NCCL_PROTO=Simple	set_by_environment_lines=8
+ring_simple	3	algo_line	bytes=134217728 algo=RING proto=SIMPLE channels=0..23
+ring_simple	3	algo_line	bytes=16777216 algo=RING proto=SIMPLE channels=0..23
+ring_simple	3	algo_line	bytes=2097152 algo=RING proto=SIMPLE channels=0..21
+ring_simple	3	algo_line	bytes=33554432 algo=RING proto=SIMPLE channels=0..23
+ring_simple	3	algo_line	bytes=4 algo=RING proto=SIMPLE channels=0..0
+ring_simple	3	algo_line	bytes=67108864 algo=RING proto=SIMPLE channels=0..23
+cta8	2	NCCL_MAX_CTAS=8	set_by_environment_lines=8
+cta8	2	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..7
+cta8	2	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..7
+cta8	2	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..7
+cta8	2	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..7
+cta8	2	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta8	2	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..7
+default	3	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+default	3	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+default	3	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+default	3	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+default	3	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+default	3	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+cta16	3	NCCL_MAX_CTAS=16	set_by_environment_lines=8
+cta16	3	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+cta16	3	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+cta16	3	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+cta16	3	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+cta16	3	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta16	3	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
+symm	3	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+symm	3	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+ring_ll128	2	NCCL_ALGO=Ring	set_by_environment_lines=8
+ring_ll128	2	NCCL_PROTO=LL128	set_by_environment_lines=8
+ring_ll128	2	algo_line	bytes=134217728 algo=RING proto=LL128 channels=0..23
+ring_ll128	2	algo_line	bytes=16777216 algo=RING proto=LL128 channels=0..23
+ring_ll128	2	algo_line	bytes=2097152 algo=RING proto=LL128 channels=0..21
+ring_ll128	2	algo_line	bytes=33554432 algo=RING proto=LL128 channels=0..23
+ring_ll128	2	algo_line	bytes=4 algo=RING proto=LL128 channels=0..0
+ring_ll128	2	algo_line	bytes=67108864 algo=RING proto=LL128 channels=0..23
+cta16	2	NCCL_MAX_CTAS=16	set_by_environment_lines=8
+cta16	2	algo_line	bytes=134217728 algo=NVLS proto=SIMPLE channels=0..15
+cta16	2	algo_line	bytes=16777216 algo=NVLS proto=SIMPLE channels=0..15
+cta16	2	algo_line	bytes=2097152 algo=NVLS proto=SIMPLE channels=0..15
+cta16	2	algo_line	bytes=33554432 algo=NVLS proto=SIMPLE channels=0..15
+cta16	2	algo_line	bytes=4 algo=RING proto=LL channels=0..0
+cta16	2	algo_line	bytes=67108864 algo=NVLS proto=SIMPLE channels=0..15
